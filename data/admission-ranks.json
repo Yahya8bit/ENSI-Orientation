@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "label": "ENSI concours cutoff rank by track",
+    "note": "Cutoff rank = the rank of the last student admitted to each track. A higher cutoff means students ranked further down still got in (less selective that year).",
+    "seats": { "MP": 150, "PC": 25, "PT": 25, "total": 200 },
+    "tracks": ["MP", "PC", "PT"],
+    "yearsMissing": [2021, 2023]
+  },
+  "data": [
+    { "year": 2020, "MP": 303, "PC": 105, "PT": 68 },
+    { "year": 2022, "MP": 380, "PC": 124, "PT": 54 },
+    { "year": 2024, "MP": 367, "PC": 100, "PT": 69 },
+    { "year": 2025, "MP": 410, "PC": 110, "PT": 78 }
+  ]
+}

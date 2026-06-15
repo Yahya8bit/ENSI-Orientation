@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENSI — Module Catalog</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html{font-size:112.5%}
+@font-face{
+  font-family:'Fraunces';
+  font-style:normal;font-weight:400;font-display:block;
+  src:url('/imag/fraunces-400.woff2') format('woff2');
+}
+</style>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ensi: {
+          navy: '#1B2A4A', blue: '#4DB8E8', lightblue: '#A8D8F0',
+          accent: '#2563EB', red: '#E63946', gray: '#F5F7FA', cardgray: '#E8EDF4',
+        }
+      },
+      fontFamily: {
+        display: ['Archivo','sans-serif'],
+        body: ['Archivo','sans-serif'],
+        mono: ['JetBrains Mono','monospace'],
+      }
+    }
+  }
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A}
+
+.module-code{
+  font-family:'JetBrains Mono',monospace;color:#1B2A4A;
+  border-bottom:2px solid #4DB8E8;
+  box-shadow:0 2px 8px rgba(77,184,232,0.3);
+  padding:2px 7px;border-radius:3px;display:inline-block;
+  font-size:0.8em;letter-spacing:0.03em;
+}
+
+/* Drawer */
+.overlay{position:fixed;inset:0;background:rgba(27,42,74,0.55);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.overlay.open{opacity:1;pointer-events:all}
+.drawer{position:fixed;top:0;right:0;width:480px;max-width:100vw;height:100vh;background:#fff;z-index:50;transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+.drawer.open{transform:translateX(0)}
+.drawer::-webkit-scrollbar{width:5px}
+.drawer::-webkit-scrollbar-track{background:#F5F7FA}
+.drawer::-webkit-scrollbar-thumb{background:#A8D8F0;border-radius:3px}
+
+/* Cards */
+.module-card{background:#E8EDF4;border:1px solid #A8D8F0;border-radius:10px;padding:20px;transition:all .2s ease;cursor:pointer}
+.module-card:hover{border-color:#4DB8E8;box-shadow:0 4px 20px rgba(77,184,232,0.18);transform:translateY(-2px)}
+
+/* Tabs */
+.sem-tab{padding:8px 18px;border-bottom:2px solid transparent;font-weight:500;transition:all .15s ease;cursor:pointer;color:#6B7280;font-size:0.875rem;white-space:nowrap}
+.sem-tab.active{border-bottom-color:#2563EB;color:#1B2A4A}
+.sem-tab:hover:not(.active){color:#1B2A4A;border-bottom-color:#A8D8F0}
+
+/* Spec cards */
+.spec-card{background:#fff;border:1px solid #E8EDF4;border-radius:12px;padding:28px;transition:all .2s ease}
+.spec-card:hover{border-color:#4DB8E8;box-shadow:0 8px 28px rgba(77,184,232,0.14)}
+
+/* Collapsible */
+.collapse-content{overflow:hidden;max-height:0;transition:max-height .2s ease}
+.collapse-content.open{max-height:800px}
+
+/* Filter checkbox */
+.filter-label{display:flex;align-items:center;gap:8px;padding:4px 0;cursor:pointer;font-size:0.875rem;color:#374151}
+.filter-label input[type=checkbox]{accent-color:#2563EB;width:14px;height:14px}
+
+/* Semester divider */
+.sem-divider{font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4DB8E8;padding:12px 0 6px;border-bottom:1px solid #E8EDF4;margin-bottom:16px}
+
+/* Pill tags */
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:0.72rem;font-weight:500;letter-spacing:0.02em}
+
+/* Hero */
+.hero-section{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;
+}
+#hero-track{
+  position:absolute;inset:0;display:flex;
+  transition:transform 0.8s ease;
+  will-change:transform;
+  cursor:grab;
+}
+#hero-track.dragging{transition:none;cursor:grabbing}
+.hero-slide{
+  flex:0 0 100%;width:100%;height:100%;
+  background-size:cover;background-position:center;position:relative;
+  filter:grayscale(1) contrast(1.05) brightness(0.9);
+}
+.hero-duotone{
+  position:absolute;inset:0;background:#1B2A4A;mix-blend-mode:multiply;opacity:0.55;pointer-events:none;
+}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(105deg,rgba(27,42,74,0.82) 0%,rgba(27,42,74,0.5) 45%,rgba(27,42,74,0.15) 100%);
+  pointer-events:none;
+}
+.hero-arrow{
+  position:absolute;top:50%;z-index:3;transform:translateY(-50%);
+  background:rgba(255,255,255,0.12);border:none;cursor:pointer;
+  width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#fff;transition:background .15s ease;
+}
+.hero-arrow:hover{background:rgba(255,255,255,0.25)}
+.hero-arrow:focus-visible{outline:2px solid #4DB8E8;outline-offset:2px}
+.hero-arrow-left{left:24px}
+.hero-arrow-right{right:24px}
+#hero-dots{
+  position:absolute;bottom:46px;left:50%;transform:translateX(-50%);
+  z-index:3;display:flex;gap:0;align-items:center;
+}
+.hero-dot{
+  width:24px;height:24px;border-radius:50%;border:none;cursor:pointer;padding:0;
+  background:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.hero-dot::after{
+  content:'';display:block;width:10px;height:10px;border-radius:50%;
+  background:rgba(255,255,255,0.45);transition:background .2s ease,box-shadow .2s ease,width .15s ease,height .15s ease;
+}
+.hero-dot:hover::after{background:rgba(255,255,255,0.7)}
+.hero-dot.active::after{
+  width:12px;height:12px;
+  background:#4DB8E8;
+  box-shadow:0 0 0 2px rgba(255,255,255,0.35);
+}
+#hero-label{
+  position:absolute;bottom:62px;left:50%;transform:translateX(-50%);
+  z-index:3;font-family:'JetBrains Mono',monospace;font-size:0.9375rem;font-weight:500;
+  color:rgba(255,255,255,0.9);white-space:nowrap;letter-spacing:0.04em;
+  pointer-events:none;
+}
+@media(max-width:600px){
+  .hero-arrow{display:none}
+  #hero-dots{display:flex!important;bottom:28px}
+  #hero-label{bottom:44px}
+}
+@media(prefers-reduced-motion:reduce){
+  #hero-track{transition:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .hero-section .fade-up{animation:fadeUp 400ms ease-out forwards;opacity:0}
+  .hero-section .fade-up-1{animation-delay:0ms}
+  .hero-section .fade-up-2{animation-delay:80ms}
+  .hero-section .fade-up-3{animation-delay:160ms}
+  .hero-section .fade-up-4{animation-delay:240ms}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-section .fade-up{opacity:1;animation:none}
+}
+
+/* Hero CTA */
+.ghost-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  border:none;outline:none;box-shadow:none;
+  background:#4DB8E8;color:#1B2A4A;
+  text-decoration:none;padding:14px 28px;border-radius:4px;
+  font-size:0.9375rem;font-family:'Archivo',sans-serif;font-weight:600;letter-spacing:normal;
+  cursor:pointer;transition:background .15s ease;
+}
+.ghost-cta:hover{background:#3AA5D5}
+.ghost-cta:hover .cta-arrow{transform:translateY(2px)}
+.cta-arrow{display:inline-block;transition:transform .15s ease}
+
+/* Spec strips */
+.spec-strip{
+  display:flex;align-items:center;gap:20px;padding:20px 10vw;
+  border-bottom:1px solid #E8EDF4;background:#fff;
+  position:relative;overflow:hidden;text-decoration:none;
+  border-left:3px solid transparent;
+  transition:border-color .15s ease,background .15s ease;
+}
+.spec-strip:hover{border-left-color:#4DB8E8;background:#F5F7FA}
+.spec-strip:hover .spec-arrow{transform:translateX(5px)}
+.spec-arrow{transition:transform .2s ease;color:#9CA3AF;font-size:1.1rem;flex-shrink:0;margin-left:auto}
+.spec-watermark{
+  position:absolute;right:10vw;top:50%;transform:translateY(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:6rem;font-weight:700;
+  pointer-events:none;user-select:none;line-height:1;
+}
+
+/* Hero watermark */
+.hero-watermark{
+  position:absolute;bottom:32px;right:10vw;
+  display:flex;flex-direction:column;align-items:flex-end;gap:4px;
+  pointer-events:none;user-select:none;
+}
+.hero-watermark span{
+  font-family:'JetBrains Mono',monospace;font-size:5rem;font-weight:600;
+  color:#fff;opacity:0.06;line-height:1;letter-spacing:-0.02em;
+}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .45s ease forwards;opacity:0}
+.fade-up-1{animation-delay:.08s}
+.fade-up-2{animation-delay:.18s}
+.fade-up-3{animation-delay:.28s}
+.fade-up-4{animation-delay:.38s}
+
+/* Nav active */
+.nav-link{color:rgba(27,42,74,0.55);text-decoration:none;font-size:0.875rem;font-weight:600;font-family:'Archivo',sans-serif;letter-spacing:0.01em;transition:color .15s ease;padding-bottom:2px;border-bottom:2px solid transparent}
+.nav-link:hover{color:#1B2A4A;border-bottom-color:#4DB8E8}
+.nav-link.active{color:#1B2A4A;border-bottom-color:transparent}
+
+/* Subject pill left-border style */
+.subj-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 0;background:#fff;border-radius:3px;overflow:hidden;font-size:0.78rem;cursor:pointer;text-decoration:none;transition:box-shadow .15s ease}
+.subj-pill:hover{box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+
+/* Club tiles */
+.club-tile{cursor:pointer;background:none;border:none;padding:0;text-align:left;width:100%}
+.club-tile:focus-visible{outline:2px solid #2563EB;outline-offset:3px;border-radius:10px}
+.club-tile-img{transition:transform .2s ease;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.club-tile-bar{height:3px;border-radius:0 0 3px 3px;margin-bottom:10px;transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+@media(prefers-reduced-motion:no-preference){
+  .club-tile:hover .club-tile-img{transform:translateY(-4px)}
+  .club-tile:hover .club-tile-bar{transform:scaleX(1)}
+}
+/* Club modal */
+#club-modal-backdrop{position:fixed;inset:0;background:rgba(27,42,74,0.55);z-index:900;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .2s ease}
+#club-modal-backdrop.open{opacity:1;pointer-events:auto}
+@media(prefers-reduced-motion:reduce){
+  #club-modal-backdrop{transition:none}
+  .partner-logo{transition:none}
+}
+#club-modal{background:#fff;border-radius:12px;width:100%;max-width:640px;max-height:calc(100vh - 48px);overflow-y:auto;position:relative}
+#club-modal::-webkit-scrollbar{width:4px}
+#club-modal::-webkit-scrollbar-thumb{background:#E8EDF4;border-radius:2px}
+.modal-eyebrow{font-family:'Archivo',sans-serif;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 8px}
+.modal-list-row{padding:10px 0;border-bottom:1px solid #F1F5F9}
+.modal-list-row:last-child{border-bottom:none}
+/* Scrollbar for sidebar */
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:#E8EDF4;border-radius:2px}
+
+@media(max-width:768px){
+  .catalog-layout{flex-direction:column}
+  .sidebar-wrap{width:100%!important;position:static!important}
+  .drawer{width:100vw}
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar" style="background:#fff;border-bottom:1px solid #E2E8F0;position:fixed;top:0;left:0;right:0;z-index:30;height:72px;display:flex;align-items:center;padding:0 10vw;justify-content:space-between;transition:box-shadow .2s ease">
+  <a href="#home" style="flex-shrink:0;display:flex;align-items:center;text-decoration:none">
+    <img src="/ensi-logo.png" alt="ENSI" style="height:52px;width:auto;flex-shrink:0;display:block">
+  </a>
+  <div style="display:flex;align-items:center;gap:28px">
+    <a href="#home" onclick="navigate('home')" class="nav-link" id="nav-home">Overview</a>
+    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-admission');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Admission</a>
+    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-pathways');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link" id="nav-specializations">Pathways</a>
+    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-studentlife');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Student Life</a>
+    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('curriculum-section');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Curriculum</a>
+  </div>
+</nav>
+
+<!-- DRAWER OVERLAY -->
+<div id="overlay" class="overlay" onclick="closeDrawer()"></div>
+
+<!-- DRAWER -->
+<div id="drawer" class="drawer" role="dialog" aria-modal="true">
+  <div id="drawer-content"></div>
+</div>
+
+<!-- MAIN PAGE -->
+<div id="page" style="padding-top:72px"></div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+
+const SUBJECT_COLORS = {
+  MAT:'#6366F1',AP:'#059669',AI:'#D97706',NET:'#2563EB',OS:'#7C3AED',
+  SE:'#0891B2',EHA:'#DC2626',DAT:'#EA580C',BDC:'#65A30D',FIN:'#0D9488',
+  IMA:'#DB2777',SEC:'#B91C1C',DDP:'#1D4ED8',GL:'#059669',CV:'#DB2777',
+  DOS:'#2563EB',SLE:'#DC2626',IF:'#0D9488',
+};
+
+const SPECIALIZATIONS = [
+  {id:'AI',name:'Artificial Intelligence',nameFr:'Intelligence Artificielle',color:'#D97706',desc:'Machine learning, deep learning, NLP, and cognitive systems.',modules:['AI.5.1','AI.5.2','AI.5.3','AI.5.4']},
+  {id:'GL',name:'Software Engineering',nameFr:'Génie Logiciel',color:'#2563EB',desc:'Software quality, DevOps, cloud engineering, and advanced architecture.',modules:['GL.5.1','GL.5.2','GL.5.3','GL.5.4']},
+  {id:'CV',name:'Data Science & Computer Vision',nameFr:'Vision par Ordinateur et Science des Données',color:'#DB2777',desc:'Image processing, pattern recognition, big data analytics, and medical imaging.',modules:['CV.5.1','CV.5.2','CV.5.3','CV.5.4']},
+  {id:'IF',name:'Financial Engineering',nameFr:'Ingénierie Financière',color:'#0D9488',desc:'Quantitative finance, algorithmic trading, blockchain, and risk management.',modules:['IF.5.1','IF.5.2','IF.5.3','IF.5.4']},
+  {id:'SLE',name:'Embedded Software and Systems',nameFr:'Systèmes et Logiciels Embarqués',color:'#7C3AED',desc:'Real-time systems, FPGA design, IoT protocols, and embedded Linux.',modules:['SLE.5.1','SLE.5.2','SLE.5.3','SLE.5.4']},
+  {id:'ST-IoT',name:'Services, Technologies & IoT',nameFr:'Services, Technologies et Internet des Objets',color:'#2563EB',desc:'Cloud computing, microservices, IoT applications, and network security.',modules:['DOS.5.1','DOS.5.2','DOS.5.3','DOS.5.4']},
+];
+
+const MODULES = [
+  // ── S1 ──
+  {code:'MAT.1.1',title:'Probability and Statistics',semester:1,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Understand probability theory fundamentals','Apply statistical methods to engineering problems','Perform hypothesis testing and regression analysis'],content:['Probability spaces and events','Random variables and distributions','Statistical inference','Regression and correlation','Hypothesis testing'],examForm:'Written exam + Lab work',passMark:'10/20',readingList:['Papoulis — Probability, Random Variables and Stochastic Processes','Wackerly — Mathematical Statistics with Applications'],responsible:'Dept. of Mathematics'},
+  {code:'MAT.1.2',title:'Engineering Mathematics',semester:1,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Master linear algebra for engineering','Apply differential equations to systems','Use Fourier and Laplace transforms'],content:['Linear algebra and matrix theory','Differential equations','Fourier series and transforms','Laplace transforms','Complex analysis'],examForm:'Written exam',passMark:'10/20',readingList:['Kreyszig — Advanced Engineering Mathematics'],responsible:'Dept. of Mathematics'},
+  {code:'FIN.1.1',title:'Introduction to the Banking and Financial System',semester:1,credits:3,subject:'FIN',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Understand structure of financial systems','Identify roles of banking institutions','Grasp fundamental financial instruments'],content:['Overview of the financial system','Commercial and central banking','Financial markets and instruments','Monetary policy','Tunisian banking sector'],examForm:'Written exam',passMark:'10/20',readingList:['Mishkin — The Economics of Money, Banking and Financial Markets'],responsible:'Dept. of Finance'},
+  {code:'EHA.1.1',title:'Digital Circuits',semester:1,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Design combinational and sequential digital circuits','Implement logic using HDL','Analyze timing in digital systems'],content:['Boolean algebra and logic gates','Combinational circuits','Flip-flops and latches','Sequential circuit design','Introduction to VHDL'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Wakerly — Digital Design: Principles and Practices'],responsible:'Dept. of Hardware'},
+  {code:'EHA.1.2',title:'Analogue Electronics',semester:1,credits:1.5,subject:'EHA',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Analyze basic analogue circuits','Understand amplifier design'],content:['Diodes and transistors','Amplifier circuits','Operational amplifiers','Filters'],examForm:'Written exam',passMark:'10/20',readingList:['Sedra & Smith — Microelectronic Circuits'],responsible:'Dept. of Hardware'},
+  {code:'AI.1.1',title:'Formal Logic',semester:1,credits:3,subject:'AI',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Master propositional and predicate logic','Use formal proof techniques','Apply logic in computer science'],content:['Propositional logic','Predicate logic','Proof methods','Resolution and unification','Logic programming basics'],examForm:'Written exam',passMark:'10/20',readingList:['Ben-Ari — Mathematical Logic for Computer Science'],responsible:'Dept. of AI'},
+  {code:'DAT.1.1',title:'Database and Database Management Systems',semester:1,credits:3,subject:'DAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Design relational databases','Write SQL queries','Understand DBMS internals'],content:['Relational model and algebra','ER modeling','SQL (DDL, DML, queries)','Normalization','Transaction management'],examForm:'Written exam + Project',passMark:'10/20',readingList:['Ramakrishnan & Gehrke — Database Management Systems'],responsible:'Dept. of Data'},
+  {code:'AP.1.2',title:'Algorithmic and Data Structures',semester:1,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:28,lab:21,selfStudy:18.5},prerequisites:[],objectives:['Analyze algorithm complexity','Implement fundamental data structures','Apply sorting and searching algorithms'],content:['Algorithm analysis and Big-O','Arrays, linked lists, stacks, queues','Trees and binary search trees','Sorting algorithms','Hash tables','Graphs introduction'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Cormen — Introduction to Algorithms'],responsible:'Dept. of Programming'},
+  {code:'AP.1.3',title:'Advanced C Programming',semester:1,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:21,lab:31.5,selfStudy:15},prerequisites:[],objectives:['Master advanced C programming','Use pointers and dynamic memory','Implement complex data structures in C'],content:['Pointers and memory management','Structures and unions','File I/O','Dynamic memory allocation','System calls'],examForm:'Lab project + Oral',passMark:'10/20',readingList:['Kernighan & Ritchie — The C Programming Language'],responsible:'Dept. of Programming'},
+  {code:'BDC.1.1',title:'Management of Organization',semester:1,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Understand organizational management principles','Apply management concepts to IT teams'],content:['Organizational structures','Management theories','Decision-making','Project teams'],examForm:'Written exam',passMark:'10/20',readingList:[],responsible:'Dept. of Business'},
+  {code:'BDC.1.2',title:'Language and Communication I: English for Computer Science',semester:1,credits:3,subject:'BDC',language:'English',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Develop technical English reading and writing','Present technical content in English'],content:['Technical vocabulary','Reading scientific papers','Writing reports','Oral presentations'],examForm:'Oral + Written',passMark:'10/20',readingList:[],responsible:'Language Center'},
+  // ── S2 ──
+  {code:'MAT.2.1',title:'Graph Algorithms',semester:2,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.1.2'],objectives:['Master graph theory fundamentals','Implement and analyze graph algorithms','Apply graphs to real problems'],content:['Graph representations','BFS and DFS','Shortest path algorithms','Minimum spanning trees','Network flow'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Cormen — Introduction to Algorithms','Diestel — Graph Theory'],responsible:'Dept. of Mathematics'},
+  {code:'MAT.2.2',title:'Numerical Methods',semester:2,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['MAT.1.2'],objectives:['Solve problems using numerical approximation','Implement numerical algorithms'],content:['Root finding methods','Interpolation','Numerical integration','Solving ODEs numerically','Linear systems'],examForm:'Written exam',passMark:'10/20',readingList:['Burden & Faires — Numerical Analysis'],responsible:'Dept. of Mathematics'},
+  {code:'EHA.2.1',title:'Microprocessor and Microcontroller Engineering',semester:2,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.1.1'],objectives:['Understand microprocessor architecture','Program microcontrollers in assembly and C'],content:['CPU architecture','Assembly programming','Memory systems','Interrupts and timers','Arduino/STM32 programming'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Mazidi — The 8051 Microcontroller and Embedded Systems'],responsible:'Dept. of Hardware'},
+  {code:'NET.2.1',title:'Digital Transmission',semester:2,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Understand data transmission fundamentals','Analyze signal encoding techniques'],content:['Signal theory','Encoding schemes','Error detection and correction','Modulation techniques','Channel capacity'],examForm:'Written exam',passMark:'10/20',readingList:['Haykin — Communication Systems'],responsible:'Dept. of Networks'},
+  {code:'OS.2.1',title:'Introduction to Operating Systems and Unix Environment',semester:2,credits:3,subject:'OS',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Understand OS concepts and architecture','Use Unix/Linux environment proficiently'],content:['OS overview and history','Process management','File systems','Shell scripting','Unix commands and tools'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Tanenbaum — Modern Operating Systems'],responsible:'Dept. of Systems'},
+  {code:'AP.2.1',title:'Object-Oriented Programming',semester:2,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:21,lab:31.5,selfStudy:15},prerequisites:['AP.1.3'],objectives:['Master OOP principles','Design with patterns','Program in Java'],content:['Classes, objects, inheritance','Polymorphism and interfaces','Exception handling','Java Collections Framework','Design patterns intro'],examForm:'Project + Oral',passMark:'10/20',readingList:['Bloch — Effective Java','Horstmann — Core Java'],responsible:'Dept. of Programming'},
+  {code:'AP.2.2',title:'Web Technologies',semester:2,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Build web applications with HTML/CSS/JS','Understand client-server architecture'],content:['HTML5 and CSS3','JavaScript fundamentals','DOM manipulation','HTTP and REST basics','Responsive design'],examForm:'Web project',passMark:'10/20',readingList:['Flanagan — JavaScript: The Definitive Guide'],responsible:'Dept. of Programming'},
+  {code:'AP.2.3',title:'Automata Theory and Languages',semester:2,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AI.1.1'],objectives:['Understand formal language theory','Design automata for language recognition'],content:['Regular languages and automata','Context-free grammars','Pushdown automata','Turing machines','Computability basics'],examForm:'Written exam',passMark:'10/20',readingList:['Sipser — Introduction to the Theory of Computation'],responsible:'Dept. of Programming'},
+  {code:'DAT.2.1',title:'Database Lab',semester:2,credits:1.5,subject:'DAT',language:'French',type:'Compulsory',hours:{total:22.5,lecture:0,lab:21,selfStudy:1.5},prerequisites:['DAT.1.1'],objectives:['Apply database design in practice','Implement a full database project'],content:['Advanced SQL','Stored procedures','Database administration','Project: full database system'],examForm:'Lab project',passMark:'10/20',readingList:[],responsible:'Dept. of Data'},
+  {code:'IMA.2.1',title:'Introduction to Image Processing',semester:2,credits:3,subject:'IMA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1'],objectives:['Understand digital image fundamentals','Apply basic image processing algorithms'],content:['Image representation','Spatial domain processing','Frequency domain (Fourier)','Edge detection','Morphological operations'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Gonzalez & Woods — Digital Image Processing'],responsible:'Dept. of Image'},
+  {code:'BDC.2.1',title:'Language and Communication 2',semester:2,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.1.2'],objectives:['Continue English language development','Focus on technical communication'],content:['Advanced technical writing','Presentation skills','Interview preparation'],examForm:'Oral + Written',passMark:'10/20',readingList:[],responsible:'Language Center'},
+  // ── S3 ──
+  {code:'MAT.3.1',title:'Linear and Nonlinear Programming',semester:3,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.2'],objectives:['Solve linear and nonlinear optimization problems','Apply optimization to engineering design'],content:['Linear programming and simplex','Duality theory','Nonlinear programming','Gradient methods','Constrained optimization'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Bazaraa — Nonlinear Programming'],responsible:'Dept. of Mathematics'},
+  {code:'EHA.3.1',title:'Processor Design Methodology',semester:3,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.2.1','EHA.1.1'],objectives:['Design processor architectures','Implement RISC processors using HDL'],content:['Computer organization','ALU design','Control unit design','Pipelining','RISC architecture','VHDL implementation'],examForm:'Project + Oral',passMark:'10/20',readingList:["Patterson & Hennessy — Computer Organization and Design"],responsible:'Dept. of Hardware'},
+  {code:'NET.3.1',title:'Local Area Networks',semester:3,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.2.1'],objectives:['Design and configure LAN systems','Understand switching and routing'],content:['Ethernet and IEEE 802.x','Switching and VLANs','Routing protocols','QoS','Network management'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Forouzan — Data Communications and Networking'],responsible:'Dept. of Networks'},
+  {code:'NET.3.2',title:'Lab LAN',semester:3,credits:1.5,subject:'NET',language:'French',type:'Compulsory',hours:{total:22.5,lecture:0,lab:21,selfStudy:1.5},prerequisites:['NET.3.1'],objectives:['Configure real network equipment','Implement and troubleshoot LANs'],content:['Cisco router and switch configuration','VLAN setup','Routing protocol implementation','Network troubleshooting'],examForm:'Lab assessment',passMark:'10/20',readingList:[],responsible:'Dept. of Networks'},
+  {code:'OS.3.3',title:'Operating Systems and Concurrent Programming',semester:3,credits:3,subject:'OS',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['OS.2.1'],objectives:['Master OS internals','Program concurrent applications'],content:['Process synchronization','Deadlocks','Memory management','Virtual memory','Threads and semaphores','IPC mechanisms'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Tanenbaum — Modern Operating Systems'],responsible:'Dept. of Systems'},
+  {code:'AP.3.1',title:'Compilation Techniques',semester:3,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AP.2.3'],objectives:['Understand compiler design phases','Build lexers and parsers'],content:['Lexical analysis','Syntax analysis and parsing','Semantic analysis','Intermediate code generation','Code optimization basics'],examForm:'Written exam + Project',passMark:'10/20',readingList:['Aho — Compilers: Principles, Techniques, and Tools'],responsible:'Dept. of Programming'},
+  {code:'AP.3.2',title:'Design and Analysis of Computer Algorithms',semester:3,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.1.2','MAT.2.1'],objectives:['Analyze algorithm complexity rigorously','Apply advanced algorithm design techniques'],content:['Divide and conquer','Dynamic programming','Greedy algorithms','NP-completeness','Approximation algorithms'],examForm:'Written exam',passMark:'10/20',readingList:['Cormen — Introduction to Algorithms'],responsible:'Dept. of Programming'},
+  {code:'SE.3.1',title:'Software Engineering',semester:3,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.2.1'],objectives:['Apply software engineering methodologies','Manage software projects'],content:['Software lifecycle models','Requirements engineering','Software architecture','Testing strategies','Agile methods'],examForm:'Project + Report',passMark:'10/20',readingList:['Sommerville — Software Engineering'],responsible:'Dept. of SE'},
+  {code:'SE.3.2',title:'Object-Oriented Analysis and Design',semester:3,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.2.1'],objectives:['Apply UML for system design','Implement design patterns'],content:['UML diagrams (class, sequence, use case)','SOLID principles','Design patterns (GoF)','Domain-driven design','Refactoring'],examForm:'Project + Oral',passMark:'10/20',readingList:['Martin — Clean Code','Gamma — Design Patterns'],responsible:'Dept. of SE'},
+  {code:'AI.3.1',title:'Artificial Intelligence & Machine Learning',semester:3,credits:3,subject:'AI',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1','AP.1.2'],objectives:['Understand AI foundations and search algorithms','Apply machine learning techniques'],content:['Intelligent agents','Search algorithms (A*, minimax)','Knowledge representation','Supervised learning','Unsupervised learning','Neural networks intro'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Russell & Norvig — Artificial Intelligence: A Modern Approach'],responsible:'Dept. of AI'},
+  {code:'BDC.3.1',title:'Language and Communication 3: English for Business Communication',semester:3,credits:1.5,subject:'BDC',language:'English',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.2.1'],objectives:['Master business English for IT contexts','Write professional technical documents'],content:['Business correspondence','Technical proposals','Negotiation language','Professional presentations'],examForm:'Written + Oral',passMark:'10/20',readingList:[],responsible:'Language Center'},
+  // ── S4 ──
+  {code:'MAT.4.1',title:'Stochastic Processes with R',semester:4,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1'],objectives:['Model random processes','Analyze Markov chains','Use R for statistical computing'],content:['Markov chains','Poisson processes','Queuing theory','Monte Carlo simulation','Time series basics','R programming for statistics'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Ross — Introduction to Probability Models'],responsible:'Dept. of Mathematics'},
+  {code:'EHA.4.1',title:'Introduction to Embedded Systems',semester:4,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.2.1'],objectives:['Design embedded systems','Program for real-time constraints'],content:['Embedded system architecture','RTOS concepts','Hardware/software co-design','Peripheral interfacing','Power management'],examForm:'Lab project',passMark:'10/20',readingList:['Valvano — Embedded Systems: Introduction to ARM Cortex-M Microcontrollers'],responsible:'Dept. of Hardware'},
+  {code:'NET.4.1',title:'Computer Networks',semester:4,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.3.1'],objectives:['Master network protocol stack','Configure internet-scale networks'],content:['TCP/IP stack in depth','IP addressing and subnetting','Routing protocols (OSPF, BGP)','Application layer protocols','Network security basics'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Forouzan — TCP/IP Protocol Suite','Tanenbaum — Computer Networks'],responsible:'Dept. of Networks'},
+  {code:'SE.4.1',title:'Formal Development Methods',semester:4,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AI.1.1','SE.3.1'],objectives:['Apply formal specification techniques','Verify software correctness formally'],content:['Z notation','B method','Model checking','Temporal logic','Automated theorem proving'],examForm:'Written exam + Project',passMark:'10/20',readingList:['Spivey — The Z Notation'],responsible:'Dept. of SE'},
+  {code:'SE.4.2',title:'Software Architectures',semester:4,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.3.1','SE.3.2'],objectives:['Design scalable software architectures','Evaluate architectural tradeoffs'],content:['Architectural styles (microservices, SOA)','Quality attributes','Architecture documentation','Cloud-native architectures','Architecture evaluation methods'],examForm:'Project + Oral',passMark:'10/20',readingList:['Bass — Software Architecture in Practice'],responsible:'Dept. of SE'},
+  {code:'SEC.4.1',title:'Cybersecurity & Cryptography',semester:4,credits:3,subject:'SEC',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.4.1','MAT.1.1'],objectives:['Understand cybersecurity threats and defenses','Apply cryptographic algorithms'],content:['Symmetric and asymmetric cryptography','PKI and certificates','Network security protocols (TLS, SSH)','Web security (OWASP Top 10)','Incident response basics'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Stallings — Cryptography and Network Security'],responsible:'Dept. of Security'},
+  {code:'FIN.4.1',title:'Introduction to Financial Markets',semester:4,credits:1.5,subject:'FIN',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['FIN.1.1'],objectives:['Understand financial market structure','Analyze basic financial instruments'],content:['Stock and bond markets','Derivatives basics','Portfolio theory','Market microstructure'],examForm:'Written exam',passMark:'10/20',readingList:[],responsible:'Dept. of Finance'},
+  {code:'DDP.4.1',title:'Design and Development Project',semester:4,credits:3,subject:'DDP',language:'French',type:'Compulsory',hours:{total:45,lecture:7,lab:31.5,selfStudy:6.5},prerequisites:['SE.3.1','SE.3.2','AP.2.1'],objectives:['Execute a full software development project','Apply agile methodology in a team'],content:['Project scoping and planning','Architecture decisions','Iterative development','Code review practices','Final delivery and presentation'],examForm:'Project defense',passMark:'10/20',readingList:[],responsible:'Dept. of SE'},
+  {code:'BDC.4.1',title:'Introduction to Entrepreneurship and Innovation',semester:4,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Understand startup creation process','Develop innovation mindset'],content:['Lean startup methodology','Business model canvas','Pitching and fundraising','IP and patents basics'],examForm:'Business plan presentation',passMark:'10/20',readingList:[],responsible:'Dept. of Business'},
+  {code:'BDC.4.2',title:'Language and Communication 4: Communication Techniques',semester:4,credits:1.5,subject:'BDC',language:'Both',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.3.1'],objectives:['Master professional communication','Present technical projects effectively'],content:['Presentation techniques','Persuasion and negotiation','Technical writing','Interview skills'],examForm:'Oral presentation',passMark:'10/20',readingList:[],responsible:'Language Center'},
+  // ── S5 COMMON ──
+  {code:'BDC.5.1',title:'Complex Project Management',semester:5,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['DDP.4.1'],objectives:['Apply advanced project management techniques','Lead complex software projects'],content:['PMP methodology','Risk management','Stakeholder management','Agile at scale (SAFe)','Project tracking tools'],examForm:'Case study',passMark:'10/20',readingList:[],responsible:'Dept. of Business'},
+  {code:'BDC.5.2',title:'Computer Law and Human Rights',semester:5,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Understand legal framework for IT','Apply GDPR and digital rights'],content:['Tunisian and international IT law','Data protection (GDPR)','Digital rights and ethics','Cybercrime law','Open source licenses'],examForm:'Written exam',passMark:'10/20',readingList:[],responsible:'Dept. of Business'},
+  {code:'BDC.5.3',title:'Language and Communication 5: Preparing for Standardized Exams',semester:5,credits:1.5,subject:'BDC',language:'English',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.4.2'],objectives:['Prepare for TOEFL/IELTS exams','Master English proficiency'],content:['TOEFL/IELTS test strategies','Reading comprehension','Academic writing','Listening skills'],examForm:'Mock exam',passMark:'10/20',readingList:[],responsible:'Language Center'},
+  // ── S5 AI TRACK ──
+  {code:'AI.5.1',title:'Advanced Machine Learning',semester:5,credits:3,subject:'AI',language:'English',type:'Optional',specialization:'AI',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AI.3.1','MAT.4.1'],objectives:['Master advanced ML algorithms','Handle real-world ML pipelines'],content:['Ensemble methods','Support Vector Machines','Bayesian learning','Feature engineering','ML pipelines and MLOps'],examForm:'Project + Oral',passMark:'10/20',readingList:['Bishop — Pattern Recognition and Machine Learning'],responsible:'Dept. of AI'},
+  {code:'AI.5.2',title:'Deep Learning and Neural Networks',semester:5,credits:3,subject:'AI',language:'English',type:'Optional',specialization:'AI',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AI.5.1'],objectives:['Implement deep neural networks','Apply CNNs, RNNs and transformers'],content:['Feedforward networks','Convolutional neural networks','Recurrent networks and LSTMs','Attention mechanisms and transformers','PyTorch/TensorFlow'],examForm:'Project',passMark:'10/20',readingList:['Goodfellow — Deep Learning'],responsible:'Dept. of AI'},
+  {code:'AI.5.3',title:'Natural Language Processing',semester:5,credits:3,subject:'AI',language:'English',type:'Optional',specialization:'AI',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AI.5.1'],objectives:['Process and analyze text data','Build NLP applications'],content:['Text preprocessing','Language models','Named entity recognition','Sentiment analysis','Sequence-to-sequence models'],examForm:'Project',passMark:'10/20',readingList:['Jurafsky — Speech and Language Processing'],responsible:'Dept. of AI'},
+  {code:'AI.5.4',title:'Multi-Agent Systems and Cognitive Computing',semester:5,credits:3,subject:'AI',language:'French',type:'Optional',specialization:'AI',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AI.3.1'],objectives:['Design multi-agent systems','Apply cognitive architectures'],content:['Agent architectures','Game theory for AI','Reinforcement learning','Knowledge graphs','Explainable AI'],examForm:'Written exam + Project',passMark:'10/20',readingList:['Wooldridge — An Introduction to MultiAgent Systems'],responsible:'Dept. of AI'},
+  // ── S5 GL TRACK ──
+  {code:'GL.5.1',title:'Software Quality and Testing',semester:5,credits:3,subject:'SE',language:'French',type:'Optional',specialization:'GL',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.4.1','SE.4.2'],objectives:['Design comprehensive test strategies','Apply TDD and BDD'],content:['Unit and integration testing','Test-driven development','Static analysis','Performance testing','CI/CD pipelines'],examForm:'Project',passMark:'10/20',readingList:['Kaner — Testing Computer Software'],responsible:'Dept. of SE'},
+  {code:'GL.5.2',title:'DevOps and Cloud Engineering',semester:5,credits:3,subject:'SE',language:'English',type:'Optional',specialization:'GL',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['SE.4.2','NET.4.1'],objectives:['Implement DevOps practices','Deploy on cloud platforms'],content:['Docker and Kubernetes','CI/CD with Jenkins/GitLab','Infrastructure as Code (Terraform)','AWS/Azure basics','Monitoring and observability'],examForm:'Lab project',passMark:'10/20',readingList:[],responsible:'Dept. of SE'},
+  {code:'GL.5.3',title:'Advanced Software Architectures',semester:5,credits:3,subject:'SE',language:'French',type:'Optional',specialization:'GL',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.4.2'],objectives:['Design distributed systems','Apply event-driven architectures'],content:['Microservices patterns','Event-driven architecture','API design (REST, GraphQL)','Distributed systems challenges','Service mesh'],examForm:'Architecture project',passMark:'10/20',readingList:['Newman — Building Microservices'],responsible:'Dept. of SE'},
+  {code:'GL.5.4',title:'Human-Computer Interaction',semester:5,credits:3,subject:'SE',language:'French',type:'Optional',specialization:'GL',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.3.1'],objectives:['Design user-centered interfaces','Evaluate usability'],content:['UX design principles','Usability testing','Accessibility standards','Prototyping tools','User research methods'],examForm:'Design project',passMark:'10/20',readingList:['Norman — The Design of Everyday Things'],responsible:'Dept. of SE'},
+  // ── S5 CV TRACK ──
+  {code:'CV.5.1',title:'Advanced Image Processing and Computer Vision',semester:5,credits:3,subject:'IMA',language:'English',type:'Optional',specialization:'CV',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['IMA.2.1','AI.3.1'],objectives:['Apply advanced vision algorithms','Build computer vision systems'],content:['Feature detection and matching','Object detection (YOLO, R-CNN)','Image segmentation','3D vision and stereo','OpenCV in practice'],examForm:'Project',passMark:'10/20',readingList:['Szeliski — Computer Vision: Algorithms and Applications'],responsible:'Dept. of CV'},
+  {code:'CV.5.2',title:'Data Science and Big Data Analytics',semester:5,credits:3,subject:'DAT',language:'English',type:'Optional',specialization:'CV',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['MAT.4.1','DAT.1.1'],objectives:['Process and analyze large datasets','Build data pipelines'],content:['Big Data frameworks (Spark, Hadoop)','Data warehousing','ETL pipelines','Data visualization','Python for data science'],examForm:'Data project',passMark:'10/20',readingList:['McKinney — Python for Data Analysis'],responsible:'Dept. of Data'},
+  {code:'CV.5.3',title:'Pattern Recognition',semester:5,credits:3,subject:'AI',language:'French',type:'Optional',specialization:'CV',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AI.3.1','MAT.1.1'],objectives:['Apply pattern recognition methods','Build classifiers for real data'],content:['Statistical pattern recognition','Clustering algorithms','Dimensionality reduction','Biometric recognition','Time-series classification'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Duda — Pattern Classification'],responsible:'Dept. of AI'},
+  {code:'CV.5.4',title:'Medical and Biomedical Imaging',semester:5,credits:3,subject:'IMA',language:'French',type:'Optional',specialization:'CV',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['CV.5.1'],objectives:['Apply image analysis to medical data','Understand medical imaging modalities'],content:['MRI and CT imaging','Medical image segmentation','Computer-aided diagnosis','Deep learning for medical imaging','DICOM standard'],examForm:'Research project',passMark:'10/20',readingList:[],responsible:'Dept. of CV'},
+  // ── S5 IF TRACK ──
+  {code:'IF.5.1',title:'Quantitative Finance and Modeling',semester:5,credits:3,subject:'FIN',language:'French',type:'Optional',specialization:'IF',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['FIN.4.1','MAT.4.1'],objectives:['Build quantitative financial models','Price financial instruments'],content:['Options pricing (Black-Scholes)','Portfolio optimization','Stochastic finance','Monte Carlo for finance','Risk measures (VaR, CVaR)'],examForm:'Written exam + Project',passMark:'10/20',readingList:['Hull — Options, Futures and Other Derivatives'],responsible:'Dept. of Finance'},
+  {code:'IF.5.2',title:'Financial Computing and Algorithmic Trading',semester:5,credits:3,subject:'FIN',language:'English',type:'Optional',specialization:'IF',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['IF.5.1','AP.1.2'],objectives:['Implement financial algorithms','Build trading systems'],content:['Algorithmic trading strategies','High-frequency trading concepts','Financial APIs','Backtesting frameworks','Risk management systems'],examForm:'Trading project',passMark:'10/20',readingList:[],responsible:'Dept. of Finance'},
+  {code:'IF.5.3',title:'Blockchain and Distributed Finance',semester:5,credits:3,subject:'SEC',language:'English',type:'Optional',specialization:'IF',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SEC.4.1','FIN.4.1'],objectives:['Understand blockchain technology','Build decentralized applications'],content:['Cryptographic foundations of blockchain','Ethereum and smart contracts','DeFi protocols','Consensus algorithms','Solidity programming'],examForm:'Project',passMark:'10/20',readingList:[],responsible:'Dept. of Security'},
+  {code:'IF.5.4',title:'Risk Analysis and Management',semester:5,credits:3,subject:'FIN',language:'French',type:'Optional',specialization:'IF',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['IF.5.1'],objectives:['Quantify and manage financial risk','Apply regulatory frameworks'],content:['Market risk','Credit risk','Operational risk','Basel III requirements','Stress testing'],examForm:'Written exam',passMark:'10/20',readingList:["McNeil — Quantitative Risk Management"],responsible:'Dept. of Finance'},
+  // ── S5 SLE TRACK ──
+  {code:'SLE.5.1',title:'Real-Time and Safety-Critical Systems',semester:5,credits:3,subject:'EHA',language:'French',type:'Optional',specialization:'SLE',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.4.1','OS.3.3'],objectives:['Design real-time systems','Verify safety-critical software'],content:['Real-time scheduling','RTOS (FreeRTOS)','Safety standards (IEC 61508)','Formal verification for embedded','Fault tolerance'],examForm:'Project + Oral',passMark:'10/20',readingList:['Burns — Real-Time Systems and Programming Languages'],responsible:'Dept. of Hardware'},
+  {code:'SLE.5.2',title:'FPGA Design and Reconfigurable Computing',semester:5,credits:3,subject:'EHA',language:'French',type:'Optional',specialization:'SLE',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['EHA.3.1','EHA.1.1'],objectives:['Design digital systems on FPGAs','Implement hardware accelerators'],content:['FPGA architecture','Advanced VHDL/Verilog','Hardware accelerator design','HLS (High-Level Synthesis)','FPGA-based systems'],examForm:'FPGA project',passMark:'10/20',readingList:[],responsible:'Dept. of Hardware'},
+  {code:'SLE.5.3',title:'IoT Systems and Protocols',semester:5,credits:3,subject:'EHA',language:'English',type:'Optional',specialization:'SLE',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.4.1','NET.4.1'],objectives:['Build IoT systems end-to-end','Apply IoT communication protocols'],content:['IoT architecture','MQTT, CoAP, LoRaWAN','Edge computing','Sensor fusion','IoT security'],examForm:'IoT project',passMark:'10/20',readingList:[],responsible:'Dept. of Hardware'},
+  {code:'SLE.5.4',title:'Embedded Linux and System Software',semester:5,credits:3,subject:'OS',language:'French',type:'Optional',specialization:'SLE',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['OS.3.3','EHA.4.1'],objectives:['Port and customize Linux for embedded targets','Write Linux kernel modules'],content:['Linux kernel architecture','Board support packages','Device drivers','Yocto Project','Buildroot'],examForm:'Lab project',passMark:'10/20',readingList:['Corbet — Linux Device Drivers'],responsible:'Dept. of Systems'},
+  // ── S5 ST-IoT TRACK ──
+  {code:'DOS.5.1',title:'Service-Oriented and Microservices Architecture',semester:5,credits:3,subject:'SE',language:'French',type:'Optional',specialization:'ST-IoT',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.4.2','AP.2.2'],objectives:['Design service-oriented systems','Implement microservices'],content:['SOA principles','REST and GraphQL APIs','API gateways','Service discovery','Distributed transactions'],examForm:'Project',passMark:'10/20',readingList:[],responsible:'Dept. of SE'},
+  {code:'DOS.5.2',title:'Cloud Computing and Virtualization',semester:5,credits:3,subject:'OS',language:'English',type:'Optional',specialization:'ST-IoT',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['OS.3.3','NET.4.1'],objectives:['Deploy cloud infrastructure','Apply virtualization technologies'],content:['Cloud models (IaaS, PaaS, SaaS)','Virtual machines and containers','OpenStack','Serverless computing','Cloud security'],examForm:'Cloud project',passMark:'10/20',readingList:[],responsible:'Dept. of Systems'},
+  {code:'DOS.5.3',title:'Internet of Things Applications',semester:5,credits:3,subject:'EHA',language:'English',type:'Optional',specialization:'ST-IoT',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['NET.4.1'],objectives:['Build connected IoT applications','Integrate cloud and edge for IoT'],content:['IoT platforms (AWS IoT, Azure IoT)','Smart city applications','Industrial IoT','Data analytics for IoT','IoT security and privacy'],examForm:'IoT application project',passMark:'10/20',readingList:[],responsible:'Dept. of Networks'},
+  {code:'DOS.5.4',title:'Network Security and Administration',semester:5,credits:3,subject:'SEC',language:'French',type:'Optional',specialization:'ST-IoT',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SEC.4.1','NET.4.1'],objectives:['Secure network infrastructure','Administer enterprise networks'],content:['Firewall and IDS/IPS','VPN technologies','Network forensics','Zero-trust architecture','Security operations center (SOC)'],examForm:'Lab project + Written',passMark:'10/20',readingList:['Stallings — Network Security Essentials'],responsible:'Dept. of Security'},
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let state = {
+  route: 'home',
+  search: '',
+  semesterFilter: 'all',
+  subjectFilters: [],
+  languageFilter: '',
+  typeFilter: '',
+  drawerModule: null,
+  searchDebounce: null,
+  collapsedSections: {},
+};
+
+// ─── ROUTER ──────────────────────────────────────────────────────────────────
+async function init() {
+  CLUBS = await fetch('/clubs.json').then(r=>r.json());
+  window.addEventListener('hashchange', handleRoute);
+  document.addEventListener('keydown', e => { if (e.key==='Escape') closeDrawer(); });
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.style.boxShadow = window.scrollY > 8 ? '0 1px 3px rgba(0,0,0,0.08)' : 'none';
+  }, {passive:true});
+  handleRoute();
+}
+
+function initHeroSlideshow() {
+  const track = document.getElementById('hero-track');
+  const dots  = document.querySelectorAll('.hero-dot');
+  const label = document.getElementById('hero-label');
+  const slides = document.querySelectorAll('.hero-slide');
+  if(!track||!slides.length) return;
+
+  const LABELS = ['ENSI Forum 20.0','Code & Conquer 3.0','RoboCup 8.0','TuniHack 11.0'];
+  const N = slides.length;
+  const reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let current = 0;
+  let autoTimer = null;
+  let userTimer = null;
+
+  function goTo(idx, instant) {
+    current = ((idx % N) + N) % N;
+    if(reduced || instant) track.style.transition = 'none';
+    else track.style.transition = 'transform 0.8s ease';
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d,i)=>{
+      d.classList.toggle('active', i===current);
+      d.setAttribute('aria-selected', i===current);
+    });
+    if(label){const parts=LABELS[current].split(' ');const num=parts.pop();label.innerHTML=parts.join(' ')+' <span style="color:#4DB8E8">'+num+'</span>';}
+    // preload next
+    const nextSlide = slides[(current+1)%N];
+    const bg = nextSlide.style.backgroundImage;
+    if(bg){const m=bg.match(/url\(['"]?([^'"]+)['"]?\)/);if(m){const img=new Image();img.src=m[1];}}
+  }
+
+  function startAuto() {
+    if(reduced) return;
+    clearInterval(autoTimer);
+    autoTimer = setInterval(()=>goTo(current+1), 6000);
+  }
+  function pauseAuto() {
+    clearInterval(autoTimer);
+    clearTimeout(userTimer);
+    userTimer = setTimeout(startAuto, 10000);
+  }
+
+  window.heroGo = function(dir) { pauseAuto(); goTo(current+dir); };
+  window.heroJump = function(idx) { pauseAuto(); goTo(idx); };
+  window.heroKey = function(e) {
+    if(e.key==='ArrowLeft'){ e.preventDefault(); heroGo(-1); }
+    if(e.key==='ArrowRight'){ e.preventDefault(); heroGo(1); }
+  };
+
+  // Drag/swipe
+  let startX = 0, isDragging = false;
+  function onDragStart(e) {
+    startX = e.touches ? e.touches[0].clientX : e.clientX;
+    isDragging = true;
+    track.classList.add('dragging');
+    pauseAuto();
+  }
+  function onDragEnd(e) {
+    if(!isDragging) return;
+    isDragging = false;
+    track.classList.remove('dragging');
+    const endX = e.touches ? e.changedTouches[0].clientX : e.clientX;
+    const diff = startX - endX;
+    if(Math.abs(diff) > 50) goTo(current + (diff>0?1:-1));
+    else goTo(current); // snap back
+  }
+  track.addEventListener('mousedown', onDragStart);
+  track.addEventListener('touchstart', onDragStart, {passive:true});
+  window.addEventListener('mouseup', onDragEnd);
+  track.addEventListener('touchend', onDragEnd);
+  // prevent click-drag firing links
+  track.addEventListener('dragstart', e=>e.preventDefault());
+
+  goTo(0, true);
+  startAuto();
+}
+
+function handleRoute() {
+  const hash = location.hash.replace('#','') || 'home';
+  const [route, params] = hash.split('?');
+  state.route = route || 'home';
+  if (params) {
+    const p = new URLSearchParams(params);
+    const s = p.get('s');
+    if (s) state.semesterFilter = parseInt(s);
+    else if (route === 'catalog') state.semesterFilter = 'all';
+  } else if (route === 'catalog') {
+    // keep existing filter
+  }
+  renderApp();
+}
+
+function navigate(route, params) {
+  const q = params ? '?'+new URLSearchParams(params).toString() : '';
+  location.hash = route + q;
+}
+
+// ─── FILTER LOGIC ────────────────────────────────────────────────────────────
+function getFilteredModules() {
+  return MODULES.filter(m => {
+    if (state.search) {
+      const q = state.search.toLowerCase();
+      const hit = m.code.toLowerCase().includes(q) ||
+                  m.title.toLowerCase().includes(q) ||
+                  (m.responsible||'').toLowerCase().includes(q) ||
+                  (m.content||[]).some(c=>c.toLowerCase().includes(q)) ||
+                  (m.objectives||[]).some(o=>o.toLowerCase().includes(q));
+      if (!hit) return false;
+    }
+    if (state.semesterFilter !== 'all' && m.semester !== state.semesterFilter) return false;
+    if (state.subjectFilters.length && !state.subjectFilters.includes(m.subject)) return false;
+    if (state.languageFilter) {
+      if (state.languageFilter==='Both') { if (m.language!=='Both'&&m.language!=='English'&&m.language!=='French') return false; }
+      else if (m.language !== state.languageFilter) return false;
+    }
+    if (state.typeFilter && m.type !== state.typeFilter) return false;
+    return true;
+  });
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function codeEl(code, onclick) {
+  const cls = 'module-code' + (onclick?' cursor-pointer hover:opacity-80':'');
+  const oc = onclick ? `onclick="${onclick}"` : '';
+  return `<span class="${cls}" ${oc}>${code}</span>`;
+}
+
+function subjectTag(subject) {
+  const color = SUBJECT_COLORS[subject]||'#6B7280';
+  return `<span class="tag" style="background:${color}20;color:${color};border:1px solid ${color}40">${subject}</span>`;
+}
+
+function semBadge(sem) {
+  return `<span class="tag" style="background:#1B2A4A15;color:#1B2A4A">S${sem}</span>`;
+}
+
+function creditBadge(cr) {
+  return `<span class="tag" style="background:#4DB8E815;color:#0891B2">${cr} ECTS</span>`;
+}
+
+function langTag(lang) {
+  const colors = {French:'#6366F1',English:'#059669',Both:'#D97706'};
+  const c = colors[lang]||'#6B7280';
+  return `<span class="tag" style="background:${c}15;color:${c}">${lang}</span>`;
+}
+
+function typeTag(type) {
+  if (type==='Compulsory') return `<span class="tag" style="background:#1B2A4A12;color:#1B2A4A">Compulsory</span>`;
+  return `<span class="tag" style="background:#4DB8E815;color:#0891B2">Optional</span>`;
+}
+
+const SEM_LABELS = {1:'Year 1',2:'Year 1',3:'Year 2',4:'Year 2',5:'Year 3'};
+
+// ─── DRAWER ──────────────────────────────────────────────────────────────────
+function openDrawer(code) {
+  const m = MODULES.find(x=>x.code===code);
+  if (!m) return;
+  state.drawerModule = m;
+  state.collapsedSections = {};
+  renderDrawer();
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawer').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+  document.body.style.overflow = '';
+  state.drawerModule = null;
+}
+
+function toggleSection(id) {
+  state.collapsedSections[id] = !state.collapsedSections[id];
+  const el = document.getElementById('dc-'+id);
+  const icon = document.getElementById('dci-'+id);
+  if (el) el.classList.toggle('open', !state.collapsedSections[id]);
+  if (icon) icon.style.transform = state.collapsedSections[id]?'rotate(-90deg)':'rotate(0)';
+}
+
+function renderDrawer() {
+  const m = state.drawerModule;
+  if (!m) return;
+  const subColor = SUBJECT_COLORS[m.subject]||'#6B7280';
+
+  function section(id, title, content) {
+    const open = !state.collapsedSections[id];
+    return `
+    <div style="border-bottom:1px solid #F0F4F8">
+      <button onclick="toggleSection('${id}')" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px 0;background:none;border:none;cursor:pointer;text-align:left">
+        <span style="font-family:'Archivo',sans-serif;font-weight:600;font-size:0.875rem;color:#1B2A4A;letter-spacing:0.02em">${title}</span>
+        <span id="dci-${id}" style="color:#4DB8E8;font-size:0.875rem;transition:transform .2s ease;transform:${open?'rotate(0)':'rotate(-90deg)'}">▼</span>
+      </button>
+      <div id="dc-${id}" class="collapse-content ${open?'open':''}">${content}</div>
+    </div>`;
+  }
+
+  const prereqs = m.prerequisites&&m.prerequisites.length
+    ? m.prerequisites.map(p=>`<span onclick="openDrawer('${p}')" style="cursor:pointer">${codeEl(p)}</span>`).join(' ')
+    : '<span style="color:#9CA3AF;font-size:0.875rem">None</span>';
+
+  const html = `
+  <div style="padding:24px 24px 0">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+      <div>${codeEl(m.code)}</div>
+      <button onclick="closeDrawer()" aria-label="Close" style="background:none;border:none;cursor:pointer;color:#9CA3AF;font-size:1.25rem;line-height:1;padding:4px">&times;</button>
+    </div>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:1.35rem;font-weight:700;color:#1B2A4A;margin:0 0 12px;line-height:1.3">${m.title}</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px">
+      ${semBadge(m.semester)}${creditBadge(m.credits)}${langTag(m.language)}${typeTag(m.type)}${subjectTag(m.subject)}
+    </div>
+  </div>
+  <div style="padding:0 24px 24px">
+    ${section('obj','Objectives',`<ul style="list-style:none;padding:0 0 12px;margin:0">${(m.objectives||[]).map(o=>`<li style="display:flex;gap:8px;align-items:flex-start;padding:4px 0;font-size:0.875rem;color:#374151"><span style="color:#4DB8E8;flex-shrink:0;margin-top:2px">▸</span>${o}</li>`).join('')}</ul>`)}
+    ${section('content','Content',`<ul style="list-style:none;padding:0 0 12px;margin:0">${(m.content||[]).map((c,i)=>`<li style="display:flex;gap:10px;align-items:flex-start;padding:4px 0;font-size:0.875rem;color:#374151"><span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#4DB8E8;flex-shrink:0;margin-top:3px;background:#4DB8E810;border-radius:2px;padding:0 4px">${String(i+1).padStart(2,'0')}</span>${c}</li>`).join('')}</ul>`)}
+    ${section('workload','Workload',`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-bottom:12px">
+      ${[['Total',m.hours.total],['Lecture',m.hours.lecture],['Lab',m.hours.lab],['Self-Study',m.hours.selfStudy]].map(([l,v])=>`
+      <div style="background:#F5F7FA;border-radius:8px;padding:12px">
+        <div style="font-size:0.7rem;color:#6B7280;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px">${l}</div>
+        <div style="font-family:'Archivo',sans-serif;font-size:1.25rem;font-weight:700;color:#1B2A4A">${v}<span style="font-size:0.7rem;color:#9CA3AF;margin-left:2px">h</span></div>
+      </div>`).join('')}
+    </div>`)}
+    ${section('prereq','Prerequisites',`<div style="padding-bottom:12px;display:flex;gap:6px;flex-wrap:wrap">${prereqs}</div>`)}
+    ${section('exam','Assessment',`<div style="padding-bottom:12px;font-size:0.875rem;color:#374151"><div style="margin-bottom:4px">${m.examForm}</div><div style="margin-top:8px;display:flex;align-items:center;gap:8px"><span style="font-size:0.75rem;color:#6B7280">Pass mark</span><span style="font-family:'JetBrains Mono',monospace;font-weight:600;color:#059669;font-size:0.85rem">${m.passMark}</span></div></div>`)}
+    ${m.readingList&&m.readingList.length ? section('reading','Reading List',`<ol style="padding:0 0 12px 16px;margin:0">${m.readingList.map(r=>`<li style="font-size:0.875rem;color:#374151;padding:3px 0">${r}</li>`).join('')}</ol>`) : ''}
+    ${section('resp','Responsible',`<div style="padding-bottom:12px;font-size:0.875rem;color:#374151">${m.responsible||'—'}</div>`)}
+  </div>`;
+  document.getElementById('drawer-content').innerHTML = html;
+}
+
+// ─── SEARCH ──────────────────────────────────────────────────────────────────
+function handleSearch(val) {
+  clearTimeout(state.searchDebounce);
+  state.searchDebounce = setTimeout(() => {
+    state.search = val.trim();
+    const clr = document.getElementById('search-clear');
+    if (clr) clr.style.display = val ? 'inline' : 'none';
+    renderCatalog();
+  }, 300);
+}
+
+function clearSearch() {
+  state.search = '';
+  const inp = document.getElementById('catalog-search');
+  if (inp) inp.value = '';
+  const clr = document.getElementById('search-clear');
+  if (clr) clr.style.display = 'none';
+  renderCatalog();
+}
+
+// ─── NAV ─────────────────────────────────────────────────────────────────────
+function updateNav() {
+  ['home','catalog','specializations'].forEach(r=>{
+    const el = document.getElementById('nav-'+r);
+    if (el) el.classList.toggle('active', state.route===r);
+  });
+}
+
+// ─── HOME PAGE ───────────────────────────────────────────────────────────────
+function renderHome() {
+  const subjectCounts = {};
+  MODULES.forEach(m => { subjectCounts[m.subject]=(subjectCounts[m.subject]||0)+1; });
+  const subjects = Object.entries(subjectCounts).sort((a,b)=>b[1]-a[1]);
+
+  const semStats = [1,2,3,4,5].map(s=>({
+    s, count: MODULES.filter(m=>m.semester===s).length,
+    credits: MODULES.filter(m=>m.semester===s).reduce((a,m)=>a+m.credits,0)
+  }));
+
+  // Specialization keyword map
+  const specKeywords = {
+    AI: 'Machine learning · Deep learning · NLP · Cognitive systems',
+    GL: 'Software quality · DevOps · Cloud · Architecture',
+    CV: 'Computer vision · Pattern recognition · Big data · Medical imaging',
+    IF: 'Quantitative finance · Algorithmic trading · Blockchain · Risk',
+    SLE: 'Real-time · FPGA · IoT protocols · Embedded Linux',
+    'ST-IoT': 'Cloud computing · Microservices · IoT apps · Network security',
+  };
+
+  // Year bracket spans for timeline
+  // S1–S2 = Year 1, S3–S4 = Year 2, S5 = Year 3
+  // We render via a flex row with relative widths
+
+  document.getElementById('page').innerHTML = `
+  <!-- HERO -->
+  <section class="hero-section" id="hero-section" tabindex="0"
+    onkeydown="heroKey(event)" aria-label="Hero slideshow — use arrow keys to browse">
+    <!-- Sliding photo track (back) -->
+    <div id="hero-track">
+      ${[
+        {src:'imag/hero/forum-20th-edition.jpeg',     label:'ENSI Forum 20.0'},
+        {src:'imag/hero/code&conquer-3th-edition.jpg',label:'Code & Conquer 3.0'},
+        {src:'imag/hero/robocup-8th-edition.jpg',     label:'RoboCup 8.0'},
+        {src:'imag/hero/tunihack-11th-edition.jpg',   label:'TuniHack 11.0'}
+      ].map(({src,label})=>`
+      <div class="hero-slide" style="background-image:url('/${src}')" aria-label="${label}">
+        <div class="hero-duotone"></div>
+      </div>`).join('')}
+    </div>
+    <!-- Gradient overlay -->
+    <div class="hero-overlay"></div>
+    <!-- Hero text (fixed above slides) -->
+    <div style="position:relative;z-index:2;padding:0 10vw;max-width:960px;pointer-events:none">
+      <p class="fade-up fade-up-1" style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;margin:0 0 28px;text-transform:uppercase">SINCE 1984 · UNIVERSITY OF MANOUBA</p>
+      <h1 class="fade-up fade-up-2" style="font-family:'Archivo',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;color:#fff;margin:0 0 8px;line-height:0.95;letter-spacing:-0.03em">Welcome to <span style="color:#4DB8E8">ENSI</span></h1>
+      <p class="fade-up fade-up-2" style="font-family:'Inter',sans-serif;font-size:1.25rem;font-weight:300;color:rgba(255,255,255,0.75);margin:0 0 24px;line-height:1.3">École Nationale des Sciences de l'Informatique</p>
+      <p class="fade-up fade-up-3" style="font-family:'Inter',sans-serif;font-size:1.125rem;color:rgba(255,255,255,0.6);margin:0 0 32px;font-weight:400">Everything a new admit needs to know — admission, pathways, student life, and what you'll study.</p>
+      <button onclick="document.getElementById('curriculum-section').scrollIntoView({behavior:'smooth'})" class="ghost-cta fade-up fade-up-4" style="pointer-events:auto">Start exploring <span class="cta-arrow">↓</span></button>
+    </div>
+    <!-- Arrow buttons -->
+    <button class="hero-arrow hero-arrow-left" onclick="heroGo(-1)" aria-label="Previous photo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="hero-arrow hero-arrow-right" onclick="heroGo(1)" aria-label="Next photo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <!-- Label + dots -->
+    <div id="hero-label">ENSI Forum <span style="color:#4DB8E8">20.0</span></div>
+    <div id="hero-dots" role="tablist" aria-label="Slideshow navigation">
+      ${[
+        {label:'ENSI Forum 20.0'},
+        {label:'Code & Conquer 3.0'},
+        {label:'RoboCup 8.0'},
+        {label:'TuniHack 11.0'}
+      ].map(({label},i)=>`
+      <button class="hero-dot${i===0?' active':''}" onclick="heroJump(${i})"
+        aria-label="Go to ${label}" role="tab" aria-selected="${i===0}"></button>`).join('')}
+    </div>
+  </section>
+
+  <!-- BY THE NUMBERS -->
+  ${(()=>{
+    const dd = [
+      {y:2013,v:3},{y:2014,v:5},{y:2015,v:11},{y:2016,v:8},
+      {y:2017,v:7},{y:2018,v:7},{y:2019,v:6},{y:2020,v:5},
+      {y:2021,v:5},{y:2022,v:10},{y:2023,v:14},{y:2024,v:17},
+    ];
+    const W=900,H=180,pL=36,pR=36,pT=16,pB=36;
+    const cW=W-pL-pR, cH=H-pT-pB, maxV=17, n=dd.length;
+    const xs=dd.map((_,i)=>pL+i*(cW/(n-1)));
+    const ys=dd.map(d=>pT+(1-d.v/maxV)*cH);
+    const line=xs.map((x,i)=>`${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ');
+    const area=`${xs[0].toFixed(1)},${(pT+cH).toFixed(1)} `+xs.map((x,i)=>`${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ')+` ${xs[n-1].toFixed(1)},${(pT+cH).toFixed(1)}`;
+    const labels=dd.map((d,i)=>`<text x="${xs[i].toFixed(1)}" y="${H-6}" text-anchor="${i===0?'start':i===n-1?'end':'middle'}" fill="rgba(255,255,255,0.45)" font-family="JetBrains Mono,monospace" font-size="13">${d.y}</text>`).join('');
+    const dots=dd.map((d,i)=>`<circle cx="${xs[i].toFixed(1)}" cy="${ys[i].toFixed(1)}" r="3.5" fill="#4DB8E8"/>`).join('');
+    return `
+  <section style="background:#1B2A4A;padding:96px 10vw">
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">BY THE NUMBERS</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#fff;margin:0 0 56px;line-height:0.95;letter-spacing:-0.03em">Four decades of <span style="color:#4DB8E8">engineers.</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:64px">
+      <div>
+        <div style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-0.03em">2,500+</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.6);margin-top:8px">engineers graduated since 2013</div>
+      </div>
+      <div>
+        <div style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-0.03em">~220</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.6);margin-top:8px">new graduates every year</div>
+      </div>
+      <div>
+        <div style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-0.03em">98</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.6);margin-top:8px">double-degree graduates, 2013–2024</div>
+      </div>
+      <div>
+        <div style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-0.03em">1984</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.6);margin-top:8px">the year ENSI was founded</div>
+      </div>
+    </div>
+    <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.7);margin:0 0 16px">Double-degree opportunities are growing — from 3 graduates in 2013 to 17 in 2024.</p>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px 8px 0">
+      <svg viewBox="0 0 ${W} ${H}" width="100%" height="220" preserveAspectRatio="none" style="display:block">
+        <defs>
+          <linearGradient id="ddGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4DB8E8" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#4DB8E8" stop-opacity="0.02"/>
+          </linearGradient>
+        </defs>
+        <polygon points="${area}" fill="url(#ddGrad)"/>
+        <polyline points="${line}" fill="none" stroke="#4DB8E8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        ${dots}
+        ${labels}
+      </svg>
+    </div>
+  </section>`;
+  })()}
+
+  <!-- ADMISSION TABLE -->
+  <section id="section-admission" style="background:#fff;padding:96px 10vw">
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">HOW SELECTIVE IS IT?</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 16px;line-height:0.95;letter-spacing:-0.03em">Admission <span style="color:#2563EB">cutoff</span></h2>
+    <p style="font-family:'Inter',sans-serif;font-size:1rem;color:rgba(27,42,74,0.65);margin:0 0 40px;max-width:640px;line-height:1.6">Each year ENSI admits 200 students across three prépa tracks. The cutoff rank is the last rank admitted to each track — the higher it climbs, the further down the ranking you could be and still get in.</p>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+      <table style="width:100%;border-collapse:collapse;min-width:480px">
+        <thead>
+          <tr style="border-bottom:1px solid rgba(27,42,74,0.15)">
+            <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 32px 18px 0;text-align:left">Track</th>
+            <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 32px 18px 0;text-align:left">2024</th>
+            <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 0 18px;text-align:left">2025</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${[
+            {track:'Mathématiques-Physique', code:'MP', color:'#2563EB', seats:150, r2024:367, r2025:410},
+            {track:'Physique-Chimie',        code:'PC', color:'#4DB8E8', seats:25,  r2024:100, r2025:110},
+            {track:'Physique-Technologie',   code:'PT', color:'#E63946', seats:25,  r2024:69,  r2025:78},
+          ].map(({track,code,color,seats,r2024,r2025})=>`
+          <tr style="border-bottom:1px solid rgba(27,42,74,0.08)">
+            <td style="padding:22px 32px 22px 0;vertical-align:middle;width:45%">
+              <div style="display:flex;align-items:stretch;gap:12px">
+                <div style="width:5px;background:${color};border-radius:2px;flex-shrink:0;align-self:stretch"></div>
+                <div>
+                  <div style="font-family:'Archivo',sans-serif;font-size:1.25rem;font-weight:800;color:${color};letter-spacing:-0.02em;line-height:1.1">${track}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;color:rgba(27,42,74,0.4);margin-top:9px">${seats} seats</div>
+                </div>
+              </div>
+            </td>
+            <td style="padding:22px 32px 22px 0;vertical-align:middle;font-family:'JetBrains Mono',monospace;font-size:1.75rem;font-weight:600;color:#1B2A4A">${r2024}</td>
+            <td style="padding:22px 0 22px 0;vertical-align:middle;font-family:'JetBrains Mono',monospace;font-size:1.75rem;font-weight:600;color:#1B2A4A">${r2025}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+    <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(27,42,74,0.45);margin:16px 0 0;line-height:1.5">Higher cutoff rank = less selective — the track fills seats further down the national ranking.</p>
+  </section>
+
+  <!-- STUDENT LIFE -->
+  <section id="section-studentlife" style="background:#fff;padding:96px 10vw">
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">12 ACTIVE CLUBS · 4 CATEGORIES</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 40px;line-height:0.95;letter-spacing:-0.03em">Campus <span style="color:#2563EB">Life</span></h2>
+
+    <!-- Filter tabs -->
+    <div id="club-tabs" style="display:flex;gap:0;border-bottom:2px solid #E8EDF4;margin-bottom:40px">
+      ${['All','Science · Tech · Innovation','Sport · Art · Culture','Humanitarian · Social'].map((cat,i)=>`
+      <button onclick="filterClubs('${cat}')" id="club-tab-${i}"
+        style="font-family:'Archivo',sans-serif;font-size:0.875rem;font-weight:700;color:${i===0?'#1B2A4A':'rgba(27,42,74,0.45)'};background:none;border:none;cursor:pointer;padding:0 20px 12px;border-bottom:${i===0?'2px solid #2563EB':'2px solid transparent'};margin-bottom:-2px;transition:color .15s ease,border-color .15s ease;white-space:nowrap">${cat}</button>`).join('')}
+    </div>
+
+    <!-- Club grid -->
+    <div id="club-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+      ${CLUBS.map(c=>`
+      <button class="club-tile" data-cat="${c.category}" data-id="${c.id}" onclick="openClubModal('${c.id}')" aria-label="View ${c.name} details">
+        <div class="club-tile-img">
+          ${c.logo
+            ? `<img src="/imag/clubs/${c.logo}" alt="${c.name}" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center;display:block;border-radius:8px">`
+            : `<div style="width:100%;aspect-ratio:1/1;background:${c.accent};border-radius:8px;display:flex;align-items:center;justify-content:center"><span style="font-family:'Archivo',sans-serif;font-size:1.25rem;font-weight:800;color:#fff;text-align:center;padding:12px">${c.name}</span></div>`
+          }
+        </div>
+        <div class="club-tile-bar" style="background:${c.accent}"></div>
+        <div style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:800;color:#1B2A4A;line-height:1.2;margin-bottom:2px">${c.name}</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.75rem;font-style:italic;color:rgba(27,42,74,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:8px">${c.tagline}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.625rem;color:rgba(27,42,74,0.45);text-transform:uppercase;letter-spacing:0.05em">EST. ${c.founded} · ${{['Science · Tech · Innovation']:'TECH',['Sport · Art · Culture']:'ARTS',['Humanitarian · Social']:'SOCIAL',['AI · ML · Innovation']:'AI'}[c.category]||c.category}</div>
+      </button>`).join('')}
+    </div>
+
+    <!-- Industry Partners -->
+    <div style="margin-top:72px;padding-top:48px;border-top:1px solid #E8EDF4">
+      <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 10px">Hiring ENSI engineers</p>
+      <h3 style="font-family:'Archivo',sans-serif;font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:800;color:#1B2A4A;margin:0 0 36px;letter-spacing:-0.02em">Industry <span style="color:#2563EB">Partners</span></h3>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:28px 40px">
+        ${PARTNERS.map(p=>`
+        <img src="/imag/${p.logo}" alt="${p.name}" class="partner-logo" style="height:${p.h}px;width:auto;display:block;filter:grayscale(1);opacity:0.65;transition:filter .2s ease,opacity .2s ease"
+          onmouseover="this.style.filter='grayscale(0)';this.style.opacity='1'"
+          onmouseout="this.style.filter='grayscale(1)';this.style.opacity='0.65'">`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <!-- SEMESTER TIMELINE -->
+  <section id="curriculum-section" style="background:#F5F7FA;padding:80px 10vw">
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">THE CURRICULUM</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 28px;line-height:0.95;letter-spacing:-0.03em">How the <span style="color:#2563EB">curriculum</span> unfolds.</h2>
+
+    <!-- Subject × Semester matrix -->
+    ${(()=>{
+      const SUBJECT_NAMES = {
+        MAT:'Mathematics',AP:'Algorithmic & Programming',EHA:'Electronics & Hardware',
+        AI:'Artificial Intelligence',DAT:'Data',OS:'Operating Systems',
+        IMA:'Image Processing',NET:'Computer Networks',SE:'Software Engineering',
+        FIN:'Finance',SEC:'Security',DDP:'Dev Project',BDC:'Business & Communication',
+      };
+      const MATRIX = [
+        {code:'MAT',data:[2,2,1,1,0]},
+        {code:'AP', data:[2,3,2,0,0]},
+        {code:'EHA',data:[2,1,1,1,0]},
+        {code:'AI', data:[1,0,1,0,0]},
+        {code:'DAT',data:[1,1,0,0,0]},
+        {code:'OS', data:[0,1,1,0,0]},
+        {code:'IMA',data:[0,1,0,0,0]},
+        {code:'NET',data:[0,1,2,1,0]},
+        {code:'SE', data:[0,0,2,2,0]},
+        {code:'FIN',data:[1,0,0,1,0]},
+        {code:'SEC',data:[0,0,0,1,0]},
+        {code:'DDP',data:[0,0,0,1,0]},
+        {code:'BDC',data:[2,1,1,2,3]},
+      ];
+      const OPACITY = {1:0.45,2:0.72,3:1};
+      const SEMS = [1,2,3,4,5];
+
+      const headerCells = SEMS.map(s=>`
+        <th data-sem="${s}"
+          onclick="setSemFilter(${s});navigate('catalog',{s:${s}})"
+          onmouseover="gridHover('col',${s},true)" onmouseout="gridHover('col',${s},false)"
+          style="width:88px;text-align:center;padding:0 0 20px;cursor:pointer;user-select:none">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:1.375rem!important;font-weight:700;color:#4DB8E8;letter-spacing:0.08em">S${s}</span>
+        </th>`).join('');
+
+      const dataRows = MATRIX.map(row=>{
+        const color = SUBJECT_COLORS[row.code]||'#6B7280';
+        const cells = row.data.map((cnt,i)=>{
+          const s = i+1;
+          if (cnt === 0) return `
+            <td data-sem="${s}" style="width:88px;height:64px;text-align:center;vertical-align:middle;padding:2px 4px">
+              <span style="color:#D1D5DB;font-size:1.5rem;line-height:1">·</span>
+            </td>`;
+          return `
+            <td data-sem="${s}" style="width:88px;height:64px;padding:2px 4px;cursor:pointer"
+              onclick="gridCell(${s},'${row.code}')"
+              title="${cnt} module${cnt>1?'s':''} — ${row.code} in S${s}">
+              <div style="width:64px;height:64px;border-radius:8px;background:${color};opacity:${OPACITY[cnt]};display:flex;align-items:center;justify-content:center;transition:opacity .15s ease,transform .15s ease;margin:0 auto"
+                onmouseover="this.style.opacity='1';this.style.transform='scale(1.06)'"
+                onmouseout="this.style.opacity='${OPACITY[cnt]}';this.style.transform='scale(1)'">
+                <span style="color:#fff;font-family:'JetBrains Mono',monospace;font-size:1.625rem;font-weight:700">${cnt}</span>
+              </div>
+            </td>`;
+        }).join('');
+
+        return `<tr data-subj="${row.code}"
+          onmouseover="gridHover('row','${row.code}',true)"
+          onmouseout="gridHover('row','${row.code}',false)"
+          style="transition:opacity .15s ease">
+          <td style="padding:2px 32px 2px 0;white-space:nowrap;vertical-align:middle;width:320px">
+            <div style="display:flex;align-items:baseline;gap:10px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:1.5rem!important;font-weight:700;color:${color}">${row.code}</span>
+              <span style="font-family:'Inter',sans-serif;font-size:1.375rem!important;font-weight:500;color:#475569">${SUBJECT_NAMES[row.code]||''}</span>
+            </div>
+          </td>
+          ${cells}
+        </tr>`;
+      }).join('');
+
+      return `<div style="overflow-x:auto">
+        <table id="subj-grid" style="border-collapse:separate;border-spacing:16px 0;width:100%">
+          <thead>
+            <tr><th style="width:320px"></th>${headerCells}</tr>
+          </thead>
+          <tbody>${dataRows}</tbody>
+        </table>
+      </div>`;
+    })()}
+  </section>
+
+  <!-- SPECIALIZATIONS STRIPS (PATHWAYS) -->
+  <section id="section-pathways" style="background:#F5F7FA;padding:80px 0">
+    <div style="padding:0 10vw;margin-bottom:40px">
+      <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">SEMESTER 5 SPECIALIZATIONS</p>
+      <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0;line-height:0.95;letter-spacing:-0.03em">Choose your <span style="color:#2563EB">coloration.</span></h2>
+    </div>
+    <div style="border-top:1px solid #E8EDF4">
+      ${SPECIALIZATIONS.map(sp=>`
+      <a href="#specializations" class="spec-strip">
+        <div style="width:56px;height:56px;background:${sp.color};border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15)">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:${sp.id==='ST-IoT'?'0.6rem':'0.8rem'};font-weight:700;color:#fff;letter-spacing:0.02em;text-align:center;line-height:1.3">${sp.id}</span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="font-family:'Archivo',sans-serif;font-size:1.05rem;font-weight:500;color:#1B2A4A;margin-bottom:2px">${sp.name}</div>
+          <div style="font-size:0.78rem;color:#9CA3AF;margin-bottom:6px">${sp.nameFr}</div>
+          <div style="font-size:0.8rem;color:${sp.color};font-family:'Inter',sans-serif">${specKeywords[sp.id]||''}</div>
+        </div>
+        <div class="spec-watermark" style="color:${sp.color};opacity:0.09">${sp.id}</div>
+        <span class="spec-arrow" style="color:${sp.color}">→</span>
+      </a>`).join('')}
+    </div>
+  </section>
+
+  ${footer()}`;
+  initHeroSlideshow();
+}
+
+function filterClubs(cat) {
+  const cards = document.querySelectorAll('.club-tile');
+  cards.forEach(c => {
+    c.style.display = (cat === 'All' || c.dataset.cat === cat) ? '' : 'none';
+  });
+  const tabs = document.querySelectorAll('#club-tabs button');
+  const cats = ['All','Science · Tech · Innovation','Sport · Art · Culture','Humanitarian · Social'];
+  tabs.forEach((t,i) => {
+    const active = cats[i] === cat;
+    t.style.color = active ? '#1B2A4A' : 'rgba(27,42,74,0.45)';
+    t.style.borderBottomColor = active ? '#2563EB' : 'transparent';
+  });
+}
+
+function gridHover(type, id, on) {
+  const grid = document.getElementById('subj-grid');
+  if (!grid) return;
+  if (type === 'row') {
+    grid.querySelectorAll('tbody tr').forEach(tr => {
+      tr.style.opacity = (!on || tr.dataset.subj === id) ? '' : '0.18';
+    });
+  } else {
+    grid.querySelectorAll('td[data-sem],th[data-sem]').forEach(el => {
+      el.style.opacity = (!on || el.dataset.sem === String(id)) ? '' : '0.18';
+    });
+  }
+}
+
+function gridCell(sem, subj) {
+  state.subjectFilters = [subj];
+  state.semesterFilter = sem;
+  location.hash = 'catalog';
+}
+
+function setSubjectFilter(subj) {
+  state.subjectFilters = [subj];
+  state.semesterFilter = 'all';
+  setTimeout(renderCatalog, 10);
+}
+
+// ─── CATALOG PAGE ────────────────────────────────────────────────────────────
+function renderCatalog() {
+  const filtered = getFilteredModules();
+  const showAll = state.semesterFilter === 'all';
+
+  const allSubjects = [...new Set(MODULES.map(m=>m.subject))].sort();
+
+  // Group modules by semester when all selected
+  let moduleGroups = [];
+  if (showAll && !state.search) {
+    [1,2,3,4,5].forEach(s=>{
+      const mods = filtered.filter(m=>m.semester===s);
+      if (mods.length) moduleGroups.push({sem:s,mods});
+    });
+  } else {
+    moduleGroups = [{sem:null,mods:filtered}];
+  }
+
+  document.getElementById('page').innerHTML = `
+  <div style="max-width:1300px;margin:0 auto;padding:32px 24px">
+    <div class="catalog-layout" style="display:flex;gap:24px">
+      <!-- SIDEBAR -->
+      <div class="sidebar-wrap" style="width:260px;flex-shrink:0">
+        <div class="sidebar" style="position:sticky;top:80px;background:#fff;border-radius:12px;border:1px solid #E8EDF4;padding:20px;max-height:calc(100vh - 100px);overflow-y:auto">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+            <span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:0.9rem;color:#1B2A4A">Filters</span>
+            <button onclick="clearFilters()" style="font-size:0.75rem;color:#4DB8E8;background:none;border:none;cursor:pointer;font-weight:500">Clear all</button>
+          </div>
+
+          <!-- Semester -->
+          <div style="margin-bottom:20px">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:8px">Semester</div>
+            ${['all',1,2,3,4,5].map(s=>`
+            <label class="filter-label">
+              <input type="checkbox" ${state.semesterFilter===s||state.semesterFilter==s?'checked':''} onchange="setSemFilter(${JSON.stringify(s)})" style="accent-color:#2563EB">
+              <span>${s==='all'?'All semesters':'Semester '+s}</span>
+            </label>`).join('')}
+          </div>
+
+          <!-- Subject -->
+          <div style="margin-bottom:20px">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:8px">Subject Area</div>
+            ${allSubjects.map(subj=>{
+              const color=SUBJECT_COLORS[subj]||'#6B7280';
+              return `<label class="filter-label">
+                <input type="checkbox" ${state.subjectFilters.includes(subj)?'checked':''} onchange="toggleSubject('${subj}')" style="accent-color:${color}">
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0"></span>${subj}</span>
+              </label>`;
+            }).join('')}
+          </div>
+
+          <!-- Language -->
+          <div style="margin-bottom:20px">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:8px">Language</div>
+            ${['','French','English','Both'].map(l=>`
+            <label class="filter-label">
+              <input type="radio" name="lang" value="${l}" ${state.languageFilter===l?'checked':''} onchange="setLang('${l}')" style="accent-color:#2563EB">
+              <span>${l||'All'}</span>
+            </label>`).join('')}
+          </div>
+
+          <!-- Type -->
+          <div style="margin-bottom:20px">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:8px">Type</div>
+            ${['','Compulsory','Optional'].map(t=>`
+            <label class="filter-label">
+              <input type="radio" name="type" value="${t}" ${state.typeFilter===t?'checked':''} onchange="setType('${t}')" style="accent-color:#2563EB">
+              <span>${t||'All'}</span>
+            </label>`).join('')}
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN -->
+      <div style="flex:1;min-width:0">
+        <!-- Search bar -->
+        <div style="position:relative;margin-bottom:16px">
+          <input id="catalog-search" type="text" placeholder="Search modules, codes, or topics…"
+            value="${state.search}"
+            style="width:100%;background:#fff;color:#1B2A4A;border:1px solid #E8EDF4;border-radius:6px;padding:10px 36px 10px 14px;font-size:0.875rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s ease"
+            oninput="handleSearch(this.value)"
+            onfocus="this.style.borderColor='#4DB8E8'"
+            onblur="this.style.borderColor='#E8EDF4'">
+          <button id="search-clear" onclick="clearSearch()"
+            style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#9CA3AF;background:none;border:none;cursor:pointer;font-size:0.875rem;display:${state.search?'inline':'none'}">✕</button>
+        </div>
+        <!-- Tabs -->
+        <div style="display:flex;border-bottom:1px solid #E8EDF4;margin-bottom:20px;overflow-x:auto">
+          ${['all',1,2,3,4,5].map(s=>`
+          <button class="sem-tab ${state.semesterFilter==s?'active':''}" onclick="setSemFilter(${JSON.stringify(s)})">
+            ${s==='all'?'All':('S'+s)}
+          </button>`).join('')}
+        </div>
+
+        <!-- Result count -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-size:0.875rem;color:#6B7280">Showing <strong>${filtered.length}</strong> of <strong>${MODULES.length}</strong> modules</span>
+          ${state.search?`<span style="font-size:0.875rem;color:#4DB8E8">Search: "${state.search}"</span>`:''}
+        </div>
+
+        <!-- Module grid -->
+        ${moduleGroups.length===0?`
+        <div style="text-align:center;padding:60px 20px">
+          <div style="font-size:2rem;margin-bottom:12px">🔍</div>
+          <p style="color:#6B7280;font-size:0.9rem">No modules match your search</p>
+          <button onclick="clearFilters()" style="margin-top:12px;color:#4DB8E8;background:none;border:none;cursor:pointer;font-size:0.875rem">Clear filters</button>
+        </div>
+        `:moduleGroups.map(({sem,mods})=>`
+        ${sem?`<div class="sem-divider">Semester ${sem} — ${SEM_LABELS[sem]}</div>`:''}
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:${sem?'32px':'0'}">
+          ${mods.map(m=>moduleCard(m)).join('')}
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>
+  ${footer()}`;
+}
+
+function moduleCard(m) {
+  const subColor = SUBJECT_COLORS[m.subject]||'#6B7280';
+  return `
+  <div class="module-card" onclick="openDrawer('${m.code}')" aria-label="View ${m.title} details">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+      ${codeEl(m.code)}
+      <div style="display:flex;gap:4px">${semBadge(m.semester)}${creditBadge(m.credits)}</div>
+    </div>
+    <h3 style="font-family:'Archivo',sans-serif;font-size:0.975rem;font-weight:600;color:#1B2A4A;margin:0 0 10px;line-height:1.3">${m.title}</h3>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:0.8rem;color:#6B7280">${m.language} · ${m.type}</span>
+      ${subjectTag(m.subject)}
+    </div>
+  </div>`;
+}
+
+// ─── FILTER CONTROLS ─────────────────────────────────────────────────────────
+function setSemFilter(s) {
+  state.semesterFilter = s;
+  if (state.route==='catalog') renderCatalog();
+  else navigate('catalog', s!=='all'?{s}:undefined);
+}
+
+function toggleSubject(subj) {
+  const i = state.subjectFilters.indexOf(subj);
+  if (i>=0) state.subjectFilters.splice(i,1); else state.subjectFilters.push(subj);
+  renderCatalog();
+}
+
+function setLang(l) { state.languageFilter=l; renderCatalog(); }
+function setType(t) { state.typeFilter=t; renderCatalog(); }
+
+function clearFilters() {
+  state.search=''; state.semesterFilter='all'; state.subjectFilters=[];
+  state.languageFilter=''; state.typeFilter='';
+  document.getElementById('navbar-search').value='';
+  document.getElementById('search-clear').style.display='none';
+  renderCatalog();
+}
+
+// ─── DOUBLE DIPLOMAS DATA ─────────────────────────────────────────────────────
+let CLUBS = [];
+const PARTNERS = [
+  {name:'Sagemcom',   logo:'partners/sagemcom-logo.png',   h:50},
+  {name:'Sofrecom',   logo:'partners/sofrecom-logo.png',   h:46},
+  {name:'Huawei',     logo:'partners/huawei-logo.png',     h:44},
+  {name:'Minotore',   logo:'partners/minotore-logo.png',   h:42},
+  {name:'Axefinance', logo:'partners/axefinance-logo.png', h:40},
+  {name:'OneTech',    logo:'partners/onetech-logo.png',    h:38},
+  {name:'ACTIA',      logo:'partners/actia-logo.png',      h:30},
+  {name:'FIS',        logo:'partners/fis-logo.png',        h:34},
+  {name:'Lyance',     logo:'partners/lyance-logo.png',     h:30},
+  {name:'Inetum',     logo:'partners/inetum-logo.png',     h:28},
+  {name:'Talan',      logo:'partners/talan-logo.svg',      h:26},
+];
+
+const DOUBLE_DIPLOMAS = [
+  { code:'ECLyon',   name:'École Centrale de Lyon',                country:'France',  total:15, byYear:{'2017-18':1,'2018-19':2,'2019-20':3,'2020-21':3,'2021-22':4,'2022-23':2} },
+  { code:'TSP',      name:'Télécom SudParis',                      country:'France',  total:14, byYear:{'2017-18':3,'2018-19':2,'2019-20':2,'2020-21':2,'2021-22':3,'2022-23':2} },
+  { code:'PASSAU',   name:'University of Passau',                  country:'Germany', total:11, byYear:{'2017-18':0,'2018-19':0,'2019-20':2,'2020-21':3,'2021-22':3,'2022-23':3} },
+  { code:'ENSEIRB',  name:'Bordeaux INP – ENSEIRB-MATMECA',        country:'France',  total:8,  byYear:{'2017-18':2,'2018-19':1,'2019-20':1,'2020-21':1,'2021-22':3,'2022-23':0} },
+  { code:'Canada',   name:'Canadian partner universities',         country:'Canada',  total:4,  byYear:{'2017-18':0,'2018-19':0,'2019-20':0,'2020-21':0,'2021-22':0,'2022-23':4} },
+  { code:'IMT-BS',   name:'Institut Mines-Télécom Business School',country:'France',  total:2,  byYear:{'2017-18':0,'2018-19':0,'2019-20':0,'2020-21':1,'2021-22':1,'2022-23':0} },
+  { code:'ENSIIE',   name:'ENSIIE (Évry)',                         country:'France',  total:1,  byYear:{'2017-18':0,'2018-19':0,'2019-20':0,'2020-21':0,'2021-22':0,'2022-23':1} },
+  { code:'EC-Lille', name:'École Centrale de Lille',               country:'France',  total:0,  byYear:{'2017-18':0,'2018-19':0,'2019-20':0,'2020-21':0,'2021-22':0,'2022-23':0} },
+];
+const COUNTRY_FLAGS = { France:'🇫🇷', Germany:'🇩🇪', Canada:'🇨🇦' };
+const COUNTRY_COLORS = { France:'#2563EB', Germany:'#D97706', Canada:'#DC2626' };
+
+// ─── SPECIALIZATIONS PAGE ────────────────────────────────────────────────────
+function renderSpecializations() {
+  const modByCode = Object.fromEntries(MODULES.map(m=>[m.code,m]));
+
+  document.getElementById('page').innerHTML = `
+  <!-- HERO BANNER -->
+  <div style="background:#1B2A4A;padding:48px 32px 40px">
+    <div style="max-width:900px;margin:0 auto;text-align:center">
+      <p style="font-size:0.72rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#4DB8E8;margin:0 0 12px;font-family:'Archivo',sans-serif">Semester 5</p>
+      <h1 style="font-family:'Archivo',sans-serif;font-size:2.25rem;font-weight:700;color:#fff;margin:0 0 12px">Specialization Tracks</h1>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;margin:0">Choose one of six engineering specializations for your final year</p>
+    </div>
+  </div>
+
+  <!-- COMMON S5 MODULES -->
+  <section style="background:#F5F7FA;padding:32px">
+    <div style="max-width:1000px;margin:0 auto">
+      <h2 style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:600;color:#1B2A4A;margin:0 0 16px;letter-spacing:0.05em;text-transform:uppercase;font-size:0.8rem;color:#4DB8E8">Common S5 Modules (all tracks)</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        ${MODULES.filter(m=>m.semester===5&&m.type==='Compulsory').map(m=>`
+        <button onclick="openDrawer('${m.code}')" style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #E8EDF4;border-radius:8px;padding:10px 16px;cursor:pointer;text-align:left;transition:all .15s ease" onmouseover="this.style.borderColor='#4DB8E8'" onmouseout="this.style.borderColor='#E8EDF4'">
+          <span class="module-code" style="font-size:0.75rem">${m.code}</span>
+          <span style="font-size:0.875rem;color:#1B2A4A;font-weight:500">${m.title}</span>
+          <span style="font-size:0.75rem;color:#9CA3AF">${m.credits} ECTS</span>
+        </button>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIALIZATION CARDS -->
+  <section style="padding:40px 32px 64px">
+    <div style="max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
+      ${SPECIALIZATIONS.map(sp=>{
+        const spMods = sp.modules.map(code=>modByCode[code]).filter(Boolean);
+        return `
+        <div style="background:#fff;border:1px solid #E8EDF4;border-radius:14px;overflow:hidden">
+          <div style="padding:24px 28px;border-bottom:1px solid ${sp.color}25;background:${sp.color}06;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
+            <div style="display:flex;align-items:flex-start;gap:16px">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:600;color:${sp.color};background:${sp.color}15;padding:12px 16px;border-radius:8px;flex-shrink:0">${sp.id}</div>
+              <div>
+                <h3 style="font-family:'Archivo',sans-serif;font-size:1.2rem;font-weight:700;color:#1B2A4A;margin:0 0 4px">${sp.name}</h3>
+                <p style="font-size:0.8rem;color:#9CA3AF;font-style:italic;margin:0 0 8px">${sp.nameFr}</p>
+                <p style="font-size:0.875rem;color:#4B5563;margin:0">${sp.desc}</p>
+              </div>
+            </div>
+          </div>
+          <div style="padding:20px 28px">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:14px">Track Modules</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px">
+              ${spMods.map(m=>`
+              <button onclick="openDrawer('${m.code}')" style="display:flex;align-items:flex-start;gap:10px;background:#F5F7FA;border:1px solid #E8EDF4;border-radius:8px;padding:12px 14px;cursor:pointer;text-align:left;width:100%;transition:all .15s ease" onmouseover="this.style.background='#fff';this.style.borderColor='${sp.color}50'" onmouseout="this.style.background='#F5F7FA';this.style.borderColor='#E8EDF4'">
+                <span class="module-code" style="font-size:0.7rem;flex-shrink:0">${m.code}</span>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:0.875rem;font-weight:500;color:#1B2A4A;line-height:1.3">${m.title}</div>
+                  <div style="font-size:0.75rem;color:#9CA3AF;margin-top:2px">${m.credits} ECTS · ${m.language}</div>
+                </div>
+              </button>`).join('')}
+            </div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  </section>
+
+  <!-- DOUBLE DEGREES -->
+  <section style="background:#F5F7FA;padding:96px 10vw">
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">DOUBLE DEGREES</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 16px;line-height:0.95;letter-spacing:-0.03em">Earn a second <span style="color:#2563EB">diploma</span> abroad.</h2>
+    <p style="font-family:'Inter',sans-serif;font-size:1rem;color:#4B5563;margin:0 0 56px;max-width:640px">ENSI students can complete a double degree at partner engineering schools across France, Germany, and Canada.</p>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      ${DOUBLE_DIPLOMAS.filter(p=>p.total>0).map(p=>{
+        const years = Object.keys(p.byYear);
+        const vals = Object.values(p.byYear);
+        const maxV = Math.max(...vals, 1);
+        const barW = 120, barH = 32;
+        const stepX = barW / (years.length - 1);
+        const pts = vals.map((v,i)=>`${(i*stepX).toFixed(1)},${(barH-(v/maxV)*barH).toFixed(1)}`).join(' ');
+        const area = `0,${barH} ${pts} ${barW},${barH}`;
+        const isNew = p.total <= 4;
+        return `
+        <div style="background:#fff;border:1px solid #E8EDF4;border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;transition:box-shadow .15s ease" onmouseover="this.style.boxShadow='0 4px 20px rgba(77,184,232,0.12)';this.style.borderColor='#A8D8F0'" onmouseout="this.style.boxShadow='none';this.style.borderColor='#E8EDF4'">
+          <div style="flex:1;min-width:220px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+              <h3 style="font-family:'Archivo',sans-serif;font-size:1.125rem;font-weight:700;color:#1B2A4A;margin:0;letter-spacing:-0.02em">${p.name}</h3>
+              ${isNew?`<span style="font-family:'JetBrains Mono',monospace;font-size:0.625rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;background:#4DB8E8;padding:2px 7px;border-radius:3px">NEW</span>`:''}
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:1rem">${COUNTRY_FLAGS[p.country]||''}</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:${COUNTRY_COLORS[p.country]||'#6B7280'}">${p.country}</span>
+            </div>
+          </div>
+          <div style="text-align:center;flex-shrink:0">
+            <div style="font-family:'Archivo',sans-serif;font-size:2rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">${p.total}</div>
+            <div style="font-family:'Inter',sans-serif;font-size:0.6875rem;color:#9CA3AF;margin-top:2px">students 2017–2023</div>
+          </div>
+          <div style="flex-shrink:0">
+            <svg viewBox="0 0 ${barW} ${barH}" width="${barW}" height="${barH}" style="display:block;overflow:visible">
+              <defs>
+                <linearGradient id="sg-${p.code}" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#4DB8E8" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#4DB8E8" stop-opacity="0.02"/>
+                </linearGradient>
+              </defs>
+              <polygon points="${area}" fill="url(#sg-${p.code})"/>
+              <polyline points="${pts}" fill="none" stroke="#4DB8E8" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+            </svg>
+            <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:0.5625rem;color:#9CA3AF;margin-top:4px;width:${barW}px">
+              <span>${years[0]}</span><span>${years[years.length-1]}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('')}
+      <div style="background:#fff;border:1px dashed #E8EDF4;border-radius:12px;padding:20px 28px;display:flex;align-items:center;gap:16px;opacity:0.6">
+        <div style="flex:1">
+          <h3 style="font-family:'Archivo',sans-serif;font-size:1.125rem;font-weight:700;color:#9CA3AF;margin:0 0 4px;letter-spacing:-0.02em">École Centrale de Lille</h3>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF">France · Partnership established</span>
+        </div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.75rem;color:#9CA3AF">No placements yet</div>
+      </div>
+    </div>
+  </section>
+
+  ${footer()}`;
+}
+
+// ─── SHARED FOOTER ───────────────────────────────────────────────────────────
+function footer() {
+  const linkStyle = `color:rgba(255,255,255,0.5);text-decoration:none;font-family:'Inter',sans-serif;font-size:0.875rem;transition:color .15s ease`;
+  const fbIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`;
+  const liIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`;
+  const extIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+  return `
+  <footer style="background:#1B2A4A;padding:64px 10vw 40px">
+    <div style="display:grid;grid-template-columns:1fr auto auto;gap:48px;align-items:start;flex-wrap:wrap">
+
+      <!-- LEFT: logo + address + credit -->
+      <div>
+        <img src="/imag/ensi-official-dark.png" alt="ENSI" style="height:40px;margin-bottom:20px;display:block">
+        <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.45);margin:0 0 4px;line-height:1.6">ENSI, Campus Universitaire de la Manouba</p>
+        <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.45);margin:0;line-height:1.6">2010 Manouba, Tunisia</p>
+      </div>
+
+      <!-- MIDDLE: nav + official site -->
+      <div>
+        <p style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:0 0 16px">Navigate</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          ${['home','catalog','specializations'].map(r=>`<a href="#${r}" style="${linkStyle}" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">${r.charAt(0).toUpperCase()+r.slice(1)}</a>`).join('')}
+          <a href="https://ensi.rnu.tn" target="_blank" rel="noopener noreferrer" style="${linkStyle}" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Official site${extIcon}</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: social icons -->
+      <div>
+        <p style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:0 0 16px">Follow</p>
+        <div style="display:flex;gap:16px">
+          <a href="https://www.facebook.com/profile.php?id=100085598258430" target="_blank" rel="noopener noreferrer" aria-label="ENSI on Facebook" style="color:rgba(255,255,255,0.5);transition:color .15s ease" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">${fbIcon}</a>
+          <a href="https://www.linkedin.com/school/ensitn/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="ENSI on LinkedIn" style="color:rgba(255,255,255,0.5);transition:color .15s ease" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">${liIcon}</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- bottom strip -->
+    <div style="margin-top:48px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);text-align:center">
+      <span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.35)">© 2026 All Rights Reserved. Made with 💙 by Mohamed Yahia Gazzeh</span>
+    </div>
+  </footer>`;
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+// ─── CLUB MODAL ───────────────────────────────────────────────────────────────
+const CAT_SHORT = {'Science · Tech · Innovation':'TECH','Sport · Art · Culture':'ARTS','Humanitarian · Social':'SOCIAL','AI · ML · Innovation':'AI'};
+const SOCIAL_ICONS = {
+  instagram:`<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+  facebook:`<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`,
+  linkedin:`<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`,
+  globe:`<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+};
+
+let _modalOpener = null;
+
+function openClubModal(id) {
+  const c = CLUBS.find(x=>x.id===id);
+  if(!c) return;
+  _modalOpener = document.querySelector(`.club-tile[data-id="${id}"]`);
+
+  const catShort = CAT_SHORT[c.category]||c.category;
+  const logoHTML = c.logo
+    ? `<img src="/imag/clubs/${c.logo}" alt="${c.name}" style="width:80px;height:80px;object-fit:cover;object-position:center;border-radius:8px;display:block;flex-shrink:0">`
+    : `<div style="width:80px;height:80px;background:rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:800;color:#fff;text-align:center;padding:8px">${c.name}</span></div>`;
+
+  const eventRow = (e) => `
+    <div style="display:flex;gap:14px;align-items:flex-start;padding:8px 0">
+      <div style="width:3px;min-width:3px;height:14px;background:${c.accent};border-radius:2px;margin-top:3px;flex-shrink:0"></div>
+      <div>
+        <div style="font-family:'Archivo',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;margin-bottom:2px">${e.name}</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.8125rem;color:#64748B;line-height:1.5">${e.note}</div>
+      </div>
+    </div>`;
+
+  const eventsHTML = (c.events&&c.events.length) ? (c.events.map(eventRow).join('')) : '';
+
+  const projectsHTML = (c.projects&&c.projects.length) ? `
+    <div style="margin-top:32px">
+      <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:8px">Projects</p>
+      ${c.projects.map(eventRow).join('')}
+    </div>` : '';
+
+  const socialsHTML = (c.socials&&c.socials.length) ? `
+    <div style="margin-top:32px">
+      <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:12px">Follow</p>
+      <div style="display:flex;gap:16px;align-items:center">
+        ${c.socials.map(s=>`
+        <a href="${s.url}" target="_blank" rel="noopener noreferrer"
+           style="color:rgba(27,42,74,0.4);transition:color .15s ease"
+           onmouseover="this.style.color='${c.accent}'" onmouseout="this.style.color='rgba(27,42,74,0.4)'"
+           aria-label="${s.type}">${SOCIAL_ICONS[s.type]||SOCIAL_ICONS.globe}</a>`).join('')}
+      </div>
+    </div>` : '';
+
+  const modalHTML = `
+    <div id="club-modal" role="dialog" aria-modal="true" aria-label="${c.name}" tabindex="-1">
+      <!-- Full-width accent header band -->
+      <div style="background:${c.accent};padding:28px 32px 24px;border-radius:12px 12px 0 0;position:relative">
+        <div style="display:flex;align-items:center;gap:20px">
+          ${logoHTML}
+          <div style="flex:1;min-width:0">
+            <div style="font-family:'Archivo',sans-serif;font-size:1.75rem;font-weight:800;color:#fff;line-height:1.1;margin-bottom:6px">${c.name}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.06em">${c.founded?'EST. '+c.founded+' · ':''}${catShort}</div>
+          </div>
+          <button onclick="closeClubModal()" aria-label="Close"
+            style="align-self:flex-start;background:rgba(255,255,255,0.15);border:none;cursor:pointer;color:#fff;padding:6px;flex-shrink:0;transition:background .15s;border-radius:6px;display:flex;align-items:center;justify-content:center"
+            onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'"
+            onfocus="this.style.outline='2px solid rgba(255,255,255,0.6)'" onblur="this.style.outline='none'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- Zone A: who they are -->
+      <div style="padding:28px 32px 0">
+        ${c.overview?`<p style="font-family:'Inter',sans-serif;font-size:0.9375rem;color:rgba(27,42,74,0.8);line-height:1.65;margin:0 0 16px">${c.overview}</p>`:''}
+        ${c.mission?`
+        <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:10px">Mission</p>
+        <div style="display:flex;gap:0;margin-bottom:0">
+          <div style="width:3px;min-width:3px;background:${c.accent};border-radius:2px;margin-right:16px;flex-shrink:0"></div>
+          <p style="font-family:'Inter',sans-serif;font-size:1rem;font-style:italic;color:#1B2A4A;line-height:1.65;margin:0;padding:2px 0">${c.mission}</p>
+        </div>`:''}
+      </div>
+      <!-- Zone B: what they do -->
+      ${eventsHTML?`
+      <div style="padding:36px 32px 0">
+        <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:4px">Events</p>
+        ${eventsHTML}
+      </div>`:''}
+      ${projectsHTML?`<div style="padding:0 32px">${projectsHTML}</div>`:''}
+      <!-- Socials + bottom padding -->
+      <div style="padding:0 32px 32px">
+        ${socialsHTML}
+      </div>
+    </div>`;
+
+  let backdrop = document.getElementById('club-modal-backdrop');
+  if(!backdrop){
+    backdrop = document.createElement('div');
+    backdrop.id = 'club-modal-backdrop';
+    backdrop.setAttribute('aria-hidden','true');
+    backdrop.addEventListener('click', e=>{ if(e.target===backdrop) closeClubModal(); });
+    document.body.appendChild(backdrop);
+  }
+  backdrop.innerHTML = modalHTML;
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  const modal = document.getElementById('club-modal');
+  modal.focus();
+
+  // Focus trap
+  modal.addEventListener('keydown', trapFocus);
+  document.addEventListener('keydown', handleModalKey);
+}
+
+function closeClubModal() {
+  const backdrop = document.getElementById('club-modal-backdrop');
+  if(!backdrop) return;
+  backdrop.classList.remove('open');
+  document.body.style.overflow = '';
+  const modal = document.getElementById('club-modal');
+  if(modal) {
+    modal.removeEventListener('keydown', trapFocus);
+  }
+  document.removeEventListener('keydown', handleModalKey);
+  if(_modalOpener) { _modalOpener.focus(); _modalOpener = null; }
+}
+
+function handleModalKey(e) {
+  if(e.key==='Escape') closeClubModal();
+}
+
+function trapFocus(e) {
+  if(e.key!=='Tab') return;
+  const modal = document.getElementById('club-modal');
+  const focusable = [...modal.querySelectorAll('button,a,[tabindex]:not([tabindex="-1"])')].filter(el=>!el.disabled);
+  if(!focusable.length) return;
+  const first = focusable[0], last = focusable[focusable.length-1];
+  if(e.shiftKey){ if(document.activeElement===first){ e.preventDefault(); last.focus(); } }
+  else { if(document.activeElement===last){ e.preventDefault(); first.focus(); } }
+}
+
+function renderApp() {
+  updateNav();
+  switch(state.route) {
+    case 'home': renderHome(); break;
+    case 'catalog': renderCatalog(); break;
+    case 'specializations': renderSpecializations(); break;
+    default: renderHome();
+  }
+  window.scrollTo(0,0);
+}
+
+init();
+</script>
+</body>
+</html>

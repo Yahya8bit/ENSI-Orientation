@@ -1,0 +1,257 @@
+[
+  {
+    "id": "are",
+    "name": "ARE Robotics",
+    "category": "Science · Tech · Innovation",
+    "founded": 2006,
+    "logo": "Are-logo.jpg",
+    "accent": "#D4A02C",
+    "tagline": "On construit ce qui n'existe pas encore",
+    "overview": "The Association Robotique ENSI is a non-profit founded in 2006 by a group of robotics-loving student engineers, mentored by Professor Moncef Tagina. It immerses computer scientists in the world of robotics to sharpen their skills and turn their ideas into reality. Its values: audace, engagement, fierté, rigueur.",
+    "mission": "Train members to build robots and master new technologies, pushing for excellence in every project.",
+    "events": [
+      { "name": "RoboCup", "note": "A robotics competition open to engineers and enthusiasts of all ages." },
+      { "name": "RoboDay", "note": "Training followed by an internal line-follower competition." },
+      { "name": "SuperCup", "note": "Internal football competition." },
+      { "name": "BootCamp", "note": "Robotics workshops for teenagers (under 18)." },
+      { "name": "RoboCamp", "note": "A camping trip for the whole ARE family." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/association.robotique.ensi/" },
+      { "type": "facebook", "url": "https://www.facebook.com/association.robotique.ensi/?locale=fr_FR" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/ar-ensi" }
+    ]
+  },
+  {
+    "id": "ecpc",
+    "name": "ECPC",
+    "category": "Science · Tech · Innovation",
+    "founded": 2017,
+    "logo": "ecpc-logo.png",
+    "accent": "#DCE336",
+    "tagline": "Coder pour gagner",
+    "overview": "The ENSI Competitive Programming Club, founded in 2017, centers on competitive programming — running training in algorithms, data structures and optimization, plus online and on-site contests. It's the only community on the Manouba campus preparing students for the TCPC, with teams ranked in the national top 10 for over five years running.",
+    "mission": "Prepare as many students as possible to compete — because the best way to learn CP is by practice.",
+    "events": [
+      { "name": "EPC — ENSI Programming Challenge", "note": "The club's flagship: a four-hour contest in C++, Python or Java, run under ICPC rules." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/cpc_ensi/" },
+      { "type": "facebook", "url": "https://www.facebook.com/ENSICPC/" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/ensi-competitive-programming-club" }
+    ]
+  },
+  {
+    "id": "eje",
+    "name": "EJE Junior Enterprise",
+    "category": "Science · Tech · Innovation",
+    "founded": 2006,
+    "logo": "eje-logo.png",
+    "accent": "#2C5F8A",
+    "tagline": "Votre première vraie mission pro",
+    "overview": "Founded in 2006, ENSI Junior Entreprise initiates students into entrepreneurial life. Over 18 years it has become a precursor of the Junior Enterprise movement in Tunisia — 75+ satisfied clients, 78+ projects delivered, a 2020 Prize of Excellence. Services span web, mobile, chatbot and software development, organized across three poles: business development, communication & design, and project.",
+    "mission": "Put the entrepreneurial spirit at the heart of student life — always striving for greatness through creativity, professionalism and excellence.",
+    "events": [
+      { "name": "GET Entrepreneurial", "note": "A professional fair for young entrepreneurs, startups and project creators." },
+      { "name": "Hack'Prise", "note": "A hackathon with major companies on high-impact IT and entrepreneurial topics." },
+      { "name": "Integration Seminar", "note": "A seminar to smoothly onboard pre-selected new members." },
+      { "name": "SummerCamp", "note": "A team-building weekend before the academic year." }
+    ],
+    "socials": [
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/ensi-junior-entreprise" },
+      { "type": "instagram", "url": "https://www.instagram.com/ensijunior/" },
+      { "type": "facebook", "url": "https://www.facebook.com/ENSI.Junior.Entreprise/?locale=fr_FR" }
+    ]
+  },
+  {
+    "id": "ieee",
+    "name": "IEEE Student Branch",
+    "category": "Science · Tech · Innovation",
+    "founded": 2011,
+    "logo": "ieee-logo.jpg",
+    "accent": "#1A6FB5",
+    "tagline": "Still we rise",
+    "overview": "The IEEE ENSI Student Branch was founded in October 2011 to sharpen members' skills, realize their creativity and build self-confidence. It gathers around 270 active members across two poles — Sponsoring and Media — with three chapters (Computer Society, Computational Intelligence, IAS) and a WIE affinity group, all part of IEEE Tunisia.",
+    "mission": "Stay current with the most relevant technical themes locally and globally, through training, publications, events and conferences.",
+    "events": [
+      { "name": "IEEEXtreme", "note": "A 24-hour worldwide programming challenge for IEEE student members." },
+      { "name": "SYP", "note": "A timed themed competition inspired by the national TSYP congress." },
+      { "name": "TSYP", "note": "A national IEEE congress drawing 1200+ engineers and students across Tunisia." },
+      { "name": "GODS — Go Data Science", "note": "A February data-science challenge: workshops, conferences and a 12-hour team contest." },
+      { "name": "Gamescraft", "note": "A CS-Chapter game-design and gaming competition with a jury and round table." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/ieee_ensi_sb/" },
+      { "type": "facebook", "url": "https://www.facebook.com/IEEE.ENSI.SB/?locale=fr_FR" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/ieee-ensi" }
+    ]
+  },
+  {
+    "id": "ossec",
+    "name": "OSSEC",
+    "category": "Science · Tech · Innovation",
+    "founded": 2012,
+    "logo": "ossec-logo.jpg",
+    "accent": "#1BA5C8",
+    "tagline": "Open source, open minds",
+    "overview": "Open Source Software ENSI Club, founded in 2012, runs a diverse mix of activities and events around free software. It works across four axes: events, projects, training and a magazine.",
+    "mission": "Spread the open-source philosophy among student engineers and promote a culture of exchange and sharing.",
+    "events": [
+      { "name": "Install Party", "note": "An annual day to help participants install GNU/Linux on their own machines." },
+      { "name": "TuniHack", "note": "A high-level 24-hour hackathon open to students across Tunisia." },
+      { "name": "CodeBreaker", "note": "A Capture The Flag cybersecurity competition testing offense and defense." },
+      { "name": "Project Day", "note": "New members present the results of their year's projects." }
+    ],
+    "socials": [
+      { "type": "facebook", "url": "https://www.facebook.com/ossec.tn/?locale=fr_FR" },
+      { "type": "instagram", "url": "https://www.instagram.com/open.source.software.ensi.club/" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/ossec-ensi" }
+    ]
+  },
+  {
+    "id": "enactus",
+    "name": "Enactus ENSI",
+    "category": "Science · Tech · Innovation",
+    "founded": 2014,
+    "logo": "enactus-logo.jpg",
+    "accent": "#F2B233",
+    "tagline": "We change the odds",
+    "overview": "Enactus ENSI is a social-entrepreneurship club that tackles the country's social and environmental problems with concrete, high-impact projects, while training future entrepreneurs. It is organized into Project and Marketing poles, with sponsoring and events-and-logistics departments.",
+    "mission": "Inspire students and bring together future leaders to develop their potential and create high-impact projects.",
+    "events": [
+      { "name": "Team Building 3.0", "note": "Member bonding." },
+      { "name": "Anniversaire 3.0", "note": "Club anniversary celebration." },
+      { "name": "Conférence 2.0", "note": "Speaker conference." }
+    ],
+    "projects": [
+      { "name": "Agricoop", "note": "An equipment-sharing platform renting tools to small farmers for a fixed fee." },
+      { "name": "Indimej", "note": "An app translating sign language to text or voice in real time, and back." },
+      { "name": "Tremoease", "note": "Vibrating gloves that ease stiffness and tremors for people with Parkinson's and MS." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/ensi_enactors/" },
+      { "type": "facebook", "url": "https://www.facebook.com/p/Enactus-ENSI-Tunisia-100088726237939/" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/enactus-ensi" }
+    ]
+  },
+  {
+    "id": "orbyx",
+    "name": "ORBYX ENSI",
+    "category": "Science · Tech · Innovation",
+    "founded": 2025,
+    "logo": "orbyx-logo.jpg",
+    "accent": "#2E3FA0",
+    "tagline": "Build AI",
+    "overview": "ORBYX is ENSI's AI club, founded in 2025. It brings together students passionate about artificial intelligence, machine learning and data science, with a focus on hands-on projects and ML competitions.",
+    "mission": "Build the next generation of AI practitioners at ENSI.",
+    "events": [
+      { "name": "AI Bootcamp", "note": "Intensive training on Python, PyTorch and transformers." },
+      { "name": "Kaggle Nights", "note": "Collaborative data challenge sessions." },
+      { "name": "ORBYX Demo Day", "note": "Public showcase of models trained by members." }
+    ],
+    "socials": [
+      { "type": "facebook", "url": "https://www.facebook.com/people/ORBYX-ENSI-Club/61578181771173/" },
+      { "type": "instagram", "url": "https://www.instagram.com/orbyx_ensi_club/" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/orbyx-ensi" }
+    ]
+  },
+  {
+    "id": "coart",
+    "name": "Co'Art",
+    "category": "Sport · Art · Culture",
+    "founded": 2010,
+    "logo": "coart-logo.jpg",
+    "accent": "#E85D4A",
+    "tagline": "Art au cœur de l'ingénierie",
+    "overview": "Co'Art — short for \"collaborative art\" — is ENSI's creative home, dedicated to making space for every student's inner artist. The club runs internal workshops and teams up with other ENSI clubs on their events.",
+    "mission": "Promote creativity and give every member a space to freely express their passion, whatever their skill level.",
+    "events": [
+      { "name": "Calligraphy workshops", "note": "Sessions led by guest artist Chebbi Hamza." },
+      { "name": "Art de l'argile", "note": "Clay sculpting turned into keychains and accessories." },
+      { "name": "Peinture sur instruments", "note": "Giving broken instruments a second life through paint." },
+      { "name": "Pictionary nights", "note": "Lighthearted drawing games for members." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/co_art_ensi/" },
+      { "type": "facebook", "url": "https://www.facebook.com/coartensi/" }
+    ]
+  },
+  {
+    "id": "chess",
+    "name": "Chess Club",
+    "category": "Sport · Art · Culture",
+    "founded": 2008,
+    "logo": "chess-logo.jpg",
+    "accent": "#2B6CB0",
+    "tagline": "Stratégie, concentration, excellence",
+    "overview": "The ENSI Chess Club builds a friendly environment for chess players and welcomes newcomers curious about the game. Alongside matches, members work on puzzle-solving and sharing what they know.",
+    "mission": "Create a welcoming space for chess at ENSI and grow the community of players, from beginners to competitors.",
+    "events": [
+      { "name": "Tournoi de qualification", "note": "Internal tournament each January; the top 3 represent ENSI at inter-school competitions. Seven rounds, FIDE rules, refereed by a former national-team player." }
+    ],
+    "socials": [
+      { "type": "facebook", "url": "https://www.facebook.com/ENSI.chess" }
+    ]
+  },
+  {
+    "id": "music",
+    "name": "Music Club",
+    "category": "Sport · Art · Culture",
+    "founded": 1995,
+    "logo": "music-logo.jpg",
+    "accent": "#7C3AED",
+    "tagline": "La scène est à vous",
+    "overview": "Founded in the 1990s, the ENSI Music Club is one of the pillars of student life at the school. Through cultural activities and musical events, it encourages students to express their passion for music and showcase their talents. Its values: creativity, passion, diversity.",
+    "mission": "Promote and celebrate music as an art and a form of expression, offering an inclusive space for music lovers to share, grow their skills, and create.",
+    "events": [
+      { "name": "Concerts", "note": "Live shows on campus." },
+      { "name": "Live performances", "note": "Music for ENSI events." },
+      { "name": "Karaoke", "note": "Open singing nights." },
+      { "name": "Jam sessions", "note": "Informal play-togethers." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/club.musique.ensi/" },
+      { "type": "facebook", "url": "https://www.facebook.com/ensi.music/" }
+    ]
+  },
+  {
+    "id": "happiness",
+    "name": "Happiness Club",
+    "category": "Humanitarian · Social",
+    "founded": 2022,
+    "logo": "happiness-logo.jpg",
+    "accent": "#F2B400",
+    "tagline": "Positive vibes only",
+    "overview": "Founded in 2022, the Happiness Club is committed to the wellbeing of the whole school community. Through educational fun, relaxation sessions, mentoring and social events, it works to build an inclusive, positive atmosphere where every member — student or staff — feels supported and connected.",
+    "mission": "Foster a positive, stimulating environment that supports academic success, personal growth and the wellbeing of everyone at ENSI.",
+    "events": [
+      { "name": "VolleyCup", "note": "A volleyball tournament celebrating sportsmanship and camaraderie." },
+      { "name": "HappyDay", "note": "An internal day of varied leisure activities for everyone." },
+      { "name": "HappyAiid", "note": "Run with the Manouba youth complex, offering a wide range of activities." }
+    ],
+    "socials": [
+      { "type": "facebook", "url": "https://www.facebook.com/p/Club-Happiness-ENSI-100090842641335/" }
+    ]
+  },
+  {
+    "id": "cps",
+    "name": "CPS",
+    "category": "Humanitarian · Social",
+    "founded": 2011,
+    "logo": "cps-logo.png",
+    "accent": "#E2231A",
+    "tagline": "Amour · Espoir · Solidarité",
+    "overview": "Citoyens Positifs et Sociables, founded in 2011, is backed by the regional committee of the Tunisian Red Crescent in La Manouba. Once focused on awareness and ambulatory health, the club now adds a humanitarian and volunteer dimension to all its work.",
+    "mission": "Act for others through awareness, health outreach and volunteer service — by lifting others, we rise.",
+    "events": [
+      { "name": "Visite des SOS", "note": "Sharing joyful moments with children at the SOS village." },
+      { "name": "Dafihom fi chtehom", "note": "Providing warm clothing to people in precarious situations during winter." },
+      { "name": "Visite des écoles primaires", "note": "Introducing schoolkids to engineering via robotics, games and painting." },
+      { "name": "Visites des Maisons de Retraite", "note": "Days spent with seniors to ease social isolation." }
+    ],
+    "socials": [
+      { "type": "facebook", "url": "https://www.facebook.com/CPSENSI" },
+      { "type": "instagram", "url": "https://www.instagram.com/cps.ensi/" }
+    ]
+  }
+]
