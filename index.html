@@ -57,6 +57,19 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
 /* Cards */
 .module-card{background:#E8EDF4;border:1px solid #A8D8F0;border-radius:10px;padding:20px;transition:all .2s ease;cursor:pointer}
 .module-card:hover{border-color:#4DB8E8;box-shadow:0 4px 20px rgba(77,184,232,0.18);transform:translateY(-2px)}
+/* Accordion cards */
+.acc-card{background:#fff;border:1px solid #E8EDF4;border-radius:10px;padding:12px 14px;transition:background .3s ease,border-left-color .3s ease,box-shadow .2s ease,transform .2s ease;cursor:pointer;position:relative;display:flex;flex-direction:column;gap:6px}
+.mod-card{transition:background-color .3s ease,color .3s ease,border-color .3s ease;cursor:pointer}
+.mod-card.mod-card-active{background-color:var(--card-color)!important;border-left-color:transparent!important;border-color:transparent!important;box-shadow:0 4px 16px rgba(0,0,0,0.15)!important}
+.mod-card.mod-card-active .mod-code{color:rgba(255,255,255,0.8)!important}
+.mod-card.mod-card-active .mod-name{color:#fff!important}
+.mod-card.active{background-color:var(--accent)}
+.mod-card.active .mod-code,.mod-card.active .mod-name{color:#fff}
+.acc-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);border-color:var(--sc)}
+.acc-card:hover .acc-chev{opacity:1}
+.acc-card:active{transform:scale(0.98)}
+.acc-chev{position:absolute;bottom:10px;right:12px;font-size:1.5rem;font-weight:700;opacity:0.55;transition:opacity .2s ease,transform .2s ease;color:var(--sc);line-height:1}
+.acc-card:hover .acc-chev{transform:translateX(2px)}
 
 /* Tabs */
 .sem-tab{padding:8px 18px;border-bottom:2px solid transparent;font-weight:500;transition:all .15s ease;cursor:pointer;color:#6B7280;font-size:0.875rem;white-space:nowrap}
@@ -142,7 +155,7 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
 @media(max-width:600px){
   .hero-arrow{display:none}
   .hero-section{min-height:100svh}
-  #hero-dots{display:flex!important;bottom:5rem}
+  #hero-dots{bottom:5rem}
   #hero-label{bottom:7rem}
 }
 @media(prefers-reduced-motion:reduce){
@@ -177,11 +190,19 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
   display:flex;align-items:center;gap:20px;padding:20px 10vw;
   border-bottom:1px solid #E8EDF4;background:#fff;
   position:relative;overflow:hidden;text-decoration:none;
-  border-left:3px solid transparent;
-  transition:border-color .15s ease,background .15s ease;
+  border-left:3px solid transparent;cursor:pointer;
 }
-.spec-strip:hover{border-left-color:#4DB8E8;background:#F5F7FA}
-.spec-strip:hover .spec-arrow{transform:translateX(5px)}
+.spec-strip::before{
+  content:'';position:absolute;top:0;left:0;height:100%;width:0;
+  background:var(--sp-color);transition:width .4s ease;z-index:0;
+}
+.spec-strip:hover::before{width:100%}
+.spec-strip:hover{border-left-color:var(--sp-color)}
+.spec-strip>*{position:relative;z-index:1}
+.spec-strip:hover .spec-name,.spec-strip:hover .spec-namefr,.spec-strip:hover .spec-kw{color:rgba(255,255,255,0.9)!important}
+.spec-strip:hover .spec-watermark{color:#fff!important;opacity:0.15!important}
+.spec-strip:hover .spec-arrow{color:#fff!important;transform:translateX(5px)}
+.spec-strip:hover .spec-badge{background:rgba(255,255,255,0.25)!important}
 .spec-arrow{transition:transform .2s ease;color:#9CA3AF;font-size:1.1rem;flex-shrink:0;margin-left:auto}
 .spec-watermark{
   position:absolute;right:10vw;top:50%;transform:translateY(-50%);
@@ -248,13 +269,17 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
 /* Partner cell wrapper — transparent on desktop */
 .partner-cell{display:contents}
 /* Club tiles */
-.club-tile{cursor:pointer;background:none;border:none;padding:0;text-align:left;width:100%}
+.club-tile{cursor:pointer;background:none;border:none;padding:0;text-align:left;width:100%;transition:transform .2s ease}
 .club-tile:focus-visible{outline:2px solid #2563EB;outline-offset:3px;border-radius:10px}
 .club-tile-img{transition:transform .2s ease;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
 .club-tile-bar{height:3px;border-radius:0 0 3px 3px;margin-bottom:10px;transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+.club-tile-chev{display:inline-block;font-size:1.6rem;font-weight:700;opacity:0.55;transition:opacity .2s ease,transform .2s ease;margin-left:5px;vertical-align:middle;line-height:1}
 @media(prefers-reduced-motion:no-preference){
-  .club-tile:hover .club-tile-img{transform:translateY(-4px)}
+  .club-tile:hover{transform:translateY(-2px);filter:drop-shadow(0 6px 16px rgba(0,0,0,0.12))}
+  .club-tile:hover .club-tile-img{transform:translateY(-2px)}
   .club-tile:hover .club-tile-bar{transform:scaleX(1)}
+  .club-tile:hover .club-tile-chev{opacity:1;transform:translateX(2px)}
+  .club-tile:active{transform:scale(0.98)}
 }
 /* Club section mobile */
 #club-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
@@ -265,13 +290,12 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
   .club-tile-caption{padding-left:2px}
   /* By the Numbers mobile */
   #section-numbers{padding-left:1.5rem!important;padding-right:1.5rem!important}
-  #numbers-grid{grid-template-columns:1fr!important;gap:28px!important}
+  #numbers-grid{grid-template-columns:1fr!important;gap:28px!important;margin-bottom:0!important}
   .stat-num{font-size:3rem!important}
-  #section-numbers{padding-bottom:2rem!important}
+  #section-numbers{padding-bottom:4rem!important}
   /* Admission table mobile */
   #section-admission{padding-left:1rem!important;padding-right:1rem!important}
   #admission-table{min-width:unset!important}
-  .col-2024{display:none}
   /* Footer single column */
   #site-footer{padding:40px 1.5rem 32px!important}
   #footer-grid{grid-template-columns:1fr!important;gap:0!important}
@@ -367,21 +391,103 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
 <script>
 // ─── DATA ───────────────────────────────────────────────────────────────────
 
+const CARD_ACCENT = {MAT:'#7C3AED',AP:'#059669',EHA:'#DC2626',AI:'#D97706',DAT:'#EA580C',FIN:'#0D9488',BDC:'#2563EB',OS:'#4F46E5',NET:'#0891B2',SE:'#1D4ED8',SEC:'#B91C1C',IMA:'#DB2777'};
 const SUBJECT_COLORS = {
   MAT:'#6366F1',AP:'#059669',AI:'#D97706',NET:'#2563EB',OS:'#7C3AED',
   SE:'#0891B2',EHA:'#DC2626',DAT:'#EA580C',BDC:'#65A30D',FIN:'#0D9488',
   IMA:'#DB2777',SEC:'#B91C1C',DDP:'#1D4ED8',GL:'#059669',CV:'#DB2777',
-  DOS:'#2563EB',SLE:'#DC2626',IF:'#0D9488',
+  DOS:'#06B6D4',SLE:'#DC2626',IF:'#0D9488',
+  ISA:'#EA580C',ESDV:'#7C3AED',ESEP:'#7C3AED',IAP:'#0891B2',
 };
 
 const SPECIALIZATIONS = [
-  {id:'AI',name:'Artificial Intelligence',nameFr:'Intelligence Artificielle',color:'#D97706',desc:'Machine learning, deep learning, NLP, and cognitive systems.',modules:['AI.5.1','AI.5.2','AI.5.3','AI.5.4']},
-  {id:'GL',name:'Software Engineering',nameFr:'Génie Logiciel',color:'#2563EB',desc:'Software quality, DevOps, cloud engineering, and advanced architecture.',modules:['GL.5.1','GL.5.2','GL.5.3','GL.5.4']},
-  {id:'CV',name:'Data Science & Computer Vision',nameFr:'Vision par Ordinateur et Science des Données',color:'#DB2777',desc:'Image processing, pattern recognition, big data analytics, and medical imaging.',modules:['CV.5.1','CV.5.2','CV.5.3','CV.5.4']},
-  {id:'IF',name:'Financial Engineering',nameFr:'Ingénierie Financière',color:'#0D9488',desc:'Quantitative finance, algorithmic trading, blockchain, and risk management.',modules:['IF.5.1','IF.5.2','IF.5.3','IF.5.4']},
-  {id:'SLE',name:'Embedded Software and Systems',nameFr:'Systèmes et Logiciels Embarqués',color:'#7C3AED',desc:'Real-time systems, FPGA design, IoT protocols, and embedded Linux.',modules:['SLE.5.1','SLE.5.2','SLE.5.3','SLE.5.4']},
-  {id:'ST-IoT',name:'Services, Technologies & IoT',nameFr:'Services, Technologies et Internet des Objets',color:'#2563EB',desc:'Cloud computing, microservices, IoT applications, and network security.',modules:['DOS.5.1','DOS.5.2','DOS.5.3','DOS.5.4']},
+  {id:'AI',name:'Artificial Intelligence',nameFr:'Intelligence Artificielle',color:'#D97706',desc:'Machine learning, deep learning, NLP, and cognitive systems.',
+    compulsory:['AI.5.1','AI.5.2','AI.5.3','AI.5.4','AI.5.5','ISA.5.1','ISA.5.2','MAT.5.2','AI.5.6','ISA.5.6','DOS.5.8','DOS.5.2'],
+    optional:['ISA.5.3','MAT.5.1','ISA.5.5','ISA.5.4','AI.5.7','ISA.5.7','ISA.5.8','AI.5.10','AI.5.8','AI.5.9','AI.5.11']},
+  {id:'GL',name:'Software Engineering',nameFr:'Génie Logiciel',color:'#2563EB',desc:'Software quality, DevOps, cloud engineering, and advanced architecture.',
+    compulsory:['SE.5.1','SE.5.2','SE.5.3','SE.5.4','SE.5.5','AI.5.3','AI.5.1','DOS.5.1','DOS.5.2','DOS.5.3'],
+    optional:['ISA.5.1','ISA.5.3','ISA.5.7','ISA.5.4','ISA.5.9','ISA.5.2','ISA.5.10','ISA.5.11','ISA.5.6','ISA.5.8']},
+  {id:'CV',name:'Data Science & Computer Vision',nameFr:'Vision par Ordinateur et Science des Données',color:'#DB2777',desc:'Image processing, pattern recognition, big data analytics, and medical imaging.',
+    compulsory:['CV.5.1','CV.5.2','CV.5.3','CV.5.4','CV.5.5','CV.5.6','CV.5.7','CV.5.8','CV.5.9','AI.5.16','CV.5.11'],
+    optional:['DOS.5.2','DOS.5.3','DOS.5.8','SE.5.3']},
+  {id:'IF',name:'Financial Engineering',nameFr:'Ingénierie Financière',color:'#0D9488',desc:'Quantitative finance, algorithmic trading, blockchain, and risk management.',
+    compulsory:['FIN.5.1','MAT.5.3','FIN.5.2','FIN.5.3','ISA.5.1','FIN.5.4','MAT.5.5','MAT.5.4','ISA.5.4','AI.5.1','FIN.5.6','AI.5.12','FIN.5.5'],
+    optional:['DOS.5.2','SE.5.3','ISA.5.7','DOS.5.3']},
+  {id:'SLE',name:'Embedded Software and Systems',nameFr:'Systèmes et Logiciels Embarqués',color:'#7C3AED',desc:'Real-time systems, FPGA design, IoT protocols, and embedded Linux.',
+    compulsory:['AI.5.5','AI.5.12','DOS.5.4','DOS.5.5','DOS.5.6','DOS.5.7','ESDV.5.1','ESDV.5.2','ESDV.5.3','ESDV.5.4','ESDV.5.5','ESDV.5.6'],
+    optional:['DOS.5.8','DOS.5.9','ESDV.5.7','ESDV.5.8','ESDV.5.9','IAP.5.1','IAP.5.2','IAP.5.3','SEC.5.1','SEC.5.2','SEC.5.3','SEC.5.4','ISA.5.12']},
+  {id:'ST-IoT',name:'Services, Technologies & IoT',nameFr:'Services, Technologies et Internet des Objets',color:'#06B6D4',desc:'Cloud computing, microservices, IoT applications, and network security.',
+    compulsory:['ESEP.5.1','ESEP.5.2','ESEP.5.3','NET.5.1','NET.5.2','NET.5.3','NET.5.4','DOS.5.5','DOS.5.6','DOS.5.4','DOS.5.8'],
+    optional:['IAP.5.3','DOS.5.11','DOS.5.2','AI.5.12','ISA.5.12','ISA.5.1','AI.5.5','SEC.5.2','SEC.5.4']},
 ];
+
+const MODULE_HANDBOOK = {
+  'AI.5.1':{objectives:["Master the concepts of agent and multi-agent systems","Learn the development of a multi-agent system","Explore complementary research questions"],content:["Chapter 2: Intelligent Agents","Chapter 3: Agents architectures","Chapter 4: Methodologies for developing multi-agent systems","Chapter 4: MAS Development environments & case study"]},
+  'AI.5.2':{objectives:["Formal systems and formal inference for decision","Theorem proving","Fuzzification, defuzzification and decision","Formal mapping rules"],content:["Lesson I. Introduction – Formal proof and logical deduction","Lesson II. Formal Systems for Temporal logics","Lesson III. PLTL logic, Buchi models, automata composition and semantic verification","Lesson III. Fuzzy Logic – Fuzzification and Defuzzification"]},
+  'AI.5.3':{objectives:["Know the basics and the different types of deep learning","Use and apply supervised and unsupervised deep learning techniques"],content:["Chapter 1. Introduction to deep learning","Chapter 2. Recurrent neural networks","Chapter 3. Feed-Forward Neural Network","Chapter 4. Autoencoders","Chapter 5. Deep Generative Models","Chapter 6. Introduction to Federated learning"]},
+  'AI.5.4':{objectives:["Understand key concepts from NLP used to describe and analyze language","Understand POS tagging and context-free grammar for Natural language","Understand semantic representation of English Natural language for processing","Apply Machine learning / deep learning methods to process texts"]},
+  'AI.5.5':{objectives:["Understand sensor fusion and perception for autonomous robots","Program autonomous mobile robot behaviors","Apply soft computing techniques to control systems"]},
+  'AI.5.8':{content:["Chapter I: Introduction to Affective Computing","Chapter II: Emotions – Definitions, Types, Theories","Chapter III: Automatic Emotion Recognition (facial, voice, gesture, physiological)","Chapter IV: Computer Modeling of Emotions and Expressive Robots"]},
+  'AI.5.9':{objectives:["Propose an ITS project using knowledge acquired in other training","Estimate the technological and budgetary resources for an ITS","Get an idea of recent trends and national and international ITS programs"],content:["Chapter I: Intelligent Transport Systems – Introduction","Chapter II: Examples of projects","Chapter III: ITS in Tunisia"]},
+  'AI.5.10':{content:["Chapter 1: Introduction to the Semantic Web","Chapter 2: RDF data model","Chapter 3: SPARQL query language","Chapter 4: Supporting RDFS ontologies and schemas","Chapter 4: Formalization in OWL"]},
+  'AI.5.12':{objectives:["Understand generic machine learning","Understand motivation and functioning of deep networks","Understand the choices and limitations of deep learning models","Apply deep learning techniques to practical problems","Critically evaluate model performance"],content:["Chapter 1: Applied Math and Machine Learning Basics","Chapter 2: Modern Practical Deep Networks","Chapter 3: Deep Learning Research"]},
+  'AI.5.16':{objectives:["Understand key concepts from NLP used to describe and analyze language","Understand POS tagging and context-free grammar for Natural language","Understand semantic representation of Natural language for processing"]},
+  'SE.5.1':{content:["Chapter 1: Introduction to Software Reengineering","Chapter 2: Code Reengineering – Refactoring","Chapter 3: Data Reengineering","Chapter 4: Business Process Reengineering","Chapter 5: Information Systems Reengineering","Chapter 6: Tools for Software Reengineering"]},
+  'SE.5.2':{objectives:["Know the quality management process and its key activities","Understand the role of standards in quality management","Learn software metrics and quality assessment","Master software testing techniques","Know the different levels of software testing","Know how to reduce bugs in software programs","Use and apply evaluation tools"],content:["Part 1: Software Quality Management","Part 2: Software Testing"]},
+  'SE.5.4':{objectives:["Assimilate key concepts in complex systems (emergence, self-organization)","Describe, understand and analyze complex systems","Study computer tools for modelling complex systems","Learn Systems of Systems basics"],content:["Chapter I: Complex Systems – Introduction","Chapter II: Agent-based modeling and simulation","Chapter III: Cellular automata","Chapter IV: Systems of Systems – Classification and Architecture","Chapter V: Systems of Systems Engineering"]},
+  'SE.5.5':{objectives:["Detail the model-driven approach MDA (Model Driven Architecture) and OMG","Develop meta-modelling capabilities","Master the OCL constraint expression language","Study the different types and approaches of model transformations","Put into practice the knowledge acquired"],content:["Chapter I: Introduction to Model Driven Engineering","Chapter II: Principles and standards of MDE","Chapter III: Object Constraints Language","Chapter IV: Model transformation"]},
+  'DOS.5.1':{objectives:["Understand cloud computing models and architectures","Apply cloud deployment strategies","Configure and manage cloud services"]},
+  'DOS.5.2':{objectives:["Explain blockchain and how it is applied across industries","Describe key principles of blockchain technology","Explain fundamental concepts in Hyperledger Fabric","Apply concepts of blockchain security, identity and access control","Write applications that interact with a blockchain network"],content:["Unit 1: Introduction to Blockchain","Unit 2: Introduction to chaincode development","Unit 3: Chaincode query methods","Unit 4: Best practices for writing, testing, and debugging chaincode","Unit 5: Identity and access control","Unit 6: Data privacy","Unit 7: Basics of application development","Unit 8: Blockchain integration and advanced application development"]},
+  'DOS.5.3':{content:["Chapter I: Introduction to IoT","Chapter II: IoT Applications and architectures","Chapter III: Networks technologies in IoT","Chapter IV: Middlewares and Application protocols for IoT"]},
+  'DOS.5.4':{objectives:["Understand advanced processor architectures","Apply parallel programming models","Optimize software for multi-core and SIMD architectures"]},
+  'DOS.5.5':{objectives:["Understand problems related to real-time applications","Use real-time operating systems following the FreeRTOS framework","Design real-time applications using FreeRTOS"],content:["Chapter I: Introduction to Real-Time Systems","Chapter II: Real-time operating systems","Chapter III: System architecture of FreeRTOS"]},
+  'DOS.5.6':{objectives:["Understand distributed systems architectures","Apply distributed computing principles","Build distributed applications"]},
+  'DOS.5.7':{objectives:["Build and configure embedded Linux systems","Write Linux device drivers","Use Yocto and Buildroot for embedded targets"]},
+  'DOS.5.8':{objectives:["Understand cloud computing fundamentals","Distinguish IaaS, PaaS, and SaaS models","Deploy applications on cloud platforms"]},
+  'DOS.5.9':{objectives:["Master the Robot Operating System (ROS)","Deal with models and simulations for robots","Develop software for robotic applications"]},
+  'DOS.5.11':{objectives:["Acquire and use knowledge of distributed systems","Discover the main concepts of middleware","Learn how to build a distributed application using different frameworks"]},
+  'ISA.5.1':{objectives:["Master the basic building blocks of the Hadoop platform (HDFS, MapReduce)","Master the MapReduce approach for problem solving","Understand the limits of the relational model and know NOSQL models"],content:["Chapter I: Introduction to Big Data","Chapter II: Hadoop – Building Blocks","Chapter III: Advanced Processing Tools","Chapter IV: NOSQL Databases","Chapter V: Big Data Architectures"]},
+  'ISA.5.2':{content:["Chapter 1: Introduction to Data Mining","Chapter 2: Text Pre-processing and text feature extraction","Chapter 3: Text classification","Chapter 4: Sentiment analysis","Chapter 5: Topic identification"]},
+  'ISA.5.3':{objectives:["Understand decision support systems and their architectures","Apply interactive decision-making techniques","Build decision support applications"]},
+  'ISA.5.4':{objectives:["Become able to evaluate the technologies that make up BI","Become able to plan the implementation of a BI solution"],content:["Chapter 1: Introduction to Business Intelligence","Chapter 2: Data Integration","Chapter 3: Data Storage – Data Warehousing","Chapter 4: Multidimensional Analysis with OLAP","Chapter 5: MDX Language"]},
+  'ISA.5.7':{objectives:["Understand distributed database architectures","Apply distributed query processing techniques","Manage replication and consistency"]},
+  'ISA.5.8':{objectives:["Master advanced BI techniques","Apply advanced analytics and reporting","Evaluate and compare BI platforms"]},
+  'ISA.5.9':{content:["Chapter 1: Introduction to GIS","Chapter 2: Formats, conception et qualité de données SIG","Chapter 3: Geospatial and Environmental Analysis","Chapter 4: Mapping and Spatial Analysis"]},
+  'ISA.5.10':{objectives:["Understand governance issues in control of business activities","Know the best practices in IS Governance","Understand components of the digital enterprise"],content:["Chapter I: Enterprise Architecture – Introduction","Section I: Presentation of the domain of EA","Section II: Architecture of the digital enterprise","Chapter II: The governance of the company's IS","Section I: IS governance","Section II: Foundations of an IS governance model","Section III: Key Initiatives"]},
+  'ISA.5.11':{objectives:["Master data engineering pipelines","Apply ETL and data orchestration tools","Build scalable data infrastructure"]},
+  'ISA.5.12':{objectives:["Introduce students to the basic concepts of data mining","Develop skills in using recent data mining tools","Gain experience in independent data analysis"],content:["Chapter 1: Introduction to Datamining","Chapter 2: Data preprocessing","Chapter 3: Association rules","Chapter 4: Clustering"]},
+  'CV.5.4':{objectives:["Master 3D mesh simplification methods","Master 3D registration methods","Master methods of 3D objects construction from images"]},
+  'CV.5.6':{objectives:["Master mathematical morphology techniques","Apply mathematical morphology in image analysis","Apply mathematical morphology for medical applications"]},
+  'CV.5.11':{objectives:["Study the specificities of the different imaging modalities"],content:["Part 1: Introduction to Medical Imaging","Part 2: Modalities","Part 3: The main processing of medical images"]},
+  'FIN.5.2':{content:["Chapter 1: Financial Risk – Introduction","Chapter 2: Portfolio Insurance","Chapter 3: Dynamic Hedging Strategies","Chapter 4: Interest Rate Risk Management"]},
+  'FIN.5.3':{content:["Chapter 1: Introduction to Bank Management","Chapter 2: Banking risks – definition and typology","Chapter 3: The Regulatory Framework","Chapter 4: Credit risk management"]},
+  'MAT.5.3':{objectives:["Apply numerical optimization methods using R","Solve constrained and unconstrained optimization problems","Implement optimization algorithms in R"]},
+  'MAT.5.4':{objectives:["Apply statistical inference methods using R","Perform hypothesis testing and confidence interval estimation","Use R for statistical computing and data analysis"]},
+  'MAT.5.5':{objectives:["Apply multivariate data analysis techniques","Perform dimensionality reduction and clustering","Interpret results of data analysis for decision-making"]},
+  'SEC.5.1':{objectives:["Develop knowledge in diagnosis and fault detection","Introduce principles of independent/dependent component analysis","Investigate on-line processing of reliability prediction in embedded systems"],content:["Lesson 1: Introduction to diagnosis, safety and reliability","Lesson 2: Diagnosis – Model-based techniques","Lesson 3: Diagnosis – Signal-based techniques","Lesson 4: Systems Analysis with independent components","Lesson 5: Systems Analysis with dependent components","Lesson 6: Application of dependability methodologies to ES","Lesson 7: Reliability prediction methodology for ES"]},
+  'SEC.5.2':{objectives:["Discuss the main IoT threats and attacks","Identify convenient cryptographic tools and protocols","Assess IoT threats and risks","Design a secure embedded system"],content:["Chapter 1: Introduction to IoT Security","Chapter 2: Securing IoT devices","Chapter 3: Securing IoT network layer","Chapter 4: Securing IoT application layer","Chapter 5: Securing IoT platforms","Chapter 6: Security in embedded systems"]},
+  'SEC.5.3':{objectives:["Understand automotive network architectures","Apply security concepts specific to automotive systems","Analyze and mitigate threats in connected vehicles"]},
+  'SEC.5.4':{objectives:["Design and implement an IoT security solution","Apply security assessment methodologies to IoT projects","Demonstrate security testing and evaluation"]},
+  'ESDV.5.1':{objectives:["Acquire basics of programming for ARM Cortex devices","Apply general principles and approaches to embedded development","Perform modeling and optimizing for IoT systems"],content:["Chapter I: Microcontrollers – Introduction","Chapter II: Processors and STM-Library","Chapter III: Peripheral Programming","Chapter IV: Real-Time and IoT Applications"]},
+  'ESDV.5.2':{objectives:["Understand VHDL language features","Design sequential and concurrent digital systems in VHDL","Simulate and debug digital systems described in VHDL","Synthesize complex digital systems and implement on FPGA"],content:["Chapter I: Introduction to VHDL","Chapter II: Combinational Circuit Design","Chapter III: Sequential Circuit Design","Chapter IV: Advanced VHDL and FPGA Implementation"]},
+  'ESDV.5.3':{objectives:["Acquire basic concepts of real-time systems design and validation"],content:["Lesson I: Introduction to Real-Time Systems","Lesson II: Petri Net","Lesson III: Timed automata"]},
+  'ESDV.5.4':{objectives:["Identify a principled scientific approach to Cyber-Physical Systems","Understand model-based design for embedded systems","Apply IoT ecosystem concepts"],content:["Chapter 1: Motivation – Cyber Physical Systems","Chapter 2: Model Based Design","Chapter 3: Sensors and Actuators","Chapter 4: Embedded Systems Programming","Chapter 5: Networking","Chapter 6: IoT Ecosystem","Chapter 7: IoT Analytics"]},
+  'ESDV.5.5':{content:["Chapter I: Introduction to Electronics for Embedded Systems","Chapter II: Design and Layout of Simple Logic Gates","Chapter III: Static, Dynamic sequential circuits"]},
+  'ESDV.5.6':{content:["Chapter I: Introduction to PCB Design with Altium","Chapter II: Schematic Editor Basics","Chapter III: Schematic Capture","Chapter IV: PCB Layout"]},
+  'ESDV.5.7':{objectives:["Integrate embedded hardware and software components","Complete a full embedded system project","Apply project management to embedded system development"]},
+  'ESDV.5.8':{objectives:["Design and implement a microcontroller-based project","Apply programming techniques to solve embedded problems","Demonstrate practical embedded systems skills"]},
+  'ESDV.5.9':{objectives:["Master the FPGA EDA design flow","Know the optimization algorithm for FPGA mapping","Deal with co-design approaches"],content:["Chapter 1: Introduction to Reconfigurable Architectures","Chapter 2: Tree-based architectures","Chapter 3: Configuration and algorithmic tools","Chapter 4: Embedded FPGA"]},
+  'ESEP.5.1':{content:["Chapter I: Introduction – ARM Cortex Microcontrollers","Chapter II: Processors and STM-Library","Chapter III: Peripheral Programming","Chapter IV: IoT Applications"]},
+  'ESEP.5.2':{objectives:["Program connected objects using embedded platforms","Apply IoT communication protocols","Build end-to-end connected object applications"]},
+  'ESEP.5.3':{objectives:["Identify a principled scientific approach to Cyber-Physical Systems","Apply model-based design for IoT","Work with sensors, actuators, and IoT ecosystems"],content:["Chapter 1: Motivation – Cyber Physical Systems","Chapter 2: Model Based Design","Chapter 3: Sensors and Actuators","Chapter 4: Embedded Systems Programming","Chapter 5: Networking","Chapter 6: IoT Ecosystem","Chapter 7: IoT Analytics"]},
+  'NET.5.1':{objectives:["Understand multi-service cellular network architectures","Analyze 4G/5G network features and performance"],content:["Part I: Introduction to 3G/UMTS networks","Part II: Introduction to 4G networks","Part III: Introduction to 5G networks"]},
+  'NET.5.2':{objectives:["Study the fundamental communication protocols for IoT","Understand IoT application architectures","Analyze wireless sensor and vehicular networks"],content:["Chapter I: Introduction to IoT communications","Chapter II: IoT Applications and architectures","Chapter III: Networks technologies in IoT","Chapter IV: Middlewares and Application protocols for IoT","Chapter V: Wireless Sensor networks","Chapter VI: Vehicular Ad hoc Networks"]},
+  'NET.5.3':{objectives:["Understand the concepts and architecture of network management","Have knowledge of latest network management technologies","Apply SNMP and related network management protocols"]},
+  'NET.5.4':{objectives:["Master the various engineering mechanisms for QoS","Know how to use techniques and tools for traffic engineering","Apply QoS policies in network environments"]},
+  'IAP.5.1':{objectives:["Understand new technologies of Soft and Smart Sensors","Learn modern Soft and Smart Actuators","Implement Soft Actuator Control Strategies"],content:["Lesson 1: Smart Measurements","Lesson 2: Soft and Smart Sensors","Lesson 3: Soft and Smart Actuators","Lesson 4: Soft Actuators Control Strategies"]},
+  'IAP.5.2':{objectives:["Program connected IoT objects","Apply IoT application programming frameworks","Build IoT prototypes with embedded boards"]},
+  'IAP.5.3':{objectives:["Understand positioning systems and techniques","Apply GPS, GNSS, and indoor positioning methods","Build location-aware IoT applications"]},
+};
 
 const MODULES = [
   // ── S1 ──
@@ -436,35 +542,102 @@ const MODULES = [
   {code:'BDC.5.2',title:'Computer Law and Human Rights',semester:5,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Understand legal framework for IT','Apply GDPR and digital rights'],content:['Tunisian and international IT law','Data protection (GDPR)','Digital rights and ethics','Cybercrime law','Open source licenses'],examForm:'Written exam',passMark:'10/20',readingList:[],responsible:'Dept. of Business'},
   {code:'BDC.5.3',title:'Language and Communication 5: Preparing for Standardized Exams',semester:5,credits:1.5,subject:'BDC',language:'English',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.4.2'],objectives:['Prepare for TOEFL/IELTS exams','Master English proficiency'],content:['TOEFL/IELTS test strategies','Reading comprehension','Academic writing','Listening skills'],examForm:'Mock exam',passMark:'10/20',readingList:[],responsible:'Language Center'},
   // ── S5 AI TRACK ──
-  {code:'AI.5.1',title:'Advanced Machine Learning',semester:5,credits:3,subject:'AI',language:'English',type:'Optional',specialization:'AI',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AI.3.1','MAT.4.1'],objectives:['Master advanced ML algorithms','Handle real-world ML pipelines'],content:['Ensemble methods','Support Vector Machines','Bayesian learning','Feature engineering','ML pipelines and MLOps'],examForm:'Project + Oral',passMark:'10/20',readingList:['Bishop — Pattern Recognition and Machine Learning'],responsible:'Dept. of AI'},
-  {code:'AI.5.2',title:'Deep Learning and Neural Networks',semester:5,credits:3,subject:'AI',language:'English',type:'Optional',specialization:'AI',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AI.5.1'],objectives:['Implement deep neural networks','Apply CNNs, RNNs and transformers'],content:['Feedforward networks','Convolutional neural networks','Recurrent networks and LSTMs','Attention mechanisms and transformers','PyTorch/TensorFlow'],examForm:'Project',passMark:'10/20',readingList:['Goodfellow — Deep Learning'],responsible:'Dept. of AI'},
-  {code:'AI.5.3',title:'Natural Language Processing',semester:5,credits:3,subject:'AI',language:'English',type:'Optional',specialization:'AI',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AI.5.1'],objectives:['Process and analyze text data','Build NLP applications'],content:['Text preprocessing','Language models','Named entity recognition','Sentiment analysis','Sequence-to-sequence models'],examForm:'Project',passMark:'10/20',readingList:['Jurafsky — Speech and Language Processing'],responsible:'Dept. of AI'},
-  {code:'AI.5.4',title:'Multi-Agent Systems and Cognitive Computing',semester:5,credits:3,subject:'AI',language:'French',type:'Optional',specialization:'AI',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AI.3.1'],objectives:['Design multi-agent systems','Apply cognitive architectures'],content:['Agent architectures','Game theory for AI','Reinforcement learning','Knowledge graphs','Explainable AI'],examForm:'Written exam + Project',passMark:'10/20',readingList:['Wooldridge — An Introduction to MultiAgent Systems'],responsible:'Dept. of AI'},
-  // ── S5 GL TRACK ──
-  {code:'GL.5.1',title:'Software Quality and Testing',semester:5,credits:3,subject:'SE',language:'French',type:'Optional',specialization:'GL',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.4.1','SE.4.2'],objectives:['Design comprehensive test strategies','Apply TDD and BDD'],content:['Unit and integration testing','Test-driven development','Static analysis','Performance testing','CI/CD pipelines'],examForm:'Project',passMark:'10/20',readingList:['Kaner — Testing Computer Software'],responsible:'Dept. of SE'},
-  {code:'GL.5.2',title:'DevOps and Cloud Engineering',semester:5,credits:3,subject:'SE',language:'English',type:'Optional',specialization:'GL',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['SE.4.2','NET.4.1'],objectives:['Implement DevOps practices','Deploy on cloud platforms'],content:['Docker and Kubernetes','CI/CD with Jenkins/GitLab','Infrastructure as Code (Terraform)','AWS/Azure basics','Monitoring and observability'],examForm:'Lab project',passMark:'10/20',readingList:[],responsible:'Dept. of SE'},
-  {code:'GL.5.3',title:'Advanced Software Architectures',semester:5,credits:3,subject:'SE',language:'French',type:'Optional',specialization:'GL',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.4.2'],objectives:['Design distributed systems','Apply event-driven architectures'],content:['Microservices patterns','Event-driven architecture','API design (REST, GraphQL)','Distributed systems challenges','Service mesh'],examForm:'Architecture project',passMark:'10/20',readingList:['Newman — Building Microservices'],responsible:'Dept. of SE'},
-  {code:'GL.5.4',title:'Human-Computer Interaction',semester:5,credits:3,subject:'SE',language:'French',type:'Optional',specialization:'GL',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.3.1'],objectives:['Design user-centered interfaces','Evaluate usability'],content:['UX design principles','Usability testing','Accessibility standards','Prototyping tools','User research methods'],examForm:'Design project',passMark:'10/20',readingList:['Norman — The Design of Everyday Things'],responsible:'Dept. of SE'},
-  // ── S5 CV TRACK ──
-  {code:'CV.5.1',title:'Advanced Image Processing and Computer Vision',semester:5,credits:3,subject:'IMA',language:'English',type:'Optional',specialization:'CV',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['IMA.2.1','AI.3.1'],objectives:['Apply advanced vision algorithms','Build computer vision systems'],content:['Feature detection and matching','Object detection (YOLO, R-CNN)','Image segmentation','3D vision and stereo','OpenCV in practice'],examForm:'Project',passMark:'10/20',readingList:['Szeliski — Computer Vision: Algorithms and Applications'],responsible:'Dept. of CV'},
-  {code:'CV.5.2',title:'Data Science and Big Data Analytics',semester:5,credits:3,subject:'DAT',language:'English',type:'Optional',specialization:'CV',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['MAT.4.1','DAT.1.1'],objectives:['Process and analyze large datasets','Build data pipelines'],content:['Big Data frameworks (Spark, Hadoop)','Data warehousing','ETL pipelines','Data visualization','Python for data science'],examForm:'Data project',passMark:'10/20',readingList:['McKinney — Python for Data Analysis'],responsible:'Dept. of Data'},
-  {code:'CV.5.3',title:'Pattern Recognition',semester:5,credits:3,subject:'AI',language:'French',type:'Optional',specialization:'CV',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AI.3.1','MAT.1.1'],objectives:['Apply pattern recognition methods','Build classifiers for real data'],content:['Statistical pattern recognition','Clustering algorithms','Dimensionality reduction','Biometric recognition','Time-series classification'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Duda — Pattern Classification'],responsible:'Dept. of AI'},
-  {code:'CV.5.4',title:'Medical and Biomedical Imaging',semester:5,credits:3,subject:'IMA',language:'French',type:'Optional',specialization:'CV',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['CV.5.1'],objectives:['Apply image analysis to medical data','Understand medical imaging modalities'],content:['MRI and CT imaging','Medical image segmentation','Computer-aided diagnosis','Deep learning for medical imaging','DICOM standard'],examForm:'Research project',passMark:'10/20',readingList:[],responsible:'Dept. of CV'},
-  // ── S5 IF TRACK ──
-  {code:'IF.5.1',title:'Quantitative Finance and Modeling',semester:5,credits:3,subject:'FIN',language:'French',type:'Optional',specialization:'IF',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['FIN.4.1','MAT.4.1'],objectives:['Build quantitative financial models','Price financial instruments'],content:['Options pricing (Black-Scholes)','Portfolio optimization','Stochastic finance','Monte Carlo for finance','Risk measures (VaR, CVaR)'],examForm:'Written exam + Project',passMark:'10/20',readingList:['Hull — Options, Futures and Other Derivatives'],responsible:'Dept. of Finance'},
-  {code:'IF.5.2',title:'Financial Computing and Algorithmic Trading',semester:5,credits:3,subject:'FIN',language:'English',type:'Optional',specialization:'IF',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['IF.5.1','AP.1.2'],objectives:['Implement financial algorithms','Build trading systems'],content:['Algorithmic trading strategies','High-frequency trading concepts','Financial APIs','Backtesting frameworks','Risk management systems'],examForm:'Trading project',passMark:'10/20',readingList:[],responsible:'Dept. of Finance'},
-  {code:'IF.5.3',title:'Blockchain and Distributed Finance',semester:5,credits:3,subject:'SEC',language:'English',type:'Optional',specialization:'IF',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SEC.4.1','FIN.4.1'],objectives:['Understand blockchain technology','Build decentralized applications'],content:['Cryptographic foundations of blockchain','Ethereum and smart contracts','DeFi protocols','Consensus algorithms','Solidity programming'],examForm:'Project',passMark:'10/20',readingList:[],responsible:'Dept. of Security'},
-  {code:'IF.5.4',title:'Risk Analysis and Management',semester:5,credits:3,subject:'FIN',language:'French',type:'Optional',specialization:'IF',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['IF.5.1'],objectives:['Quantify and manage financial risk','Apply regulatory frameworks'],content:['Market risk','Credit risk','Operational risk','Basel III requirements','Stress testing'],examForm:'Written exam',passMark:'10/20',readingList:["McNeil — Quantitative Risk Management"],responsible:'Dept. of Finance'},
-  // ── S5 SLE TRACK ──
-  {code:'SLE.5.1',title:'Real-Time and Safety-Critical Systems',semester:5,credits:3,subject:'EHA',language:'French',type:'Optional',specialization:'SLE',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.4.1','OS.3.3'],objectives:['Design real-time systems','Verify safety-critical software'],content:['Real-time scheduling','RTOS (FreeRTOS)','Safety standards (IEC 61508)','Formal verification for embedded','Fault tolerance'],examForm:'Project + Oral',passMark:'10/20',readingList:['Burns — Real-Time Systems and Programming Languages'],responsible:'Dept. of Hardware'},
-  {code:'SLE.5.2',title:'FPGA Design and Reconfigurable Computing',semester:5,credits:3,subject:'EHA',language:'French',type:'Optional',specialization:'SLE',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['EHA.3.1','EHA.1.1'],objectives:['Design digital systems on FPGAs','Implement hardware accelerators'],content:['FPGA architecture','Advanced VHDL/Verilog','Hardware accelerator design','HLS (High-Level Synthesis)','FPGA-based systems'],examForm:'FPGA project',passMark:'10/20',readingList:[],responsible:'Dept. of Hardware'},
-  {code:'SLE.5.3',title:'IoT Systems and Protocols',semester:5,credits:3,subject:'EHA',language:'English',type:'Optional',specialization:'SLE',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.4.1','NET.4.1'],objectives:['Build IoT systems end-to-end','Apply IoT communication protocols'],content:['IoT architecture','MQTT, CoAP, LoRaWAN','Edge computing','Sensor fusion','IoT security'],examForm:'IoT project',passMark:'10/20',readingList:[],responsible:'Dept. of Hardware'},
-  {code:'SLE.5.4',title:'Embedded Linux and System Software',semester:5,credits:3,subject:'OS',language:'French',type:'Optional',specialization:'SLE',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['OS.3.3','EHA.4.1'],objectives:['Port and customize Linux for embedded targets','Write Linux kernel modules'],content:['Linux kernel architecture','Board support packages','Device drivers','Yocto Project','Buildroot'],examForm:'Lab project',passMark:'10/20',readingList:['Corbet — Linux Device Drivers'],responsible:'Dept. of Systems'},
-  // ── S5 ST-IoT TRACK ──
-  {code:'DOS.5.1',title:'Service-Oriented and Microservices Architecture',semester:5,credits:3,subject:'SE',language:'French',type:'Optional',specialization:'ST-IoT',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.4.2','AP.2.2'],objectives:['Design service-oriented systems','Implement microservices'],content:['SOA principles','REST and GraphQL APIs','API gateways','Service discovery','Distributed transactions'],examForm:'Project',passMark:'10/20',readingList:[],responsible:'Dept. of SE'},
-  {code:'DOS.5.2',title:'Cloud Computing and Virtualization',semester:5,credits:3,subject:'OS',language:'English',type:'Optional',specialization:'ST-IoT',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['OS.3.3','NET.4.1'],objectives:['Deploy cloud infrastructure','Apply virtualization technologies'],content:['Cloud models (IaaS, PaaS, SaaS)','Virtual machines and containers','OpenStack','Serverless computing','Cloud security'],examForm:'Cloud project',passMark:'10/20',readingList:[],responsible:'Dept. of Systems'},
-  {code:'DOS.5.3',title:'Internet of Things Applications',semester:5,credits:3,subject:'EHA',language:'English',type:'Optional',specialization:'ST-IoT',hours:{total:45,lecture:14,lab:21,selfStudy:10},prerequisites:['NET.4.1'],objectives:['Build connected IoT applications','Integrate cloud and edge for IoT'],content:['IoT platforms (AWS IoT, Azure IoT)','Smart city applications','Industrial IoT','Data analytics for IoT','IoT security and privacy'],examForm:'IoT application project',passMark:'10/20',readingList:[],responsible:'Dept. of Networks'},
-  {code:'DOS.5.4',title:'Network Security and Administration',semester:5,credits:3,subject:'SEC',language:'French',type:'Optional',specialization:'ST-IoT',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SEC.4.1','NET.4.1'],objectives:['Secure network infrastructure','Administer enterprise networks'],content:['Firewall and IDS/IPS','VPN technologies','Network forensics','Zero-trust architecture','Security operations center (SOC)'],examForm:'Lab project + Written',passMark:'10/20',readingList:['Stallings — Network Security Essentials'],responsible:'Dept. of Security'},
+  {code:'AI.5.1',title:'Multi-Agent Systems',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.2',title:'Non-Classical Logics',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.3',title:'Applied Deep Learning',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.4',title:'Natural Language Processing',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.6',title:'Knowledge Representation & Reasoning',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.7',title:'Deep Reinforcement Learning',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.8',title:'Affective Computing',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.9',title:'Intelligent Transport Systems',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.10',title:'Semantic Web & Linked Data',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.11',title:'AIoT',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // ── S5 SHARED TRACK MODULES ──
+  // SE
+  {code:'SE.5.1',title:'Software Reengineering',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.2',title:'Software Quality & Test',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.3',title:'Mobile Development',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.4',title:'Complex Systems Engineering',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.5',title:'Model Driven Engineering',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.5',title:'Robotics and Soft Computing',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.12',title:'Introduction to Deep Learning',semester:5,credits:3,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.16',title:'Introduction to Natural Language Processing',semester:5,credits:3,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // DOS (Distributed/OS/Cloud)
+  {code:'DOS.5.1',title:'Cloud Computing',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.2',title:'Blockchain',semester:5,credits:1,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.3',title:'IoT',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.4',title:'Advanced Architectures and Parallel Programming',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.5',title:'Real Time Operating Systems',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.6',title:'Distributed Systems and Applications',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.7',title:'Embedded Linux',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.8',title:'Introduction to Cloud Computing',semester:5,credits:1,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.9',title:'Software Development for Robotics',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.11',title:'Distributed Storage Systems',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // ISA (Information Systems/Analytics)
+  {code:'ISA.5.1',title:'Big Data',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.2',title:'Data Mining',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.3',title:'Interactive Decision Support Systems',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.4',title:'Business Intelligence',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.5',title:'Recommender Systems',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.6',title:'Text Mining',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.7',title:'Distributed Databases',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.8',title:'Advanced BI',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.9',title:'Geographic Information Systems',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.10',title:'Urbanization of Information Systems',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.11',title:'Data Engineering',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.12',title:'Introduction to Datamining',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // CV
+  {code:'CV.5.1',title:'Restoration and Digital Considerations',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.2',title:'Shape Recognition and Geometric Invariants',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.3',title:'3D Representation: Curves Shapes and Surfaces',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.4',title:'Discrete Representation of 3D Objects',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.5',title:'Compression Techniques for Computer Vision',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.6',title:'Mathematical Morphology and Medical Applications',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.7',title:'Multispectral Image Processing',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.8',title:'Multidimensional Signal Processing',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.9',title:'Computer Vision',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.11',title:'Medical Imaging Workshops',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // FIN
+  {code:'FIN.5.1',title:'International Finance',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.2',title:'Risk Modelling and Dynamic Financial Risk Management',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.3',title:'Bank Management',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.4',title:'Monte Carlo Methods and Financial Model Simulation',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.5',title:'Quantitative Finance',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.6',title:'Valuation and Financing of Companies',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // MAT S5
+  {code:'MAT.5.1',title:'Combinatorial Optimization',semester:5,credits:2,subject:'MAT',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.2',title:'Category Theory and Functional Programming',semester:5,credits:2,subject:'MAT',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.3',title:'Numerical Optimization with R',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.4',title:'Statistical Inference with R',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.5',title:'Data Analysis',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // SEC S5
+  {code:'SEC.5.1',title:'Diagnosis Safety and Reliability of Embedded Systems',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SEC.5.2',title:'IoT Security',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SEC.5.3',title:'Automotive Architecture and Security',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SEC.5.4',title:'IoT Security Project',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // ESDV (Embedded Systems Design/VHDL)
+  {code:'ESDV.5.1',title:'Microcontroller-Based Systems',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.2',title:'System Integration VHDL',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.3',title:'Real-Time Systems Design and Validation',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.4',title:'Cyber-Physical Systems',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.5',title:'Electronics for Embedded Systems',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.6',title:'Embedded Interfacing',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.7',title:'Integration Project',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.8',title:'Microcontroller Project',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.9',title:'Reconfigurable Architectures',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // ESEP (Embedded Systems/Electronics)
+  {code:'ESEP.5.1',title:'Microcontrollers Based Systems',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESEP.5.2',title:'Connected Objects Programming',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESEP.5.3',title:'Cyber-Physical Systems',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // NET S5
+  {code:'NET.5.1',title:'Multi-Service Cellular Networks',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'NET.5.2',title:'Communication Architectures and Protocols for IoT',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'NET.5.3',title:'Networks Management',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'NET.5.4',title:'QoS & Traffic Engineering',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // IAP
+  {code:'IAP.5.1',title:'Soft Actuator Control and Applications',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'IAP.5.2',title:'Introduction to Programming Connected Objects',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'IAP.5.3',title:'Positioning Systems and Applications',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
 ];
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
@@ -678,8 +851,17 @@ const SEM_LABELS = {1:'Year 1',2:'Year 1',3:'Year 2',4:'Year 2',5:'Year 3'};
 
 // ─── DRAWER ──────────────────────────────────────────────────────────────────
 function openDrawer(code) {
-  const m = MODULES.find(x=>x.code===code);
-  if (!m) return;
+  const alreadyActive = document.querySelector(`.mod-card[data-code="${code}"].mod-card-active`);
+  if (alreadyActive) { closeDrawer(); return; }
+  const base = MODULES.find(x=>x.code===code);
+  if (!base) return;
+  const hb = MODULE_HANDBOOK[code] || {};
+  const m = Object.assign({}, base, {
+    objectives: (hb.objectives && hb.objectives.length) ? hb.objectives : (base.objectives || []),
+    content: (hb.content && hb.content.length) ? hb.content : (base.content || []),
+  });
+  document.querySelectorAll('.mod-card-active').forEach(el=>el.classList.remove('mod-card-active'));
+  document.querySelectorAll(`.mod-card[data-code="${code}"]`).forEach(el=>el.classList.add('mod-card-active'));
   state.drawerModule = m;
   state.collapsedSections = {};
   renderDrawer();
@@ -694,6 +876,7 @@ function closeDrawer() {
   document.getElementById('drawer').classList.remove('open');
   document.body.style.overflow = '';
   state.drawerModule = null;
+  document.querySelectorAll('.mod-card-active').forEach(el=>el.classList.remove('mod-card-active'));
 }
 
 function toggleSection(id) {
@@ -820,21 +1003,21 @@ function renderHome() {
     </div>
     <!-- Gradient overlay -->
     <div class="hero-overlay"></div>
-    <!-- Hero text (fixed above slides) -->
-    <div style="position:relative;z-index:2;padding:0 10vw;max-width:960px;pointer-events:none">
-      <p class="fade-up fade-up-1" style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;margin:0 0 28px;text-transform:uppercase">SINCE 1984 · UNIVERSITY OF MANOUBA</p>
-      <h1 class="fade-up fade-up-2" style="font-family:'Archivo',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;color:#fff;margin:0 0 8px;line-height:0.95;letter-spacing:-0.03em">Welcome to <span style="color:#4DB8E8">ENSI</span></h1>
-      <p class="fade-up fade-up-2" style="font-family:'Inter',sans-serif;font-size:1.25rem;font-weight:300;color:rgba(255,255,255,0.75);margin:0 0 24px;line-height:1.3">École Nationale des Sciences de l'Informatique</p>
-      <p class="fade-up fade-up-3" style="font-family:'Inter',sans-serif;font-size:1.125rem;color:rgba(255,255,255,0.6);margin:0 0 32px;font-weight:400">Everything a new admit needs to know — admission, pathways, student life, and what you'll study.</p>
-      <button onclick="document.getElementById('curriculum-section').scrollIntoView({behavior:'smooth'})" class="ghost-cta fade-up fade-up-4" style="pointer-events:auto">Start exploring <span class="cta-arrow">↓</span></button>
-    </div>
-    <!-- Arrow buttons -->
+    <!-- Arrow buttons (absolute, always centered vertically) -->
     <button class="hero-arrow hero-arrow-left" onclick="heroGo(-1)" aria-label="Previous photo">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
     <button class="hero-arrow hero-arrow-right" onclick="heroGo(1)" aria-label="Next photo">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
+    <!-- Hero text (fixed above slides) -->
+    <div id="hero-text" style="position:relative;z-index:2;padding:0 10vw;max-width:960px;pointer-events:none">
+      <p class="fade-up fade-up-1" style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;margin:0 0 28px;text-transform:uppercase">SINCE 1984 · UNIVERSITY OF MANOUBA</p>
+      <h1 class="fade-up fade-up-2" style="font-family:'Archivo',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;color:#fff;margin:0 0 8px;line-height:0.95;letter-spacing:-0.03em">Welcome to <span style="color:#4DB8E8">ENSI</span></h1>
+      <p class="fade-up fade-up-2" style="font-family:'Inter',sans-serif;font-size:1.25rem;font-weight:300;color:rgba(255,255,255,0.75);margin:0 0 24px;line-height:1.3">École Nationale des Sciences de l'Informatique</p>
+      <p class="fade-up fade-up-3" style="font-family:'Inter',sans-serif;font-size:1.125rem;color:rgba(255,255,255,0.6);margin:0 0 32px;font-weight:400">Everything a new admit needs to know — admission, pathways, student life, and what you'll study.</p>
+      <button onclick="(()=>{const t=document.getElementById('section-numbers');window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'})})()" class="ghost-cta fade-up fade-up-4" style="pointer-events:auto">Start exploring <span class="cta-arrow">↓</span></button>
+    </div>
     <!-- Label + dots -->
     <div id="hero-label">ENSI Forum <span style="color:#4DB8E8">20.0</span></div>
     <div id="hero-dots" role="tablist" aria-label="Slideshow navigation">
@@ -925,12 +1108,11 @@ function renderHome() {
         </tbody>
       </table>
     </div>
-    <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(27,42,74,0.45);margin:16px 0 0;line-height:1.5">Higher cutoff rank = less selective — the track fills seats further down the national ranking.</p>
   </section>
 
   <!-- STUDENT LIFE -->
   <section id="section-studentlife" style="background:#fff;padding:96px 10vw">
-    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">12 ACTIVE CLUBS · 4 CATEGORIES</p>
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">12 ACTIVE CLUBS · 3 CATEGORIES</p>
     <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 40px;line-height:0.95;letter-spacing:-0.03em">Campus <span style="color:#2563EB">Life</span></h2>
 
     <!-- Filter tabs -->
@@ -952,7 +1134,7 @@ function renderHome() {
         </div>
         <div class="club-tile-bar" style="background:${c.accent}"></div>
         <div class="club-tile-caption">
-        <div style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:800;color:#1B2A4A;line-height:1.2;margin-bottom:2px">${c.name}</div>
+        <div style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:800;color:#1B2A4A;line-height:1.2;margin-bottom:2px">${c.name}<span class="club-tile-chev" style="color:${c.accent}">›</span></div>
         <div style="font-family:'Inter',sans-serif;font-size:0.75rem;font-style:italic;color:rgba(27,42,74,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:8px">${c.tagline}</div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:0.625rem;color:rgba(27,42,74,0.45);text-transform:uppercase;letter-spacing:0.05em">EST. ${c.founded} · ${{['Science · Tech · Innovation']:'TECH',['Sport · Art · Culture']:'ARTS',['Humanitarian · Social']:'SOCIAL',['AI · ML · Innovation']:'AI'}[c.category]||c.category}</div>
         </div>
@@ -1054,9 +1236,10 @@ function renderHome() {
         const totalCr = semCredits[si];
         const cards = mods.map(m=>{
           const sc = SUBJECT_COLORS[m.subject]||'#6B7280';
-          return `<div class="module-card" onclick="openDrawer('${m.code}')" aria-label="View ${m.title} details" style="display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-left:3px solid ${sc}">
+          return `<div class="acc-card" onclick="openDrawer('${m.code}')" aria-label="View ${m.title} details" style="--sc:${sc};border-left:3px solid ${sc}">
             <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
-            <span style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3">${m.title}</span>
+            <span style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3;padding-right:20px">${m.title}</span>
+            <span class="acc-chev">›</span>
           </div>`;
         }).join('');
         return `<div class="cur-acc-item">
@@ -1092,17 +1275,17 @@ function renderHome() {
     </div>
     <div style="border-top:1px solid #E8EDF4">
       ${SPECIALIZATIONS.map(sp=>`
-      <a href="#specializations" class="spec-strip">
-        <div style="width:56px;height:56px;background:${sp.color};border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15)">
+      <a href="#specializations" class="spec-strip" style="--sp-color:${sp.color}" onclick="event.preventDefault();navigate('specializations');setTimeout(()=>{const el=document.getElementById('spec-${sp.id}');if(el){const nav=document.getElementById('navbar');const offset=nav?nav.offsetHeight+16:80;window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-offset,behavior:'smooth'})}},120)">
+        <div class="spec-badge" style="width:56px;height:56px;background:${sp.color};border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:background .3s ease">
           <span style="font-family:'JetBrains Mono',monospace;font-size:${sp.id==='ST-IoT'?'0.6rem':'0.8rem'};font-weight:700;color:#fff;letter-spacing:0.02em;text-align:center;line-height:1.3">${sp.id}</span>
         </div>
         <div style="flex:1;min-width:0">
-          <div class="spec-name" style="font-family:'Archivo',sans-serif;font-size:1.05rem;font-weight:500;color:#1B2A4A;margin-bottom:2px">${sp.name}</div>
-          <div style="font-size:0.78rem;color:#9CA3AF;margin-bottom:6px">${sp.nameFr}</div>
-          <div style="font-size:0.8rem;color:${sp.color};font-family:'Inter',sans-serif">${specKeywords[sp.id]||''}</div>
+          <div class="spec-name" style="font-family:'Archivo',sans-serif;font-size:1.05rem;font-weight:500;color:#1B2A4A;margin-bottom:2px;transition:color .3s ease">${sp.name}</div>
+          <div class="spec-namefr" style="font-size:0.78rem;color:#9CA3AF;margin-bottom:6px;transition:color .3s ease">${sp.nameFr}</div>
+          <div class="spec-kw" style="font-size:0.8rem;color:${sp.color};font-family:'Inter',sans-serif;transition:color .3s ease">${specKeywords[sp.id]||''}</div>
         </div>
-        <div class="spec-watermark" style="color:${sp.color};opacity:0.09">${sp.id}</div>
-        <span class="spec-arrow" style="color:${sp.color}">→</span>
+        <div class="spec-watermark" style="color:${sp.color};opacity:0.09;transition:color .3s ease,opacity .3s ease">${sp.id}</div>
+        <span class="spec-arrow" style="color:${sp.color};transition:color .3s ease,transform .2s ease">→</span>
       </a>`).join('')}
     </div>
   </section>
@@ -1371,31 +1554,37 @@ function renderSpecializations() {
   <section style="padding:40px 32px 64px">
     <div style="max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
       ${SPECIALIZATIONS.map(sp=>{
-        const spMods = sp.modules.map(code=>modByCode[code]).filter(Boolean);
+        const spComp = (sp.compulsory||[]).map(code=>modByCode[code]).filter(Boolean);
+        const spOpt  = (sp.optional||[]).map(code=>modByCode[code]).filter(Boolean);
+        const modGrid = (mods, accent) => mods.length ? `
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px">
+            ${mods.map(m=>{
+              const sc = SUBJECT_COLORS[m.subject]||accent;
+              return `<button class="mod-card" data-code="${m.code}" onclick="openDrawer('${m.code}')" style="display:flex;align-items:flex-start;gap:10px;background:#fff;border:1px solid #E8EDF4;border-left:3px solid ${sc};border-radius:8px;padding:10px 12px;cursor:pointer;text-align:left;width:100%;--card-color:${accent};transition:background .3s ease,border-left-color .3s ease,border-color .3s ease,box-shadow .2s ease" onmouseover="if(!this.classList.contains('mod-card-active')){this.style.background='#F9FAFB';this.style.borderColor='${sc}80'}" onmouseout="if(!this.classList.contains('mod-card-active')){this.style.background='#fff';this.style.borderColor='#E8EDF4';this.style.borderLeftColor='${sc}'}">
+                <span class="mod-code" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:${sc};flex-shrink:0;padding-top:1px">${m.code}</span>
+                <div class="mod-name" style="font-size:0.8125rem;font-weight:500;color:#1B2A4A;line-height:1.35">${m.title}</div>
+              </button>`;
+            }).join('')}
+          </div>` : '';
         return `
-        <div style="background:#fff;border:1px solid #E8EDF4;border-radius:14px;overflow:hidden">
-          <div style="padding:24px 28px;border-bottom:1px solid ${sp.color}25;background:${sp.color}06;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
-            <div style="display:flex;align-items:flex-start;gap:16px">
-              <div style="font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:600;color:${sp.color};background:${sp.color}15;padding:12px 16px;border-radius:8px;flex-shrink:0">${sp.id}</div>
-              <div>
-                <h3 style="font-family:'Archivo',sans-serif;font-size:1.2rem;font-weight:700;color:#1B2A4A;margin:0 0 4px">${sp.name}</h3>
-                <p style="font-size:0.8rem;color:#9CA3AF;font-style:italic;margin:0 0 8px">${sp.nameFr}</p>
-                <p style="font-size:0.875rem;color:#4B5563;margin:0">${sp.desc}</p>
-              </div>
+        <div id="spec-${sp.id}" style="background:#fff;border:1px solid #E8EDF4;border-radius:14px;overflow:hidden">
+          <div style="padding:24px 28px;border-bottom:1px solid ${sp.color}25;background:${sp.color}06;display:flex;align-items:flex-start;gap:16px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:600;color:${sp.color};background:${sp.color}15;padding:12px 16px;border-radius:8px;flex-shrink:0">${sp.id}</div>
+            <div>
+              <h3 style="font-family:'Archivo',sans-serif;font-size:1.2rem;font-weight:700;color:#1B2A4A;margin:0 0 4px">${sp.name}</h3>
+              <p style="font-size:0.8rem;color:#9CA3AF;font-style:italic;margin:0 0 8px">${sp.nameFr}</p>
+              <p style="font-size:0.875rem;color:#4B5563;margin:0">${sp.desc}</p>
             </div>
           </div>
-          <div style="padding:20px 28px">
-            <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:14px">Track Modules</div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px">
-              ${spMods.map(m=>`
-              <button onclick="openDrawer('${m.code}')" style="display:flex;align-items:flex-start;gap:10px;background:#F5F7FA;border:1px solid #E8EDF4;border-radius:8px;padding:12px 14px;cursor:pointer;text-align:left;width:100%;transition:all .15s ease" onmouseover="this.style.background='#fff';this.style.borderColor='${sp.color}50'" onmouseout="this.style.background='#F5F7FA';this.style.borderColor='#E8EDF4'">
-                <span class="module-code" style="font-size:0.7rem;flex-shrink:0">${m.code}</span>
-                <div style="flex:1;min-width:0">
-                  <div style="font-size:0.875rem;font-weight:500;color:#1B2A4A;line-height:1.3">${m.title}</div>
-                  <div style="font-size:0.75rem;color:#9CA3AF;margin-top:2px">${m.credits} ECTS · ${m.language}</div>
-                </div>
-              </button>`).join('')}
-            </div>
+          <div style="padding:20px 28px;display:flex;flex-direction:column;gap:20px">
+            ${spComp.length ? `<div>
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${sp.color};margin-bottom:10px">Compulsory · ${spComp.length} modules</div>
+              ${modGrid(spComp, sp.color)}
+            </div>` : ''}
+            ${spOpt.length ? `<div>
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:10px">Optional · ${spOpt.length} modules</div>
+              ${modGrid(spOpt, sp.color)}
+            </div>` : ''}
           </div>
         </div>`;
       }).join('')}
