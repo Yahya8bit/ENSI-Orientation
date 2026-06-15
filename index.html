@@ -255,7 +255,7 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A}
 <!-- NAVBAR -->
 <nav id="navbar" style="background:#fff;border-bottom:1px solid #E2E8F0;position:fixed;top:0;left:0;right:0;z-index:30;height:72px;display:flex;align-items:center;padding:0 10vw;justify-content:space-between;transition:box-shadow .2s ease">
   <a href="#home" style="flex-shrink:0;display:flex;align-items:center;text-decoration:none">
-    <img src="/ensi-logo.png" alt="ENSI" style="height:52px;width:auto;flex-shrink:0;display:block">
+    <img src="/imag/ensi-navbar.png" alt="ENSI" style="height:52px;width:auto;flex-shrink:0;display:block">
   </a>
   <div style="display:flex;align-items:center;gap:28px">
     <a href="#home" onclick="navigate('home')" class="nav-link" id="nav-home">Overview</a>
@@ -395,7 +395,7 @@ let state = {
 
 // ─── ROUTER ──────────────────────────────────────────────────────────────────
 async function init() {
-  CLUBS = await fetch('/clubs.json').then(r=>r.json());
+  CLUBS = await fetch('/data/clubs.json').then(r=>r.json());
   window.addEventListener('hashchange', handleRoute);
   document.addEventListener('keydown', e => { if (e.key==='Escape') closeDrawer(); });
   window.addEventListener('scroll', () => {
