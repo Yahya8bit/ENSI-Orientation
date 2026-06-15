@@ -7,7 +7,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-html{font-size:112.5%}
+html{font-size:112.5%;max-width:100%;overflow-x:hidden}
 @font-face{
   font-family:'Fraunces';
   font-style:normal;font-weight:400;font-display:block;
@@ -35,7 +35,7 @@ tailwind.config = {
 </script>
 <style>
 *{box-sizing:border-box}
-body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A}
+body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscroll-behavior-y:contain}
 
 .module-code{
   font-family:'JetBrains Mono',monospace;color:#1B2A4A;
@@ -48,7 +48,7 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A}
 /* Drawer */
 .overlay{position:fixed;inset:0;background:rgba(27,42,74,0.55);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s ease}
 .overlay.open{opacity:1;pointer-events:all}
-.drawer{position:fixed;top:0;right:0;width:480px;max-width:100vw;height:100vh;background:#fff;z-index:50;transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+.drawer{position:fixed;top:0;right:0;width:480px;max-width:100vw;height:100vh;background:#fff;z-index:200;transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
 .drawer.open{transform:translateX(0)}
 .drawer::-webkit-scrollbar{width:5px}
 .drawer::-webkit-scrollbar-track{background:#F5F7FA}
@@ -116,7 +116,7 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A}
 .hero-arrow-left{left:24px}
 .hero-arrow-right{right:24px}
 #hero-dots{
-  position:absolute;bottom:46px;left:50%;transform:translateX(-50%);
+  position:absolute;bottom:72px;left:50%;transform:translateX(-50%);
   z-index:3;display:flex;gap:0;align-items:center;
 }
 .hero-dot{
@@ -134,15 +134,16 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A}
   box-shadow:0 0 0 2px rgba(255,255,255,0.35);
 }
 #hero-label{
-  position:absolute;bottom:62px;left:50%;transform:translateX(-50%);
+  position:absolute;bottom:92px;left:50%;transform:translateX(-50%);
   z-index:3;font-family:'JetBrains Mono',monospace;font-size:0.9375rem;font-weight:500;
   color:rgba(255,255,255,0.9);white-space:nowrap;letter-spacing:0.04em;
   pointer-events:none;
 }
 @media(max-width:600px){
   .hero-arrow{display:none}
-  #hero-dots{display:flex!important;bottom:28px}
-  #hero-label{bottom:44px}
+  .hero-section{min-height:100svh}
+  #hero-dots{display:flex!important;bottom:5rem}
+  #hero-label{bottom:7rem}
 }
 @media(prefers-reduced-motion:reduce){
   #hero-track{transition:none}
@@ -212,10 +213,40 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A}
 .nav-link:hover{color:#1B2A4A;border-bottom-color:#4DB8E8}
 .nav-link.active{color:#1B2A4A;border-bottom-color:transparent}
 
+/* Curriculum accordion — single view all sizes */
+#cur-matrix-wrap{display:none!important}
+#cur-accordion{display:block}
+@media(max-width:768px){
+  #curriculum-section{padding-left:1rem!important;padding-right:1rem!important}
+  .cur-acc-cards{grid-template-columns:1fr!important}
+}
+/* Mobile hamburger + sidebar */
+#nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:#1B2A4A;font-size:1.5rem;line-height:1;flex-shrink:0;z-index:1001;position:relative;pointer-events:auto;min-width:44px;min-height:44px;align-items:center;justify-content:center}
+#mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:40;opacity:0;transition:opacity .3s ease;pointer-events:none}
+#mobile-overlay.open{opacity:1;pointer-events:auto}
+#mobile-sidebar{position:fixed;top:0;left:0;width:280px;height:100vh;background:#fff;z-index:50;transform:translateX(-100%);transition:transform .3s ease;display:flex;flex-direction:column;padding:24px 0 32px;box-shadow:4px 0 24px rgba(0,0,0,0.12)}
+#mobile-sidebar.open{transform:translateX(0)}
+#mobile-sidebar-close{align-self:flex-end;margin-right:20px;margin-bottom:24px;background:none;border:none;cursor:pointer;font-size:1.5rem;color:#1B2A4A;padding:4px 8px;line-height:1}
+.mobile-nav-link{font-family:'Archivo',sans-serif;font-size:1.2rem;font-weight:800;color:#1B2A4A;text-decoration:none;padding:14px 28px;display:block;min-height:48px;display:flex;align-items:center;border-left:3px solid transparent;transition:border-color .15s ease,color .15s ease}
+.mobile-nav-link:hover{border-left-color:#4DB8E8;color:#2563EB}
+@media(max-width:768px){
+  #nav-links{display:none!important}
+  #nav-hamburger{display:flex!important;align-items:center;justify-content:center}
+  #mobile-overlay{display:block}
+}
+@media(min-width:769px){
+  #mobile-sidebar{display:none!important}
+  #mobile-overlay{display:none!important}
+}
 /* Subject pill left-border style */
 .subj-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 0;background:#fff;border-radius:3px;overflow:hidden;font-size:0.78rem;cursor:pointer;text-decoration:none;transition:box-shadow .15s ease}
 .subj-pill:hover{box-shadow:0 2px 6px rgba(0,0,0,0.08)}
 
+/* Navbar logo always visible */
+#navbar-logo{display:flex!important;visibility:visible!important;opacity:1!important;flex-shrink:0!important}
+#navbar-logo img{display:block!important}
+/* Partner cell wrapper — transparent on desktop */
+.partner-cell{display:contents}
 /* Club tiles */
 .club-tile{cursor:pointer;background:none;border:none;padding:0;text-align:left;width:100%}
 .club-tile:focus-visible{outline:2px solid #2563EB;outline-offset:3px;border-radius:10px}
@@ -230,17 +261,53 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A}
 #club-tabs::-webkit-scrollbar{display:none}
 @media(max-width:768px){
   #section-studentlife{padding-left:1rem!important;padding-right:1rem!important}
-  #club-grid{grid-template-columns:repeat(2,1fr)!important;gap:16px!important}
+  #club-grid{grid-template-columns:1fr!important;gap:16px!important}
   .club-tile-caption{padding-left:2px}
+  /* By the Numbers mobile */
+  #section-numbers{padding-left:1.5rem!important;padding-right:1.5rem!important}
+  #numbers-grid{grid-template-columns:1fr!important;gap:28px!important}
+  .stat-num{font-size:3rem!important}
+  #section-numbers{padding-bottom:2rem!important}
+  /* Admission table mobile */
+  #section-admission{padding-left:1rem!important;padding-right:1rem!important}
+  #admission-table{min-width:unset!important}
+  .col-2024{display:none}
+  /* Footer single column */
+  #site-footer{padding:40px 1.5rem 32px!important}
+  #footer-grid{grid-template-columns:1fr!important;gap:0!important}
+  #footer-grid>div{padding-bottom:1.5rem}
+  /* Partner wall 3-col grid */
+  #partner-wall{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:0!important}
+  .partner-cell{display:flex;align-items:center;justify-content:center;height:70px}
+  .partner-cell .partner-logo{height:auto!important;width:auto!important;max-width:80%;max-height:40px;object-fit:contain}
+  .spec-watermark{display:none}
+  .spec-strip{padding-left:1rem!important;padding-right:1rem!important;gap:12px}
+  .spec-name{font-size:0.9rem!important}
+  /* Navbar compact on mobile */
+  #navbar{padding:0 1rem!important}
+  #navbar-logo img{height:44px!important}
+  /* Club tile: horizontal layout on mobile */
+  .club-tile{display:flex;flex-direction:row;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid #F0F4F8}
+  .club-tile-img{width:80px!important;min-width:80px;flex-shrink:0}
+  .club-tile-img img,.club-tile-img>div{width:80px!important;height:80px!important;aspect-ratio:unset!important;border-radius:8px}
+  .club-tile-bar{display:none}
+  .club-tile-caption{flex:1;min-width:0;text-align:left}
+  .club-tile-caption>div:first-child{font-size:1rem!important}
+  .club-tile-caption>div:nth-child(2){font-size:0.85rem!important;white-space:normal!important}
+  .club-tile-caption>div:last-child{font-size:0.7rem!important}
+  /* Curriculum subject column */
+  #subj-grid td:first-child{width:auto!important;max-width:160px;white-space:nowrap;overflow:hidden}
+  #subj-grid td:first-child .subj-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;max-width:110px}
 }
 /* Club modal */
-#club-modal-backdrop{position:fixed;inset:0;background:rgba(27,42,74,0.55);z-index:900;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .2s ease}
+#club-modal-backdrop{position:fixed;inset:0;background:rgba(27,42,74,0.55);z-index:900;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s ease;max-width:100vw;overflow-x:hidden;box-sizing:border-box}
 #club-modal-backdrop.open{opacity:1;pointer-events:auto}
 @media(prefers-reduced-motion:reduce){
   #club-modal-backdrop{transition:none}
   .partner-logo{transition:none}
 }
-#club-modal{background:#fff;border-radius:12px;width:100%;max-width:640px;max-height:calc(100vh - 48px);overflow-y:auto;position:relative}
+#club-modal{background:#fff;border-radius:12px;width:calc(100% - 2rem);max-width:600px;margin:1rem auto;box-sizing:border-box;max-height:90vh;overflow-y:auto;overflow-x:hidden;position:relative}
+#club-modal .modal-body{word-break:break-word;overflow-wrap:break-word}
 #club-modal::-webkit-scrollbar{width:4px}
 #club-modal::-webkit-scrollbar-thumb{background:#E8EDF4;border-radius:2px}
 .modal-eyebrow{font-family:'Archivo',sans-serif;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 8px}
@@ -261,17 +328,29 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A}
 <body>
 
 <!-- NAVBAR -->
-<nav id="navbar" style="background:#fff;border-bottom:1px solid #E2E8F0;position:fixed;top:0;left:0;right:0;z-index:30;height:72px;display:flex;align-items:center;padding:0 10vw;justify-content:space-between;transition:box-shadow .2s ease">
-  <a href="#home" style="flex-shrink:0;display:flex;align-items:center;text-decoration:none">
+<nav id="navbar" style="background:#fff;border-bottom:1px solid #E2E8F0;position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;padding:0 10vw;justify-content:space-between;transition:box-shadow .2s ease">
+  <button id="nav-hamburger" onclick="openMobileNav()" aria-label="Open menu">☰</button>
+  <a href="#home" id="navbar-logo" style="flex-shrink:0;display:flex;align-items:center;text-decoration:none">
     <img src="/imag/ensi-navbar.png" alt="ENSI" style="height:52px;width:auto;flex-shrink:0;display:block">
   </a>
-  <div style="display:flex;align-items:center;gap:28px">
-    <a href="#home" onclick="navigate('home')" class="nav-link" id="nav-home">Overview</a>
+  <div id="nav-links" style="display:flex;align-items:center;gap:28px">
+    <a href="#home" onclick="event.preventDefault();if(location.hash==='#home'||location.hash===''){window.scrollTo({top:0,behavior:'smooth'})}else{navigate('home')}" class="nav-link" id="nav-home">Overview</a>
     <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-admission');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Admission</a>
-    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-pathways');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link" id="nav-specializations">Pathways</a>
     <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-studentlife');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Student Life</a>
     <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('curriculum-section');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Curriculum</a>
+    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-pathways');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link" id="nav-specializations">Pathways</a>
   </div>
+</nav>
+
+<!-- Mobile sidebar -->
+<div id="mobile-overlay" onclick="closeMobileNav()"></div>
+<nav id="mobile-sidebar" aria-label="Mobile navigation">
+  <button id="mobile-sidebar-close" onclick="closeMobileNav()" aria-label="Close menu">×</button>
+  <a href="#home" class="mobile-nav-link" onclick="event.preventDefault();closeMobileNav();if(location.hash==='#home'||location.hash===''){window.scrollTo({top:0,behavior:'smooth'})}else{navigate('home')}">Overview</a>
+  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-admission');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Admission</a>
+  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-studentlife');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Student Life</a>
+  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('curriculum-section');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Curriculum</a>
+  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-pathways');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Pathways</a>
 </nav>
 
 <!-- DRAWER OVERLAY -->
@@ -389,6 +468,7 @@ const MODULES = [
 ];
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
+let _heroAutoTimer = null;
 let state = {
   route: 'home',
   search: '',
@@ -400,6 +480,35 @@ let state = {
   searchDebounce: null,
   collapsedSections: {},
 };
+
+// ─── CURRICULUM ACCORDION ────────────────────────────────────────────────────
+function toggleCurAcc(btn) {
+  const item = btn.parentElement;
+  const body = item.querySelector('.cur-acc-body');
+  const chev = btn.querySelector('.cur-acc-chev');
+  const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+  // close all
+  document.querySelectorAll('.cur-acc-body').forEach(b=>b.style.maxHeight='0px');
+  document.querySelectorAll('.cur-acc-chev').forEach(c=>c.style.transform='');
+  if (!isOpen) {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    chev.style.transform = 'rotate(90deg)';
+  }
+}
+
+// ─── MOBILE NAV ──────────────────────────────────────────────────────────────
+function openMobileNav() {
+  const sidebar = document.getElementById('mobile-sidebar');
+  if (sidebar.classList.contains('open')) { closeMobileNav(); return; }
+  sidebar.classList.add('open');
+  document.getElementById('mobile-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileNav() {
+  document.getElementById('mobile-sidebar').classList.remove('open');
+  document.getElementById('mobile-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
 // ─── ROUTER ──────────────────────────────────────────────────────────────────
 async function init() {
@@ -424,6 +533,7 @@ function initHeroSlideshow() {
   const N = slides.length;
   const reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   let current = 0;
+  if (_heroAutoTimer) { clearInterval(_heroAutoTimer); _heroAutoTimer = null; }
   let autoTimer = null;
   let userTimer = null;
 
@@ -447,6 +557,7 @@ function initHeroSlideshow() {
     if(reduced) return;
     clearInterval(autoTimer);
     autoTimer = setInterval(()=>goTo(current+1), 6000);
+    _heroAutoTimer = autoTimer;
   }
   function pauseAuto() {
     clearInterval(autoTimer);
@@ -610,16 +721,13 @@ function renderDrawer() {
     </div>`;
   }
 
-  const prereqs = m.prerequisites&&m.prerequisites.length
-    ? m.prerequisites.map(p=>`<span onclick="openDrawer('${p}')" style="cursor:pointer">${codeEl(p)}</span>`).join(' ')
-    : '<span style="color:#9CA3AF;font-size:0.875rem">None</span>';
 
   const html = `
+  <div style="position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #F0F4F8;padding:12px 24px;display:flex;justify-content:space-between;align-items:center">
+    <div>${codeEl(m.code)}</div>
+    <button onclick="closeDrawer()" aria-label="Close" style="background:#F5F7FA;border:none;cursor:pointer;color:#1B2A4A;font-size:1.25rem;line-height:1;padding:8px 12px;border-radius:6px;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center">&times;</button>
+  </div>
   <div style="padding:24px 24px 0">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
-      <div>${codeEl(m.code)}</div>
-      <button onclick="closeDrawer()" aria-label="Close" style="background:none;border:none;cursor:pointer;color:#9CA3AF;font-size:1.25rem;line-height:1;padding:4px">&times;</button>
-    </div>
     <h2 style="font-family:'Archivo',sans-serif;font-size:1.35rem;font-weight:700;color:#1B2A4A;margin:0 0 12px;line-height:1.3">${m.title}</h2>
     <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px">
       ${semBadge(m.semester)}${creditBadge(m.credits)}${langTag(m.language)}${typeTag(m.type)}${subjectTag(m.subject)}
@@ -636,10 +744,7 @@ function renderDrawer() {
         <div style="font-family:'Archivo',sans-serif;font-size:1.25rem;font-weight:700;color:#1B2A4A">${v}<span style="font-size:0.7rem;color:#9CA3AF;margin-left:2px">h</span></div>
       </div>`).join('')}
     </div>`)}
-    ${section('prereq','Prerequisites',`<div style="padding-bottom:12px;display:flex;gap:6px;flex-wrap:wrap">${prereqs}</div>`)}
-    ${section('exam','Assessment',`<div style="padding-bottom:12px;font-size:0.875rem;color:#374151"><div style="margin-bottom:4px">${m.examForm}</div><div style="margin-top:8px;display:flex;align-items:center;gap:8px"><span style="font-size:0.75rem;color:#6B7280">Pass mark</span><span style="font-family:'JetBrains Mono',monospace;font-weight:600;color:#059669;font-size:0.85rem">${m.passMark}</span></div></div>`)}
-    ${m.readingList&&m.readingList.length ? section('reading','Reading List',`<ol style="padding:0 0 12px 16px;margin:0">${m.readingList.map(r=>`<li style="font-size:0.875rem;color:#374151;padding:3px 0">${r}</li>`).join('')}</ol>`) : ''}
-    ${section('resp','Responsible',`<div style="padding-bottom:12px;font-size:0.875rem;color:#374151">${m.responsible||'—'}</div>`)}
+    ${section('exam','Assessment',`<div style="padding-bottom:12px;font-size:0.875rem;color:#374151"><div style="margin-bottom:4px">${m.examForm}</div><div style="margin-top:8px;display:flex;align-items:center;gap:8px"><span style="font-size:0.75rem;color:#6B7280">Pass mark</span><span style="font-family:'JetBrains Mono',monospace;font-weight:600;color:#059669;font-size:0.85rem">8/20</span></div></div>`)}
   </div>`;
   document.getElementById('drawer-content').innerHTML = html;
 }
@@ -757,44 +862,29 @@ function renderHome() {
     const ys=dd.map(d=>pT+(1-d.v/maxV)*cH);
     const line=xs.map((x,i)=>`${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ');
     const area=`${xs[0].toFixed(1)},${(pT+cH).toFixed(1)} `+xs.map((x,i)=>`${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ')+` ${xs[n-1].toFixed(1)},${(pT+cH).toFixed(1)}`;
-    const labels=dd.map((d,i)=>`<text x="${xs[i].toFixed(1)}" y="${H-6}" text-anchor="${i===0?'start':i===n-1?'end':'middle'}" fill="rgba(255,255,255,0.45)" font-family="JetBrains Mono,monospace" font-size="13">${d.y}</text>`).join('');
-    const dots=dd.map((d,i)=>`<circle cx="${xs[i].toFixed(1)}" cy="${ys[i].toFixed(1)}" r="3.5" fill="#4DB8E8"/>`).join('');
+    const labels=dd.map((d,i)=>`<text x="${xs[i].toFixed(1)}" y="${H-6}" text-anchor="${i===0?'start':i===n-1?'end':'middle'}" fill="#9CA3AF" font-family="JetBrains Mono,monospace" font-size="13">${d.y}</text>`).join('');
+    const dots=dd.map((d,i)=>`<circle cx="${xs[i].toFixed(1)}" cy="${ys[i].toFixed(1)}" r="3.5" fill="#2563EB"/>`).join('');
     return `
-  <section style="background:#1B2A4A;padding:96px 10vw">
+  <section id="section-numbers" style="background:#fff;padding:96px 10vw">
     <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">BY THE NUMBERS</p>
-    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#fff;margin:0 0 56px;line-height:0.95;letter-spacing:-0.03em">Four decades of <span style="color:#4DB8E8">engineers.</span></h2>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:64px">
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 56px;line-height:0.95;letter-spacing:-0.03em">Four decades of <span style="color:#2563EB">engineers.</span></h2>
+    <div id="numbers-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:64px">
       <div>
-        <div style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-0.03em">2,500+</div>
-        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.6);margin-top:8px">engineers graduated since 2013</div>
+        <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">2,500+</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">engineers graduated since 2013</div>
       </div>
       <div>
-        <div style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-0.03em">~220</div>
-        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.6);margin-top:8px">new graduates every year</div>
+        <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">~220</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">new graduates every year</div>
       </div>
       <div>
-        <div style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-0.03em">98</div>
-        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.6);margin-top:8px">double-degree graduates, 2013–2024</div>
+        <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">98</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">double-degree graduates, 2013–2024</div>
       </div>
       <div>
-        <div style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-0.03em">1984</div>
-        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.6);margin-top:8px">the year ENSI was founded</div>
+        <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">1984</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">the year ENSI was founded</div>
       </div>
-    </div>
-    <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.7);margin:0 0 16px">Double-degree opportunities are growing — from 3 graduates in 2013 to 17 in 2024.</p>
-    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px 8px 0">
-      <svg viewBox="0 0 ${W} ${H}" width="100%" height="220" preserveAspectRatio="none" style="display:block">
-        <defs>
-          <linearGradient id="ddGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#4DB8E8" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="#4DB8E8" stop-opacity="0.02"/>
-          </linearGradient>
-        </defs>
-        <polygon points="${area}" fill="url(#ddGrad)"/>
-        <polyline points="${line}" fill="none" stroke="#4DB8E8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-        ${dots}
-        ${labels}
-      </svg>
     </div>
   </section>`;
   })()}
@@ -805,12 +895,12 @@ function renderHome() {
     <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 16px;line-height:0.95;letter-spacing:-0.03em">Admission <span style="color:#2563EB">cutoff</span></h2>
     <p style="font-family:'Inter',sans-serif;font-size:1rem;color:rgba(27,42,74,0.65);margin:0 0 40px;max-width:640px;line-height:1.6">Each year ENSI admits 200 students across three prépa tracks. The cutoff rank is the last rank admitted to each track — the higher it climbs, the further down the ranking you could be and still get in.</p>
     <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
-      <table style="width:100%;border-collapse:collapse;min-width:480px">
+      <table id="admission-table" style="width:100%;border-collapse:collapse;min-width:480px">
         <thead>
           <tr style="border-bottom:1px solid rgba(27,42,74,0.15)">
             <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 32px 18px 0;text-align:left">Track</th>
-            <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 32px 18px 0;text-align:left">2024</th>
-            <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 0 18px;text-align:left">2025</th>
+            <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 32px 18px 0;text-align:left">2025</th>
+            <th class="col-2024" style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 0 18px;text-align:left">2024</th>
           </tr>
         </thead>
         <tbody>
@@ -829,8 +919,8 @@ function renderHome() {
                 </div>
               </div>
             </td>
-            <td style="padding:22px 32px 22px 0;vertical-align:middle;font-family:'JetBrains Mono',monospace;font-size:1.75rem;font-weight:600;color:#1B2A4A">${r2024}</td>
-            <td style="padding:22px 0 22px 0;vertical-align:middle;font-family:'JetBrains Mono',monospace;font-size:1.75rem;font-weight:600;color:#1B2A4A">${r2025}</td>
+            <td style="padding:22px 32px 22px 0;vertical-align:middle;font-family:'JetBrains Mono',monospace;font-size:1.75rem;font-weight:600;color:#1B2A4A">${r2025}</td>
+            <td class="col-2024" style="padding:22px 0 22px 0;vertical-align:middle;font-family:'JetBrains Mono',monospace;font-size:1.75rem;font-weight:600;color:#1B2A4A">${r2024}</td>
           </tr>`).join('')}
         </tbody>
       </table>
@@ -873,17 +963,19 @@ function renderHome() {
     <div style="margin-top:72px;padding-top:48px;border-top:1px solid #E8EDF4">
       <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 10px">Hiring ENSI engineers</p>
       <h3 style="font-family:'Archivo',sans-serif;font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:800;color:#1B2A4A;margin:0 0 36px;letter-spacing:-0.02em">Industry <span style="color:#2563EB">Partners</span></h3>
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:28px 40px">
+      <div id="partner-wall" style="display:flex;flex-wrap:wrap;align-items:center;gap:28px 40px">
         ${PARTNERS.map(p=>`
-        <img src="/imag/${p.logo}" alt="${p.name}" class="partner-logo" style="height:${p.h}px;width:auto;display:block;filter:grayscale(1);opacity:0.65;transition:filter .2s ease,opacity .2s ease"
-          onmouseover="this.style.filter='grayscale(0)';this.style.opacity='1'"
-          onmouseout="this.style.filter='grayscale(1)';this.style.opacity='0.65'">`).join('')}
+        <div class="partner-cell">
+          <img src="/imag/${p.logo}" alt="${p.name}" class="partner-logo" style="height:${p.h}px;width:auto;display:block;filter:grayscale(1);opacity:0.65;transition:filter .2s ease,opacity .2s ease"
+            onmouseover="this.style.filter='grayscale(0)';this.style.opacity='1'"
+            onmouseout="this.style.filter='grayscale(1)';this.style.opacity='0.65'">
+        </div>`).join('')}
       </div>
     </div>
   </section>
 
   <!-- SEMESTER TIMELINE -->
-  <section id="curriculum-section" style="background:#F5F7FA;padding:80px 10vw">
+  <section id="curriculum-section" style="background:#fff;padding:80px 10vw">
     <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">THE CURRICULUM</p>
     <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 28px;line-height:0.95;letter-spacing:-0.03em">How the <span style="color:#2563EB">curriculum</span> unfolds.</h2>
 
@@ -948,26 +1040,52 @@ function renderHome() {
           <td style="padding:2px 32px 2px 0;white-space:nowrap;vertical-align:middle;width:320px">
             <div style="display:flex;align-items:baseline;gap:10px">
               <span style="font-family:'JetBrains Mono',monospace;font-size:1.5rem!important;font-weight:700;color:${color}">${row.code}</span>
-              <span style="font-family:'Inter',sans-serif;font-size:1.375rem!important;font-weight:500;color:#475569">${SUBJECT_NAMES[row.code]||''}</span>
+              <span class="subj-label" style="font-family:'Inter',sans-serif;font-size:1.375rem!important;font-weight:500;color:#475569">${SUBJECT_NAMES[row.code]||''}</span>
             </div>
           </td>
           ${cells}
         </tr>`;
       }).join('');
 
-      return `<div style="overflow-x:auto">
+      // Build accordion: per-semester, module cards from MODULES
+      const semCredits = SEMS.map(s => MODULES.filter(m=>m.semester===s&&(s!==5||m.type==='Compulsory')).reduce((a,m)=>a+m.credits,0));
+      const accordionHTML = SEMS.map((s,si)=>{
+        const mods = MODULES.filter(m=>m.semester===s&&(s!==5||m.type==='Compulsory'));
+        const totalCr = semCredits[si];
+        const cards = mods.map(m=>{
+          const sc = SUBJECT_COLORS[m.subject]||'#6B7280';
+          return `<div class="module-card" onclick="openDrawer('${m.code}')" aria-label="View ${m.title} details" style="display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-left:3px solid ${sc}">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
+            <span style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3">${m.title}</span>
+          </div>`;
+        }).join('');
+        return `<div class="cur-acc-item">
+          <button class="cur-acc-hdr" onclick="toggleCurAcc(this)" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 0;background:none;border:none;border-bottom:1px solid #E8EDF4;cursor:pointer;text-align:left">
+            <span style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:800;color:#1B2A4A">Semester ${s}</span>
+            <div style="display:flex;align-items:center;gap:12px">
+              <span class="cur-acc-chev" style="color:#4DB8E8;font-size:1.2rem;transition:transform .25s ease;display:inline-block">›</span>
+            </div>
+          </button>
+          <div class="cur-acc-body" style="max-height:0;overflow:hidden;transition:max-height .3s ease">
+            <div class="cur-acc-cards" style="display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch;gap:0.75rem;padding:16px 0">${cards}</div>
+          </div>
+        </div>`;
+      }).join('');
+
+      return `<div id="cur-matrix-wrap" style="overflow-x:auto">
         <table id="subj-grid" style="border-collapse:separate;border-spacing:16px 0;width:100%">
           <thead>
             <tr><th style="width:320px"></th>${headerCells}</tr>
           </thead>
           <tbody>${dataRows}</tbody>
         </table>
-      </div>`;
+      </div>
+      <div id="cur-accordion">${accordionHTML}</div>`;
     })()}
   </section>
 
   <!-- SPECIALIZATIONS STRIPS (PATHWAYS) -->
-  <section id="section-pathways" style="background:#F5F7FA;padding:80px 0">
+  <section id="section-pathways" style="background:#fff;padding:80px 0">
     <div style="padding:0 10vw;margin-bottom:40px">
       <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">SEMESTER 5 SPECIALIZATIONS</p>
       <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0;line-height:0.95;letter-spacing:-0.03em">Choose your <span style="color:#2563EB">coloration.</span></h2>
@@ -979,7 +1097,7 @@ function renderHome() {
           <span style="font-family:'JetBrains Mono',monospace;font-size:${sp.id==='ST-IoT'?'0.6rem':'0.8rem'};font-weight:700;color:#fff;letter-spacing:0.02em;text-align:center;line-height:1.3">${sp.id}</span>
         </div>
         <div style="flex:1;min-width:0">
-          <div style="font-family:'Archivo',sans-serif;font-size:1.05rem;font-weight:500;color:#1B2A4A;margin-bottom:2px">${sp.name}</div>
+          <div class="spec-name" style="font-family:'Archivo',sans-serif;font-size:1.05rem;font-weight:500;color:#1B2A4A;margin-bottom:2px">${sp.name}</div>
           <div style="font-size:0.78rem;color:#9CA3AF;margin-bottom:6px">${sp.nameFr}</div>
           <div style="font-size:0.8rem;color:${sp.color};font-family:'Inter',sans-serif">${specKeywords[sp.id]||''}</div>
         </div>
@@ -1352,12 +1470,12 @@ function footer() {
   const liIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`;
   const extIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
   return `
-  <footer style="background:#1B2A4A;padding:64px 10vw 40px">
-    <div style="display:grid;grid-template-columns:1fr auto auto;gap:48px;align-items:start;flex-wrap:wrap">
+  <footer id="site-footer" style="background:#1B2A4A;padding:64px 10vw 40px">
+    <div id="footer-grid" style="display:grid;grid-template-columns:1fr auto auto;gap:48px;align-items:start;flex-wrap:wrap">
 
       <!-- LEFT: logo + address + credit -->
       <div>
-        <img src="/imag/ensi-official-dark.png" alt="ENSI" style="height:40px;margin-bottom:20px;display:block">
+        <img src="/imag/ensi-navbar.png" alt="ENSI" style="height:40px;margin-bottom:20px;display:block">
         <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.45);margin:0 0 4px;line-height:1.6">ENSI, Campus Universitaire de la Manouba</p>
         <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.45);margin:0;line-height:1.6">2010 Manouba, Tunisia</p>
       </div>
@@ -1408,8 +1526,8 @@ function openClubModal(id) {
 
   const catShort = CAT_SHORT[c.category]||c.category;
   const logoHTML = c.logo
-    ? `<img src="/imag/clubs/${c.logo}" alt="${c.name}" style="width:80px;height:80px;object-fit:cover;object-position:center;border-radius:8px;display:block;flex-shrink:0">`
-    : `<div style="width:80px;height:80px;background:rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:800;color:#fff;text-align:center;padding:8px">${c.name}</span></div>`;
+    ? `<img src="/imag/clubs/${c.logo}" alt="${c.name}" style="width:56px;height:56px;object-fit:cover;object-position:center;border-radius:8px;display:block;flex-shrink:0">`
+    : `<div style="width:56px;height:56px;background:rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:800;color:#fff;text-align:center;padding:8px">${c.name}</span></div>`;
 
   const eventRow = (e) => `
     <div style="display:flex;gap:14px;align-items:flex-start;padding:8px 0">
@@ -1442,30 +1560,31 @@ function openClubModal(id) {
 
   const modalHTML = `
     <div id="club-modal" role="dialog" aria-modal="true" aria-label="${c.name}" tabindex="-1">
+      <!-- Close button — outside header band, top-right of modal -->
+      <button onclick="closeClubModal()" aria-label="Close"
+        style="position:absolute;top:10px;right:10px;background:rgba(27,42,74,0.12);border:none;cursor:pointer;color:#1B2A4A;padding:6px;flex-shrink:0;transition:background .15s;border-radius:6px;display:flex;align-items:center;justify-content:center;z-index:10"
+        onmouseover="this.style.background='rgba(27,42,74,0.22)'" onmouseout="this.style.background='rgba(27,42,74,0.12)'"
+        onfocus="this.style.outline='2px solid #2563EB'" onblur="this.style.outline='none'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
       <!-- Full-width accent header band -->
-      <div style="background:${c.accent};padding:28px 32px 24px;border-radius:12px 12px 0 0;position:relative">
-        <div style="display:flex;align-items:center;gap:20px">
+      <div style="background:${c.accent};padding:24px 28px 20px;border-radius:12px 12px 0 0;position:relative;overflow:hidden">
+        <div style="display:flex;align-items:center;gap:16px">
           ${logoHTML}
           <div style="flex:1;min-width:0">
-            <div style="font-family:'Archivo',sans-serif;font-size:1.75rem;font-weight:800;color:#fff;line-height:1.1;margin-bottom:6px">${c.name}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.06em">${c.founded?'EST. '+c.founded+' · ':''}${catShort}</div>
+            <div style="font-family:'Archivo',sans-serif;font-size:1.6rem;font-weight:800;color:#fff;line-height:1.1;margin-bottom:6px">${c.name}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.06em;display:flex;gap:0.5rem;flex-wrap:nowrap;white-space:nowrap">${c.founded?`<span>EST. ${c.founded}</span><span>·</span>`:''}<span>${catShort}</span></div>
           </div>
-          <button onclick="closeClubModal()" aria-label="Close"
-            style="align-self:flex-start;background:rgba(255,255,255,0.15);border:none;cursor:pointer;color:#fff;padding:6px;flex-shrink:0;transition:background .15s;border-radius:6px;display:flex;align-items:center;justify-content:center"
-            onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'"
-            onfocus="this.style.outline='2px solid rgba(255,255,255,0.6)'" onblur="this.style.outline='none'">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          </button>
         </div>
       </div>
       <!-- Zone A: who they are -->
-      <div style="padding:28px 32px 0">
-        ${c.overview?`<p style="font-family:'Inter',sans-serif;font-size:0.9375rem;color:rgba(27,42,74,0.8);line-height:1.65;margin:0 0 16px">${c.overview}</p>`:''}
+      <div class="modal-body" style="padding:28px 32px 0">
+        ${c.overview?`<p style="font-family:'Inter',sans-serif;font-size:0.9375rem;color:rgba(27,42,74,0.8);line-height:1.5;margin:0 0 16px">${c.overview}</p>`:''}
         ${c.mission?`
         <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:10px">Mission</p>
         <div style="display:flex;gap:0;margin-bottom:0">
           <div style="width:3px;min-width:3px;background:${c.accent};border-radius:2px;margin-right:16px;flex-shrink:0"></div>
-          <p style="font-family:'Inter',sans-serif;font-size:1rem;font-style:italic;color:#1B2A4A;line-height:1.65;margin:0;padding:2px 0">${c.mission}</p>
+          <p style="font-family:'Inter',sans-serif;font-size:1rem;font-style:italic;color:#1B2A4A;line-height:1.5;margin:0;padding:2px 0">${c.mission}</p>
         </div>`:''}
       </div>
       <!-- Zone B: what they do -->
