@@ -225,6 +225,14 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A}
   .club-tile:hover .club-tile-img{transform:translateY(-4px)}
   .club-tile:hover .club-tile-bar{transform:scaleX(1)}
 }
+/* Club section mobile */
+#club-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#club-tabs::-webkit-scrollbar{display:none}
+@media(max-width:768px){
+  #section-studentlife{padding-left:1rem!important;padding-right:1rem!important}
+  #club-grid{grid-template-columns:repeat(2,1fr)!important;gap:16px!important}
+  .club-tile-caption{padding-left:2px}
+}
 /* Club modal */
 #club-modal-backdrop{position:fixed;inset:0;background:rgba(27,42,74,0.55);z-index:900;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .2s ease}
 #club-modal-backdrop.open{opacity:1;pointer-events:auto}
@@ -853,9 +861,11 @@ function renderHome() {
           }
         </div>
         <div class="club-tile-bar" style="background:${c.accent}"></div>
+        <div class="club-tile-caption">
         <div style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:800;color:#1B2A4A;line-height:1.2;margin-bottom:2px">${c.name}</div>
         <div style="font-family:'Inter',sans-serif;font-size:0.75rem;font-style:italic;color:rgba(27,42,74,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:8px">${c.tagline}</div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:0.625rem;color:rgba(27,42,74,0.45);text-transform:uppercase;letter-spacing:0.05em">EST. ${c.founded} · ${{['Science · Tech · Innovation']:'TECH',['Sport · Art · Culture']:'ARTS',['Humanitarian · Social']:'SOCIAL',['AI · ML · Innovation']:'AI'}[c.category]||c.category}</div>
+        </div>
       </button>`).join('')}
     </div>
 
