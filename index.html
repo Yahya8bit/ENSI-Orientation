@@ -709,18 +709,65 @@ let state = {
   collapsedSections: {},
 };
 
+// ─── OVERLAY HISTORY (Android back button closes modals/drawers/accordions) ──
+let _overlayDepth = 0;
+let _ignoreNextPopstate = false;
+function pushOverlayHistory() {
+  _overlayDepth++;
+  history.pushState({ ensiOverlay: true, depth: _overlayDepth }, '');
+}
+function popOverlayHistoryIfNeeded(fromPopstate) {
+  if (_overlayDepth <= 0) return;
+  _overlayDepth--;
+  if (!fromPopstate) {
+    _ignoreNextPopstate = true;
+    history.back();
+  }
+}
+function closeOpenSpecAcc() {
+  const body = [...document.querySelectorAll('.spec-acc-body')].find(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
+  if (!body) return false;
+  body.style.maxHeight = '0px';
+  const item = body.closest('.spec-acc-item');
+  const chev = item ? item.querySelector('.spec-acc-chev') : null;
+  if (chev) chev.style.transform = '';
+  return true;
+}
+function closeOpenCurAcc() {
+  const body = [...document.querySelectorAll('.cur-acc-body')].find(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
+  if (!body) return false;
+  body.style.maxHeight = '0px';
+  const item = body.closest('.cur-acc-item');
+  const chev = item ? item.querySelector('.cur-acc-chev') : null;
+  if (chev) chev.style.transform = '';
+  return true;
+}
+window.addEventListener('popstate', function() {
+  if (_ignoreNextPopstate) { _ignoreNextPopstate = false; return; }
+  const drawerEl = document.getElementById('drawer');
+  if (drawerEl && drawerEl.classList.contains('open')) { closeDrawer(true); return; }
+  const backdrop = document.getElementById('club-modal-backdrop');
+  if (backdrop && backdrop.classList.contains('open')) { closeClubModal(true); return; }
+  if (closeOpenSpecAcc()) { popOverlayHistoryIfNeeded(true); return; }
+  if (closeOpenCurAcc()) { popOverlayHistoryIfNeeded(true); return; }
+});
+
 // ─── CURRICULUM ACCORDION ────────────────────────────────────────────────────
 function toggleCurAcc(btn) {
   const item = btn.parentElement;
   const body = item.querySelector('.cur-acc-body');
   const chev = btn.querySelector('.cur-acc-chev');
   const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+  const anyOpenBefore = [...document.querySelectorAll('.cur-acc-body')].some(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
   // close all
   document.querySelectorAll('.cur-acc-body').forEach(b=>b.style.maxHeight='0px');
   document.querySelectorAll('.cur-acc-chev').forEach(c=>c.style.transform='');
   if (!isOpen) {
     body.style.maxHeight = body.scrollHeight + 'px';
     chev.style.transform = 'rotate(90deg)';
+    if (!anyOpenBefore) pushOverlayHistory();
+  } else {
+    popOverlayHistoryIfNeeded(false);
   }
 }
 
@@ -730,11 +777,15 @@ function toggleSpecAcc(btn) {
   const body = item.querySelector('.spec-acc-body');
   const chev = btn.querySelector('.spec-acc-chev');
   const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+  const anyOpenBefore = [...document.querySelectorAll('.spec-acc-body')].some(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
   document.querySelectorAll('.spec-acc-body').forEach(b=>b.style.maxHeight='0px');
   document.querySelectorAll('.spec-acc-chev').forEach(c=>c.style.transform='');
   if (!isOpen) {
     body.style.maxHeight = body.scrollHeight + 'px';
     chev.style.transform = 'rotate(90deg)';
+    if (!anyOpenBefore) pushOverlayHistory();
+  } else {
+    popOverlayHistoryIfNeeded(false);
   }
 }
 
@@ -942,6 +993,7 @@ function openDrawer(code) {
   });
   document.querySelectorAll('.mod-card-active').forEach(el=>el.classList.remove('mod-card-active'));
   document.querySelectorAll(`.mod-card[data-code="${code}"]`).forEach(el=>el.classList.add('mod-card-active'));
+  const wasOpen = document.getElementById('drawer').classList.contains('open');
   state.drawerModule = m;
   state.collapsedSections = {};
   renderDrawer();
@@ -949,14 +1001,17 @@ function openDrawer(code) {
   document.getElementById('drawer').classList.add('open');
   document.getElementById('drawer').scrollTop = 0;
   document.body.style.overflow = 'hidden';
+  if (!wasOpen) pushOverlayHistory();
 }
 
-function closeDrawer() {
+function closeDrawer(fromPopstate) {
+  if (!document.getElementById('drawer').classList.contains('open')) return;
   document.getElementById('overlay').classList.remove('open');
   document.getElementById('drawer').classList.remove('open');
   document.body.style.overflow = '';
   state.drawerModule = null;
   document.querySelectorAll('.mod-card-active').forEach(el=>el.classList.remove('mod-card-active'));
+  popOverlayHistoryIfNeeded(fromPopstate);
 }
 
 function toggleSection(id) {
@@ -1881,6 +1936,7 @@ function openClubModal(id) {
     backdrop.addEventListener('click', e=>{ if(e.target===backdrop) closeClubModal(); });
     document.body.appendChild(backdrop);
   }
+  const wasOpen = backdrop.classList.contains('open');
   backdrop.innerHTML = modalHTML;
   backdrop.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1891,11 +1947,12 @@ function openClubModal(id) {
   // Focus trap
   modal.addEventListener('keydown', trapFocus);
   document.addEventListener('keydown', handleModalKey);
+  if (!wasOpen) pushOverlayHistory();
 }
 
-function closeClubModal() {
+function closeClubModal(fromPopstate) {
   const backdrop = document.getElementById('club-modal-backdrop');
-  if(!backdrop) return;
+  if(!backdrop || !backdrop.classList.contains('open')) return;
   backdrop.classList.remove('open');
   document.body.style.overflow = '';
   const modal = document.getElementById('club-modal');
@@ -1904,6 +1961,7 @@ function closeClubModal() {
   }
   document.removeEventListener('keydown', handleModalKey);
   if(_modalOpener) { _modalOpener.focus(); _modalOpener = null; }
+  popOverlayHistoryIfNeeded(fromPopstate);
 }
 
 function handleModalKey(e) {
