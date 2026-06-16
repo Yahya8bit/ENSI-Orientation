@@ -770,6 +770,23 @@ function closeOpenCurAcc() {
   if (chev) chev.style.transform = '';
   return true;
 }
+// ─── ARROW-KEY SCROLL TRAP (keep arrow keys scrolling the open overlay, not the page) ──
+let _arrowTrapTarget = null;
+function arrowTrapHandler(e) {
+  if (!_arrowTrapTarget) return;
+  if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+  e.preventDefault();
+  _arrowTrapTarget.scrollBy({ top: e.key === 'ArrowDown' ? 80 : -80, behavior: 'auto' });
+}
+function enableArrowTrap(target) {
+  _arrowTrapTarget = target;
+  document.addEventListener('keydown', arrowTrapHandler);
+}
+function disableArrowTrap() {
+  _arrowTrapTarget = null;
+  document.removeEventListener('keydown', arrowTrapHandler);
+}
+
 function initCodeTooltips() {
   document.querySelectorAll('.code-tip').forEach(el=>{
     el.addEventListener('click', e=>e.stopPropagation());
@@ -1049,6 +1066,7 @@ function openDrawer(code) {
   document.getElementById('drawer').classList.add('open');
   document.getElementById('drawer').scrollTop = 0;
   document.body.style.overflow = 'hidden';
+  enableArrowTrap(document.getElementById('drawer'));
   if (!wasOpen) pushOverlayHistory();
 }
 
@@ -1057,6 +1075,7 @@ function closeDrawer(fromPopstate) {
   document.getElementById('overlay').classList.remove('open');
   document.getElementById('drawer').classList.remove('open');
   document.body.style.overflow = '';
+  disableArrowTrap();
   state.drawerModule = null;
   document.querySelectorAll('.mod-card-active').forEach(el=>el.classList.remove('mod-card-active'));
   popOverlayHistoryIfNeeded(fromPopstate);
@@ -1999,6 +2018,7 @@ function openClubModal(id) {
   // Focus trap
   modal.addEventListener('keydown', trapFocus);
   document.addEventListener('keydown', handleModalKey);
+  enableArrowTrap(modal);
   if (!wasOpen) pushOverlayHistory();
 }
 
@@ -2013,6 +2033,7 @@ function closeClubModal(fromPopstate) {
   }
   document.removeEventListener('keydown', handleModalKey);
   if(_modalOpener) { _modalOpener.focus(); _modalOpener = null; }
+  disableArrowTrap();
   popOverlayHistoryIfNeeded(fromPopstate);
 }
 
