@@ -8,6 +8,8 @@
 <meta name="description" content="Everything newly-admitted ENSI students need: admission cutoff ranks, the 6 specialization tracks, clubs, and the full curriculum. École Nationale des Sciences de l'Informatique, Manouba.">
 <meta name="keywords" content="ENSI, École Nationale des Sciences de l'Informatique, Manouba, admission ENSI, spécialisations ENSI, clubs ENSI, orientation ENSI">
 <meta name="robots" content="index, follow">
+<link rel="preload" as="image" href="imag/ensi-navbar.png">
+<link rel="preload" as="image" fetchpriority="high" href="imag/hero/forum-20th-edition.jpeg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ENSI Orientation Guide | Admission, Specializations & Student Life">
 <meta property="og:description" content="Everything newly-admitted ENSI students need: admission cutoff ranks, the 6 specialization tracks, clubs, and the full curriculum.">
@@ -397,7 +399,7 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
 <nav id="navbar" style="background:#fff;border-bottom:1px solid #E2E8F0;position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;padding:0 10vw;justify-content:space-between;transition:box-shadow .2s ease">
   <button id="nav-hamburger" onclick="openMobileNav()" aria-label="Open menu">☰</button>
   <a href="#home" id="navbar-logo" onclick="event.preventDefault();navigate('home');window.scrollTo({top:0,behavior:'smooth'})" style="flex-shrink:0;display:flex;align-items:center;text-decoration:none;cursor:pointer">
-    <img src="/imag/ensi-navbar.png" alt="ENSI" style="height:52px;width:auto;flex-shrink:0;display:block">
+    <img src="/imag/ensi-navbar.png" alt="ENSI" loading="lazy" width="37" height="52" style="height:52px;width:auto;flex-shrink:0;display:block">
   </a>
   <div id="nav-links" style="display:flex;align-items:center;gap:28px">
     <a href="#home" onclick="event.preventDefault();if(location.hash==='#home'||location.hash===''){window.scrollTo({top:0,behavior:'smooth'})}else{navigate('home')}" class="nav-link" id="nav-home">Overview</a>
@@ -1196,7 +1198,7 @@ function renderHome() {
       <button class="club-tile" data-cat="${c.category}" data-id="${c.id}" onclick="openClubModal('${c.id}')" aria-label="View ${c.name} details" style="-webkit-tap-highlight-color:${c.accent}33">
         <div class="club-tile-img">
           ${c.logo
-            ? `<img src="/imag/clubs/${c.logo}" alt="${c.name}" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center;display:block;border-radius:8px">`
+            ? `<img src="/imag/clubs/${c.logo}" alt="${c.name}" loading="lazy" width="300" height="300" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center;display:block;border-radius:8px">`
             : `<div style="width:100%;aspect-ratio:1/1;background:${c.accent};border-radius:8px;display:flex;align-items:center;justify-content:center"><span style="font-family:'Archivo',sans-serif;font-size:1.25rem;font-weight:800;color:#fff;text-align:center;padding:12px">${c.name}</span></div>`
           }
         </div>
@@ -1216,7 +1218,7 @@ function renderHome() {
       <div id="partner-wall" style="display:flex;flex-wrap:wrap;align-items:center;gap:28px 40px">
         ${PARTNERS.map(p=>`
         <div class="partner-cell">
-          <img src="/imag/${p.logo}" alt="${p.name}" class="partner-logo" style="height:${p.h}px;width:auto;display:block;filter:grayscale(1);opacity:0.65;transition:filter .2s ease,opacity .2s ease"
+          <img src="/imag/${p.logo}" alt="${p.name}" class="partner-logo" loading="lazy" width="${Math.round(p.h*p.nw/120)}" height="${p.h}" style="height:${p.h}px;width:auto;display:block;filter:grayscale(1);opacity:0.65;transition:filter .2s ease,opacity .2s ease"
             onmouseover="this.style.filter='grayscale(0)';this.style.opacity='1'"
             onmouseout="this.style.filter='grayscale(1)';this.style.opacity='0.65'">
         </div>`).join('')}
@@ -1566,17 +1568,17 @@ function clearFilters() {
 // ─── DOUBLE DIPLOMAS DATA ─────────────────────────────────────────────────────
 let CLUBS = [];
 const PARTNERS = [
-  {name:'Sagemcom',   logo:'partners/sagemcom-logo.png',   h:50},
-  {name:'Sofrecom',   logo:'partners/sofrecom-logo.png',   h:46},
-  {name:'Huawei',     logo:'partners/huawei-logo.png',     h:44},
-  {name:'Minotore',   logo:'partners/minotore-logo.png',   h:42},
-  {name:'Axefinance', logo:'partners/axefinance-logo.png', h:40},
-  {name:'OneTech',    logo:'partners/onetech-logo.png',    h:38},
-  {name:'ACTIA',      logo:'partners/actia-logo.png',      h:30},
-  {name:'FIS',        logo:'partners/fis-logo.png',        h:34},
-  {name:'Lyance',     logo:'partners/lyance-logo.png',     h:30},
-  {name:'Inetum',     logo:'partners/inetum-logo.png',     h:28},
-  {name:'Talan',      logo:'partners/talan-logo.svg',      h:26},
+  {name:'Sagemcom',   logo:'partners/sagemcom-logo.png',   h:50, nw:90},
+  {name:'Sofrecom',   logo:'partners/sofrecom-logo.png',   h:46, nw:192},
+  {name:'Huawei',     logo:'partners/huawei-logo.png',     h:44, nw:119},
+  {name:'Minotore',   logo:'partners/minotore-logo.png',   h:42, nw:161},
+  {name:'Axefinance', logo:'partners/axefinance-logo.png', h:40, nw:276},
+  {name:'OneTech',    logo:'partners/onetech-logo.png',    h:38, nw:472},
+  {name:'ACTIA',      logo:'partners/actia-logo.png',      h:30, nw:558},
+  {name:'FIS',        logo:'partners/fis-logo.png',        h:34, nw:287},
+  {name:'Lyance',     logo:'partners/lyance-logo.png',     h:30, nw:445},
+  {name:'Inetum',     logo:'partners/inetum-logo.png',     h:28, nw:801},
+  {name:'Talan',      logo:'partners/talan-logo.svg',      h:26, nw:495},
 ];
 
 const DOUBLE_DIPLOMAS = [
@@ -1732,7 +1734,7 @@ function footer() {
 
       <!-- LEFT: logo + address + credit -->
       <div>
-        <img src="/imag/ensi-navbar.png" alt="ENSI" style="height:40px;margin-bottom:20px;display:block">
+        <img src="/imag/ensi-navbar.png" alt="ENSI" loading="lazy" width="29" height="40" style="height:40px;margin-bottom:20px;display:block">
         <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.45);margin:0 0 4px;line-height:1.6">ENSI, Campus Universitaire de la Manouba</p>
         <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.45);margin:0;line-height:1.6">2010 Manouba, Tunisia</p>
       </div>
@@ -1783,7 +1785,7 @@ function openClubModal(id) {
 
   const catShort = CAT_SHORT[c.category]||c.category;
   const logoHTML = c.logo
-    ? `<img src="/imag/clubs/${c.logo}" alt="${c.name}" style="width:56px;height:56px;object-fit:cover;object-position:center;border-radius:8px;display:block;flex-shrink:0">`
+    ? `<img src="/imag/clubs/${c.logo}" alt="${c.name}" loading="lazy" width="56" height="56" style="width:56px;height:56px;object-fit:cover;object-position:center;border-radius:8px;display:block;flex-shrink:0">`
     : `<div style="width:56px;height:56px;background:rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:800;color:#fff;text-align:center;padding:8px">${c.name}</span></div>`;
 
   const eventRow = (e) => `
