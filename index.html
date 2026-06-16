@@ -3,8 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ENSI: Orientation Guide</title>
+<meta name="google-site-verification" content="SqWZRLJdgXtQ45Ve2oSBrZiAPhMleDEszYhuupqvY2A" />
+<title>ENSI Orientation Guide | Admission, Specializations & Student Life</title>
+<meta name="description" content="Everything newly-admitted ENSI students need: admission cutoff ranks, the 6 specialization tracks, clubs, and the full curriculum. École Nationale des Sciences de l'Informatique, Manouba.">
+<meta name="keywords" content="ENSI, École Nationale des Sciences de l'Informatique, Manouba, admission ENSI, spécialisations ENSI, clubs ENSI, orientation ENSI">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ENSI Orientation Guide | Admission, Specializations & Student Life">
+<meta property="og:description" content="Everything newly-admitted ENSI students need: admission cutoff ranks, the 6 specialization tracks, clubs, and the full curriculum.">
+<meta property="og:image" content="https://ensi-orientation.example/imag/ensi-navbar.png">
+<meta property="og:url" content="https://ensi-orientation.example/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ENSI Orientation Guide | Admission, Specializations & Student Life">
+<meta name="twitter:description" content="Everything newly-admitted ENSI students need: admission cutoff ranks, the 6 specialization tracks, clubs, and the full curriculum.">
+<meta name="twitter:image" content="https://ensi-orientation.example/imag/ensi-navbar.png">
 <link rel="icon" href="imag/header_logo.png" type="image/png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "École Nationale des Sciences de l'Informatique (ENSI)",
+  "description": "Orientation guide for newly-admitted ENSI students: admission cutoff ranks, specialization tracks, clubs, and curriculum.",
+  "url": "https://ensi-orientation.example/"
+}
+</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -374,7 +396,7 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
 <!-- NAVBAR -->
 <nav id="navbar" style="background:#fff;border-bottom:1px solid #E2E8F0;position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;padding:0 10vw;justify-content:space-between;transition:box-shadow .2s ease">
   <button id="nav-hamburger" onclick="openMobileNav()" aria-label="Open menu">☰</button>
-  <a href="#home" id="navbar-logo" style="flex-shrink:0;display:flex;align-items:center;text-decoration:none">
+  <a href="#home" id="navbar-logo" onclick="event.preventDefault();navigate('home');window.scrollTo({top:0,behavior:'smooth'})" style="flex-shrink:0;display:flex;align-items:center;text-decoration:none;cursor:pointer">
     <img src="/imag/ensi-navbar.png" alt="ENSI" style="height:52px;width:auto;flex-shrink:0;display:block">
   </a>
   <div id="nav-links" style="display:flex;align-items:center;gap:28px">
@@ -1569,6 +1591,7 @@ const DOUBLE_DIPLOMAS = [
 ];
 const COUNTRY_FLAGS = { France:'🇫🇷', Germany:'🇩🇪', Canada:'🇨🇦' };
 const COUNTRY_COLORS = { France:'#2563EB', Germany:'#D97706', Canada:'#DC2626' };
+const COUNTRY_BAR_COLORS = { France:'#2563EB', Germany:'#D97706', Canada:'#4DB8E8' };
 
 // ─── SPECIALIZATIONS PAGE ────────────────────────────────────────────────────
 function renderSpecializations() {
@@ -1649,61 +1672,52 @@ function renderSpecializations() {
   <section style="background:#F5F7FA;padding:96px 10vw">
     <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">DOUBLE DEGREES</p>
     <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 16px;line-height:0.95;letter-spacing:-0.03em">Earn a second <span style="color:#2563EB">diploma</span> abroad.</h2>
-    <p style="font-family:'Inter',sans-serif;font-size:1rem;color:#4B5563;margin:0 0 56px;max-width:640px">ENSI students can complete a double degree at partner engineering schools across France, Germany, and Canada.</p>
-    <div style="display:flex;flex-direction:column;gap:12px">
-      ${DOUBLE_DIPLOMAS.filter(p=>p.total>0).map(p=>{
-        const years = Object.keys(p.byYear);
-        const vals = Object.values(p.byYear);
-        const maxV = Math.max(...vals, 1);
-        const barW = 120, barH = 32;
-        const stepX = barW / (years.length - 1);
-        const pts = vals.map((v,i)=>`${(i*stepX).toFixed(1)},${(barH-(v/maxV)*barH).toFixed(1)}`).join(' ');
-        const area = `0,${barH} ${pts} ${barW},${barH}`;
-        const isNew = p.total <= 4;
-        return `
-        <div style="background:#fff;border:1px solid #E8EDF4;border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;transition:box-shadow .15s ease" onmouseover="this.style.boxShadow='0 4px 20px rgba(77,184,232,0.12)';this.style.borderColor='#A8D8F0'" onmouseout="this.style.boxShadow='none';this.style.borderColor='#E8EDF4'">
-          <div style="flex:1;min-width:220px">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
-              <h3 style="font-family:'Archivo',sans-serif;font-size:1.125rem;font-weight:700;color:#1B2A4A;margin:0;letter-spacing:-0.02em">${p.name}</h3>
-              ${isNew?`<span style="font-family:'JetBrains Mono',monospace;font-size:0.625rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;background:#4DB8E8;padding:2px 7px;border-radius:3px">NEW</span>`:''}
+    <p style="font-family:'Inter',sans-serif;font-size:1rem;color:#4B5563;margin:0 0 48px;max-width:640px">ENSI students can complete a double degree at partner engineering schools across France, Germany, and Canada (2017–2023 placements).</p>
+    <div id="degree-bars" style="display:flex;flex-direction:column;gap:26px">
+      ${(()=>{
+        const REAL_CODES = ['ECLyon','TSP','PASSAU','ENSEIRB','Canada'];
+        const list = DOUBLE_DIPLOMAS.filter(p=>REAL_CODES.includes(p.code)).sort((a,b)=>b.total-a.total);
+        const maxCount = Math.max(...list.map(p=>p.total));
+        return list.map(p=>{
+          const color = COUNTRY_BAR_COLORS[p.country]||'#1B2A4A';
+          const pct = (p.total/maxCount*100).toFixed(1);
+          const isNew = p.code==='Canada';
+          return `
+          <div class="degree-bar-row" data-pct="${pct}">
+            <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
+              <span style="font-size:1.1rem;line-height:1">${COUNTRY_FLAGS[p.country]||''}</span>
+              <span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:0.95rem;color:#1B2A4A">${p.name}</span>
+              ${isNew?`<span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;background:#4DB8E8;padding:1px 6px;border-radius:3px">NEW</span>`:''}
             </div>
-            <div style="display:flex;align-items:center;gap:8px">
-              <span style="font-size:1rem">${COUNTRY_FLAGS[p.country]||''}</span>
-              <span style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:${COUNTRY_COLORS[p.country]||'#6B7280'}">${p.country}</span>
+            <div style="display:flex;align-items:center;gap:16px">
+              <div style="flex:1;height:34px;background:#E2E8F0;border-radius:4px;overflow:hidden">
+                <div class="degree-bar-fill" style="height:100%;width:0%;background:${color};border-radius:4px;transition:width 1.1s cubic-bezier(.16,1,.3,1)"></div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-weight:800;font-size:1.3rem;color:#1B2A4A;flex-shrink:0;min-width:34px;text-align:right">${p.total}</div>
             </div>
-          </div>
-          <div style="text-align:center;flex-shrink:0">
-            <div style="font-family:'Archivo',sans-serif;font-size:2rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">${p.total}</div>
-            <div style="font-family:'Inter',sans-serif;font-size:0.6875rem;color:#9CA3AF;margin-top:2px">students 2017–2023</div>
-          </div>
-          <div style="flex-shrink:0">
-            <svg viewBox="0 0 ${barW} ${barH}" width="${barW}" height="${barH}" style="display:block;overflow:visible">
-              <defs>
-                <linearGradient id="sg-${p.code}" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#4DB8E8" stop-opacity="0.35"/>
-                  <stop offset="100%" stop-color="#4DB8E8" stop-opacity="0.02"/>
-                </linearGradient>
-              </defs>
-              <polygon points="${area}" fill="url(#sg-${p.code})"/>
-              <polyline points="${pts}" fill="none" stroke="#4DB8E8" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
-            </svg>
-            <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:0.5625rem;color:#9CA3AF;margin-top:4px;width:${barW}px">
-              <span>${years[0]}</span><span>${years[years.length-1]}</span>
-            </div>
-          </div>
-        </div>`;
-      }).join('')}
-      <div style="background:#fff;border:1px dashed #E8EDF4;border-radius:12px;padding:20px 28px;display:flex;align-items:center;gap:16px;opacity:0.6">
-        <div style="flex:1">
-          <h3 style="font-family:'Archivo',sans-serif;font-size:1.125rem;font-weight:700;color:#9CA3AF;margin:0 0 4px;letter-spacing:-0.02em">École Centrale de Lille</h3>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF">France · Partnership established</span>
-        </div>
-        <div style="font-family:'Inter',sans-serif;font-size:0.75rem;color:#9CA3AF">No placements yet</div>
-      </div>
+          </div>`;
+        }).join('');
+      })()}
     </div>
   </section>
 
   ${footer()}`;
+  initDegreeBars();
+}
+
+function initDegreeBars() {
+  const rows = document.querySelectorAll('.degree-bar-row');
+  if (!rows.length) return;
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if (entry.isIntersecting) {
+        const fill = entry.target.querySelector('.degree-bar-fill');
+        fill.style.width = entry.target.dataset.pct + '%';
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.3});
+  rows.forEach(row=>obs.observe(row));
 }
 
 // ─── SHARED FOOTER ───────────────────────────────────────────────────────────
