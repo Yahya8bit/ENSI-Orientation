@@ -95,6 +95,7 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
 .mod-card.mod-card-active{background-color:var(--card-color)!important;border-left-color:transparent!important;border-color:transparent!important;box-shadow:0 4px 16px rgba(0,0,0,0.15)!important}
 .mod-card.mod-card-active .mod-code{color:rgba(255,255,255,0.8)!important}
 .mod-card.mod-card-active .mod-name{color:#fff!important}
+.mod-card.mod-card-active .acc-chev{color:#fff!important;opacity:0.85!important}
 .mod-card.active{background-color:var(--accent)}
 .mod-card.active .mod-code,.mod-card.active .mod-name{color:#fff}
 @media (max-width:390px){
@@ -1645,12 +1646,13 @@ function renderSpecializations() {
         const spComp = (sp.compulsory||[]).map(code=>modByCode[code]).filter(Boolean);
         const spOpt  = (sp.optional||[]).map(code=>modByCode[code]).filter(Boolean);
         const modGrid = (mods, accent) => mods.length ? `
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden">
+          <div class="cur-acc-cards" style="display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch;gap:0.75rem;width:100%;max-width:100%;box-sizing:border-box">
             ${mods.map(m=>{
               const sc = SUBJECT_COLORS[m.subject]||accent;
-              return `<button class="mod-card" data-code="${m.code}" onclick="openDrawer('${m.code}')" style="display:flex;align-items:flex-start;gap:0.5rem;background:#fff;border:1px solid #E8EDF4;border-left:3px solid ${sc};border-radius:8px;padding:10px 12px;cursor:pointer;text-align:left;width:100%;max-width:100%;box-sizing:border-box;--card-color:${accent};box-shadow:0 1px 3px rgba(0,0,0,0.05);-webkit-tap-highlight-color:${sc}33;transition:background .3s ease,border-left-color .3s ease,border-color .3s ease,box-shadow .2s ease" onmouseover="if(!this.classList.contains('mod-card-active')){this.style.background='#F9FAFB';this.style.borderColor='${sc}80'}" onmouseout="if(!this.classList.contains('mod-card-active')){this.style.background='#fff';this.style.borderColor='#E8EDF4';this.style.borderLeftColor='${sc}'}">
-                <span class="mod-code" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:${sc};flex-shrink:0;white-space:nowrap;padding-top:1px">${m.code}</span>
-                <div class="mod-name" style="font-size:0.8125rem;font-weight:500;color:#1B2A4A;line-height:1.35;flex:1;min-width:0;white-space:normal;word-break:break-word;overflow-wrap:break-word">${m.title}</div>
+              return `<button class="acc-card mod-card" data-code="${m.code}" onclick="openDrawer('${m.code}')" aria-label="View ${m.title} details" style="--sc:${sc};--card-color:${accent};border-left:3px solid ${sc};width:100%;text-align:left;background:#fff">
+                <span class="mod-code" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
+                <span class="mod-name" style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3;padding-right:20px">${m.title}</span>
+                <span class="acc-chev">›</span>
               </button>`;
             }).join('')}
           </div>` : '';
