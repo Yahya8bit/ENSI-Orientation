@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ENSI — Module Catalog</title>
+<title>ENSI — Orientation Guide</title>
+<link rel="icon" href="imag/header_logo.png" type="image/png">
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -69,9 +70,6 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
   .spec-header-row{width:100%;max-width:100%;box-sizing:border-box;overflow:hidden}
   .spec-header-text{flex:1;min-width:0;overflow-wrap:break-word;max-width:100%}
   .spec-header-text h3,.spec-header-text p{word-break:break-word;overflow-wrap:break-word;max-width:100%}
-}
-@media (max-width:768px){
-  .spec-header-row-stiot{flex-direction:column}
 }
 .acc-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);border-color:var(--sc)}
 .acc-card:hover .acc-chev{opacity:1}
@@ -165,6 +163,15 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
   .hero-section{min-height:100svh}
   #hero-dots{bottom:5rem}
   #hero-label{bottom:7rem}
+}
+@media(max-width:390px){
+  .hero-section{justify-content:flex-start!important;padding-top:13vh}
+  #hero-text h1.fade-up-2{font-size:2.2rem!important;margin-bottom:6px!important}
+  #hero-text p.fade-up-2{font-size:0.95rem!important;margin-bottom:14px!important}
+  #hero-text p.fade-up-3{font-size:0.9rem!important;margin-bottom:18px!important}
+  #hero-text .ghost-cta{margin-bottom:2rem}
+  #hero-label{bottom:6.5rem}
+  #hero-dots{bottom:5rem}
 }
 @media(prefers-reduced-motion:reduce){
   #hero-track{transition:none}
@@ -408,6 +415,7 @@ const SUBJECT_COLORS = {
   ISA:'#EA580C',ESDV:'#7C3AED',ESEP:'#7C3AED',IAP:'#0891B2',
 };
 
+const SPEC_BADGE_LABEL = {'ST-IoT':'IoT','CV':'DS'};
 const SPECIALIZATIONS = [
   {id:'AI',name:'Artificial Intelligence',nameFr:'Intelligence Artificielle',color:'#D97706',desc:'Machine learning, deep learning, NLP, and cognitive systems.',
     compulsory:['AI.5.1','AI.5.2','AI.5.3','AI.5.4','AI.5.5','ISA.5.1','ISA.5.2','MAT.5.2','AI.5.6','ISA.5.6','DOS.5.8','DOS.5.2'],
@@ -1166,7 +1174,7 @@ function renderHome() {
     <!-- Industry Partners -->
     <div style="margin-top:72px;padding-top:48px;border-top:1px solid #E8EDF4">
       <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 10px">Hiring ENSI engineers</p>
-      <h3 style="font-family:'Archivo',sans-serif;font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:800;color:#1B2A4A;margin:0 0 36px;letter-spacing:-0.02em">Industry <span style="color:#2563EB">Partners</span></h3>
+      <h3 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 36px;letter-spacing:-0.03em;line-height:0.95">Industry <span style="color:#2563EB">Partners</span></h3>
       <div id="partner-wall" style="display:flex;flex-wrap:wrap;align-items:center;gap:28px 40px">
         ${PARTNERS.map(p=>`
         <div class="partner-cell">
@@ -1296,19 +1304,21 @@ function renderHome() {
       <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0;line-height:0.95;letter-spacing:-0.03em">Choose your <span style="color:#2563EB">coloration.</span></h2>
     </div>
     <div style="border-top:1px solid #E8EDF4">
-      ${SPECIALIZATIONS.map(sp=>`
+      ${SPECIALIZATIONS.map(sp=>{
+        const badge = SPEC_BADGE_LABEL[sp.id]||sp.id;
+        return `
       <a href="#specializations" class="spec-strip" style="--sp-color:${sp.color}" onclick="event.preventDefault();navigate('specializations');setTimeout(()=>{const el=document.getElementById('spec-${sp.id}');if(el){const hdr=el.querySelector('.spec-acc-hdr');if(hdr)toggleSpecAcc(hdr);const nav=document.getElementById('navbar');const offset=nav?nav.offsetHeight+16:80;window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-offset,behavior:'smooth'})}},120)">
         <div class="spec-badge" style="width:56px;height:56px;background:${sp.color};border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:background .3s ease">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:${sp.id==='ST-IoT'?'0.6rem':'0.8rem'};font-weight:700;color:#fff;letter-spacing:0.02em;text-align:center;line-height:1.3">${sp.id}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:700;color:#fff;letter-spacing:0.02em;text-align:center;line-height:1.3">${badge}</span>
         </div>
         <div style="flex:1;min-width:0">
           <div class="spec-name" style="font-family:'Archivo',sans-serif;font-size:1.05rem;font-weight:500;color:#1B2A4A;margin-bottom:2px;transition:color .3s ease">${sp.name}</div>
           <div class="spec-namefr" style="font-size:0.78rem;color:#9CA3AF;margin-bottom:6px;transition:color .3s ease">${sp.nameFr}</div>
           <div class="spec-kw" style="font-size:0.8rem;color:${sp.color};font-family:'Inter',sans-serif;transition:color .3s ease">${specKeywords[sp.id]||''}</div>
         </div>
-        <div class="spec-watermark" style="color:${sp.color};opacity:0.09;transition:color .3s ease,opacity .3s ease">${sp.id}</div>
+        <div class="spec-watermark" style="color:${sp.color};opacity:0.09;transition:color .3s ease,opacity .3s ease">${badge}</div>
         <span class="spec-arrow" style="color:${sp.color};transition:color .3s ease,transform .2s ease">→</span>
-      </a>`).join('')}
+      </a>`;}).join('')}
     </div>
   </section>
 
@@ -1591,12 +1601,12 @@ function renderSpecializations() {
         return `
         <div id="spec-${sp.id}" class="spec-acc-item" style="background:#fff;border:1px solid #E8EDF4;border-radius:14px;overflow:hidden;width:100%;max-width:100%;box-sizing:border-box">
           <button class="spec-acc-hdr" onclick="toggleSpecAcc(this)" style="width:100%;display:flex;align-items:center;gap:16px;padding:20px 28px;background:${sp.color}06;border:none;border-bottom:1px solid ${sp.color}25;cursor:pointer;text-align:left">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:600;color:${sp.color};background:${sp.color}15;padding:10px 14px;border-radius:8px;flex-shrink:0">${sp.id}</div>
-            <span style="font-family:'Archivo',sans-serif;font-size:1.1rem;font-weight:800;color:#1B2A4A;flex:1;min-width:0">${sp.name}</span>
+            <div class="spec-acc-icon" style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:600;color:${sp.color};background:${sp.color}15;padding:10px 14px;border-radius:8px;flex-shrink:0">${SPEC_BADGE_LABEL[sp.id]||sp.id}</div>
+            <span class="spec-acc-title" style="font-family:'Archivo',sans-serif;font-size:1.1rem;font-weight:800;color:#1B2A4A;flex:1;min-width:0">${sp.name}</span>
             <span class="spec-acc-chev" style="color:${sp.color};font-size:1.3rem;font-weight:700;transition:transform .25s ease;display:inline-block;flex-shrink:0">›</span>
           </button>
           <div class="spec-acc-body" style="max-height:0;overflow:hidden;transition:max-height .3s ease">
-            <div class="spec-header-row${sp.id==='ST-IoT'?' spec-header-row-stiot':''}" style="padding:24px 28px;border-bottom:1px solid ${sp.color}25;background:${sp.color}06;display:flex;align-items:flex-start;gap:16px">
+            <div class="spec-header-row" style="padding:24px 28px;border-bottom:1px solid ${sp.color}25;background:${sp.color}06;display:flex;align-items:flex-start;gap:16px">
               <div class="spec-header-text">
                 <p style="font-size:0.8rem;color:#9CA3AF;font-style:italic;margin:0 0 8px">${sp.nameFr}</p>
                 <p style="font-size:0.875rem;color:#4B5563;margin:0">${sp.desc}</p>
