@@ -77,6 +77,17 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
   font-size:0.8em;letter-spacing:0.03em;
 }
 
+/* Module code tooltips */
+.code-tip{position:relative}
+.code-tip::after{
+  content:attr(data-tip);position:absolute;bottom:100%;left:0;margin-bottom:6px;
+  background:#1B2A4A;color:#fff;font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:500;
+  padding:4px 8px;border-radius:6px;white-space:nowrap;box-shadow:none;
+  opacity:0;pointer-events:none;transition:opacity .15s ease;z-index:60;
+}
+.code-tip:hover::after{opacity:1}
+.code-tip.tip-show::after{opacity:1}
+
 /* Drawer */
 .overlay{position:fixed;inset:0;background:rgba(27,42,74,0.55);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s ease}
 .overlay.open{opacity:1;pointer-events:all}
@@ -454,6 +465,23 @@ const SUBJECT_COLORS = {
   ISA:'#EA580C',ESDV:'#7C3AED',ESEP:'#7C3AED',IAP:'#0891B2',
 };
 
+const SUBJECT_FULLNAMES = {
+  MAT:'Mathematics', AP:'Algorithms & Programming', EHA:'Electronics & Hardware Architecture',
+  AI:'Artificial Intelligence', DAT:'Data Engineering', FIN:'Finance & Management',
+  BDC:'Business, Communication & Law', OS:'Operating Systems', NET:'Networking',
+  SE:'Software Engineering', SEC:'Security', IMA:'Image & Multimedia',
+  DOS:'Distributed & Cloud Systems', ISA:'Intelligent Systems & Applications',
+};
+function codeTipAttr(code) {
+  const prefix = (code.match(/^[A-Z]+/)||[])[0];
+  const full = SUBJECT_FULLNAMES[prefix];
+  return full ? `data-tip="${full}"` : '';
+}
+function codeTip(code) {
+  const attr = codeTipAttr(code);
+  return attr ? `class="code-tip" ${attr}` : '';
+}
+
 const SPEC_BADGE_LABEL = {'ST-IoT':'IoT','CV':'DS'};
 const SPECIALIZATIONS = [
   {id:'AI',name:'Artificial Intelligence',nameFr:'Intelligence Artificielle',color:'#D97706',desc:'Machine learning, deep learning, NLP, and cognitive systems.',
@@ -742,6 +770,24 @@ function closeOpenCurAcc() {
   if (chev) chev.style.transform = '';
   return true;
 }
+function initCodeTooltips() {
+  document.querySelectorAll('.code-tip').forEach(el=>{
+    el.addEventListener('click', e=>e.stopPropagation());
+  });
+  if (window.matchMedia('(max-width:768px)').matches !== true) return;
+  document.querySelectorAll('.code-tip').forEach(el=>{
+    el.addEventListener('touchstart', e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      const wasShown = el.classList.contains('tip-show');
+      document.querySelectorAll('.code-tip.tip-show').forEach(o=>o.classList.remove('tip-show'));
+      if (!wasShown) {
+        el.classList.add('tip-show');
+        setTimeout(()=>el.classList.remove('tip-show'), 2000);
+      }
+    }, {passive:false});
+  });
+}
 window.addEventListener('popstate', function() {
   if (_ignoreNextPopstate) { _ignoreNextPopstate = false; return; }
   const drawerEl = document.getElementById('drawer');
@@ -949,9 +995,11 @@ function getFilteredModules() {
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 function codeEl(code, onclick) {
-  const cls = 'module-code' + (onclick?' cursor-pointer hover:opacity-80':'');
+  const cls = 'module-code code-tip' + (onclick?' cursor-pointer hover:opacity-80':'');
   const oc = onclick ? `onclick="${onclick}"` : '';
-  return `<span class="${cls}" ${oc}>${code}</span>`;
+  const prefix = (code.match(/^[A-Z]+/)||[])[0];
+  const full = SUBJECT_FULLNAMES[prefix];
+  return `<span class="${cls}" ${oc} ${full?`data-tip="${full}"`:''}>${code}</span>`;
 }
 
 function subjectTag(subject) {
@@ -1065,6 +1113,7 @@ function renderDrawer() {
     ${section('exam','Assessment',`<div style="padding-bottom:12px;font-size:0.875rem;color:#374151"><div style="margin-bottom:4px">${m.examForm}</div><div style="margin-top:8px;display:flex;align-items:center;gap:8px"><span style="font-size:0.75rem;color:#6B7280">Pass mark</span><span style="font-family:'JetBrains Mono',monospace;font-weight:600;color:#059669;font-size:0.85rem">8/20</span></div></div>`)}
   </div>`;
   document.getElementById('drawer-content').innerHTML = html;
+  initCodeTooltips();
 }
 
 // ─── SEARCH ──────────────────────────────────────────────────────────────────
@@ -1372,7 +1421,7 @@ function renderHome() {
         const cards = mods.map(m=>{
           const sc = SUBJECT_COLORS[m.subject]||'#6B7280';
           return `<div class="acc-card" onclick="openDrawer('${m.code}')" aria-label="View ${m.title} details" style="--sc:${sc};border-left:3px solid ${sc}">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
+            <span ${codeTip(m.code)} style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
             <span style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3;padding-right:20px">${m.title}</span>
             <span class="acc-chev">›</span>
           </div>`;
@@ -1430,6 +1479,7 @@ function renderHome() {
   ${footer()}`;
   initHeroSlideshow();
   initSpecStripTouch();
+  initCodeTooltips();
 }
 
 function filterClubs(cat) {
@@ -1588,6 +1638,7 @@ function renderCatalog() {
     </div>
   </div>
   ${footer()}`;
+  initCodeTooltips();
 }
 
 function moduleCard(m) {
@@ -1682,7 +1733,7 @@ function renderSpecializations() {
         const sc = SUBJECT_COLORS[m.subject]||'#6B7280';
         return `<div class="acc-card" onclick="openDrawer('${m.code}')" aria-label="View ${m.title} details" style="--sc:${sc};border-left:3px solid ${sc}">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
+            <span ${codeTip(m.code)} style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
             <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#9CA3AF">${m.credits} ECTS</span>
           </div>
           <span style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3;padding-right:20px">${m.title}</span>
@@ -1703,7 +1754,7 @@ function renderSpecializations() {
             ${mods.map(m=>{
               const sc = SUBJECT_COLORS[m.subject]||accent;
               return `<button class="acc-card mod-card" data-code="${m.code}" onclick="openDrawer('${m.code}')" aria-label="View ${m.title} details" style="--sc:${sc};--card-color:${accent};border-left:3px solid ${sc};width:100%;text-align:left;background:#fff">
-                <span class="mod-code" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
+                <span class="mod-code code-tip" ${codeTipAttr(m.code)} style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
                 <span class="mod-name" style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3;padding-right:20px">${m.title}</span>
                 <span class="acc-chev">›</span>
               </button>`;
@@ -1774,6 +1825,7 @@ function renderSpecializations() {
 
   ${footer()}`;
   initDegreeBars();
+  initCodeTooltips();
 }
 
 function initDegreeBars() {
