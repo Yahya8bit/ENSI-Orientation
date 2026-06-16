@@ -65,6 +65,14 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
 .mod-card.mod-card-active .mod-name{color:#fff!important}
 .mod-card.active{background-color:var(--accent)}
 .mod-card.active .mod-code,.mod-card.active .mod-name{color:#fff}
+@media (max-width:390px){
+  .spec-header-row{width:100%;max-width:100%;box-sizing:border-box;overflow:hidden}
+  .spec-header-text{flex:1;min-width:0;overflow-wrap:break-word;max-width:100%}
+  .spec-header-text h3,.spec-header-text p{word-break:break-word;overflow-wrap:break-word;max-width:100%}
+}
+@media (max-width:768px){
+  .spec-header-row-stiot{flex-direction:column}
+}
 .acc-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);border-color:var(--sc)}
 .acc-card:hover .acc-chev{opacity:1}
 .acc-card:active{transform:scale(0.98)}
@@ -663,6 +671,20 @@ function toggleCurAcc(btn) {
   // close all
   document.querySelectorAll('.cur-acc-body').forEach(b=>b.style.maxHeight='0px');
   document.querySelectorAll('.cur-acc-chev').forEach(c=>c.style.transform='');
+  if (!isOpen) {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    chev.style.transform = 'rotate(90deg)';
+  }
+}
+
+// ─── SPECIALIZATION ACCORDION ───────────────────────────────────────────────
+function toggleSpecAcc(btn) {
+  const item = btn.parentElement;
+  const body = item.querySelector('.spec-acc-body');
+  const chev = btn.querySelector('.spec-acc-chev');
+  const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+  document.querySelectorAll('.spec-acc-body').forEach(b=>b.style.maxHeight='0px');
+  document.querySelectorAll('.spec-acc-chev').forEach(c=>c.style.transform='');
   if (!isOpen) {
     body.style.maxHeight = body.scrollHeight + 'px';
     chev.style.transform = 'rotate(90deg)';
@@ -1275,7 +1297,7 @@ function renderHome() {
     </div>
     <div style="border-top:1px solid #E8EDF4">
       ${SPECIALIZATIONS.map(sp=>`
-      <a href="#specializations" class="spec-strip" style="--sp-color:${sp.color}" onclick="event.preventDefault();navigate('specializations');setTimeout(()=>{const el=document.getElementById('spec-${sp.id}');if(el){const nav=document.getElementById('navbar');const offset=nav?nav.offsetHeight+16:80;window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-offset,behavior:'smooth'})}},120)">
+      <a href="#specializations" class="spec-strip" style="--sp-color:${sp.color}" onclick="event.preventDefault();navigate('specializations');setTimeout(()=>{const el=document.getElementById('spec-${sp.id}');if(el){const hdr=el.querySelector('.spec-acc-hdr');if(hdr)toggleSpecAcc(hdr);const nav=document.getElementById('navbar');const offset=nav?nav.offsetHeight+16:80;window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-offset,behavior:'smooth'})}},120)">
         <div class="spec-badge" style="width:56px;height:56px;background:${sp.color};border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:background .3s ease">
           <span style="font-family:'JetBrains Mono',monospace;font-size:${sp.id==='ST-IoT'?'0.6rem':'0.8rem'};font-weight:700;color:#fff;letter-spacing:0.02em;text-align:center;line-height:1.3">${sp.id}</span>
         </div>
@@ -1557,34 +1579,39 @@ function renderSpecializations() {
         const spComp = (sp.compulsory||[]).map(code=>modByCode[code]).filter(Boolean);
         const spOpt  = (sp.optional||[]).map(code=>modByCode[code]).filter(Boolean);
         const modGrid = (mods, accent) => mods.length ? `
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden">
             ${mods.map(m=>{
               const sc = SUBJECT_COLORS[m.subject]||accent;
-              return `<button class="mod-card" data-code="${m.code}" onclick="openDrawer('${m.code}')" style="display:flex;align-items:flex-start;gap:10px;background:#fff;border:1px solid #E8EDF4;border-left:3px solid ${sc};border-radius:8px;padding:10px 12px;cursor:pointer;text-align:left;width:100%;--card-color:${accent};transition:background .3s ease,border-left-color .3s ease,border-color .3s ease,box-shadow .2s ease" onmouseover="if(!this.classList.contains('mod-card-active')){this.style.background='#F9FAFB';this.style.borderColor='${sc}80'}" onmouseout="if(!this.classList.contains('mod-card-active')){this.style.background='#fff';this.style.borderColor='#E8EDF4';this.style.borderLeftColor='${sc}'}">
-                <span class="mod-code" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:${sc};flex-shrink:0;padding-top:1px">${m.code}</span>
-                <div class="mod-name" style="font-size:0.8125rem;font-weight:500;color:#1B2A4A;line-height:1.35">${m.title}</div>
+              return `<button class="mod-card" data-code="${m.code}" onclick="openDrawer('${m.code}')" style="display:flex;align-items:flex-start;gap:0.5rem;background:#fff;border:1px solid #E8EDF4;border-left:3px solid ${sc};border-radius:8px;padding:10px 12px;cursor:pointer;text-align:left;width:100%;max-width:100%;box-sizing:border-box;--card-color:${accent};transition:background .3s ease,border-left-color .3s ease,border-color .3s ease,box-shadow .2s ease" onmouseover="if(!this.classList.contains('mod-card-active')){this.style.background='#F9FAFB';this.style.borderColor='${sc}80'}" onmouseout="if(!this.classList.contains('mod-card-active')){this.style.background='#fff';this.style.borderColor='#E8EDF4';this.style.borderLeftColor='${sc}'}">
+                <span class="mod-code" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:${sc};flex-shrink:0;white-space:nowrap;padding-top:1px">${m.code}</span>
+                <div class="mod-name" style="font-size:0.8125rem;font-weight:500;color:#1B2A4A;line-height:1.35;flex:1;min-width:0;white-space:normal;word-break:break-word;overflow-wrap:break-word">${m.title}</div>
               </button>`;
             }).join('')}
           </div>` : '';
         return `
-        <div id="spec-${sp.id}" style="background:#fff;border:1px solid #E8EDF4;border-radius:14px;overflow:hidden">
-          <div style="padding:24px 28px;border-bottom:1px solid ${sp.color}25;background:${sp.color}06;display:flex;align-items:flex-start;gap:16px">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:600;color:${sp.color};background:${sp.color}15;padding:12px 16px;border-radius:8px;flex-shrink:0">${sp.id}</div>
-            <div>
-              <h3 style="font-family:'Archivo',sans-serif;font-size:1.2rem;font-weight:700;color:#1B2A4A;margin:0 0 4px">${sp.name}</h3>
-              <p style="font-size:0.8rem;color:#9CA3AF;font-style:italic;margin:0 0 8px">${sp.nameFr}</p>
-              <p style="font-size:0.875rem;color:#4B5563;margin:0">${sp.desc}</p>
+        <div id="spec-${sp.id}" class="spec-acc-item" style="background:#fff;border:1px solid #E8EDF4;border-radius:14px;overflow:hidden;width:100%;max-width:100%;box-sizing:border-box">
+          <button class="spec-acc-hdr" onclick="toggleSpecAcc(this)" style="width:100%;display:flex;align-items:center;gap:16px;padding:20px 28px;background:${sp.color}06;border:none;border-bottom:1px solid ${sp.color}25;cursor:pointer;text-align:left">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:600;color:${sp.color};background:${sp.color}15;padding:10px 14px;border-radius:8px;flex-shrink:0">${sp.id}</div>
+            <span style="font-family:'Archivo',sans-serif;font-size:1.1rem;font-weight:800;color:#1B2A4A;flex:1;min-width:0">${sp.name}</span>
+            <span class="spec-acc-chev" style="color:${sp.color};font-size:1.3rem;font-weight:700;transition:transform .25s ease;display:inline-block;flex-shrink:0">›</span>
+          </button>
+          <div class="spec-acc-body" style="max-height:0;overflow:hidden;transition:max-height .3s ease">
+            <div class="spec-header-row${sp.id==='ST-IoT'?' spec-header-row-stiot':''}" style="padding:24px 28px;border-bottom:1px solid ${sp.color}25;background:${sp.color}06;display:flex;align-items:flex-start;gap:16px">
+              <div class="spec-header-text">
+                <p style="font-size:0.8rem;color:#9CA3AF;font-style:italic;margin:0 0 8px">${sp.nameFr}</p>
+                <p style="font-size:0.875rem;color:#4B5563;margin:0">${sp.desc}</p>
+              </div>
             </div>
-          </div>
-          <div style="padding:20px 28px;display:flex;flex-direction:column;gap:20px">
-            ${spComp.length ? `<div>
-              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${sp.color};margin-bottom:10px">Compulsory · ${spComp.length} modules</div>
-              ${modGrid(spComp, sp.color)}
-            </div>` : ''}
-            ${spOpt.length ? `<div>
-              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:10px">Optional · ${spOpt.length} modules</div>
-              ${modGrid(spOpt, sp.color)}
-            </div>` : ''}
+            <div style="padding:20px 28px;display:flex;flex-direction:column;gap:20px;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden">
+              ${spComp.length ? `<div style="width:100%;max-width:100%;box-sizing:border-box">
+                <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${sp.color};margin-bottom:10px">Compulsory · ${spComp.length} modules</div>
+                ${modGrid(spComp, sp.color)}
+              </div>` : ''}
+              ${spOpt.length ? `<div style="width:100%;max-width:100%;box-sizing:border-box">
+                <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:10px">Optional · ${spOpt.length} modules</div>
+                ${modGrid(spOpt, sp.color)}
+              </div>` : ''}
+            </div>
           </div>
         </div>`;
       }).join('')}
