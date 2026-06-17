@@ -74,7 +74,7 @@ window.tailwind.config = {
 </script>
 <style>
 *{box-sizing:border-box}
-body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscroll-behavior-y:contain}
+body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscroll-behavior-y:contain;margin:0}
 
 .module-code{
   font-family:'JetBrains Mono',monospace;color:#1B2A4A;
@@ -813,6 +813,7 @@ function toggleCurAcc(btn) {
     body.style.maxHeight = body.scrollHeight + 'px';
     chev.style.transform = 'rotate(90deg)';
     if (!anyOpenBefore) pushOverlayHistory();
+    setTimeout(() => item.scrollIntoView({behavior:'smooth', block:'nearest'}), 300);
   } else {
     popOverlayHistoryIfNeeded(false);
   }
@@ -831,6 +832,7 @@ function toggleSpecAcc(btn) {
     body.style.maxHeight = body.scrollHeight + 'px';
     chev.style.transform = 'rotate(90deg)';
     if (!anyOpenBefore) pushOverlayHistory();
+    setTimeout(() => item.scrollIntoView({behavior:'smooth', block:'nearest'}), 300);
   } else {
     popOverlayHistoryIfNeeded(false);
   }
