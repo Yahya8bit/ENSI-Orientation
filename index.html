@@ -353,6 +353,7 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
   .stat-num{font-size:3rem!important}
   #section-numbers{padding-bottom:4rem!important}
   #accred-grid{flex-wrap:wrap!important;justify-content:flex-start!important;gap:24px!important}
+  #accred-container{margin-top:40px!important}
   /* Admission table mobile */
   #section-admission{padding-left:1rem!important;padding-right:1rem!important}
   #admission-table{min-width:unset!important}
@@ -361,9 +362,9 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
   #footer-grid{grid-template-columns:1fr!important;gap:0!important}
   #footer-grid>div{padding-bottom:1.5rem}
   /* Partner wall 3-col grid */
-  #partner-wall{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:0!important}
-  .partner-cell{display:flex;align-items:center;justify-content:center;height:70px}
-  .partner-cell .partner-logo{height:auto!important;width:auto!important;max-width:80%;max-height:50px;object-fit:contain}
+  #partner-wall{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:1.5rem!important;width:100%!important;justify-content:unset!important}
+  .partner-cell{display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden}
+  .partner-cell .partner-logo{max-width:100%!important;max-height:50px!important;width:auto!important;height:auto!important;object-fit:contain!important}
   .spec-watermark{display:none}
   .spec-strip{padding-left:1rem!important;padding-right:1rem!important;gap:12px}
   .spec-name{font-size:0.9rem!important}
@@ -800,6 +801,24 @@ window.addEventListener('popstate', function() {
   if (closeOpenCurAcc()) { popOverlayHistoryIfNeeded(true); return; }
 });
 
+// ─── ACCORDION HELPERS ───────────────────────────────────────────────────────
+function _accOpen(item, body, chev) {
+  // Step 1: collapse all open siblings instantly
+  const siblings = item.parentElement.querySelectorAll(body.className.split(' ').map(c=>'.'+c).join(''));
+  siblings.forEach(b=>{ b.style.transition='none'; b.style.maxHeight='0px'; });
+  item.parentElement.querySelectorAll(chev.className.split(' ').map(c=>'.'+c).join('')).forEach(c=>c.style.transform='');
+  // Step 2: strong reflow — positions recalculated after collapse
+  void document.body.offsetHeight;
+  // Step 3: calculate scroll target AFTER collapse (layout now stable)
+  const navHeight = document.querySelector('nav').offsetHeight;
+  const top = item.getBoundingClientRect().top + window.scrollY - navHeight - 16;
+  // Step 4: open new item with animation
+  body.style.transition=''; body.style.maxHeight = body.scrollHeight + 'px';
+  chev.style.transform = 'rotate(90deg)';
+  // Step 5: scroll using position calculated post-collapse
+  window.scrollTo({top, behavior:'smooth'});
+}
+
 // ─── CURRICULUM ACCORDION ────────────────────────────────────────────────────
 function toggleCurAcc(btn) {
   const item = btn.parentElement;
@@ -807,22 +826,12 @@ function toggleCurAcc(btn) {
   const chev = btn.querySelector('.cur-acc-chev');
   const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
   const anyOpenBefore = [...document.querySelectorAll('.cur-acc-body')].some(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
-  // instantly collapse all open items (no animation) so page height is stable
-  document.querySelectorAll('.cur-acc-body').forEach(b=>{
-    b.style.transition='none'; b.style.maxHeight='0px';
-  });
-  document.querySelectorAll('.cur-acc-chev').forEach(c=>c.style.transform='');
   if (!isOpen) {
-    // restore transition then open new item
-    requestAnimationFrame(()=>{
-      body.style.transition=''; body.style.maxHeight = body.scrollHeight + 'px';
-      chev.style.transform = 'rotate(90deg)';
-      const navHeight = document.querySelector('nav').offsetHeight;
-      const cardTop = item.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({top: cardTop - navHeight - 16, behavior:'smooth'});
-    });
+    _accOpen(item, body, chev);
     if (!anyOpenBefore) pushOverlayHistory();
   } else {
+    body.style.transition='none'; body.style.maxHeight='0px';
+    chev.style.transform='';
     popOverlayHistoryIfNeeded(false);
   }
 }
@@ -834,22 +843,12 @@ function toggleSpecAcc(btn) {
   const chev = btn.querySelector('.spec-acc-chev');
   const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
   const anyOpenBefore = [...document.querySelectorAll('.spec-acc-body')].some(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
-  // instantly collapse all open items (no animation) so page height is stable
-  document.querySelectorAll('.spec-acc-body').forEach(b=>{
-    b.style.transition='none'; b.style.maxHeight='0px';
-  });
-  document.querySelectorAll('.spec-acc-chev').forEach(c=>c.style.transform='');
   if (!isOpen) {
-    // restore transition then open new item
-    requestAnimationFrame(()=>{
-      body.style.transition=''; body.style.maxHeight = body.scrollHeight + 'px';
-      chev.style.transform = 'rotate(90deg)';
-      const navHeight = document.querySelector('nav').offsetHeight;
-      const cardTop = item.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({top: cardTop - navHeight - 16, behavior:'smooth'});
-    });
+    _accOpen(item, body, chev);
     if (!anyOpenBefore) pushOverlayHistory();
   } else {
+    body.style.transition='none'; body.style.maxHeight='0px';
+    chev.style.transform='';
     popOverlayHistoryIfNeeded(false);
   }
 }
@@ -1226,7 +1225,7 @@ function renderHome() {
     </div>
 
     <!-- Accreditations -->
-    <div style="margin-top:0">
+    <div id="accred-container" style="margin-top:0">
       <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 20px">ACCRÉDITATIONS</p>
       <div id="accred-grid" style="display:flex;justify-content:space-between;align-items:flex-start;width:100%;gap:24px">
         ${[
@@ -1320,7 +1319,7 @@ function renderHome() {
       <div id="partner-wall" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:28px 0;width:100%">
         ${PARTNERS.map(p=>`
         <div class="partner-cell" style="display:flex;align-items:center;justify-content:center">
-          <img src="/imag/${p.logo}" alt="${p.name}" class="partner-logo" loading="lazy" style="max-height:50px;max-width:120px;width:auto;height:auto;object-fit:contain;display:block;filter:grayscale(1);opacity:0.65;transition:filter .2s ease,opacity .2s ease"
+          <img src="/imag/${p.logo}" alt="${p.name}" class="partner-logo" loading="lazy" style="max-height:70px;max-width:150px;width:auto;height:auto;object-fit:contain;display:block;filter:grayscale(1);opacity:0.65;transition:filter .2s ease,opacity .2s ease"
             onmouseover="this.style.filter='grayscale(0)';this.style.opacity='1'"
             onmouseout="this.style.filter='grayscale(1)';this.style.opacity='0.65'">
         </div>`).join('')}
