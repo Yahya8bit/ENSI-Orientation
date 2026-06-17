@@ -1417,8 +1417,8 @@ function renderHome() {
           <span style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:700;color:#fff;letter-spacing:0.02em;text-align:center;line-height:1.3">${badge}</span>
         </div>
         <div style="flex:1;min-width:0">
-          <div class="spec-name" style="font-family:'Archivo',sans-serif;font-size:1.05rem;font-weight:500;color:#1B2A4A;margin-bottom:2px;transition:color .3s ease">${sp.name}</div>
-          <div class="spec-namefr" style="font-size:0.78rem;color:#9CA3AF;margin-bottom:6px;transition:color .3s ease">${sp.nameFr}</div>
+          <div class="spec-name" style="font-family:'Archivo',sans-serif;font-size:1.05rem;font-weight:500;color:#1B2A4A;margin-bottom:2px;transition:color .3s ease">${sp.nameFr}</div>
+          <div class="spec-namefr" style="font-size:0.78rem;color:#9CA3AF;margin-bottom:6px;transition:color .3s ease">${sp.id}</div>
           <div class="spec-kw" style="font-size:0.8rem;color:${sp.color};font-family:'Inter',sans-serif;transition:color .3s ease">${specKeywords[sp.id]||''}</div>
         </div>
         <div class="spec-watermark" style="color:${sp.color};opacity:0.09;transition:color .3s ease,opacity .3s ease">${badge}</div>
@@ -1545,13 +1545,13 @@ function renderSpecializations() {
         <div id="spec-${sp.id}" class="spec-acc-item" style="background:#fff;border:1px solid #E8EDF4;border-radius:14px;overflow:hidden;width:100%;max-width:100%;box-sizing:border-box">
           <button class="spec-acc-hdr" onclick="toggleSpecAcc(this)" style="width:100%;display:flex;align-items:center;gap:16px;padding:20px 28px;background:${sp.color}06;border:none;border-bottom:1px solid ${sp.color}25;cursor:pointer;text-align:left">
             <div class="spec-acc-icon" style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:600;color:${sp.color};background:${sp.color}15;padding:10px 14px;border-radius:8px;flex-shrink:0">${SPEC_BADGE_LABEL[sp.id]||sp.id}</div>
-            <span class="spec-acc-title" style="font-family:'Archivo',sans-serif;font-size:1.1rem;font-weight:800;color:#1B2A4A;flex:1;min-width:0">${sp.name}</span>
+            <span class="spec-acc-title" style="font-family:'Archivo',sans-serif;font-size:1.1rem;font-weight:800;color:#1B2A4A;flex:1;min-width:0">${sp.nameFr}</span>
             <span class="spec-acc-chev" style="color:${sp.color};font-size:1.3rem;font-weight:700;transition:transform .25s ease;display:inline-block;flex-shrink:0">›</span>
           </button>
           <div class="spec-acc-body" style="max-height:0;overflow:hidden;transition:max-height .3s ease">
             <div class="spec-header-row" style="padding:24px 28px;border-bottom:1px solid ${sp.color}25;background:${sp.color}06;display:flex;align-items:flex-start;gap:16px">
               <div class="spec-header-text">
-                <p style="font-size:0.8rem;color:#9CA3AF;font-style:italic;margin:0 0 8px">${sp.nameFr}</p>
+                <p style="font-size:0.8rem;color:#9CA3AF;font-style:italic;margin:0 0 8px">${sp.name}</p>
                 <p style="font-size:0.875rem;color:#4B5563;margin:0">${sp.desc}</p>
               </div>
             </div>
