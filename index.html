@@ -806,14 +806,19 @@ function toggleCurAcc(btn) {
   const chev = btn.querySelector('.cur-acc-chev');
   const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
   const anyOpenBefore = [...document.querySelectorAll('.cur-acc-body')].some(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
-  // close all
-  document.querySelectorAll('.cur-acc-body').forEach(b=>b.style.maxHeight='0px');
+  // instantly collapse all open items (no animation) so page height is stable
+  document.querySelectorAll('.cur-acc-body').forEach(b=>{
+    b.style.transition='none'; b.style.maxHeight='0px';
+  });
   document.querySelectorAll('.cur-acc-chev').forEach(c=>c.style.transform='');
   if (!isOpen) {
-    body.style.maxHeight = body.scrollHeight + 'px';
-    chev.style.transform = 'rotate(90deg)';
+    // restore transition then open new item
+    requestAnimationFrame(()=>{
+      body.style.transition=''; body.style.maxHeight = body.scrollHeight + 'px';
+      chev.style.transform = 'rotate(90deg)';
+      item.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
     if (!anyOpenBefore) pushOverlayHistory();
-    setTimeout(() => item.scrollIntoView({behavior:'smooth', block:'nearest'}), 300);
   } else {
     popOverlayHistoryIfNeeded(false);
   }
@@ -826,13 +831,19 @@ function toggleSpecAcc(btn) {
   const chev = btn.querySelector('.spec-acc-chev');
   const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
   const anyOpenBefore = [...document.querySelectorAll('.spec-acc-body')].some(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
-  document.querySelectorAll('.spec-acc-body').forEach(b=>b.style.maxHeight='0px');
+  // instantly collapse all open items (no animation) so page height is stable
+  document.querySelectorAll('.spec-acc-body').forEach(b=>{
+    b.style.transition='none'; b.style.maxHeight='0px';
+  });
   document.querySelectorAll('.spec-acc-chev').forEach(c=>c.style.transform='');
   if (!isOpen) {
-    body.style.maxHeight = body.scrollHeight + 'px';
-    chev.style.transform = 'rotate(90deg)';
+    // restore transition then open new item
+    requestAnimationFrame(()=>{
+      body.style.transition=''; body.style.maxHeight = body.scrollHeight + 'px';
+      chev.style.transform = 'rotate(90deg)';
+      item.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
     if (!anyOpenBefore) pushOverlayHistory();
-    setTimeout(() => item.scrollIntoView({behavior:'smooth', block:'nearest'}), 300);
   } else {
     popOverlayHistoryIfNeeded(false);
   }
@@ -1189,7 +1200,7 @@ function renderHome() {
     return `
   <section id="section-numbers" style="background:#fff;padding:96px 10vw">
     <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">EN CHIFFRES</p>
-    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 56px;line-height:0.95;letter-spacing:-0.03em">Quatre décennies d'<span style="color:#2563EB">ingénieurs.</span></h2>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 56px;line-height:0.95;letter-spacing:-0.03em">40 ans d'<span style="color:#2563EB">ingénieurs.</span></h2>
     <div id="numbers-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:64px">
       <div>
         <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">2 500+</div>
