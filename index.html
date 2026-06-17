@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="SqWZRLJdgXtQ45Ve2oSBrZiAPhMleDEszYhuupqvY2A" />
-<title>ENSI Orientation Guide | Admission, Specializations & Student Life</title>
-<meta name="description" content="Everything newly-admitted ENSI students need: admission cutoff ranks, the 6 specialization tracks, clubs, and the full curriculum. École Nationale des Sciences de l'Informatique, Manouba.">
-<meta name="keywords" content="ENSI, École Nationale des Sciences de l'Informatique, Manouba, admission ENSI, spécialisations ENSI, clubs ENSI, orientation ENSI">
+<title>Guide d'orientation ENSI | Admission, Spécialisations et Vie Étudiante</title>
+<meta name="description" content="Tout ce que les nouveaux admis à l'ENSI doivent savoir : rangs d'admission, les 6 filières de spécialisation, clubs, et le programme complet. École Nationale des Sciences de l'Informatique, Manouba.">
+<meta name="keywords" content="ENSI, École Nationale des Sciences de l'Informatique, Manouba, admission ENSI, spécialisations ENSI, clubs ENSI, orientation ENSI, filières ENSI, curriculum ENSI">
 <meta name="robots" content="index, follow">
 <link rel="preload" as="image" href="imag/ensi-navbar.png">
 <link rel="preload" as="image" fetchpriority="high" href="imag/hero/forum-20th-edition.jpeg">
@@ -15,22 +15,29 @@
 <link rel="preload" as="image" href="imag/partners/huawei-logo.png">
 <link rel="preload" as="image" href="imag/partners/minotore-logo.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ENSI Orientation Guide | Admission, Specializations & Student Life">
-<meta property="og:description" content="Everything newly-admitted ENSI students need: admission cutoff ranks, the 6 specialization tracks, clubs, and the full curriculum.">
+<meta property="og:title" content="Guide d'orientation ENSI | Admission, Spécialisations et Vie Étudiante">
+<meta property="og:description" content="Tout ce que les nouveaux admis à l'ENSI doivent savoir : rangs d'admission, les 6 filières de spécialisation, clubs, et le programme complet.">
 <meta property="og:image" content="https://ensi-orientation.vercel.app/imag/ensi-navbar.png">
 <meta property="og:url" content="https://ensi-orientation.vercel.app/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ENSI Orientation Guide | Admission, Specializations & Student Life">
-<meta name="twitter:description" content="Everything newly-admitted ENSI students need: admission cutoff ranks, the 6 specialization tracks, clubs, and the full curriculum.">
+<meta name="twitter:title" content="Guide d'orientation ENSI | Admission, Spécialisations et Vie Étudiante">
+<meta name="twitter:description" content="Tout ce que les nouveaux admis à l'ENSI doivent savoir : rangs d'admission, les 6 filières de spécialisation, clubs, et le programme complet.">
 <meta name="twitter:image" content="https://ensi-orientation.vercel.app/imag/ensi-navbar.png">
 <link rel="icon" href="imag/header_logo.png" type="image/png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
-  "name": "École Nationale des Sciences de l'Informatique (ENSI)",
-  "description": "Orientation guide for newly-admitted ENSI students: admission cutoff ranks, specialization tracks, clubs, and curriculum.",
-  "url": "https://ensi-orientation.vercel.app/"
+  "@type": "WebSite",
+  "name": "Guide d'orientation ENSI",
+  "url": "https://ensi-orientation.vercel.app",
+  "description": "Tout ce que les nouveaux admis à l'ENSI doivent savoir : rangs d'admission, les 6 filières de spécialisation, clubs, et le programme complet. École Nationale des Sciences de l'Informatique, Manouba.",
+  "inLanguage": ["fr", "en"],
+  "about": {
+    "@type": "EducationalOrganization",
+    "name": "École Nationale des Sciences de l'Informatique",
+    "alternateName": "ENSI",
+    "url": "https://ensi.rnu.tn"
+  }
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -399,28 +406,28 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
 
 <!-- NAVBAR -->
 <nav id="navbar" style="background:#fff;border-bottom:1px solid #E2E8F0;position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;padding:0 10vw;justify-content:space-between;transition:box-shadow .2s ease">
-  <button id="nav-hamburger" onclick="openMobileNav()" aria-label="Open menu">☰</button>
+  <button id="nav-hamburger" onclick="openMobileNav()" aria-label="Ouvrir le menu">☰</button>
   <a href="#home" id="navbar-logo" onclick="event.preventDefault();navigate('home');window.scrollTo({top:0,behavior:'smooth'})" style="flex-shrink:0;display:flex;align-items:center;text-decoration:none;cursor:pointer">
     <img src="/imag/ensi-navbar.png" alt="ENSI" loading="lazy" width="37" height="52" style="height:52px;width:auto;flex-shrink:0;display:block">
   </a>
   <div id="nav-links" style="display:flex;align-items:center;gap:28px">
-    <a href="#home" onclick="event.preventDefault();if(location.hash==='#home'||location.hash===''){window.scrollTo({top:0,behavior:'smooth'})}else{navigate('home')}" class="nav-link" id="nav-home">Overview</a>
+    <a href="#home" onclick="event.preventDefault();if(location.hash==='#home'||location.hash===''){window.scrollTo({top:0,behavior:'smooth'})}else{navigate('home')}" class="nav-link" id="nav-home">Aperçu</a>
     <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-admission');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Admission</a>
-    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-studentlife');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Student Life</a>
-    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('curriculum-section');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Curriculum</a>
-    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-pathways');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link" id="nav-specializations">Pathways</a>
+    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-studentlife');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Vie étudiante</a>
+    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('curriculum-section');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Plan d'études</a>
+    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-pathways');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link" id="nav-specializations">Filières</a>
   </div>
 </nav>
 
 <!-- Mobile sidebar -->
 <div id="mobile-overlay" onclick="closeMobileNav()"></div>
-<nav id="mobile-sidebar" aria-label="Mobile navigation">
-  <button id="mobile-sidebar-close" onclick="closeMobileNav()" aria-label="Close menu">×</button>
-  <a href="#home" class="mobile-nav-link" onclick="event.preventDefault();closeMobileNav();if(location.hash==='#home'||location.hash===''){window.scrollTo({top:0,behavior:'smooth'})}else{navigate('home')}">Overview</a>
+<nav id="mobile-sidebar" aria-label="Navigation mobile">
+  <button id="mobile-sidebar-close" onclick="closeMobileNav()" aria-label="Fermer le menu">×</button>
+  <a href="#home" class="mobile-nav-link" onclick="event.preventDefault();closeMobileNav();if(location.hash==='#home'||location.hash===''){window.scrollTo({top:0,behavior:'smooth'})}else{navigate('home')}">Aperçu</a>
   <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-admission');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Admission</a>
-  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-studentlife');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Student Life</a>
-  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('curriculum-section');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Curriculum</a>
-  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-pathways');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Pathways</a>
+  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-studentlife');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Vie étudiante</a>
+  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('curriculum-section');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Plan d'études</a>
+  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-pathways');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Filières</a>
 </nav>
 
 <!-- DRAWER OVERLAY -->
@@ -447,13 +454,13 @@ const SUBJECT_COLORS = {
 };
 
 const SUBJECT_FULLNAMES = {
-  AI:'Artificial Intelligence', AP:'Algorithmic & Programming', BDC:'Business Digitalization and Communication',
-  CV:'Computer Vision', DAT:'Data', DDP:'Design and Development Project',
-  DOS:'Distributed and Operating Systems', EHA:'Electronics and Hardware Architecture',
-  ESDV:'Embedded System Design and Validation', ESEP:'Embedded Systems & Embedded Programming',
-  FIN:'Finance', IAP:'IoT Applications Programming', IMA:'Image',
-  ISA:'Information Systems Applications', MAT:'Mathematics', NET:'Computer Networks',
-  OS:'Operating Systems', SE:'Software Engineering', SEC:'Security',
+  AI:'Intelligence Artificielle', AP:'Algorithmique & Programmation', BDC:'Digitalisation des Entreprises et Communication',
+  CV:'Vision par Ordinateur', DAT:'Données', DDP:'Projet de Design et Développement',
+  DOS:'Systèmes Distribués et Exploitation', EHA:'Électronique et Architecture Matérielle',
+  ESDV:'Conception et Validation de Systèmes Embarqués', ESEP:'Systèmes Embarqués & Programmation Embarquée',
+  FIN:'Finance', IAP:'Programmation Applications IoT', IMA:'Image',
+  ISA:'Applications des Systèmes d\'Information', MAT:'Mathématiques', NET:'Réseaux Informatiques',
+  OS:'Systèmes d\'Exploitation', SE:'Génie Logiciel', SEC:'Sécurité',
 };
 function codeTipAttr(code) {
   const prefix = (code.match(/^[A-Z]+/)||[])[0];
@@ -467,243 +474,243 @@ function codeTip(code) {
 
 const SPEC_BADGE_LABEL = {'ST-IoT':'IoT','CV':'DS'};
 const SPECIALIZATIONS = [
-  {id:'AI',name:'Artificial Intelligence',nameFr:'Intelligence Artificielle',color:'#D97706',desc:'Machine learning, deep learning, NLP, and cognitive systems.',
+  {id:'AI',name:'Artificial Intelligence',nameFr:'Intelligence Artificielle',color:'#D97706',desc:'Apprentissage automatique, deep learning, NLP et systèmes cognitifs.',
     compulsory:['AI.5.1','AI.5.2','AI.5.3','AI.5.4','AI.5.5','ISA.5.1','ISA.5.2','MAT.5.2','AI.5.6','ISA.5.6','DOS.5.8','DOS.5.2'],
     optional:['ISA.5.3','MAT.5.1','ISA.5.5','ISA.5.4','AI.5.7','ISA.5.7','ISA.5.8','AI.5.10','AI.5.8','AI.5.9','AI.5.11']},
-  {id:'GL',name:'Software Engineering',nameFr:'Génie Logiciel',color:'#2563EB',desc:'Software quality, DevOps, cloud engineering, and advanced architecture.',
+  {id:'GL',name:'Software Engineering',nameFr:'Génie Logiciel',color:'#2563EB',desc:'Qualité logicielle, DevOps, ingénierie cloud et architecture avancée.',
     compulsory:['SE.5.1','SE.5.2','SE.5.3','SE.5.4','SE.5.5','AI.5.3','AI.5.1','DOS.5.1','DOS.5.2','DOS.5.3'],
     optional:['ISA.5.1','ISA.5.3','ISA.5.7','ISA.5.4','ISA.5.9','ISA.5.2','ISA.5.10','ISA.5.11','ISA.5.6','ISA.5.8']},
-  {id:'CV',name:'Data Science & Computer Vision',nameFr:'Vision par Ordinateur et Science des Données',color:'#DB2777',desc:'Image processing, pattern recognition, big data analytics, and medical imaging.',
+  {id:'CV',name:'Data Science & Computer Vision',nameFr:'Vision par Ordinateur et Science des Données',color:'#DB2777',desc:'Traitement d\'images, reconnaissance de formes, analyse big data et imagerie médicale.',
     compulsory:['CV.5.1','CV.5.2','CV.5.3','CV.5.4','CV.5.5','CV.5.6','CV.5.7','CV.5.8','CV.5.9','AI.5.16','CV.5.11'],
     optional:['DOS.5.2','DOS.5.3','DOS.5.8','SE.5.3']},
-  {id:'IF',name:'Financial Engineering',nameFr:'Ingénierie Financière',color:'#0D9488',desc:'Quantitative finance, algorithmic trading, blockchain, and risk management.',
+  {id:'IF',name:'Financial Engineering',nameFr:'Ingénierie Financière',color:'#0D9488',desc:'Finance quantitative, trading algorithmique, blockchain et gestion des risques.',
     compulsory:['FIN.5.1','MAT.5.3','FIN.5.2','FIN.5.3','ISA.5.1','FIN.5.4','MAT.5.5','MAT.5.4','ISA.5.4','AI.5.1','FIN.5.6','AI.5.12','FIN.5.5'],
     optional:['DOS.5.2','SE.5.3','ISA.5.7','DOS.5.3']},
-  {id:'SLE',name:'Embedded Software and Systems',nameFr:'Systèmes et Logiciels Embarqués',color:'#7C3AED',desc:'Real-time systems, FPGA design, IoT protocols, and embedded Linux.',
+  {id:'SLE',name:'Embedded Software and Systems',nameFr:'Systèmes et Logiciels Embarqués',color:'#7C3AED',desc:'Systèmes temps réel, conception FPGA, protocoles IoT et Linux embarqué.',
     compulsory:['AI.5.5','AI.5.12','DOS.5.4','DOS.5.5','DOS.5.6','DOS.5.7','ESDV.5.1','ESDV.5.2','ESDV.5.3','ESDV.5.4','ESDV.5.5','ESDV.5.6'],
     optional:['DOS.5.8','DOS.5.9','ESDV.5.7','ESDV.5.8','ESDV.5.9','IAP.5.1','IAP.5.2','IAP.5.3','SEC.5.1','SEC.5.2','SEC.5.3','SEC.5.4','ISA.5.12']},
-  {id:'ST-IoT',name:'Services, Technologies & IoT',nameFr:'Services, Technologies et Internet des Objets',color:'#06B6D4',desc:'Cloud computing, microservices, IoT applications, and network security.',
+  {id:'ST-IoT',name:'Services, Technologies & IoT',nameFr:'Services, Technologies et Internet des Objets',color:'#06B6D4',desc:'Cloud computing, microservices, applications IoT et sécurité réseau.',
     compulsory:['ESEP.5.1','ESEP.5.2','ESEP.5.3','NET.5.1','NET.5.2','NET.5.3','NET.5.4','DOS.5.5','DOS.5.6','DOS.5.4','DOS.5.8'],
     optional:['IAP.5.3','DOS.5.11','DOS.5.2','AI.5.12','ISA.5.12','ISA.5.1','AI.5.5','SEC.5.2','SEC.5.4']},
 ];
 
 const MODULE_HANDBOOK = {
-  'AI.5.1':{objectives:["Master the concepts of agent and multi-agent systems","Learn the development of a multi-agent system","Explore complementary research questions"],content:["Chapter 2: Intelligent Agents","Chapter 3: Agents architectures","Chapter 4: Methodologies for developing multi-agent systems","Chapter 4: MAS Development environments & case study"]},
-  'AI.5.2':{objectives:["Formal systems and formal inference for decision","Theorem proving","Fuzzification, defuzzification and decision","Formal mapping rules"],content:["Lesson I. Introduction – Formal proof and logical deduction","Lesson II. Formal Systems for Temporal logics","Lesson III. PLTL logic, Buchi models, automata composition and semantic verification","Lesson III. Fuzzy Logic – Fuzzification and Defuzzification"]},
-  'AI.5.3':{objectives:["Know the basics and the different types of deep learning","Use and apply supervised and unsupervised deep learning techniques"],content:["Chapter 1. Introduction to deep learning","Chapter 2. Recurrent neural networks","Chapter 3. Feed-Forward Neural Network","Chapter 4. Autoencoders","Chapter 5. Deep Generative Models","Chapter 6. Introduction to Federated learning"]},
-  'AI.5.4':{objectives:["Understand key concepts from NLP used to describe and analyze language","Understand POS tagging and context-free grammar for Natural language","Understand semantic representation of English Natural language for processing","Apply Machine learning / deep learning methods to process texts"]},
-  'AI.5.5':{objectives:["Understand sensor fusion and perception for autonomous robots","Program autonomous mobile robot behaviors","Apply soft computing techniques to control systems"]},
-  'AI.5.8':{content:["Chapter I: Introduction to Affective Computing","Chapter II: Emotions – Definitions, Types, Theories","Chapter III: Automatic Emotion Recognition (facial, voice, gesture, physiological)","Chapter IV: Computer Modeling of Emotions and Expressive Robots"]},
-  'AI.5.9':{objectives:["Propose an ITS project using knowledge acquired in other training","Estimate the technological and budgetary resources for an ITS","Get an idea of recent trends and national and international ITS programs"],content:["Chapter I: Intelligent Transport Systems – Introduction","Chapter II: Examples of projects","Chapter III: ITS in Tunisia"]},
-  'AI.5.10':{content:["Chapter 1: Introduction to the Semantic Web","Chapter 2: RDF data model","Chapter 3: SPARQL query language","Chapter 4: Supporting RDFS ontologies and schemas","Chapter 4: Formalization in OWL"]},
-  'AI.5.12':{objectives:["Understand generic machine learning","Understand motivation and functioning of deep networks","Understand the choices and limitations of deep learning models","Apply deep learning techniques to practical problems","Critically evaluate model performance"],content:["Chapter 1: Applied Math and Machine Learning Basics","Chapter 2: Modern Practical Deep Networks","Chapter 3: Deep Learning Research"]},
-  'AI.5.16':{objectives:["Understand key concepts from NLP used to describe and analyze language","Understand POS tagging and context-free grammar for Natural language","Understand semantic representation of Natural language for processing"]},
-  'SE.5.1':{content:["Chapter 1: Introduction to Software Reengineering","Chapter 2: Code Reengineering – Refactoring","Chapter 3: Data Reengineering","Chapter 4: Business Process Reengineering","Chapter 5: Information Systems Reengineering","Chapter 6: Tools for Software Reengineering"]},
-  'SE.5.2':{objectives:["Know the quality management process and its key activities","Understand the role of standards in quality management","Learn software metrics and quality assessment","Master software testing techniques","Know the different levels of software testing","Know how to reduce bugs in software programs","Use and apply evaluation tools"],content:["Part 1: Software Quality Management","Part 2: Software Testing"]},
-  'SE.5.4':{objectives:["Assimilate key concepts in complex systems (emergence, self-organization)","Describe, understand and analyze complex systems","Study computer tools for modelling complex systems","Learn Systems of Systems basics"],content:["Chapter I: Complex Systems – Introduction","Chapter II: Agent-based modeling and simulation","Chapter III: Cellular automata","Chapter IV: Systems of Systems – Classification and Architecture","Chapter V: Systems of Systems Engineering"]},
-  'SE.5.5':{objectives:["Detail the model-driven approach MDA (Model Driven Architecture) and OMG","Develop meta-modelling capabilities","Master the OCL constraint expression language","Study the different types and approaches of model transformations","Put into practice the knowledge acquired"],content:["Chapter I: Introduction to Model Driven Engineering","Chapter II: Principles and standards of MDE","Chapter III: Object Constraints Language","Chapter IV: Model transformation"]},
-  'DOS.5.1':{objectives:["Understand cloud computing models and architectures","Apply cloud deployment strategies","Configure and manage cloud services"]},
-  'DOS.5.2':{objectives:["Explain blockchain and how it is applied across industries","Describe key principles of blockchain technology","Explain fundamental concepts in Hyperledger Fabric","Apply concepts of blockchain security, identity and access control","Write applications that interact with a blockchain network"],content:["Unit 1: Introduction to Blockchain","Unit 2: Introduction to chaincode development","Unit 3: Chaincode query methods","Unit 4: Best practices for writing, testing, and debugging chaincode","Unit 5: Identity and access control","Unit 6: Data privacy","Unit 7: Basics of application development","Unit 8: Blockchain integration and advanced application development"]},
-  'DOS.5.3':{content:["Chapter I: Introduction to IoT","Chapter II: IoT Applications and architectures","Chapter III: Networks technologies in IoT","Chapter IV: Middlewares and Application protocols for IoT"]},
-  'DOS.5.4':{objectives:["Understand advanced processor architectures","Apply parallel programming models","Optimize software for multi-core and SIMD architectures"]},
-  'DOS.5.5':{objectives:["Understand problems related to real-time applications","Use real-time operating systems following the FreeRTOS framework","Design real-time applications using FreeRTOS"],content:["Chapter I: Introduction to Real-Time Systems","Chapter II: Real-time operating systems","Chapter III: System architecture of FreeRTOS"]},
-  'DOS.5.6':{objectives:["Understand distributed systems architectures","Apply distributed computing principles","Build distributed applications"]},
-  'DOS.5.7':{objectives:["Build and configure embedded Linux systems","Write Linux device drivers","Use Yocto and Buildroot for embedded targets"]},
-  'DOS.5.8':{objectives:["Understand cloud computing fundamentals","Distinguish IaaS, PaaS, and SaaS models","Deploy applications on cloud platforms"]},
-  'DOS.5.9':{objectives:["Master the Robot Operating System (ROS)","Deal with models and simulations for robots","Develop software for robotic applications"]},
-  'DOS.5.11':{objectives:["Acquire and use knowledge of distributed systems","Discover the main concepts of middleware","Learn how to build a distributed application using different frameworks"]},
-  'ISA.5.1':{objectives:["Master the basic building blocks of the Hadoop platform (HDFS, MapReduce)","Master the MapReduce approach for problem solving","Understand the limits of the relational model and know NOSQL models"],content:["Chapter I: Introduction to Big Data","Chapter II: Hadoop – Building Blocks","Chapter III: Advanced Processing Tools","Chapter IV: NOSQL Databases","Chapter V: Big Data Architectures"]},
-  'ISA.5.2':{content:["Chapter 1: Introduction to Data Mining","Chapter 2: Text Pre-processing and text feature extraction","Chapter 3: Text classification","Chapter 4: Sentiment analysis","Chapter 5: Topic identification"]},
-  'ISA.5.3':{objectives:["Understand decision support systems and their architectures","Apply interactive decision-making techniques","Build decision support applications"]},
-  'ISA.5.4':{objectives:["Become able to evaluate the technologies that make up BI","Become able to plan the implementation of a BI solution"],content:["Chapter 1: Introduction to Business Intelligence","Chapter 2: Data Integration","Chapter 3: Data Storage – Data Warehousing","Chapter 4: Multidimensional Analysis with OLAP","Chapter 5: MDX Language"]},
-  'ISA.5.7':{objectives:["Understand distributed database architectures","Apply distributed query processing techniques","Manage replication and consistency"]},
-  'ISA.5.8':{objectives:["Master advanced BI techniques","Apply advanced analytics and reporting","Evaluate and compare BI platforms"]},
-  'ISA.5.9':{content:["Chapter 1: Introduction to GIS","Chapter 2: Formats, conception et qualité de données SIG","Chapter 3: Geospatial and Environmental Analysis","Chapter 4: Mapping and Spatial Analysis"]},
-  'ISA.5.10':{objectives:["Understand governance issues in control of business activities","Know the best practices in IS Governance","Understand components of the digital enterprise"],content:["Chapter I: Enterprise Architecture – Introduction","Section I: Presentation of the domain of EA","Section II: Architecture of the digital enterprise","Chapter II: The governance of the company's IS","Section I: IS governance","Section II: Foundations of an IS governance model","Section III: Key Initiatives"]},
-  'ISA.5.11':{objectives:["Master data engineering pipelines","Apply ETL and data orchestration tools","Build scalable data infrastructure"]},
-  'ISA.5.12':{objectives:["Introduce students to the basic concepts of data mining","Develop skills in using recent data mining tools","Gain experience in independent data analysis"],content:["Chapter 1: Introduction to Datamining","Chapter 2: Data preprocessing","Chapter 3: Association rules","Chapter 4: Clustering"]},
-  'CV.5.4':{objectives:["Master 3D mesh simplification methods","Master 3D registration methods","Master methods of 3D objects construction from images"]},
-  'CV.5.6':{objectives:["Master mathematical morphology techniques","Apply mathematical morphology in image analysis","Apply mathematical morphology for medical applications"]},
-  'CV.5.11':{objectives:["Study the specificities of the different imaging modalities"],content:["Part 1: Introduction to Medical Imaging","Part 2: Modalities","Part 3: The main processing of medical images"]},
-  'FIN.5.2':{content:["Chapter 1: Financial Risk – Introduction","Chapter 2: Portfolio Insurance","Chapter 3: Dynamic Hedging Strategies","Chapter 4: Interest Rate Risk Management"]},
-  'FIN.5.3':{content:["Chapter 1: Introduction to Bank Management","Chapter 2: Banking risks – definition and typology","Chapter 3: The Regulatory Framework","Chapter 4: Credit risk management"]},
-  'MAT.5.3':{objectives:["Apply numerical optimization methods using R","Solve constrained and unconstrained optimization problems","Implement optimization algorithms in R"]},
-  'MAT.5.4':{objectives:["Apply statistical inference methods using R","Perform hypothesis testing and confidence interval estimation","Use R for statistical computing and data analysis"]},
-  'MAT.5.5':{objectives:["Apply multivariate data analysis techniques","Perform dimensionality reduction and clustering","Interpret results of data analysis for decision-making"]},
-  'SEC.5.1':{objectives:["Develop knowledge in diagnosis and fault detection","Introduce principles of independent/dependent component analysis","Investigate on-line processing of reliability prediction in embedded systems"],content:["Lesson 1: Introduction to diagnosis, safety and reliability","Lesson 2: Diagnosis – Model-based techniques","Lesson 3: Diagnosis – Signal-based techniques","Lesson 4: Systems Analysis with independent components","Lesson 5: Systems Analysis with dependent components","Lesson 6: Application of dependability methodologies to ES","Lesson 7: Reliability prediction methodology for ES"]},
-  'SEC.5.2':{objectives:["Discuss the main IoT threats and attacks","Identify convenient cryptographic tools and protocols","Assess IoT threats and risks","Design a secure embedded system"],content:["Chapter 1: Introduction to IoT Security","Chapter 2: Securing IoT devices","Chapter 3: Securing IoT network layer","Chapter 4: Securing IoT application layer","Chapter 5: Securing IoT platforms","Chapter 6: Security in embedded systems"]},
-  'SEC.5.3':{objectives:["Understand automotive network architectures","Apply security concepts specific to automotive systems","Analyze and mitigate threats in connected vehicles"]},
-  'SEC.5.4':{objectives:["Design and implement an IoT security solution","Apply security assessment methodologies to IoT projects","Demonstrate security testing and evaluation"]},
-  'ESDV.5.1':{objectives:["Acquire basics of programming for ARM Cortex devices","Apply general principles and approaches to embedded development","Perform modeling and optimizing for IoT systems"],content:["Chapter I: Microcontrollers – Introduction","Chapter II: Processors and STM-Library","Chapter III: Peripheral Programming","Chapter IV: Real-Time and IoT Applications"]},
-  'ESDV.5.2':{objectives:["Understand VHDL language features","Design sequential and concurrent digital systems in VHDL","Simulate and debug digital systems described in VHDL","Synthesize complex digital systems and implement on FPGA"],content:["Chapter I: Introduction to VHDL","Chapter II: Combinational Circuit Design","Chapter III: Sequential Circuit Design","Chapter IV: Advanced VHDL and FPGA Implementation"]},
-  'ESDV.5.3':{objectives:["Acquire basic concepts of real-time systems design and validation"],content:["Lesson I: Introduction to Real-Time Systems","Lesson II: Petri Net","Lesson III: Timed automata"]},
-  'ESDV.5.4':{objectives:["Identify a principled scientific approach to Cyber-Physical Systems","Understand model-based design for embedded systems","Apply IoT ecosystem concepts"],content:["Chapter 1: Motivation – Cyber Physical Systems","Chapter 2: Model Based Design","Chapter 3: Sensors and Actuators","Chapter 4: Embedded Systems Programming","Chapter 5: Networking","Chapter 6: IoT Ecosystem","Chapter 7: IoT Analytics"]},
-  'ESDV.5.5':{content:["Chapter I: Introduction to Electronics for Embedded Systems","Chapter II: Design and Layout of Simple Logic Gates","Chapter III: Static, Dynamic sequential circuits"]},
-  'ESDV.5.6':{content:["Chapter I: Introduction to PCB Design with Altium","Chapter II: Schematic Editor Basics","Chapter III: Schematic Capture","Chapter IV: PCB Layout"]},
-  'ESDV.5.7':{objectives:["Integrate embedded hardware and software components","Complete a full embedded system project","Apply project management to embedded system development"]},
-  'ESDV.5.8':{objectives:["Design and implement a microcontroller-based project","Apply programming techniques to solve embedded problems","Demonstrate practical embedded systems skills"]},
-  'ESDV.5.9':{objectives:["Master the FPGA EDA design flow","Know the optimization algorithm for FPGA mapping","Deal with co-design approaches"],content:["Chapter 1: Introduction to Reconfigurable Architectures","Chapter 2: Tree-based architectures","Chapter 3: Configuration and algorithmic tools","Chapter 4: Embedded FPGA"]},
-  'ESEP.5.1':{content:["Chapter I: Introduction – ARM Cortex Microcontrollers","Chapter II: Processors and STM-Library","Chapter III: Peripheral Programming","Chapter IV: IoT Applications"]},
-  'ESEP.5.2':{objectives:["Program connected objects using embedded platforms","Apply IoT communication protocols","Build end-to-end connected object applications"]},
-  'ESEP.5.3':{objectives:["Identify a principled scientific approach to Cyber-Physical Systems","Apply model-based design for IoT","Work with sensors, actuators, and IoT ecosystems"],content:["Chapter 1: Motivation – Cyber Physical Systems","Chapter 2: Model Based Design","Chapter 3: Sensors and Actuators","Chapter 4: Embedded Systems Programming","Chapter 5: Networking","Chapter 6: IoT Ecosystem","Chapter 7: IoT Analytics"]},
-  'NET.5.1':{objectives:["Understand multi-service cellular network architectures","Analyze 4G/5G network features and performance"],content:["Part I: Introduction to 3G/UMTS networks","Part II: Introduction to 4G networks","Part III: Introduction to 5G networks"]},
-  'NET.5.2':{objectives:["Study the fundamental communication protocols for IoT","Understand IoT application architectures","Analyze wireless sensor and vehicular networks"],content:["Chapter I: Introduction to IoT communications","Chapter II: IoT Applications and architectures","Chapter III: Networks technologies in IoT","Chapter IV: Middlewares and Application protocols for IoT","Chapter V: Wireless Sensor networks","Chapter VI: Vehicular Ad hoc Networks"]},
-  'NET.5.3':{objectives:["Understand the concepts and architecture of network management","Have knowledge of latest network management technologies","Apply SNMP and related network management protocols"]},
-  'NET.5.4':{objectives:["Master the various engineering mechanisms for QoS","Know how to use techniques and tools for traffic engineering","Apply QoS policies in network environments"]},
-  'IAP.5.1':{objectives:["Understand new technologies of Soft and Smart Sensors","Learn modern Soft and Smart Actuators","Implement Soft Actuator Control Strategies"],content:["Lesson 1: Smart Measurements","Lesson 2: Soft and Smart Sensors","Lesson 3: Soft and Smart Actuators","Lesson 4: Soft Actuators Control Strategies"]},
-  'IAP.5.2':{objectives:["Program connected IoT objects","Apply IoT application programming frameworks","Build IoT prototypes with embedded boards"]},
-  'IAP.5.3':{objectives:["Understand positioning systems and techniques","Apply GPS, GNSS, and indoor positioning methods","Build location-aware IoT applications"]},
+  'AI.5.1':{objectives:["Maîtriser les concepts d'agent et de systèmes multi-agents","Apprendre le développement d'un système multi-agents","Explorer des questions de recherche complémentaires"],content:["Chapitre 2 : Agents intelligents","Chapitre 3 : Architectures d'agents","Chapitre 4 : Méthodologies de développement de systèmes multi-agents","Chapitre 4 : Environnements de développement SMA & étude de cas"]},
+  'AI.5.2':{objectives:["Systèmes formels et inférence formelle pour la décision","Démonstration de théorèmes","Fuzzification, défuzzification et décision","Règles de correspondance formelles"],content:["Leçon I. Introduction – Preuve formelle et déduction logique","Leçon II. Systèmes formels pour les logiques temporelles","Leçon III. Logique PLTL, modèles de Büchi, composition d'automates et vérification sémantique","Leçon III. Logique floue – Fuzzification et défuzzification"]},
+  'AI.5.3':{objectives:["Connaître les bases et les différents types de deep learning","Utiliser et appliquer les techniques de deep learning supervisées et non supervisées"],content:["Chapitre 1. Introduction au deep learning","Chapitre 2. Réseaux de neurones récurrents","Chapitre 3. Réseau de neurones feed-forward","Chapitre 4. Autoencodeurs","Chapitre 5. Modèles génératifs profonds","Chapitre 6. Introduction à l'apprentissage fédéré"]},
+  'AI.5.4':{objectives:["Comprendre les concepts clés du NLP pour décrire et analyser le langage","Comprendre l'étiquetage morphosyntaxique et la grammaire hors-contexte pour le langage naturel","Comprendre la représentation sémantique du langage naturel pour le traitement","Appliquer les méthodes d'apprentissage automatique / deep learning au traitement de textes"]},
+  'AI.5.5':{objectives:["Comprendre la fusion de capteurs et la perception pour les robots autonomes","Programmer des comportements de robots mobiles autonomes","Appliquer des techniques de soft computing aux systèmes de contrôle"]},
+  'AI.5.8':{content:["Chapitre I : Introduction au calcul affectif","Chapitre II : Émotions – Définitions, types, théories","Chapitre III : Reconnaissance automatique des émotions (faciale, vocale, gestuelle, physiologique)","Chapitre IV : Modélisation informatique des émotions et robots expressifs"]},
+  'AI.5.9':{objectives:["Proposer un projet ITS en utilisant les connaissances acquises dans d'autres formations","Estimer les ressources technologiques et budgétaires pour un ITS","Avoir une idée des tendances récentes et des programmes ITS nationaux et internationaux"],content:["Chapitre I : Systèmes de transport intelligents – Introduction","Chapitre II : Exemples de projets","Chapitre III : ITS en Tunisie"]},
+  'AI.5.10':{content:["Chapitre 1 : Introduction au Web sémantique","Chapitre 2 : Modèle de données RDF","Chapitre 3 : Langage de requête SPARQL","Chapitre 4 : Support des ontologies et schémas RDFS","Chapitre 4 : Formalisation en OWL"]},
+  'AI.5.12':{objectives:["Comprendre l'apprentissage automatique générique","Comprendre la motivation et le fonctionnement des réseaux profonds","Comprendre les choix et les limites des modèles de deep learning","Appliquer les techniques de deep learning à des problèmes pratiques","Évaluer de manière critique les performances des modèles"],content:["Chapitre 1 : Mathématiques appliquées et bases de l'apprentissage automatique","Chapitre 2 : Réseaux profonds pratiques modernes","Chapitre 3 : Recherche en deep learning"]},
+  'AI.5.16':{objectives:["Comprendre les concepts clés du NLP pour décrire et analyser le langage","Comprendre l'étiquetage morphosyntaxique et la grammaire hors-contexte pour le langage naturel","Comprendre la représentation sémantique du langage naturel pour le traitement"]},
+  'SE.5.1':{content:["Chapitre 1 : Introduction à la réingénierie logicielle","Chapitre 2 : Réingénierie du code – Refactoring","Chapitre 3 : Réingénierie des données","Chapitre 4 : Réingénierie des processus métier","Chapitre 5 : Réingénierie des systèmes d'information","Chapitre 6 : Outils pour la réingénierie logicielle"]},
+  'SE.5.2':{objectives:["Connaître le processus de gestion de la qualité et ses activités clés","Comprendre le rôle des normes dans la gestion de la qualité","Apprendre les métriques logicielles et l'évaluation de la qualité","Maîtriser les techniques de test logiciel","Connaître les différents niveaux de test logiciel","Savoir réduire les bugs dans les programmes logiciels","Utiliser et appliquer des outils d'évaluation"],content:["Partie 1 : Gestion de la qualité logicielle","Partie 2 : Test logiciel"]},
+  'SE.5.4':{objectives:["Assimiler les concepts clés des systèmes complexes (émergence, auto-organisation)","Décrire, comprendre et analyser les systèmes complexes","Étudier les outils informatiques de modélisation des systèmes complexes","Apprendre les bases des systèmes de systèmes"],content:["Chapitre I : Systèmes complexes – Introduction","Chapitre II : Modélisation et simulation à base d'agents","Chapitre III : Automates cellulaires","Chapitre IV : Systèmes de systèmes – Classification et architecture","Chapitre V : Ingénierie des systèmes de systèmes"]},
+  'SE.5.5':{objectives:["Détailler l'approche MDA (Model Driven Architecture) et l'OMG","Développer des capacités de méta-modélisation","Maîtriser le langage de contraintes OCL","Étudier les différents types et approches de transformation de modèles","Mettre en pratique les connaissances acquises"],content:["Chapitre I : Introduction à l'ingénierie dirigée par les modèles","Chapitre II : Principes et normes du MDE","Chapitre III : Langage de contraintes d'objets (OCL)","Chapitre IV : Transformation de modèles"]},
+  'DOS.5.1':{objectives:["Comprendre les modèles et architectures du cloud computing","Appliquer des stratégies de déploiement cloud","Configurer et gérer des services cloud"]},
+  'DOS.5.2':{objectives:["Expliquer la blockchain et son application dans différents secteurs","Décrire les principes clés de la technologie blockchain","Expliquer les concepts fondamentaux d'Hyperledger Fabric","Appliquer les concepts de sécurité blockchain, d'identité et de contrôle d'accès","Écrire des applications interagissant avec un réseau blockchain"],content:["Unité 1 : Introduction à la blockchain","Unité 2 : Introduction au développement de chaincode","Unité 3 : Méthodes de requête de chaincode","Unité 4 : Bonnes pratiques pour l'écriture, le test et le débogage de chaincode","Unité 5 : Identité et contrôle d'accès","Unité 6 : Confidentialité des données","Unité 7 : Bases du développement d'applications","Unité 8 : Intégration blockchain et développement d'applications avancées"]},
+  'DOS.5.3':{content:["Chapitre I : Introduction à l'IoT","Chapitre II : Applications et architectures IoT","Chapitre III : Technologies réseaux dans l'IoT","Chapitre IV : Middlewares et protocoles applicatifs pour l'IoT"]},
+  'DOS.5.4':{objectives:["Comprendre les architectures avancées de processeurs","Appliquer des modèles de programmation parallèle","Optimiser les logiciels pour les architectures multi-cœurs et SIMD"]},
+  'DOS.5.5':{objectives:["Comprendre les problèmes liés aux applications temps réel","Utiliser des systèmes d'exploitation temps réel basés sur FreeRTOS","Concevoir des applications temps réel avec FreeRTOS"],content:["Chapitre I : Introduction aux systèmes temps réel","Chapitre II : Systèmes d'exploitation temps réel","Chapitre III : Architecture système de FreeRTOS"]},
+  'DOS.5.6':{objectives:["Comprendre les architectures des systèmes distribués","Appliquer les principes du calcul distribué","Construire des applications distribuées"]},
+  'DOS.5.7':{objectives:["Construire et configurer des systèmes Linux embarqués","Écrire des pilotes de périphériques Linux","Utiliser Yocto et Buildroot pour des cibles embarquées"]},
+  'DOS.5.8':{objectives:["Comprendre les fondamentaux du cloud computing","Distinguer les modèles IaaS, PaaS et SaaS","Déployer des applications sur des plateformes cloud"]},
+  'DOS.5.9':{objectives:["Maîtriser le système d'exploitation robotique (ROS)","Traiter les modèles et simulations pour les robots","Développer des logiciels pour les applications robotiques"]},
+  'DOS.5.11':{objectives:["Acquérir et utiliser des connaissances sur les systèmes distribués","Découvrir les principaux concepts du middleware","Apprendre à construire une application distribuée avec différents frameworks"]},
+  'ISA.5.1':{objectives:["Maîtriser les briques de base de la plateforme Hadoop (HDFS, MapReduce)","Maîtriser l'approche MapReduce pour la résolution de problèmes","Comprendre les limites du modèle relationnel et connaître les modèles NOSQL"],content:["Chapitre I : Introduction au Big Data","Chapitre II : Hadoop – Briques de base","Chapitre III : Outils de traitement avancés","Chapitre IV : Bases de données NOSQL","Chapitre V : Architectures Big Data"]},
+  'ISA.5.2':{content:["Chapitre 1 : Introduction à l'exploration de données","Chapitre 2 : Prétraitement et extraction de caractéristiques textuelles","Chapitre 3 : Classification de textes","Chapitre 4 : Analyse de sentiment","Chapitre 5 : Identification de sujets"]},
+  'ISA.5.3':{objectives:["Comprendre les systèmes d'aide à la décision et leurs architectures","Appliquer des techniques de prise de décision interactive","Construire des applications d'aide à la décision"]},
+  'ISA.5.4':{objectives:["Être capable d'évaluer les technologies constituant la BI","Être capable de planifier la mise en œuvre d'une solution BI"],content:["Chapitre 1 : Introduction à la Business Intelligence","Chapitre 2 : Intégration des données","Chapitre 3 : Stockage des données – Entrepôt de données","Chapitre 4 : Analyse multidimensionnelle avec OLAP","Chapitre 5 : Langage MDX"]},
+  'ISA.5.7':{objectives:["Comprendre les architectures de bases de données distribuées","Appliquer des techniques de traitement de requêtes distribuées","Gérer la réplication et la cohérence"]},
+  'ISA.5.8':{objectives:["Maîtriser les techniques avancées de BI","Appliquer des analyses et rapports avancés","Évaluer et comparer les plateformes BI"]},
+  'ISA.5.9':{content:["Chapitre 1 : Introduction aux SIG","Chapitre 2 : Formats, conception et qualité de données SIG","Chapitre 3 : Analyse géospatiale et environnementale","Chapitre 4 : Cartographie et analyse spatiale"]},
+  'ISA.5.10':{objectives:["Comprendre les enjeux de gouvernance dans le contrôle des activités d'entreprise","Connaître les meilleures pratiques en gouvernance des SI","Comprendre les composantes de l'entreprise numérique"],content:["Chapitre I : Architecture d'entreprise – Introduction","Section I : Présentation du domaine de l'AE","Section II : Architecture de l'entreprise numérique","Chapitre II : Gouvernance du SI de l'entreprise","Section I : Gouvernance des SI","Section II : Fondements d'un modèle de gouvernance des SI","Section III : Initiatives clés"]},
+  'ISA.5.11':{objectives:["Maîtriser les pipelines d'ingénierie des données","Appliquer des outils ETL et d'orchestration de données","Construire une infrastructure de données scalable"]},
+  'ISA.5.12':{objectives:["Initier les étudiants aux concepts de base de l'exploration de données","Développer des compétences dans l'utilisation d'outils récents de datamining","Acquérir de l'expérience en analyse de données autonome"],content:["Chapitre 1 : Introduction au Datamining","Chapitre 2 : Prétraitement des données","Chapitre 3 : Règles d'association","Chapitre 4 : Clustering"]},
+  'CV.5.4':{objectives:["Maîtriser les méthodes de simplification de maillages 3D","Maîtriser les méthodes de recalage 3D","Maîtriser les méthodes de construction d'objets 3D à partir d'images"]},
+  'CV.5.6':{objectives:["Maîtriser les techniques de morphologie mathématique","Appliquer la morphologie mathématique en analyse d'images","Appliquer la morphologie mathématique pour des applications médicales"]},
+  'CV.5.11':{objectives:["Étudier les spécificités des différentes modalités d'imagerie"],content:["Partie 1 : Introduction à l'imagerie médicale","Partie 2 : Modalités","Partie 3 : Les principaux traitements des images médicales"]},
+  'FIN.5.2':{content:["Chapitre 1 : Risque financier – Introduction","Chapitre 2 : Assurance de portefeuille","Chapitre 3 : Stratégies de couverture dynamique","Chapitre 4 : Gestion du risque de taux d'intérêt"]},
+  'FIN.5.3':{content:["Chapitre 1 : Introduction à la gestion bancaire","Chapitre 2 : Risques bancaires – définition et typologie","Chapitre 3 : Le cadre réglementaire","Chapitre 4 : Gestion du risque de crédit"]},
+  'MAT.5.3':{objectives:["Appliquer des méthodes d'optimisation numérique avec R","Résoudre des problèmes d'optimisation avec et sans contraintes","Implémenter des algorithmes d'optimisation en R"]},
+  'MAT.5.4':{objectives:["Appliquer des méthodes d'inférence statistique avec R","Effectuer des tests d'hypothèses et estimer des intervalles de confiance","Utiliser R pour le calcul statistique et l'analyse de données"]},
+  'MAT.5.5':{objectives:["Appliquer des techniques d'analyse de données multivariées","Effectuer la réduction de dimensionnalité et le clustering","Interpréter les résultats d'analyse de données pour la prise de décision"]},
+  'SEC.5.1':{objectives:["Développer des connaissances en diagnostic et détection de défauts","Introduire les principes d'analyse en composantes indépendantes/dépendantes","Étudier le traitement en ligne de la prédiction de fiabilité dans les systèmes embarqués"],content:["Leçon 1 : Introduction au diagnostic, à la sûreté et à la fiabilité","Leçon 2 : Diagnostic – Techniques basées sur les modèles","Leçon 3 : Diagnostic – Techniques basées sur les signaux","Leçon 4 : Analyse de systèmes avec composants indépendants","Leçon 5 : Analyse de systèmes avec composants dépendants","Leçon 6 : Application des méthodologies de sûreté de fonctionnement aux SE","Leçon 7 : Méthodologie de prédiction de fiabilité pour les SE"]},
+  'SEC.5.2':{objectives:["Discuter des principales menaces et attaques IoT","Identifier les outils et protocoles cryptographiques adaptés","Évaluer les menaces et risques IoT","Concevoir un système embarqué sécurisé"],content:["Chapitre 1 : Introduction à la sécurité IoT","Chapitre 2 : Sécurisation des dispositifs IoT","Chapitre 3 : Sécurisation de la couche réseau IoT","Chapitre 4 : Sécurisation de la couche applicative IoT","Chapitre 5 : Sécurisation des plateformes IoT","Chapitre 6 : Sécurité dans les systèmes embarqués"]},
+  'SEC.5.3':{objectives:["Comprendre les architectures réseau automobiles","Appliquer les concepts de sécurité spécifiques aux systèmes automobiles","Analyser et atténuer les menaces dans les véhicules connectés"]},
+  'SEC.5.4':{objectives:["Concevoir et implémenter une solution de sécurité IoT","Appliquer des méthodologies d'évaluation de la sécurité à des projets IoT","Démontrer des compétences en test et évaluation de la sécurité"]},
+  'ESDV.5.1':{objectives:["Acquérir les bases de la programmation pour les dispositifs ARM Cortex","Appliquer les principes et approches généraux du développement embarqué","Effectuer la modélisation et l'optimisation pour les systèmes IoT"],content:["Chapitre I : Microcontrôleurs – Introduction","Chapitre II : Processeurs et bibliothèque STM","Chapitre III : Programmation des périphériques","Chapitre IV : Applications temps réel et IoT"]},
+  'ESDV.5.2':{objectives:["Comprendre les fonctionnalités du langage VHDL","Concevoir des systèmes numériques séquentiels et concurrents en VHDL","Simuler et déboguer des systèmes numériques décrits en VHDL","Synthétiser des systèmes numériques complexes et les implémenter sur FPGA"],content:["Chapitre I : Introduction au VHDL","Chapitre II : Conception de circuits combinatoires","Chapitre III : Conception de circuits séquentiels","Chapitre IV : VHDL avancé et implémentation sur FPGA"]},
+  'ESDV.5.3':{objectives:["Acquérir les concepts de base de conception et validation des systèmes temps réel"],content:["Leçon I : Introduction aux systèmes temps réel","Leçon II : Réseau de Petri","Leçon III : Automates temporisés"]},
+  'ESDV.5.4':{objectives:["Identifier une approche scientifique rigoureuse des systèmes cyber-physiques","Comprendre la conception basée sur les modèles pour les systèmes embarqués","Appliquer les concepts de l'écosystème IoT"],content:["Chapitre 1 : Motivation – Systèmes cyber-physiques","Chapitre 2 : Conception basée sur les modèles","Chapitre 3 : Capteurs et actionneurs","Chapitre 4 : Programmation de systèmes embarqués","Chapitre 5 : Réseaux","Chapitre 6 : Écosystème IoT","Chapitre 7 : Analytique IoT"]},
+  'ESDV.5.5':{content:["Chapitre I : Introduction à l'électronique pour les systèmes embarqués","Chapitre II : Conception et layout de portes logiques simples","Chapitre III : Circuits séquentiels statiques et dynamiques"]},
+  'ESDV.5.6':{content:["Chapitre I : Introduction à la conception de PCB avec Altium","Chapitre II : Bases de l'éditeur schématique","Chapitre III : Capture schématique","Chapitre IV : Layout PCB"]},
+  'ESDV.5.7':{objectives:["Intégrer des composants matériels et logiciels embarqués","Mener à bien un projet de système embarqué complet","Appliquer la gestion de projet au développement de systèmes embarqués"]},
+  'ESDV.5.8':{objectives:["Concevoir et implémenter un projet à base de microcontrôleur","Appliquer des techniques de programmation pour résoudre des problèmes embarqués","Démontrer des compétences pratiques en systèmes embarqués"]},
+  'ESDV.5.9':{objectives:["Maîtriser le flot de conception EDA pour FPGA","Connaître l'algorithme d'optimisation pour le mapping FPGA","Traiter les approches de co-conception"],content:["Chapitre 1 : Introduction aux architectures reconfigurables","Chapitre 2 : Architectures à base d'arbres","Chapitre 3 : Outils de configuration et algorithmiques","Chapitre 4 : FPGA embarqué"]},
+  'ESEP.5.1':{content:["Chapitre I : Introduction – Microcontrôleurs ARM Cortex","Chapitre II : Processeurs et bibliothèque STM","Chapitre III : Programmation des périphériques","Chapitre IV : Applications IoT"]},
+  'ESEP.5.2':{objectives:["Programmer des objets connectés à l'aide de plateformes embarquées","Appliquer les protocoles de communication IoT","Construire des applications d'objets connectés de bout en bout"]},
+  'ESEP.5.3':{objectives:["Identifier une approche scientifique rigoureuse des systèmes cyber-physiques","Appliquer la conception basée sur les modèles pour l'IoT","Travailler avec des capteurs, actionneurs et écosystèmes IoT"],content:["Chapitre 1 : Motivation – Systèmes cyber-physiques","Chapitre 2 : Conception basée sur les modèles","Chapitre 3 : Capteurs et actionneurs","Chapitre 4 : Programmation de systèmes embarqués","Chapitre 5 : Réseaux","Chapitre 6 : Écosystème IoT","Chapitre 7 : Analytique IoT"]},
+  'NET.5.1':{objectives:["Comprendre les architectures de réseaux cellulaires multi-services","Analyser les fonctionnalités et performances des réseaux 4G/5G"],content:["Partie I : Introduction aux réseaux 3G/UMTS","Partie II : Introduction aux réseaux 4G","Partie III : Introduction aux réseaux 5G"]},
+  'NET.5.2':{objectives:["Étudier les protocoles de communication fondamentaux pour l'IoT","Comprendre les architectures applicatives IoT","Analyser les réseaux de capteurs sans fil et les réseaux véhiculaires"],content:["Chapitre I : Introduction aux communications IoT","Chapitre II : Applications et architectures IoT","Chapitre III : Technologies réseaux dans l'IoT","Chapitre IV : Middlewares et protocoles applicatifs pour l'IoT","Chapitre V : Réseaux de capteurs sans fil","Chapitre VI : Réseaux ad hoc véhiculaires"]},
+  'NET.5.3':{objectives:["Comprendre les concepts et l'architecture de la gestion de réseau","Avoir une connaissance des dernières technologies de gestion de réseau","Appliquer SNMP et les protocoles de gestion de réseau associés"]},
+  'NET.5.4':{objectives:["Maîtriser les différents mécanismes d'ingénierie pour la QoS","Savoir utiliser les techniques et outils d'ingénierie du trafic","Appliquer des politiques QoS dans des environnements réseau"]},
+  'IAP.5.1':{objectives:["Comprendre les nouvelles technologies de capteurs souples et intelligents","Apprendre les actionneurs souples et intelligents modernes","Implémenter des stratégies de contrôle d'actionneurs souples"],content:["Leçon 1 : Mesures intelligentes","Leçon 2 : Capteurs souples et intelligents","Leçon 3 : Actionneurs souples et intelligents","Leçon 4 : Stratégies de contrôle d'actionneurs souples"]},
+  'IAP.5.2':{objectives:["Programmer des objets IoT connectés","Appliquer des frameworks de programmation d'applications IoT","Construire des prototypes IoT avec des cartes embarquées"]},
+  'IAP.5.3':{objectives:["Comprendre les systèmes et techniques de positionnement","Appliquer les méthodes GPS, GNSS et de positionnement intérieur","Construire des applications IoT géolocalisées"]},
 };
 
 const MODULES = [
   // ── S1 ──
-  {code:'MAT.1.1',title:'Probability and Statistics',semester:1,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Understand probability theory fundamentals','Apply statistical methods to engineering problems','Perform hypothesis testing and regression analysis'],content:['Probability spaces and events','Random variables and distributions','Statistical inference','Regression and correlation','Hypothesis testing'],examForm:'Written exam + Lab work',passMark:'10/20',readingList:['Papoulis, Probability, Random Variables and Stochastic Processes','Wackerly, Mathematical Statistics with Applications'],responsible:'Dept. of Mathematics'},
-  {code:'MAT.1.2',title:'Engineering Mathematics',semester:1,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Master linear algebra for engineering','Apply differential equations to systems','Use Fourier and Laplace transforms'],content:['Linear algebra and matrix theory','Differential equations','Fourier series and transforms','Laplace transforms','Complex analysis'],examForm:'Written exam',passMark:'10/20',readingList:['Kreyszig, Advanced Engineering Mathematics'],responsible:'Dept. of Mathematics'},
-  {code:'FIN.1.1',title:'Introduction to the Banking and Financial System',semester:1,credits:3,subject:'FIN',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Understand structure of financial systems','Identify roles of banking institutions','Grasp fundamental financial instruments'],content:['Overview of the financial system','Commercial and central banking','Financial markets and instruments','Monetary policy','Tunisian banking sector'],examForm:'Written exam',passMark:'10/20',readingList:['Mishkin, The Economics of Money, Banking and Financial Markets'],responsible:'Dept. of Finance'},
-  {code:'EHA.1.1',title:'Digital Circuits',semester:1,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Design combinational and sequential digital circuits','Implement logic using HDL','Analyze timing in digital systems'],content:['Boolean algebra and logic gates','Combinational circuits','Flip-flops and latches','Sequential circuit design','Introduction to VHDL'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Wakerly, Digital Design: Principles and Practices'],responsible:'Dept. of Hardware'},
-  {code:'EHA.1.2',title:'Analogue Electronics',semester:1,credits:1.5,subject:'EHA',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Analyze basic analogue circuits','Understand amplifier design'],content:['Diodes and transistors','Amplifier circuits','Operational amplifiers','Filters'],examForm:'Written exam',passMark:'10/20',readingList:['Sedra & Smith, Microelectronic Circuits'],responsible:'Dept. of Hardware'},
-  {code:'AI.1.1',title:'Formal Logic',semester:1,credits:3,subject:'AI',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Master propositional and predicate logic','Use formal proof techniques','Apply logic in computer science'],content:['Propositional logic','Predicate logic','Proof methods','Resolution and unification','Logic programming basics'],examForm:'Written exam',passMark:'10/20',readingList:['Ben-Ari, Mathematical Logic for Computer Science'],responsible:'Dept. of AI'},
-  {code:'DAT.1.1',title:'Database and Database Management Systems',semester:1,credits:3,subject:'DAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Design relational databases','Write SQL queries','Understand DBMS internals'],content:['Relational model and algebra','ER modeling','SQL (DDL, DML, queries)','Normalization','Transaction management'],examForm:'Written exam + Project',passMark:'10/20',readingList:['Ramakrishnan & Gehrke, Database Management Systems'],responsible:'Dept. of Data'},
-  {code:'AP.1.2',title:'Algorithmic and Data Structures',semester:1,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:28,lab:21,selfStudy:18.5},prerequisites:[],objectives:['Analyze algorithm complexity','Implement fundamental data structures','Apply sorting and searching algorithms'],content:['Algorithm analysis and Big-O','Arrays, linked lists, stacks, queues','Trees and binary search trees','Sorting algorithms','Hash tables','Graphs introduction'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Cormen, Introduction to Algorithms'],responsible:'Dept. of Programming'},
-  {code:'AP.1.3',title:'Advanced C Programming',semester:1,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:21,lab:31.5,selfStudy:15},prerequisites:[],objectives:['Master advanced C programming','Use pointers and dynamic memory','Implement complex data structures in C'],content:['Pointers and memory management','Structures and unions','File I/O','Dynamic memory allocation','System calls'],examForm:'Lab project + Oral',passMark:'10/20',readingList:['Kernighan & Ritchie, The C Programming Language'],responsible:'Dept. of Programming'},
-  {code:'BDC.1.1',title:'Management of Organization',semester:1,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Understand organizational management principles','Apply management concepts to IT teams'],content:['Organizational structures','Management theories','Decision-making','Project teams'],examForm:'Written exam',passMark:'10/20',readingList:[],responsible:'Dept. of Business'},
-  {code:'BDC.1.2',title:'Language and Communication I: English for Computer Science',semester:1,credits:3,subject:'BDC',language:'English',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Develop technical English reading and writing','Present technical content in English'],content:['Technical vocabulary','Reading scientific papers','Writing reports','Oral presentations'],examForm:'Oral + Written',passMark:'10/20',readingList:[],responsible:'Language Center'},
+  {code:'MAT.1.1',title:'Probabilités et Statistiques',semester:1,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Comprendre les fondamentaux de la théorie des probabilités','Appliquer les méthodes statistiques aux problèmes d\'ingénierie','Effectuer des tests d\'hypothèses et des analyses de régression'],content:['Espaces de probabilité et événements','Variables aléatoires et distributions','Inférence statistique','Régression et corrélation','Tests d\'hypothèses'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Papoulis, Probability, Random Variables and Stochastic Processes','Wackerly, Mathematical Statistics with Applications'],responsible:'Dép. de Mathématiques'},
+  {code:'MAT.1.2',title:'Mathématiques de l\'Ingénieur',semester:1,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Maîtriser l\'algèbre linéaire pour l\'ingénierie','Appliquer les équations différentielles aux systèmes','Utiliser les transformées de Fourier et de Laplace'],content:['Algèbre linéaire et théorie des matrices','Équations différentielles','Séries et transformées de Fourier','Transformées de Laplace','Analyse complexe'],examForm:'Examen écrit',passMark:'10/20',readingList:['Kreyszig, Advanced Engineering Mathematics'],responsible:'Dép. de Mathématiques'},
+  {code:'FIN.1.1',title:'Introduction au Système Bancaire et Financier',semester:1,credits:3,subject:'FIN',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Comprendre la structure des systèmes financiers','Identifier les rôles des institutions bancaires','Saisir les instruments financiers fondamentaux'],content:['Vue d\'ensemble du système financier','Banques commerciales et centrales','Marchés et instruments financiers','Politique monétaire','Secteur bancaire tunisien'],examForm:'Examen écrit',passMark:'10/20',readingList:['Mishkin, The Economics of Money, Banking and Financial Markets'],responsible:'Dép. de Finance'},
+  {code:'EHA.1.1',title:'Circuits Numériques',semester:1,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Concevoir des circuits numériques combinatoires et séquentiels','Implémenter la logique avec un HDL','Analyser le timing dans les systèmes numériques'],content:['Algèbre de Boole et portes logiques','Circuits combinatoires','Bascules (flip-flops et latches)','Conception de circuits séquentiels','Introduction au VHDL'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Wakerly, Digital Design: Principles and Practices'],responsible:'Dép. de Matériel'},
+  {code:'EHA.1.2',title:'Électronique Analogique',semester:1,credits:1.5,subject:'EHA',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Analyser des circuits analogiques de base','Comprendre la conception des amplificateurs'],content:['Diodes et transistors','Circuits amplificateurs','Amplificateurs opérationnels','Filtres'],examForm:'Examen écrit',passMark:'10/20',readingList:['Sedra & Smith, Microelectronic Circuits'],responsible:'Dép. de Matériel'},
+  {code:'AI.1.1',title:'Logique Formelle',semester:1,credits:3,subject:'AI',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Maîtriser la logique propositionnelle et des prédicats','Utiliser les techniques de preuve formelle','Appliquer la logique en informatique'],content:['Logique propositionnelle','Logique des prédicats','Méthodes de preuve','Résolution et unification','Bases de la programmation logique'],examForm:'Examen écrit',passMark:'10/20',readingList:['Ben-Ari, Mathematical Logic for Computer Science'],responsible:'Dép. d\'IA'},
+  {code:'DAT.1.1',title:'Bases de Données et SGBD',semester:1,credits:3,subject:'DAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Concevoir des bases de données relationnelles','Écrire des requêtes SQL','Comprendre le fonctionnement interne des SGBD'],content:['Modèle et algèbre relationnels','Modélisation ER','SQL (DDL, DML, requêtes)','Normalisation','Gestion des transactions'],examForm:'Examen écrit + Projet',passMark:'10/20',readingList:['Ramakrishnan & Gehrke, Database Management Systems'],responsible:'Dép. de Données'},
+  {code:'AP.1.2',title:'Algorithmique et Structures de Données',semester:1,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:28,lab:21,selfStudy:18.5},prerequisites:[],objectives:['Analyser la complexité des algorithmes','Implémenter les structures de données fondamentales','Appliquer les algorithmes de tri et de recherche'],content:['Analyse d\'algorithmes et notation Big-O','Tableaux, listes chaînées, piles, files','Arbres et arbres binaires de recherche','Algorithmes de tri','Tables de hachage','Introduction aux graphes'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Cormen, Introduction to Algorithms'],responsible:'Dép. de Programmation'},
+  {code:'AP.1.3',title:'Programmation C Avancée',semester:1,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:21,lab:31.5,selfStudy:15},prerequisites:[],objectives:['Maîtriser la programmation C avancée','Utiliser les pointeurs et la mémoire dynamique','Implémenter des structures de données complexes en C'],content:['Pointeurs et gestion mémoire','Structures et unions','Entrées/sorties fichiers','Allocation dynamique de mémoire','Appels système'],examForm:'Projet TP + Oral',passMark:'10/20',readingList:['Kernighan & Ritchie, The C Programming Language'],responsible:'Dép. de Programmation'},
+  {code:'BDC.1.1',title:'Gestion des Organisations',semester:1,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Comprendre les principes de gestion organisationnelle','Appliquer les concepts de management aux équipes IT'],content:['Structures organisationnelles','Théories du management','Prise de décision','Équipes de projet'],examForm:'Examen écrit',passMark:'10/20',readingList:[],responsible:'Dép. de Business'},
+  {code:'BDC.1.2',title:'Langue et Communication I : Anglais pour l\'Informatique',semester:1,credits:3,subject:'BDC',language:'English',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Développer la lecture et l\'écriture technique en anglais','Présenter du contenu technique en anglais'],content:['Vocabulaire technique','Lecture d\'articles scientifiques','Rédaction de rapports','Présentations orales'],examForm:'Oral + Écrit',passMark:'10/20',readingList:[],responsible:'Centre de Langues'},
   // ── S2 ──
-  {code:'MAT.2.1',title:'Graph Algorithms',semester:2,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.1.2'],objectives:['Master graph theory fundamentals','Implement and analyze graph algorithms','Apply graphs to real problems'],content:['Graph representations','BFS and DFS','Shortest path algorithms','Minimum spanning trees','Network flow'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Cormen, Introduction to Algorithms','Diestel, Graph Theory'],responsible:'Dept. of Mathematics'},
-  {code:'MAT.2.2',title:'Numerical Methods',semester:2,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['MAT.1.2'],objectives:['Solve problems using numerical approximation','Implement numerical algorithms'],content:['Root finding methods','Interpolation','Numerical integration','Solving ODEs numerically','Linear systems'],examForm:'Written exam',passMark:'10/20',readingList:['Burden & Faires, Numerical Analysis'],responsible:'Dept. of Mathematics'},
-  {code:'EHA.2.1',title:'Microprocessor and Microcontroller Engineering',semester:2,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.1.1'],objectives:['Understand microprocessor architecture','Program microcontrollers in assembly and C'],content:['CPU architecture','Assembly programming','Memory systems','Interrupts and timers','Arduino/STM32 programming'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Mazidi, The 8051 Microcontroller and Embedded Systems'],responsible:'Dept. of Hardware'},
-  {code:'NET.2.1',title:'Digital Transmission',semester:2,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Understand data transmission fundamentals','Analyze signal encoding techniques'],content:['Signal theory','Encoding schemes','Error detection and correction','Modulation techniques','Channel capacity'],examForm:'Written exam',passMark:'10/20',readingList:['Haykin, Communication Systems'],responsible:'Dept. of Networks'},
-  {code:'OS.2.1',title:'Introduction to Operating Systems and Unix Environment',semester:2,credits:3,subject:'OS',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Understand OS concepts and architecture','Use Unix/Linux environment proficiently'],content:['OS overview and history','Process management','File systems','Shell scripting','Unix commands and tools'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Tanenbaum, Modern Operating Systems'],responsible:'Dept. of Systems'},
-  {code:'AP.2.1',title:'Object-Oriented Programming',semester:2,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:21,lab:31.5,selfStudy:15},prerequisites:['AP.1.3'],objectives:['Master OOP principles','Design with patterns','Program in Java'],content:['Classes, objects, inheritance','Polymorphism and interfaces','Exception handling','Java Collections Framework','Design patterns intro'],examForm:'Project + Oral',passMark:'10/20',readingList:['Bloch, Effective Java','Horstmann, Core Java'],responsible:'Dept. of Programming'},
-  {code:'AP.2.2',title:'Web Technologies',semester:2,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Build web applications with HTML/CSS/JS','Understand client-server architecture'],content:['HTML5 and CSS3','JavaScript fundamentals','DOM manipulation','HTTP and REST basics','Responsive design'],examForm:'Web project',passMark:'10/20',readingList:['Flanagan, JavaScript: The Definitive Guide'],responsible:'Dept. of Programming'},
-  {code:'AP.2.3',title:'Automata Theory and Languages',semester:2,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AI.1.1'],objectives:['Understand formal language theory','Design automata for language recognition'],content:['Regular languages and automata','Context-free grammars','Pushdown automata','Turing machines','Computability basics'],examForm:'Written exam',passMark:'10/20',readingList:['Sipser, Introduction to the Theory of Computation'],responsible:'Dept. of Programming'},
-  {code:'DAT.2.1',title:'Database Lab',semester:2,credits:1.5,subject:'DAT',language:'French',type:'Compulsory',hours:{total:22.5,lecture:0,lab:21,selfStudy:1.5},prerequisites:['DAT.1.1'],objectives:['Apply database design in practice','Implement a full database project'],content:['Advanced SQL','Stored procedures','Database administration','Project: full database system'],examForm:'Lab project',passMark:'10/20',readingList:[],responsible:'Dept. of Data'},
-  {code:'IMA.2.1',title:'Introduction to Image Processing',semester:2,credits:3,subject:'IMA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1'],objectives:['Understand digital image fundamentals','Apply basic image processing algorithms'],content:['Image representation','Spatial domain processing','Frequency domain (Fourier)','Edge detection','Morphological operations'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Gonzalez & Woods, Digital Image Processing'],responsible:'Dept. of Image'},
-  {code:'BDC.2.1',title:'Language and Communication 2',semester:2,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.1.2'],objectives:['Continue English language development','Focus on technical communication'],content:['Advanced technical writing','Presentation skills','Interview preparation'],examForm:'Oral + Written',passMark:'10/20',readingList:[],responsible:'Language Center'},
+  {code:'MAT.2.1',title:'Algorithmes sur les Graphes',semester:2,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.1.2'],objectives:['Maîtriser les fondamentaux de la théorie des graphes','Implémenter et analyser des algorithmes sur les graphes','Appliquer les graphes à des problèmes réels'],content:['Représentations de graphes','BFS et DFS','Algorithmes de plus court chemin','Arbres couvrants minimaux','Flot dans les réseaux'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Cormen, Introduction to Algorithms','Diestel, Graph Theory'],responsible:'Dép. de Mathématiques'},
+  {code:'MAT.2.2',title:'Méthodes Numériques',semester:2,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['MAT.1.2'],objectives:['Résoudre des problèmes par approximation numérique','Implémenter des algorithmes numériques'],content:['Méthodes de recherche de racines','Interpolation','Intégration numérique','Résolution numérique d\'EDO','Systèmes linéaires'],examForm:'Examen écrit',passMark:'10/20',readingList:['Burden & Faires, Numerical Analysis'],responsible:'Dép. de Mathématiques'},
+  {code:'EHA.2.1',title:'Microprocesseurs et Microcontrôleurs',semester:2,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.1.1'],objectives:['Comprendre l\'architecture des microprocesseurs','Programmer des microcontrôleurs en assembleur et en C'],content:['Architecture CPU','Programmation assembleur','Systèmes mémoire','Interruptions et timers','Programmation Arduino/STM32'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Mazidi, The 8051 Microcontroller and Embedded Systems'],responsible:'Dép. de Matériel'},
+  {code:'NET.2.1',title:'Transmission Numérique',semester:2,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Comprendre les fondamentaux de la transmission de données','Analyser les techniques de codage de signal'],content:['Théorie du signal','Schémas de codage','Détection et correction d\'erreurs','Techniques de modulation','Capacité du canal'],examForm:'Examen écrit',passMark:'10/20',readingList:['Haykin, Communication Systems'],responsible:'Dép. de Réseaux'},
+  {code:'OS.2.1',title:'Introduction aux Systèmes d\'Exploitation et Environnement Unix',semester:2,credits:3,subject:'OS',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Comprendre les concepts et l\'architecture des SE','Utiliser l\'environnement Unix/Linux efficacement'],content:['Vue d\'ensemble et histoire des SE','Gestion des processus','Systèmes de fichiers','Scripts shell','Commandes et outils Unix'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Tanenbaum, Modern Operating Systems'],responsible:'Dép. de Systèmes'},
+  {code:'AP.2.1',title:'Programmation Orientée Objet',semester:2,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:21,lab:31.5,selfStudy:15},prerequisites:['AP.1.3'],objectives:['Maîtriser les principes de la POO','Concevoir avec des patrons de conception','Programmer en Java'],content:['Classes, objets, héritage','Polymorphisme et interfaces','Gestion des exceptions','Java Collections Framework','Introduction aux patrons de conception'],examForm:'Projet + Oral',passMark:'10/20',readingList:['Bloch, Effective Java','Horstmann, Core Java'],responsible:'Dép. de Programmation'},
+  {code:'AP.2.2',title:'Technologies Web',semester:2,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Construire des applications web avec HTML/CSS/JS','Comprendre l\'architecture client-serveur'],content:['HTML5 et CSS3','Fondamentaux JavaScript','Manipulation du DOM','HTTP et bases de REST','Design responsive'],examForm:'Projet web',passMark:'10/20',readingList:['Flanagan, JavaScript: The Definitive Guide'],responsible:'Dép. de Programmation'},
+  {code:'AP.2.3',title:'Théorie des Automates et des Langages',semester:2,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AI.1.1'],objectives:['Comprendre la théorie des langages formels','Concevoir des automates pour la reconnaissance de langages'],content:['Langages réguliers et automates','Grammaires hors-contexte','Automates à pile','Machines de Turing','Bases de la calculabilité'],examForm:'Examen écrit',passMark:'10/20',readingList:['Sipser, Introduction to the Theory of Computation'],responsible:'Dép. de Programmation'},
+  {code:'DAT.2.1',title:'TP Bases de Données',semester:2,credits:1.5,subject:'DAT',language:'French',type:'Compulsory',hours:{total:22.5,lecture:0,lab:21,selfStudy:1.5},prerequisites:['DAT.1.1'],objectives:['Appliquer la conception de bases de données en pratique','Implémenter un projet de base de données complet'],content:['SQL avancé','Procédures stockées','Administration de bases de données','Projet : système de base de données complet'],examForm:'Projet TP',passMark:'10/20',readingList:[],responsible:'Dép. de Données'},
+  {code:'IMA.2.1',title:'Introduction au Traitement d\'Images',semester:2,credits:3,subject:'IMA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1'],objectives:['Comprendre les fondamentaux de l\'image numérique','Appliquer des algorithmes de base de traitement d\'images'],content:['Représentation des images','Traitement dans le domaine spatial','Domaine fréquentiel (Fourier)','Détection de contours','Opérations morphologiques'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Gonzalez & Woods, Digital Image Processing'],responsible:'Dép. d\'Image'},
+  {code:'BDC.2.1',title:'Langue et Communication 2',semester:2,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.1.2'],objectives:['Poursuivre le développement de l\'anglais','Se concentrer sur la communication technique'],content:['Rédaction technique avancée','Compétences de présentation','Préparation aux entretiens'],examForm:'Oral + Écrit',passMark:'10/20',readingList:[],responsible:'Centre de Langues'},
   // ── S3 ──
-  {code:'MAT.3.1',title:'Linear and Nonlinear Programming',semester:3,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.2'],objectives:['Solve linear and nonlinear optimization problems','Apply optimization to engineering design'],content:['Linear programming and simplex','Duality theory','Nonlinear programming','Gradient methods','Constrained optimization'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Bazaraa, Nonlinear Programming'],responsible:'Dept. of Mathematics'},
-  {code:'EHA.3.1',title:'Processor Design Methodology',semester:3,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.2.1','EHA.1.1'],objectives:['Design processor architectures','Implement RISC processors using HDL'],content:['Computer organization','ALU design','Control unit design','Pipelining','RISC architecture','VHDL implementation'],examForm:'Project + Oral',passMark:'10/20',readingList:["Patterson & Hennessy, Computer Organization and Design"],responsible:'Dept. of Hardware'},
-  {code:'NET.3.1',title:'Local Area Networks',semester:3,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.2.1'],objectives:['Design and configure LAN systems','Understand switching and routing'],content:['Ethernet and IEEE 802.x','Switching and VLANs','Routing protocols','QoS','Network management'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Forouzan, Data Communications and Networking'],responsible:'Dept. of Networks'},
-  {code:'NET.3.2',title:'Lab LAN',semester:3,credits:1.5,subject:'NET',language:'French',type:'Compulsory',hours:{total:22.5,lecture:0,lab:21,selfStudy:1.5},prerequisites:['NET.3.1'],objectives:['Configure real network equipment','Implement and troubleshoot LANs'],content:['Cisco router and switch configuration','VLAN setup','Routing protocol implementation','Network troubleshooting'],examForm:'Lab assessment',passMark:'10/20',readingList:[],responsible:'Dept. of Networks'},
-  {code:'OS.3.3',title:'Operating Systems and Concurrent Programming',semester:3,credits:3,subject:'OS',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['OS.2.1'],objectives:['Master OS internals','Program concurrent applications'],content:['Process synchronization','Deadlocks','Memory management','Virtual memory','Threads and semaphores','IPC mechanisms'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Tanenbaum, Modern Operating Systems'],responsible:'Dept. of Systems'},
-  {code:'AP.3.1',title:'Compilation Techniques',semester:3,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AP.2.3'],objectives:['Understand compiler design phases','Build lexers and parsers'],content:['Lexical analysis','Syntax analysis and parsing','Semantic analysis','Intermediate code generation','Code optimization basics'],examForm:'Written exam + Project',passMark:'10/20',readingList:['Aho, Compilers: Principles, Techniques, and Tools'],responsible:'Dept. of Programming'},
-  {code:'AP.3.2',title:'Design and Analysis of Computer Algorithms',semester:3,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.1.2','MAT.2.1'],objectives:['Analyze algorithm complexity rigorously','Apply advanced algorithm design techniques'],content:['Divide and conquer','Dynamic programming','Greedy algorithms','NP-completeness','Approximation algorithms'],examForm:'Written exam',passMark:'10/20',readingList:['Cormen, Introduction to Algorithms'],responsible:'Dept. of Programming'},
-  {code:'SE.3.1',title:'Software Engineering',semester:3,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.2.1'],objectives:['Apply software engineering methodologies','Manage software projects'],content:['Software lifecycle models','Requirements engineering','Software architecture','Testing strategies','Agile methods'],examForm:'Project + Report',passMark:'10/20',readingList:['Sommerville, Software Engineering'],responsible:'Dept. of SE'},
-  {code:'SE.3.2',title:'Object-Oriented Analysis and Design',semester:3,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.2.1'],objectives:['Apply UML for system design','Implement design patterns'],content:['UML diagrams (class, sequence, use case)','SOLID principles','Design patterns (GoF)','Domain-driven design','Refactoring'],examForm:'Project + Oral',passMark:'10/20',readingList:['Martin, Clean Code','Gamma, Design Patterns'],responsible:'Dept. of SE'},
-  {code:'AI.3.1',title:'Artificial Intelligence & Machine Learning',semester:3,credits:3,subject:'AI',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1','AP.1.2'],objectives:['Understand AI foundations and search algorithms','Apply machine learning techniques'],content:['Intelligent agents','Search algorithms (A*, minimax)','Knowledge representation','Supervised learning','Unsupervised learning','Neural networks intro'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Russell & Norvig, Artificial Intelligence: A Modern Approach'],responsible:'Dept. of AI'},
-  {code:'BDC.3.1',title:'Language and Communication 3: English for Business Communication',semester:3,credits:1.5,subject:'BDC',language:'English',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.2.1'],objectives:['Master business English for IT contexts','Write professional technical documents'],content:['Business correspondence','Technical proposals','Negotiation language','Professional presentations'],examForm:'Written + Oral',passMark:'10/20',readingList:[],responsible:'Language Center'},
+  {code:'MAT.3.1',title:'Programmation Linéaire et Non Linéaire',semester:3,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.2'],objectives:['Résoudre des problèmes d\'optimisation linéaire et non linéaire','Appliquer l\'optimisation à la conception en ingénierie'],content:['Programmation linéaire et simplexe','Théorie de la dualité','Programmation non linéaire','Méthodes de gradient','Optimisation sous contraintes'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Bazaraa, Nonlinear Programming'],responsible:'Dép. de Mathématiques'},
+  {code:'EHA.3.1',title:'Méthodologie de Conception de Processeurs',semester:3,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.2.1','EHA.1.1'],objectives:['Concevoir des architectures de processeurs','Implémenter des processeurs RISC avec un HDL'],content:['Organisation des ordinateurs','Conception d\'UAL','Conception de l\'unité de contrôle','Pipeline','Architecture RISC','Implémentation en VHDL'],examForm:'Projet + Oral',passMark:'10/20',readingList:["Patterson & Hennessy, Computer Organization and Design"],responsible:'Dép. de Matériel'},
+  {code:'NET.3.1',title:'Réseaux Locaux',semester:3,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.2.1'],objectives:['Concevoir et configurer des systèmes LAN','Comprendre la commutation et le routage'],content:['Ethernet et IEEE 802.x','Commutation et VLANs','Protocoles de routage','QoS','Gestion de réseau'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Forouzan, Data Communications and Networking'],responsible:'Dép. de Réseaux'},
+  {code:'NET.3.2',title:'TP Réseaux Locaux',semester:3,credits:1.5,subject:'NET',language:'French',type:'Compulsory',hours:{total:22.5,lecture:0,lab:21,selfStudy:1.5},prerequisites:['NET.3.1'],objectives:['Configurer des équipements réseau réels','Implémenter et dépanner des LAN'],content:['Configuration de routeurs et commutateurs Cisco','Configuration des VLANs','Implémentation de protocoles de routage','Dépannage réseau'],examForm:'Évaluation TP',passMark:'10/20',readingList:[],responsible:'Dép. de Réseaux'},
+  {code:'OS.3.3',title:'Systèmes d\'Exploitation et Programmation Concurrente',semester:3,credits:3,subject:'OS',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['OS.2.1'],objectives:['Maîtriser les mécanismes internes des SE','Programmer des applications concurrentes'],content:['Synchronisation des processus','Interblocages (deadlocks)','Gestion de la mémoire','Mémoire virtuelle','Threads et sémaphores','Mécanismes IPC'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Tanenbaum, Modern Operating Systems'],responsible:'Dép. de Systèmes'},
+  {code:'AP.3.1',title:'Techniques de Compilation',semester:3,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AP.2.3'],objectives:['Comprendre les phases de conception d\'un compilateur','Construire des analyseurs lexicaux et syntaxiques'],content:['Analyse lexicale','Analyse syntaxique (parsing)','Analyse sémantique','Génération de code intermédiaire','Bases de l\'optimisation de code'],examForm:'Examen écrit + Projet',passMark:'10/20',readingList:['Aho, Compilers: Principles, Techniques, and Tools'],responsible:'Dép. de Programmation'},
+  {code:'AP.3.2',title:'Conception et Analyse des Algorithmes',semester:3,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.1.2','MAT.2.1'],objectives:['Analyser rigoureusement la complexité des algorithmes','Appliquer des techniques avancées de conception d\'algorithmes'],content:['Diviser pour régner','Programmation dynamique','Algorithmes gloutons','NP-complétude','Algorithmes d\'approximation'],examForm:'Examen écrit',passMark:'10/20',readingList:['Cormen, Introduction to Algorithms'],responsible:'Dép. de Programmation'},
+  {code:'SE.3.1',title:'Génie Logiciel',semester:3,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.2.1'],objectives:['Appliquer les méthodologies du génie logiciel','Gérer des projets logiciels'],content:['Modèles de cycle de vie logiciel','Ingénierie des exigences','Architecture logicielle','Stratégies de test','Méthodes agiles'],examForm:'Projet + Rapport',passMark:'10/20',readingList:['Sommerville, Software Engineering'],responsible:'Dép. de GL'},
+  {code:'SE.3.2',title:'Analyse et Conception Orientées Objet',semester:3,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.2.1'],objectives:['Appliquer UML pour la conception de systèmes','Implémenter des patrons de conception'],content:['Diagrammes UML (classes, séquence, cas d\'utilisation)','Principes SOLID','Patrons de conception (GoF)','Conception dirigée par le domaine','Refactoring'],examForm:'Projet + Oral',passMark:'10/20',readingList:['Martin, Clean Code','Gamma, Design Patterns'],responsible:'Dép. de GL'},
+  {code:'AI.3.1',title:'Intelligence Artificielle & Apprentissage Automatique',semester:3,credits:3,subject:'AI',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1','AP.1.2'],objectives:['Comprendre les fondements de l\'IA et les algorithmes de recherche','Appliquer les techniques d\'apprentissage automatique'],content:['Agents intelligents','Algorithmes de recherche (A*, minimax)','Représentation des connaissances','Apprentissage supervisé','Apprentissage non supervisé','Introduction aux réseaux de neurones'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Russell & Norvig, Artificial Intelligence: A Modern Approach'],responsible:'Dép. d\'IA'},
+  {code:'BDC.3.1',title:'Langue et Communication 3 : Anglais des Affaires',semester:3,credits:1.5,subject:'BDC',language:'English',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.2.1'],objectives:['Maîtriser l\'anglais des affaires dans les contextes IT','Rédiger des documents techniques professionnels'],content:['Correspondance professionnelle','Propositions techniques','Langue de négociation','Présentations professionnelles'],examForm:'Écrit + Oral',passMark:'10/20',readingList:[],responsible:'Centre de Langues'},
   // ── S4 ──
-  {code:'MAT.4.1',title:'Stochastic Processes with R',semester:4,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1'],objectives:['Model random processes','Analyze Markov chains','Use R for statistical computing'],content:['Markov chains','Poisson processes','Queuing theory','Monte Carlo simulation','Time series basics','R programming for statistics'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Ross, Introduction to Probability Models'],responsible:'Dept. of Mathematics'},
-  {code:'EHA.4.1',title:'Introduction to Embedded Systems',semester:4,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.2.1'],objectives:['Design embedded systems','Program for real-time constraints'],content:['Embedded system architecture','RTOS concepts','Hardware/software co-design','Peripheral interfacing','Power management'],examForm:'Lab project',passMark:'10/20',readingList:['Valvano, Embedded Systems: Introduction to ARM Cortex-M Microcontrollers'],responsible:'Dept. of Hardware'},
-  {code:'NET.4.1',title:'Computer Networks',semester:4,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.3.1'],objectives:['Master network protocol stack','Configure internet-scale networks'],content:['TCP/IP stack in depth','IP addressing and subnetting','Routing protocols (OSPF, BGP)','Application layer protocols','Network security basics'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Forouzan, TCP/IP Protocol Suite','Tanenbaum, Computer Networks'],responsible:'Dept. of Networks'},
-  {code:'SE.4.1',title:'Formal Development Methods',semester:4,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AI.1.1','SE.3.1'],objectives:['Apply formal specification techniques','Verify software correctness formally'],content:['Z notation','B method','Model checking','Temporal logic','Automated theorem proving'],examForm:'Written exam + Project',passMark:'10/20',readingList:['Spivey, The Z Notation'],responsible:'Dept. of SE'},
-  {code:'SE.4.2',title:'Software Architectures',semester:4,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.3.1','SE.3.2'],objectives:['Design scalable software architectures','Evaluate architectural tradeoffs'],content:['Architectural styles (microservices, SOA)','Quality attributes','Architecture documentation','Cloud-native architectures','Architecture evaluation methods'],examForm:'Project + Oral',passMark:'10/20',readingList:['Bass, Software Architecture in Practice'],responsible:'Dept. of SE'},
-  {code:'SEC.4.1',title:'Cybersecurity & Cryptography',semester:4,credits:3,subject:'SEC',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.4.1','MAT.1.1'],objectives:['Understand cybersecurity threats and defenses','Apply cryptographic algorithms'],content:['Symmetric and asymmetric cryptography','PKI and certificates','Network security protocols (TLS, SSH)','Web security (OWASP Top 10)','Incident response basics'],examForm:'Written exam + Lab',passMark:'10/20',readingList:['Stallings, Cryptography and Network Security'],responsible:'Dept. of Security'},
-  {code:'FIN.4.1',title:'Introduction to Financial Markets',semester:4,credits:1.5,subject:'FIN',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['FIN.1.1'],objectives:['Understand financial market structure','Analyze basic financial instruments'],content:['Stock and bond markets','Derivatives basics','Portfolio theory','Market microstructure'],examForm:'Written exam',passMark:'10/20',readingList:[],responsible:'Dept. of Finance'},
-  {code:'DDP.4.1',title:'Design and Development Project',semester:4,credits:3,subject:'DDP',language:'French',type:'Compulsory',hours:{total:45,lecture:7,lab:31.5,selfStudy:6.5},prerequisites:['SE.3.1','SE.3.2','AP.2.1'],objectives:['Execute a full software development project','Apply agile methodology in a team'],content:['Project scoping and planning','Architecture decisions','Iterative development','Code review practices','Final delivery and presentation'],examForm:'Project defense',passMark:'10/20',readingList:[],responsible:'Dept. of SE'},
-  {code:'BDC.4.1',title:'Introduction to Entrepreneurship and Innovation',semester:4,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Understand startup creation process','Develop innovation mindset'],content:['Lean startup methodology','Business model canvas','Pitching and fundraising','IP and patents basics'],examForm:'Business plan presentation',passMark:'10/20',readingList:[],responsible:'Dept. of Business'},
-  {code:'BDC.4.2',title:'Language and Communication 4: Communication Techniques',semester:4,credits:1.5,subject:'BDC',language:'Both',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.3.1'],objectives:['Master professional communication','Present technical projects effectively'],content:['Presentation techniques','Persuasion and negotiation','Technical writing','Interview skills'],examForm:'Oral presentation',passMark:'10/20',readingList:[],responsible:'Language Center'},
+  {code:'MAT.4.1',title:'Processus Stochastiques avec R',semester:4,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1'],objectives:['Modéliser des processus aléatoires','Analyser des chaînes de Markov','Utiliser R pour le calcul statistique'],content:['Chaînes de Markov','Processus de Poisson','Théorie des files d\'attente','Simulation de Monte-Carlo','Bases des séries temporelles','Programmation R pour les statistiques'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Ross, Introduction to Probability Models'],responsible:'Dép. de Mathématiques'},
+  {code:'EHA.4.1',title:'Introduction aux Systèmes Embarqués',semester:4,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.2.1'],objectives:['Concevoir des systèmes embarqués','Programmer sous contraintes temps réel'],content:['Architecture de systèmes embarqués','Concepts RTOS','Co-conception matériel/logiciel','Interfaçage de périphériques','Gestion de l\'énergie'],examForm:'Projet TP',passMark:'10/20',readingList:['Valvano, Embedded Systems: Introduction to ARM Cortex-M Microcontrollers'],responsible:'Dép. de Matériel'},
+  {code:'NET.4.1',title:'Réseaux Informatiques',semester:4,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.3.1'],objectives:['Maîtriser la pile de protocoles réseau','Configurer des réseaux à l\'échelle d\'Internet'],content:['Pile TCP/IP en profondeur','Adressage IP et sous-réseaux','Protocoles de routage (OSPF, BGP)','Protocoles de la couche applicative','Bases de la sécurité réseau'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Forouzan, TCP/IP Protocol Suite','Tanenbaum, Computer Networks'],responsible:'Dép. de Réseaux'},
+  {code:'SE.4.1',title:'Méthodes Formelles de Développement',semester:4,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AI.1.1','SE.3.1'],objectives:['Appliquer des techniques de spécification formelle','Vérifier formellement la correction des logiciels'],content:['Notation Z','Méthode B','Model checking','Logique temporelle','Démonstration automatique de théorèmes'],examForm:'Examen écrit + Projet',passMark:'10/20',readingList:['Spivey, The Z Notation'],responsible:'Dép. de GL'},
+  {code:'SE.4.2',title:'Architectures Logicielles',semester:4,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.3.1','SE.3.2'],objectives:['Concevoir des architectures logicielles scalables','Évaluer les compromis architecturaux'],content:['Styles architecturaux (microservices, SOA)','Attributs de qualité','Documentation d\'architecture','Architectures cloud-native','Méthodes d\'évaluation d\'architecture'],examForm:'Projet + Oral',passMark:'10/20',readingList:['Bass, Software Architecture in Practice'],responsible:'Dép. de GL'},
+  {code:'SEC.4.1',title:'Cybersécurité & Cryptographie',semester:4,credits:3,subject:'SEC',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.4.1','MAT.1.1'],objectives:['Comprendre les menaces et défenses en cybersécurité','Appliquer des algorithmes cryptographiques'],content:['Cryptographie symétrique et asymétrique','PKI et certificats','Protocoles de sécurité réseau (TLS, SSH)','Sécurité web (OWASP Top 10)','Bases de la réponse aux incidents'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Stallings, Cryptography and Network Security'],responsible:'Dép. de Sécurité'},
+  {code:'FIN.4.1',title:'Introduction aux Marchés Financiers',semester:4,credits:1.5,subject:'FIN',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['FIN.1.1'],objectives:['Comprendre la structure des marchés financiers','Analyser des instruments financiers de base'],content:['Marchés actions et obligations','Bases des produits dérivés','Théorie du portefeuille','Microstructure des marchés'],examForm:'Examen écrit',passMark:'10/20',readingList:[],responsible:'Dép. de Finance'},
+  {code:'DDP.4.1',title:'Projet de Conception et Développement',semester:4,credits:3,subject:'DDP',language:'French',type:'Compulsory',hours:{total:45,lecture:7,lab:31.5,selfStudy:6.5},prerequisites:['SE.3.1','SE.3.2','AP.2.1'],objectives:['Mener un projet de développement logiciel complet','Appliquer la méthodologie agile en équipe'],content:['Cadrage et planification du projet','Décisions d\'architecture','Développement itératif','Pratiques de revue de code','Livraison finale et présentation'],examForm:'Soutenance de projet',passMark:'10/20',readingList:[],responsible:'Dép. de GL'},
+  {code:'BDC.4.1',title:'Introduction à l\'Entrepreneuriat et à l\'Innovation',semester:4,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Comprendre le processus de création de startup','Développer un esprit d\'innovation'],content:['Méthodologie lean startup','Business model canvas','Pitch et levée de fonds','Bases de la PI et des brevets'],examForm:'Présentation du business plan',passMark:'10/20',readingList:[],responsible:'Dép. de Business'},
+  {code:'BDC.4.2',title:'Langue et Communication 4 : Techniques de Communication',semester:4,credits:1.5,subject:'BDC',language:'Both',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.3.1'],objectives:['Maîtriser la communication professionnelle','Présenter des projets techniques efficacement'],content:['Techniques de présentation','Persuasion et négociation','Rédaction technique','Compétences en entretien'],examForm:'Présentation orale',passMark:'10/20',readingList:[],responsible:'Centre de Langues'},
   // ── S5 COMMON ──
-  {code:'BDC.5.1',title:'Complex Project Management',semester:5,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['DDP.4.1'],objectives:['Apply advanced project management techniques','Lead complex software projects'],content:['PMP methodology','Risk management','Stakeholder management','Agile at scale (SAFe)','Project tracking tools'],examForm:'Case study',passMark:'10/20',readingList:[],responsible:'Dept. of Business'},
-  {code:'BDC.5.2',title:'Computer Law and Human Rights',semester:5,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Understand legal framework for IT','Apply GDPR and digital rights'],content:['Tunisian and international IT law','Data protection (GDPR)','Digital rights and ethics','Cybercrime law','Open source licenses'],examForm:'Written exam',passMark:'10/20',readingList:[],responsible:'Dept. of Business'},
-  {code:'BDC.5.3',title:'Language and Communication 5: Preparing for Standardized Exams',semester:5,credits:1.5,subject:'BDC',language:'English',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.4.2'],objectives:['Prepare for TOEFL/IELTS exams','Master English proficiency'],content:['TOEFL/IELTS test strategies','Reading comprehension','Academic writing','Listening skills'],examForm:'Mock exam',passMark:'10/20',readingList:[],responsible:'Language Center'},
+  {code:'BDC.5.1',title:'Gestion de Projets Complexes',semester:5,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['DDP.4.1'],objectives:['Appliquer des techniques avancées de gestion de projet','Piloter des projets logiciels complexes'],content:['Méthodologie PMP','Gestion des risques','Gestion des parties prenantes','Agile à l\'échelle (SAFe)','Outils de suivi de projet'],examForm:'Étude de cas',passMark:'10/20',readingList:[],responsible:'Dép. de Business'},
+  {code:'BDC.5.2',title:'Droit Informatique et Droits Numériques',semester:5,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Comprendre le cadre juridique de l\'informatique','Appliquer le RGPD et les droits numériques'],content:['Droit informatique tunisien et international','Protection des données (RGPD)','Droits numériques et éthique','Droit de la cybercriminalité','Licences open source'],examForm:'Examen écrit',passMark:'10/20',readingList:[],responsible:'Dép. de Business'},
+  {code:'BDC.5.3',title:'Langue et Communication 5 : Préparation aux Examens Standardisés',semester:5,credits:1.5,subject:'BDC',language:'English',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.4.2'],objectives:['Se préparer aux examens TOEFL/IELTS','Maîtriser la compétence en anglais'],content:['Stratégies TOEFL/IELTS','Compréhension écrite','Rédaction académique','Compétences d\'écoute'],examForm:'Examen blanc',passMark:'10/20',readingList:[],responsible:'Centre de Langues'},
   // ── S5 AI TRACK ──
-  {code:'AI.5.1',title:'Multi-Agent Systems',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'AI.5.2',title:'Non-Classical Logics',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'AI.5.3',title:'Applied Deep Learning',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'AI.5.4',title:'Natural Language Processing',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'AI.5.6',title:'Knowledge Representation & Reasoning',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.1',title:'Systèmes Multi-Agents',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.2',title:'Logiques Non Classiques',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.3',title:'Deep Learning Appliqué',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.4',title:'Traitement du Langage Naturel',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.6',title:'Représentation des Connaissances & Raisonnement',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   {code:'AI.5.7',title:'Deep Reinforcement Learning',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'AI.5.8',title:'Affective Computing',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'AI.5.9',title:'Intelligent Transport Systems',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'AI.5.10',title:'Semantic Web & Linked Data',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.8',title:'Informatique Affective',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.9',title:'Systèmes de Transport Intelligents',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.10',title:'Web Sémantique & Données Liées',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   {code:'AI.5.11',title:'AIoT',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   // ── S5 SHARED TRACK MODULES ──
   // SE
-  {code:'SE.5.1',title:'Software Reengineering',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'SE.5.2',title:'Software Quality & Test',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'SE.5.3',title:'Mobile Development',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'SE.5.4',title:'Complex Systems Engineering',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'SE.5.5',title:'Model Driven Engineering',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'AI.5.5',title:'Robotics and Soft Computing',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'AI.5.12',title:'Introduction to Deep Learning',semester:5,credits:3,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'AI.5.16',title:'Introduction to Natural Language Processing',semester:5,credits:3,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.1',title:'Réingénierie Logicielle',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.2',title:'Qualité Logicielle & Test',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.3',title:'Développement Mobile',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.4',title:'Ingénierie des Systèmes Complexes',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.5',title:'Ingénierie Dirigée par les Modèles',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.5',title:'Robotique et Soft Computing',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.12',title:'Introduction au Deep Learning',semester:5,credits:3,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.16',title:'Introduction au Traitement du Langage Naturel',semester:5,credits:3,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   // DOS (Distributed/OS/Cloud)
   {code:'DOS.5.1',title:'Cloud Computing',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   {code:'DOS.5.2',title:'Blockchain',semester:5,credits:1,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   {code:'DOS.5.3',title:'IoT',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'DOS.5.4',title:'Advanced Architectures and Parallel Programming',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'DOS.5.5',title:'Real Time Operating Systems',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'DOS.5.6',title:'Distributed Systems and Applications',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'DOS.5.7',title:'Embedded Linux',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'DOS.5.8',title:'Introduction to Cloud Computing',semester:5,credits:1,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'DOS.5.9',title:'Software Development for Robotics',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'DOS.5.11',title:'Distributed Storage Systems',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.4',title:'Architectures Avancées et Programmation Parallèle',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.5',title:'Systèmes d\'Exploitation Temps Réel',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.6',title:'Systèmes et Applications Distribués',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.7',title:'Linux Embarqué',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.8',title:'Introduction au Cloud Computing',semester:5,credits:1,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.9',title:'Développement Logiciel pour la Robotique',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.11',title:'Systèmes de Stockage Distribués',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   // ISA (Information Systems/Analytics)
   {code:'ISA.5.1',title:'Big Data',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ISA.5.2',title:'Data Mining',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ISA.5.3',title:'Interactive Decision Support Systems',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.2',title:'Fouille de Données',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.3',title:'Systèmes Interactifs d\'Aide à la Décision',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   {code:'ISA.5.4',title:'Business Intelligence',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ISA.5.5',title:'Recommender Systems',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ISA.5.6',title:'Text Mining',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ISA.5.7',title:'Distributed Databases',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ISA.5.8',title:'Advanced BI',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ISA.5.9',title:'Geographic Information Systems',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ISA.5.10',title:'Urbanization of Information Systems',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ISA.5.11',title:'Data Engineering',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ISA.5.12',title:'Introduction to Datamining',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.5',title:'Systèmes de Recommandation',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.6',title:'Fouille de Textes',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.7',title:'Bases de Données Distribuées',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.8',title:'BI Avancée',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.9',title:'Systèmes d\'Information Géographique',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.10',title:'Urbanisation des Systèmes d\'Information',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.11',title:'Ingénierie des Données',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.12',title:'Introduction à la Fouille de Données',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   // CV
-  {code:'CV.5.1',title:'Restoration and Digital Considerations',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'CV.5.2',title:'Shape Recognition and Geometric Invariants',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'CV.5.3',title:'3D Representation: Curves Shapes and Surfaces',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'CV.5.4',title:'Discrete Representation of 3D Objects',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'CV.5.5',title:'Compression Techniques for Computer Vision',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'CV.5.6',title:'Mathematical Morphology and Medical Applications',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'CV.5.7',title:'Multispectral Image Processing',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'CV.5.8',title:'Multidimensional Signal Processing',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'CV.5.9',title:'Computer Vision',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'CV.5.11',title:'Medical Imaging Workshops',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.1',title:'Restauration et Considérations Numériques',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.2',title:'Reconnaissance de Formes et Invariants Géométriques',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.3',title:'Représentation 3D : Courbes, Formes et Surfaces',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.4',title:'Représentation Discrète d\'Objets 3D',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.5',title:'Techniques de Compression pour la Vision par Ordinateur',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.6',title:'Morphologie Mathématique et Applications Médicales',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.7',title:'Traitement d\'Images Multispectrales',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.8',title:'Traitement du Signal Multidimensionnel',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.9',title:'Vision par Ordinateur',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.11',title:'Ateliers d\'Imagerie Médicale',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   // FIN
-  {code:'FIN.5.1',title:'International Finance',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'FIN.5.2',title:'Risk Modelling and Dynamic Financial Risk Management',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'FIN.5.3',title:'Bank Management',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'FIN.5.4',title:'Monte Carlo Methods and Financial Model Simulation',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'FIN.5.5',title:'Quantitative Finance',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'FIN.5.6',title:'Valuation and Financing of Companies',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.1',title:'Finance Internationale',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.2',title:'Modélisation du Risque et Gestion Dynamique du Risque Financier',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.3',title:'Gestion Bancaire',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.4',title:'Méthodes de Monte Carlo et Simulation de Modèles Financiers',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.5',title:'Finance Quantitative',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.6',title:'Évaluation et Financement des Entreprises',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   // MAT S5
-  {code:'MAT.5.1',title:'Combinatorial Optimization',semester:5,credits:2,subject:'MAT',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'MAT.5.2',title:'Category Theory and Functional Programming',semester:5,credits:2,subject:'MAT',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'MAT.5.3',title:'Numerical Optimization with R',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'MAT.5.4',title:'Statistical Inference with R',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'MAT.5.5',title:'Data Analysis',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.1',title:'Optimisation Combinatoire',semester:5,credits:2,subject:'MAT',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.2',title:'Théorie des Catégories et Programmation Fonctionnelle',semester:5,credits:2,subject:'MAT',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.3',title:'Optimisation Numérique avec R',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.4',title:'Inférence Statistique avec R',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.5',title:'Analyse de Données',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   // SEC S5
-  {code:'SEC.5.1',title:'Diagnosis Safety and Reliability of Embedded Systems',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'SEC.5.2',title:'IoT Security',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'SEC.5.3',title:'Automotive Architecture and Security',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'SEC.5.4',title:'IoT Security Project',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SEC.5.1',title:'Diagnostic, Sûreté et Fiabilité des Systèmes Embarqués',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SEC.5.2',title:'Sécurité IoT',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SEC.5.3',title:'Architecture Automobile et Sécurité',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SEC.5.4',title:'Projet Sécurité IoT',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   // ESDV (Embedded Systems Design/VHDL)
-  {code:'ESDV.5.1',title:'Microcontroller-Based Systems',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ESDV.5.2',title:'System Integration VHDL',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ESDV.5.3',title:'Real-Time Systems Design and Validation',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ESDV.5.4',title:'Cyber-Physical Systems',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ESDV.5.5',title:'Electronics for Embedded Systems',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ESDV.5.6',title:'Embedded Interfacing',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ESDV.5.7',title:'Integration Project',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ESDV.5.8',title:'Microcontroller Project',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ESDV.5.9',title:'Reconfigurable Architectures',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.1',title:'Systèmes à Base de Microcontrôleurs',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.2',title:'Intégration de Systèmes VHDL',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.3',title:'Conception et Validation de Systèmes Temps Réel',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.4',title:'Systèmes Cyber-Physiques',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.5',title:'Électronique pour Systèmes Embarqués',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.6',title:'Interfaçage Embarqué',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.7',title:'Projet d\'Intégration',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.8',title:'Projet Microcontrôleur',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.9',title:'Architectures Reconfigurables',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   // ESEP (Embedded Systems/Electronics)
-  {code:'ESEP.5.1',title:'Microcontrollers Based Systems',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ESEP.5.2',title:'Connected Objects Programming',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'ESEP.5.3',title:'Cyber-Physical Systems',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESEP.5.1',title:'Systèmes à Base de Microcontrôleurs',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESEP.5.2',title:'Programmation d\'Objets Connectés',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESEP.5.3',title:'Systèmes Cyber-Physiques',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   // NET S5
-  {code:'NET.5.1',title:'Multi-Service Cellular Networks',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'NET.5.2',title:'Communication Architectures and Protocols for IoT',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'NET.5.3',title:'Networks Management',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'NET.5.4',title:'QoS & Traffic Engineering',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'NET.5.1',title:'Réseaux Cellulaires Multi-Services',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'NET.5.2',title:'Architectures et Protocoles de Communication pour l\'IoT',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'NET.5.3',title:'Gestion des Réseaux',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'NET.5.4',title:'QoS & Ingénierie du Trafic',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
   // IAP
-  {code:'IAP.5.1',title:'Soft Actuator Control and Applications',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'IAP.5.2',title:'Introduction to Programming Connected Objects',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
-  {code:'IAP.5.3',title:'Positioning Systems and Applications',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'IAP.5.1',title:'Contrôle d\'Actionneurs Souples et Applications',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'IAP.5.2',title:'Introduction à la Programmation d\'Objets Connectés',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'IAP.5.3',title:'Systèmes de Positionnement et Applications',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
 ];
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
@@ -980,16 +987,17 @@ function creditBadge(cr) {
 
 function langTag(lang) {
   const colors = {French:'#6366F1',English:'#059669',Both:'#D97706'};
+  const labels = {French:'Français',English:'Anglais',Both:'Bilingue'};
   const c = colors[lang]||'#6B7280';
-  return `<span class="tag" style="background:${c}15;color:${c}">${lang}</span>`;
+  return `<span class="tag" style="background:${c}15;color:${c}">${labels[lang]||lang}</span>`;
 }
 
 function typeTag(type) {
-  if (type==='Compulsory') return `<span class="tag" style="background:#1B2A4A12;color:#1B2A4A">Compulsory</span>`;
-  return `<span class="tag" style="background:#4DB8E815;color:#0891B2">Optional</span>`;
+  if (type==='Compulsory') return `<span class="tag" style="background:#1B2A4A12;color:#1B2A4A">Obligatoire</span>`;
+  return `<span class="tag" style="background:#4DB8E815;color:#0891B2">Optionnel</span>`;
 }
 
-const SEM_LABELS = {1:'Year 1',2:'Year 1',3:'Year 2',4:'Year 2',5:'Year 3'};
+const SEM_LABELS = {1:'Année 1',2:'Année 1',3:'Année 2',4:'Année 2',5:'Année 3'};
 
 // ─── DRAWER ──────────────────────────────────────────────────────────────────
 function openDrawer(code) {
@@ -1056,7 +1064,7 @@ function renderDrawer() {
   const html = `
   <div style="position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #F0F4F8;padding:12px 24px;display:flex;justify-content:space-between;align-items:center">
     <div>${codeEl(m.code)}</div>
-    <button onclick="closeDrawer()" aria-label="Close" style="background:#F5F7FA;border:none;cursor:pointer;color:#1B2A4A;font-size:1.25rem;line-height:1;padding:8px 12px;border-radius:6px;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center">&times;</button>
+    <button onclick="closeDrawer()" aria-label="Fermer" style="background:#F5F7FA;border:none;cursor:pointer;color:#1B2A4A;font-size:1.25rem;line-height:1;padding:8px 12px;border-radius:6px;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center">&times;</button>
   </div>
   <div style="padding:24px 24px 0">
     <h2 style="font-family:'Archivo',sans-serif;font-size:1.35rem;font-weight:700;color:#1B2A4A;margin:0 0 12px;line-height:1.3">${m.title}</h2>
@@ -1065,17 +1073,17 @@ function renderDrawer() {
     </div>
   </div>
   <div style="padding:0 24px 24px">
-    ${section('obj','Objectives',`<ul style="list-style:none;padding:0 0 12px;margin:0">${(m.objectives||[]).map(o=>`<li style="display:flex;gap:8px;align-items:flex-start;padding:4px 0;font-size:0.875rem;color:#374151"><span style="color:#4DB8E8;flex-shrink:0;margin-top:2px">▸</span>${o}</li>`).join('')}</ul>`)}
-    ${section('content','Content',`<ul style="list-style:none;padding:0 0 12px;margin:0">${(m.content||[]).map((c,i)=>`<li style="display:flex;gap:10px;align-items:flex-start;padding:4px 0;font-size:0.875rem;color:#374151"><span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#4DB8E8;flex-shrink:0;margin-top:3px;background:#4DB8E810;border-radius:2px;padding:0 4px">${String(i+1).padStart(2,'0')}</span>${c}</li>`).join('')}</ul>`)}
-    ${section('workload','Workload',`
+    ${section('obj','Objectifs',`<ul style="list-style:none;padding:0 0 12px;margin:0">${(m.objectives||[]).map(o=>`<li style="display:flex;gap:8px;align-items:flex-start;padding:4px 0;font-size:0.875rem;color:#374151"><span style="color:#4DB8E8;flex-shrink:0;margin-top:2px">▸</span>${o}</li>`).join('')}</ul>`)}
+    ${section('content','Contenu',`<ul style="list-style:none;padding:0 0 12px;margin:0">${(m.content||[]).map((c,i)=>`<li style="display:flex;gap:10px;align-items:flex-start;padding:4px 0;font-size:0.875rem;color:#374151"><span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#4DB8E8;flex-shrink:0;margin-top:3px;background:#4DB8E810;border-radius:2px;padding:0 4px">${String(i+1).padStart(2,'0')}</span>${c}</li>`).join('')}</ul>`)}
+    ${section('workload','Volume horaire',`
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-bottom:12px">
-      ${[['Total',m.hours.total],['Lecture',m.hours.lecture],['Lab',m.hours.lab],['Self-Study',m.hours.selfStudy]].map(([l,v])=>`
+      ${[['Total',m.hours.total],['Cours',m.hours.lecture],['TP',m.hours.lab],['Travail personnel',m.hours.selfStudy]].map(([l,v])=>`
       <div style="background:#F5F7FA;border-radius:8px;padding:12px">
         <div style="font-size:0.7rem;color:#6B7280;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px">${l}</div>
         <div style="font-family:'Archivo',sans-serif;font-size:1.25rem;font-weight:700;color:#1B2A4A">${v}<span style="font-size:0.7rem;color:#9CA3AF;margin-left:2px">h</span></div>
       </div>`).join('')}
     </div>`)}
-    ${section('exam','Assessment',`<div style="padding-bottom:12px;font-size:0.875rem;color:#374151"><div style="margin-bottom:4px">${m.examForm}</div><div style="margin-top:8px;display:flex;align-items:center;gap:8px"><span style="font-size:0.75rem;color:#6B7280">Pass mark</span><span style="font-family:'JetBrains Mono',monospace;font-weight:600;color:#059669;font-size:0.85rem">8/20</span></div></div>`)}
+    ${section('exam','Évaluation',`<div style="padding-bottom:12px;font-size:0.875rem;color:#374151"><div style="margin-bottom:4px">${m.examForm}</div><div style="margin-top:8px;display:flex;align-items:center;gap:8px"><span style="font-size:0.75rem;color:#6B7280">Note de passage</span><span style="font-family:'JetBrains Mono',monospace;font-weight:600;color:#059669;font-size:0.85rem">8/20</span></div></div>`)}
   </div>`;
   document.getElementById('drawer-content').innerHTML = html;
   initCodeTooltips();
@@ -1102,12 +1110,12 @@ function renderHome() {
 
   // Specialization keyword map
   const specKeywords = {
-    AI: 'Machine learning · Deep learning · NLP · Cognitive systems',
-    GL: 'Software quality · DevOps · Cloud · Architecture',
-    CV: 'Computer vision · Pattern recognition · Big data · Medical imaging',
-    IF: 'Quantitative finance · Algorithmic trading · Blockchain · Risk',
-    SLE: 'Real-time · FPGA · IoT protocols · Embedded Linux',
-    'ST-IoT': 'Cloud computing · Microservices · IoT apps · Network security',
+    AI: 'Apprentissage automatique · Deep learning · NLP · Systèmes cognitifs',
+    GL: 'Qualité logicielle · DevOps · Cloud · Architecture',
+    CV: 'Vision par ordinateur · Reconnaissance de formes · Big data · Imagerie médicale',
+    IF: 'Finance quantitative · Trading algorithmique · Blockchain · Risque',
+    SLE: 'Temps réel · FPGA · Protocoles IoT · Linux embarqué',
+    'ST-IoT': 'Cloud computing · Microservices · Applications IoT · Sécurité réseau',
   };
 
   // Year bracket spans for timeline
@@ -1117,7 +1125,7 @@ function renderHome() {
   document.getElementById('page').innerHTML = `
   <!-- HERO -->
   <section class="hero-section" id="hero-section" tabindex="0"
-    onkeydown="heroKey(event)" aria-label="Hero slideshow, use arrow keys to browse">
+    onkeydown="heroKey(event)" aria-label="Diaporama hero, utilisez les touches fléchées pour naviguer">
     <!-- Sliding photo track (back) -->
     <div id="hero-track">
       ${[
@@ -1133,23 +1141,23 @@ function renderHome() {
     <!-- Gradient overlay -->
     <div class="hero-overlay"></div>
     <!-- Arrow buttons (absolute, always centered vertically) -->
-    <button class="hero-arrow hero-arrow-left" onclick="heroGo(-1)" aria-label="Previous photo">
+    <button class="hero-arrow hero-arrow-left" onclick="heroGo(-1)" aria-label="Photo précédente">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
-    <button class="hero-arrow hero-arrow-right" onclick="heroGo(1)" aria-label="Next photo">
+    <button class="hero-arrow hero-arrow-right" onclick="heroGo(1)" aria-label="Photo suivante">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
     <!-- Hero text (fixed above slides) -->
     <div id="hero-text" style="position:relative;z-index:2;padding:0 10vw;max-width:960px;pointer-events:none">
-      <p class="fade-up fade-up-1" style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;margin:0 0 28px;text-transform:uppercase">SINCE 1984 · UNIVERSITY OF MANOUBA</p>
-      <h1 class="fade-up fade-up-2" style="font-family:'Archivo',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;color:#fff;margin:0 0 8px;line-height:0.95;letter-spacing:-0.03em">Welcome to <span style="color:#4DB8E8">ENSI</span></h1>
+      <p class="fade-up fade-up-1" style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;margin:0 0 28px;text-transform:uppercase">DEPUIS 1984 · UNIVERSITÉ DE LA MANOUBA</p>
+      <h1 class="fade-up fade-up-2" style="font-family:'Archivo',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;color:#fff;margin:0 0 8px;line-height:0.95;letter-spacing:-0.03em">Bienvenue à <span style="color:#4DB8E8">l'ENSI</span></h1>
       <p class="fade-up fade-up-2" style="font-family:'Inter',sans-serif;font-size:1.25rem;font-weight:300;color:rgba(255,255,255,0.75);margin:0 0 24px;line-height:1.3">École Nationale des Sciences de l'Informatique</p>
-      <p class="fade-up fade-up-3" style="font-family:'Inter',sans-serif;font-size:1.125rem;color:rgba(255,255,255,0.6);margin:0 0 32px;font-weight:400">Everything a new admit needs to know: admission, pathways, student life, and what you'll study.</p>
-      <button onclick="(()=>{const t=document.getElementById('section-numbers');window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'})})()" class="ghost-cta fade-up fade-up-4" style="pointer-events:auto">Start exploring <span class="cta-arrow">↓</span></button>
+      <p class="fade-up fade-up-3" style="font-family:'Inter',sans-serif;font-size:1.125rem;color:rgba(255,255,255,0.6);margin:0 0 32px;font-weight:400">Tout ce qu'un nouvel admis doit savoir : admission, filières, vie étudiante et programme d'études.</p>
+      <button onclick="(()=>{const t=document.getElementById('section-numbers');window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'})})()" class="ghost-cta fade-up fade-up-4" style="pointer-events:auto">Découvrir <span class="cta-arrow">↓</span></button>
     </div>
     <!-- Label + dots -->
     <div id="hero-label">ENSI Forum <span style="color:#4DB8E8">20.0</span></div>
-    <div id="hero-dots" role="tablist" aria-label="Slideshow navigation">
+    <div id="hero-dots" role="tablist" aria-label="Navigation du diaporama">
       ${[
         {label:'ENSI Forum 20.0'},
         {label:'Code & Conquer 3.0'},
@@ -1157,7 +1165,7 @@ function renderHome() {
         {label:'TuniHack 11.0'}
       ].map(({label},i)=>`
       <button class="hero-dot${i===0?' active':''}" onclick="heroJump(${i})"
-        aria-label="Go to ${label}" role="tab" aria-selected="${i===0}"></button>`).join('')}
+        aria-label="Aller à ${label}" role="tab" aria-selected="${i===0}"></button>`).join('')}
     </div>
   </section>
 
@@ -1178,24 +1186,24 @@ function renderHome() {
     const dots=dd.map((d,i)=>`<circle cx="${xs[i].toFixed(1)}" cy="${ys[i].toFixed(1)}" r="3.5" fill="#2563EB"/>`).join('');
     return `
   <section id="section-numbers" style="background:#fff;padding:96px 10vw">
-    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">BY THE NUMBERS</p>
-    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 56px;line-height:0.95;letter-spacing:-0.03em">Four decades of <span style="color:#2563EB">engineers.</span></h2>
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">EN CHIFFRES</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 56px;line-height:0.95;letter-spacing:-0.03em">Quatre décennies d'<span style="color:#2563EB">ingénieurs.</span></h2>
     <div id="numbers-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:64px">
       <div>
-        <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">2,500+</div>
-        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">engineers graduated since 2013</div>
+        <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">2 500+</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">ingénieurs diplômés depuis 2013</div>
       </div>
       <div>
         <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">~220</div>
-        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">new graduates every year</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">nouveaux diplômés chaque année</div>
       </div>
       <div>
         <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">98</div>
-        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">double-degree graduates, 2013–2024</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">diplômés en double diplôme, 2013–2024</div>
       </div>
       <div>
         <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">1984</div>
-        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">the year ENSI was founded</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">année de fondation de l'ENSI</div>
       </div>
     </div>
   </section>`;
@@ -1203,14 +1211,14 @@ function renderHome() {
 
   <!-- ADMISSION TABLE -->
   <section id="section-admission" style="background:#fff;padding:96px 10vw">
-    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">HOW SELECTIVE IS IT?</p>
-    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 16px;line-height:0.95;letter-spacing:-0.03em">Admission <span style="color:#2563EB">cutoff</span></h2>
-    <p style="font-family:'Inter',sans-serif;font-size:1rem;color:rgba(27,42,74,0.65);margin:0 0 40px;max-width:640px;line-height:1.6">Each year ENSI admits 200 students across three prépa tracks. The cutoff rank is the last rank admitted to each track, the higher it climbs, the further down the ranking you could be and still get in.</p>
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">QUELLE SÉLECTIVITÉ ?</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 16px;line-height:0.95;letter-spacing:-0.03em">Rang du <span style="color:#2563EB">dernier admis</span></h2>
+    <p style="font-family:'Inter',sans-serif;font-size:1rem;color:rgba(27,42,74,0.65);margin:0 0 40px;max-width:640px;line-height:1.6">Chaque année, l'ENSI admet 200 étudiants répartis sur trois filières de prépa. Le rang du dernier admis est le dernier rang accepté dans chaque filière — plus il monte, plus vous pouvez être loin dans le classement et être quand même admis.</p>
     <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
       <table id="admission-table" style="width:100%;border-collapse:collapse;min-width:480px">
         <thead>
           <tr style="border-bottom:1px solid rgba(27,42,74,0.15)">
-            <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 32px 18px 0;text-align:left">Track</th>
+            <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 32px 18px 0;text-align:left">Filière</th>
             <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 32px 18px 0;text-align:left">2025</th>
             <th class="col-2024" style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 0 18px;text-align:left">2024</th>
           </tr>
@@ -1227,7 +1235,7 @@ function renderHome() {
                 <div style="width:5px;background:${color};border-radius:2px;flex-shrink:0;align-self:stretch"></div>
                 <div>
                   <div style="font-family:'Archivo',sans-serif;font-size:1.25rem;font-weight:800;color:${color};letter-spacing:-0.02em;line-height:1.1">${track}</div>
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;color:rgba(27,42,74,0.4);margin-top:9px">${seats} seats</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;color:rgba(27,42,74,0.4);margin-top:9px">${seats} places</div>
                 </div>
               </div>
             </td>
@@ -1241,20 +1249,20 @@ function renderHome() {
 
   <!-- STUDENT LIFE -->
   <section id="section-studentlife" style="background:#fff;padding:96px 10vw">
-    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">12 ACTIVE CLUBS · 3 CATEGORIES</p>
-    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 40px;line-height:0.95;letter-spacing:-0.03em">Campus <span style="color:#2563EB">Life</span></h2>
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">12 CLUBS ACTIFS · 3 CATÉGORIES</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 40px;line-height:0.95;letter-spacing:-0.03em">Vie <span style="color:#2563EB">étudiante</span></h2>
 
     <!-- Filter tabs -->
     <div id="club-tabs" style="display:flex;gap:0;border-bottom:2px solid #E8EDF4;margin-bottom:40px">
-      ${['All','Science · Tech · Innovation','Sport · Art · Culture','Humanitarian · Social'].map((cat,i)=>`
+      ${['Tous','Science · Tech · Innovation','Sport · Art · Culture','Humanitarian · Social'].map((cat,i)=>`
       <button onclick="filterClubs('${cat}')" id="club-tab-${i}"
-        style="font-family:'Archivo',sans-serif;font-size:0.875rem;font-weight:700;color:${i===0?'#1B2A4A':'rgba(27,42,74,0.45)'};background:none;border:none;cursor:pointer;padding:0 20px 12px;border-bottom:${i===0?'2px solid #2563EB':'2px solid transparent'};margin-bottom:-2px;transition:color .15s ease,border-color .15s ease;white-space:nowrap">${cat}</button>`).join('')}
+        style="font-family:'Archivo',sans-serif;font-size:0.875rem;font-weight:700;color:${i===0?'#1B2A4A':'rgba(27,42,74,0.45)'};background:none;border:none;cursor:pointer;padding:0 20px 12px;border-bottom:${i===0?'2px solid #2563EB':'2px solid transparent'};margin-bottom:-2px;transition:color .15s ease,border-color .15s ease;white-space:nowrap">${cat==='Tous'?'Tous':cat}</button>`).join('')}
     </div>
 
     <!-- Club grid -->
     <div id="club-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
       ${CLUBS.map(c=>`
-      <button class="club-tile" data-cat="${c.category}" data-id="${c.id}" onclick="openClubModal('${c.id}')" aria-label="View ${c.name} details" style="-webkit-tap-highlight-color:${c.accent}33">
+      <button class="club-tile" data-cat="${c.category}" data-id="${c.id}" onclick="openClubModal('${c.id}')" aria-label="Voir les détails de ${c.name}" style="-webkit-tap-highlight-color:${c.accent}33">
         <div class="club-tile-img">
           ${c.logo
             ? `<img src="/imag/clubs/${c.logo}" alt="${c.name}" class="club-logo" loading="lazy" width="300" height="300" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center;display:block;border-radius:8px">`
@@ -1272,8 +1280,8 @@ function renderHome() {
 
     <!-- Industry Partners -->
     <div style="margin-top:72px;padding-top:48px">
-      <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 10px">Hiring ENSI engineers</p>
-      <h3 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 36px;letter-spacing:-0.03em;line-height:0.95">Industry <span style="color:#2563EB">Partners</span></h3>
+      <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 10px">Recruteurs d'ingénieurs ENSI</p>
+      <h3 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 36px;letter-spacing:-0.03em;line-height:0.95">Partenaires <span style="color:#2563EB">industriels</span></h3>
       <div id="partner-wall" style="display:flex;flex-wrap:wrap;align-items:center;gap:28px 40px">
         ${PARTNERS.map(p=>`
         <div class="partner-cell">
@@ -1287,16 +1295,16 @@ function renderHome() {
 
   <!-- SEMESTER TIMELINE -->
   <section id="curriculum-section" style="background:#fff;padding:80px 10vw">
-    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">THE CURRICULUM</p>
-    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 28px;line-height:0.95;letter-spacing:-0.03em">How the <span style="color:#2563EB">curriculum</span> unfolds.</h2>
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">PLAN D'ÉTUDES</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 28px;line-height:0.95;letter-spacing:-0.03em">Comment se déroule le <span style="color:#2563EB">plan d'études.</span></h2>
 
     <!-- Subject × Semester matrix -->
     ${(()=>{
       const SUBJECT_NAMES = {
-        MAT:'Mathematics',AP:'Algorithmic & Programming',EHA:'Electronics & Hardware',
-        AI:'Artificial Intelligence',DAT:'Data',OS:'Operating Systems',
-        IMA:'Image Processing',NET:'Computer Networks',SE:'Software Engineering',
-        FIN:'Finance',SEC:'Security',DDP:'Dev Project',BDC:'Business & Communication',
+        MAT:'Mathématiques',AP:'Algorithmique & Programmation',EHA:'Électronique & Matériel',
+        AI:'Intelligence Artificielle',DAT:'Données',OS:'Systèmes d\'Exploitation',
+        IMA:'Traitement d\'Images',NET:'Réseaux Informatiques',SE:'Génie Logiciel',
+        FIN:'Finance',SEC:'Sécurité',DDP:'Projet de Développement',BDC:'Business & Communication',
       };
       const MATRIX = [
         {code:'MAT',data:[2,2,1,1,0]},
@@ -1333,7 +1341,7 @@ function renderHome() {
             </td>`;
           return `
             <td data-sem="${s}" style="width:88px;height:64px;padding:2px 4px"
-              title="${cnt} module${cnt>1?'s':''}, ${row.code} in S${s}">
+              title="${cnt} module${cnt>1?'s':''}, ${row.code} en S${s}">
               <div style="width:64px;height:64px;border-radius:8px;background:${color};opacity:${OPACITY[cnt]};display:flex;align-items:center;justify-content:center;transition:opacity .15s ease,transform .15s ease;margin:0 auto"
                 onmouseover="this.style.opacity='1';this.style.transform='scale(1.06)'"
                 onmouseout="this.style.opacity='${OPACITY[cnt]}';this.style.transform='scale(1)'">
@@ -1363,7 +1371,7 @@ function renderHome() {
         const totalCr = semCredits[si];
         const cards = mods.map(m=>{
           const sc = SUBJECT_COLORS[m.subject]||'#6B7280';
-          return `<div class="acc-card" onclick="openDrawer('${m.code}')" aria-label="View ${m.title} details" style="--sc:${sc};border-left:3px solid ${sc}">
+          return `<div class="acc-card" onclick="openDrawer('${m.code}')" aria-label="Voir les détails de \${m.title}" style="--sc:${sc};border-left:3px solid ${sc}">
             <span ${codeTip(m.code)} style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
             <span style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3;padding-right:20px">${m.title}</span>
             <span class="acc-chev">›</span>
@@ -1371,7 +1379,7 @@ function renderHome() {
         }).join('');
         return `<div class="cur-acc-item">
           <button class="cur-acc-hdr" onclick="toggleCurAcc(this)" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 0;background:none;border:none;border-bottom:1px solid #E8EDF4;cursor:pointer;text-align:left">
-            <span style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:800;color:#1B2A4A">Semester ${s}</span>
+            <span style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:800;color:#1B2A4A">Semestre ${s}</span>
             <div style="display:flex;align-items:center;gap:12px">
               <span class="cur-acc-chev" style="color:#4DB8E8;font-size:1.2rem;transition:transform .25s ease;display:inline-block">›</span>
             </div>
@@ -1397,8 +1405,8 @@ function renderHome() {
   <!-- SPECIALIZATIONS STRIPS (PATHWAYS) -->
   <section id="section-pathways" style="background:#fff;padding:80px 0">
     <div id="pathways-header" style="padding:0 10vw;margin-bottom:40px">
-      <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">SEMESTER 5 SPECIALIZATIONS</p>
-      <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0;line-height:0.95;letter-spacing:-0.03em">Choose your <span style="color:#2563EB">coloration.</span></h2>
+      <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">SPÉCIALISATIONS DU SEMESTRE 5</p>
+      <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0;line-height:0.95;letter-spacing:-0.03em">Choisissez votre <span style="color:#2563EB">coloration.</span></h2>
     </div>
     <div style="border-top:1px solid #E8EDF4">
       ${SPECIALIZATIONS.map(sp=>{
@@ -1428,10 +1436,10 @@ function renderHome() {
 function filterClubs(cat) {
   const cards = document.querySelectorAll('.club-tile');
   cards.forEach(c => {
-    c.style.display = (cat === 'All' || c.dataset.cat === cat) ? '' : 'none';
+    c.style.display = (cat === 'Tous' || c.dataset.cat === cat) ? '' : 'none';
   });
   const tabs = document.querySelectorAll('#club-tabs button');
-  const cats = ['All','Science · Tech · Innovation','Sport · Art · Culture','Humanitarian · Social'];
+  const cats = ['Tous','Science · Tech · Innovation','Sport · Art · Culture','Humanitarian · Social'];
   tabs.forEach((t,i) => {
     const active = cats[i] === cat;
     t.style.color = active ? '#1B2A4A' : 'rgba(27,42,74,0.45)';
@@ -1492,19 +1500,19 @@ function renderSpecializations() {
   <!-- HERO BANNER -->
   <div style="background:#1B2A4A;padding:48px 32px 40px">
     <div style="max-width:900px;margin:0 auto;text-align:center">
-      <p style="font-size:0.72rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#4DB8E8;margin:0 0 12px;font-family:'Archivo',sans-serif">Semester 5</p>
-      <h1 style="font-family:'Archivo',sans-serif;font-size:2.25rem;font-weight:700;color:#fff;margin:0 0 12px">Specialization Tracks</h1>
-      <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;margin:0">Choose one of six engineering specializations for your final year</p>
+      <p style="font-size:0.72rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#4DB8E8;margin:0 0 12px;font-family:'Archivo',sans-serif">Semestre 5</p>
+      <h1 style="font-family:'Archivo',sans-serif;font-size:2.25rem;font-weight:700;color:#fff;margin:0 0 12px">Filières de spécialisation</h1>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;margin:0">Choisissez l'une des six spécialisations d'ingénieur pour votre dernière année</p>
     </div>
   </div>
 
   <!-- COMMON S5 MODULES -->
   <section style="background:#F5F7FA;padding:64px 10vw">
-    <h2 style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:600;color:#1B2A4A;margin:0 0 16px;letter-spacing:0.05em;text-transform:uppercase;font-size:0.8rem;color:#4DB8E8">Common S5 Modules (all tracks)</h2>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:600;color:#1B2A4A;margin:0 0 16px;letter-spacing:0.05em;text-transform:uppercase;font-size:0.8rem;color:#4DB8E8">Modules S5 communs (toutes les filières)</h2>
     <div class="cur-acc-cards" style="display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch;gap:0.75rem">
       ${MODULES.filter(m=>m.semester===5&&m.type==='Compulsory').map(m=>{
         const sc = SUBJECT_COLORS[m.subject]||'#6B7280';
-        return `<div class="acc-card" onclick="openDrawer('${m.code}')" aria-label="View ${m.title} details" style="--sc:${sc};border-left:3px solid ${sc}">
+        return `<div class="acc-card" onclick="openDrawer('${m.code}')" aria-label="Voir les détails de \${m.title}" style="--sc:${sc};border-left:3px solid ${sc}">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
             <span ${codeTip(m.code)} style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
             <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#9CA3AF">${m.credits} ECTS</span>
@@ -1526,7 +1534,7 @@ function renderSpecializations() {
           <div class="cur-acc-cards" style="display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch;gap:0.75rem;width:100%;max-width:100%;box-sizing:border-box">
             ${mods.map(m=>{
               const sc = SUBJECT_COLORS[m.subject]||accent;
-              return `<button class="acc-card mod-card" data-code="${m.code}" onclick="openDrawer('${m.code}')" aria-label="View ${m.title} details" style="--sc:${sc};--card-color:${accent};border-left:3px solid ${sc};width:100%;text-align:left;background:#fff">
+              return `<button class="acc-card mod-card" data-code="${m.code}" onclick="openDrawer('${m.code}')" aria-label="Voir les détails de \${m.title}" style="--sc:${sc};--card-color:${accent};border-left:3px solid ${sc};width:100%;text-align:left;background:#fff">
                 <span class="mod-code code-tip" ${codeTipAttr(m.code)} style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
                 <span class="mod-name" style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3;padding-right:20px">${m.title}</span>
                 <span class="acc-chev">›</span>
@@ -1549,11 +1557,11 @@ function renderSpecializations() {
             </div>
             <div style="padding:20px 28px;display:flex;flex-direction:column;gap:20px;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden">
               ${spComp.length ? `<div style="width:100%;max-width:100%;box-sizing:border-box">
-                <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${sp.color};margin-bottom:10px">Compulsory · ${spComp.length} modules</div>
+                <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${sp.color};margin-bottom:10px">Obligatoire · ${spComp.length} modules</div>
                 ${modGrid(spComp, sp.color)}
               </div>` : ''}
               ${spOpt.length ? `<div style="width:100%;max-width:100%;box-sizing:border-box">
-                <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:10px">Optional · ${spOpt.length} modules</div>
+                <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:10px">Optionnel · ${spOpt.length} modules</div>
                 ${modGrid(spOpt, sp.color)}
               </div>` : ''}
             </div>
@@ -1565,9 +1573,9 @@ function renderSpecializations() {
 
   <!-- DOUBLE DEGREES -->
   <section style="background:#F5F7FA;padding:96px 10vw">
-    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">DOUBLE DEGREES</p>
-    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 16px;line-height:0.95;letter-spacing:-0.03em">Earn a second <span style="color:#2563EB">diploma</span> abroad.</h2>
-    <p style="font-family:'Inter',sans-serif;font-size:1rem;color:#4B5563;margin:0 0 48px;max-width:640px">ENSI students can complete a double degree at partner engineering schools across France, Germany, and Canada (2017–2023 placements).</p>
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">DOUBLES DIPLÔMES</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 16px;line-height:0.95;letter-spacing:-0.03em">Obtenez un second <span style="color:#2563EB">diplôme</span> à l'étranger.</h2>
+    <p style="font-family:'Inter',sans-serif;font-size:1rem;color:#4B5563;margin:0 0 48px;max-width:640px">Les étudiants de l'ENSI peuvent effectuer un double diplôme dans des écoles d'ingénieurs partenaires en France, Allemagne et Canada (placements 2017–2023).</p>
     <div id="degree-bars" style="display:flex;flex-direction:column;gap:26px">
       ${(()=>{
         const REAL_CODES = ['ECLyon','TSP','PASSAU','ENSEIRB','Canada'];
@@ -1582,7 +1590,7 @@ function renderSpecializations() {
             <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
               <span style="font-size:1.1rem;line-height:1">${COUNTRY_FLAGS[p.country]||''}</span>
               <span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:0.95rem;color:#1B2A4A">${p.name}</span>
-              ${isNew?`<span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;background:#4DB8E8;padding:1px 6px;border-radius:3px">NEW</span>`:''}
+              ${isNew?`<span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;background:#4DB8E8;padding:1px 6px;border-radius:3px">NOUVEAU</span>`:''}
             </div>
             <div style="display:flex;align-items:center;gap:16px">
               <div style="flex:1;height:34px;background:#E2E8F0;border-radius:4px;overflow:hidden">
@@ -1635,19 +1643,19 @@ function footer() {
 
       <!-- MIDDLE: nav + official site -->
       <div>
-        <p style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:0 0 16px">Navigate</p>
+        <p style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:0 0 16px">Navigation</p>
         <div style="display:flex;flex-direction:column;gap:10px">
-          ${['home','specializations'].map(r=>`<a href="#${r}" style="${linkStyle}" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">${r.charAt(0).toUpperCase()+r.slice(1)}</a>`).join('')}
-          <a href="https://ensi.rnu.tn" target="_blank" rel="noopener noreferrer" style="${linkStyle}" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Official site${extIcon}</a>
+          ${[['home','Accueil'],['specializations','Filières']].map(([r,label])=>`<a href="#${r}" style="${linkStyle}" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">${label}</a>`).join('')}
+          <a href="https://ensi.rnu.tn" target="_blank" rel="noopener noreferrer" style="${linkStyle}" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Site officiel${extIcon}</a>
         </div>
       </div>
 
       <!-- RIGHT: social icons -->
       <div>
-        <p style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:0 0 16px">Follow</p>
+        <p style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:0 0 16px">Suivre</p>
         <div style="display:flex;gap:16px">
-          <a href="https://www.facebook.com/profile.php?id=100085598258430" target="_blank" rel="noopener noreferrer" aria-label="ENSI on Facebook" style="color:rgba(255,255,255,0.5);transition:color .15s ease" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">${fbIcon}</a>
-          <a href="https://www.linkedin.com/school/ensitn/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="ENSI on LinkedIn" style="color:rgba(255,255,255,0.5);transition:color .15s ease" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">${liIcon}</a>
+          <a href="https://www.facebook.com/profile.php?id=100085598258430" target="_blank" rel="noopener noreferrer" aria-label="ENSI sur Facebook" style="color:rgba(255,255,255,0.5);transition:color .15s ease" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">${fbIcon}</a>
+          <a href="https://www.linkedin.com/school/ensitn/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="ENSI sur LinkedIn" style="color:rgba(255,255,255,0.5);transition:color .15s ease" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">${liIcon}</a>
         </div>
       </div>
 
@@ -1655,7 +1663,7 @@ function footer() {
 
     <!-- bottom strip -->
     <div style="margin-top:48px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);text-align:center">
-      <span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.35)">© 2026 All Rights Reserved. Made with 💙 by Mohamed Yahia Gazzeh</span>
+      <span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.35)">© 2026 All Rights Reserved. Made with 💙 by ANONYMOUS ENSI STUDENT</span>
     </div>
   </footer>`;
 }
@@ -1695,13 +1703,13 @@ function openClubModal(id) {
 
   const projectsHTML = (c.projects&&c.projects.length) ? `
     <div style="margin-top:32px">
-      <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:8px">Projects</p>
+      <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:8px">Projets</p>
       ${c.projects.map(eventRow).join('')}
     </div>` : '';
 
   const socialsHTML = (c.socials&&c.socials.length) ? `
     <div style="margin-top:32px">
-      <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:12px">Follow</p>
+      <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:12px">Suivre</p>
       <div style="display:flex;gap:16px;align-items:center">
         ${c.socials.map(s=>`
         <a href="${s.url}" target="_blank" rel="noopener noreferrer"
@@ -1743,7 +1751,7 @@ function openClubModal(id) {
       <!-- Zone B: what they do -->
       ${eventsHTML?`
       <div style="padding:36px 32px 0">
-        <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:4px">Events</p>
+        <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:4px">Événements</p>
         ${eventsHTML}
       </div>`:''}
       ${projectsHTML?`<div style="padding:0 32px">${projectsHTML}</div>`:''}
