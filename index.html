@@ -352,6 +352,7 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
   #numbers-grid{grid-template-columns:1fr!important;gap:28px!important;margin-bottom:0!important}
   .stat-num{font-size:3rem!important}
   #section-numbers{padding-bottom:4rem!important}
+  #accred-grid{flex-wrap:wrap!important;justify-content:flex-start!important;gap:24px!important}
   /* Admission table mobile */
   #section-admission{padding-left:1rem!important;padding-right:1rem!important}
   #admission-table{min-width:unset!important}
@@ -362,7 +363,7 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
   /* Partner wall 3-col grid */
   #partner-wall{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:0!important}
   .partner-cell{display:flex;align-items:center;justify-content:center;height:70px}
-  .partner-cell .partner-logo{height:auto!important;width:auto!important;max-width:80%;max-height:40px;object-fit:contain}
+  .partner-cell .partner-logo{height:auto!important;width:auto!important;max-width:80%;max-height:50px;object-fit:contain}
   .spec-watermark{display:none}
   .spec-strip{padding-left:1rem!important;padding-right:1rem!important;gap:12px}
   .spec-name{font-size:0.9rem!important}
@@ -816,7 +817,9 @@ function toggleCurAcc(btn) {
     requestAnimationFrame(()=>{
       body.style.transition=''; body.style.maxHeight = body.scrollHeight + 'px';
       chev.style.transform = 'rotate(90deg)';
-      item.scrollIntoView({behavior:'smooth', block:'nearest'});
+      const navHeight = document.querySelector('nav').offsetHeight;
+      const cardTop = item.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({top: cardTop - navHeight - 16, behavior:'smooth'});
     });
     if (!anyOpenBefore) pushOverlayHistory();
   } else {
@@ -841,7 +844,9 @@ function toggleSpecAcc(btn) {
     requestAnimationFrame(()=>{
       body.style.transition=''; body.style.maxHeight = body.scrollHeight + 'px';
       chev.style.transform = 'rotate(90deg)';
-      item.scrollIntoView({behavior:'smooth', block:'nearest'});
+      const navHeight = document.querySelector('nav').offsetHeight;
+      const cardTop = item.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({top: cardTop - navHeight - 16, behavior:'smooth'});
     });
     if (!anyOpenBefore) pushOverlayHistory();
   } else {
@@ -1219,6 +1224,23 @@ function renderHome() {
         <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">année de fondation de l'ENSI</div>
       </div>
     </div>
+
+    <!-- Accreditations -->
+    <div style="margin-top:0">
+      <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 20px">ACCRÉDITATIONS</p>
+      <div id="accred-grid" style="display:flex;justify-content:space-between;align-items:flex-start;width:100%;gap:24px">
+        ${[
+          {logo:'eur-ace.png', label:"EUR-ACE® Master · jusqu'en 2028"},
+          {logo:'asiin.jpg',   label:"ASIIN · jusqu'en 2028"},
+          {logo:'9001.jpeg',   label:"ISO 9001:2015 · jusqu'en 2027"},
+          {logo:'iso.png',     label:"ISO 21001:2018 · jusqu'en 2027"},
+        ].map(a=>`
+        <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+          <img src="/imag/${a.logo}" alt="${a.label}" loading="lazy" style="height:100px;max-width:180px;object-fit:contain;filter:grayscale(100%);opacity:0.65;transition:filter .2s ease,opacity .2s ease" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)';this.style.opacity='0.65'">
+          <span style="font-family:'Inter',sans-serif;font-size:0.72rem;color:#6B7280">${a.label}</span>
+        </div>`).join('')}
+      </div>
+    </div>
   </section>`;
   })()}
 
@@ -1295,10 +1317,10 @@ function renderHome() {
     <div style="margin-top:72px;padding-top:48px">
       <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 10px">Recruteurs d'ingénieurs ENSI</p>
       <h3 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 36px;letter-spacing:-0.03em;line-height:0.95">Partenaires <span style="color:#2563EB">industriels</span></h3>
-      <div id="partner-wall" style="display:flex;flex-wrap:wrap;align-items:center;gap:28px 40px">
+      <div id="partner-wall" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:28px 0;width:100%">
         ${PARTNERS.map(p=>`
-        <div class="partner-cell">
-          <img src="/imag/${p.logo}" alt="${p.name}" class="partner-logo" loading="lazy" width="${Math.round(p.h*p.nw/120)}" height="${p.h}" style="height:${p.h}px;width:auto;display:block;filter:grayscale(1);opacity:0.65;transition:filter .2s ease,opacity .2s ease"
+        <div class="partner-cell" style="display:flex;align-items:center;justify-content:center">
+          <img src="/imag/${p.logo}" alt="${p.name}" class="partner-logo" loading="lazy" style="max-height:50px;max-width:120px;width:auto;height:auto;object-fit:contain;display:block;filter:grayscale(1);opacity:0.65;transition:filter .2s ease,opacity .2s ease"
             onmouseover="this.style.filter='grayscale(0)';this.style.opacity='1'"
             onmouseout="this.style.filter='grayscale(1)';this.style.opacity='0.65'">
         </div>`).join('')}
