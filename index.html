@@ -348,11 +348,14 @@ body{font-family:'Archivo',sans-serif;background:#F5F7FA;color:#1B2A4A;overscrol
   .club-tile:active{transform:scale(0.98)}
   .mod-card:active{transform:scale(0.98)}
   /* By the Numbers mobile */
-  #section-numbers{padding-left:1.5rem!important;padding-right:1.5rem!important}
+  #section-numbers{padding-left:1.5rem!important;padding-right:1.5rem!important;padding-top:48px!important}
+  #numbers-heading{font-size:1.75rem!important;white-space:nowrap}
   #numbers-grid{grid-template-columns:1fr!important;gap:28px!important;margin-bottom:0!important}
-  .stat-num{font-size:3rem!important}
+  .stat-num{font-size:2.5rem!important}
   #section-numbers{padding-bottom:4rem!important}
-  #accred-grid{flex-wrap:wrap!important;justify-content:flex-start!important;gap:24px!important}
+  #accred-grid{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:1.5rem!important;align-items:center!important;width:100%!important}
+  #accred-grid>div{flex-direction:column!important;align-items:center!important;text-align:center!important}
+  #accred-grid img{max-height:80px!important;max-width:100%!important}
   #accred-container{margin-top:40px!important}
   /* Admission table mobile */
   #section-admission{padding-left:1rem!important;padding-right:1rem!important}
@@ -802,21 +805,22 @@ window.addEventListener('popstate', function() {
 });
 
 // ─── ACCORDION HELPERS ───────────────────────────────────────────────────────
-function _accOpen(item, body, chev) {
-  // Step 1: collapse all open siblings instantly
-  const siblings = item.parentElement.querySelectorAll(body.className.split(' ').map(c=>'.'+c).join(''));
-  siblings.forEach(b=>{ b.style.transition='none'; b.style.maxHeight='0px'; });
-  item.parentElement.querySelectorAll(chev.className.split(' ').map(c=>'.'+c).join('')).forEach(c=>c.style.transform='');
-  // Step 2: strong reflow — positions recalculated after collapse
+function _accOpen(allBodies, allChevs, item, body, chev) {
+  // 1. Collapse all open items instantly, no transition
+  allBodies.forEach(b=>{ b.style.transition='none'; b.style.maxHeight='0px'; });
+  allChevs.forEach(c=>c.style.transform='');
+  // 2. Open new item instantly (no transition) to get final layout
+  body.style.transition='none'; body.style.maxHeight = body.scrollHeight + 'px';
+  chev.style.transform = 'rotate(90deg)';
+  // 3. Synchronous reflow — everything settled
   void document.body.offsetHeight;
-  // Step 3: calculate scroll target AFTER collapse (layout now stable)
+  // 4. Measure final position after all layout changes
   const navHeight = document.querySelector('nav').offsetHeight;
   const top = item.getBoundingClientRect().top + window.scrollY - navHeight - 16;
-  // Step 4: open new item with animation
-  body.style.transition=''; body.style.maxHeight = body.scrollHeight + 'px';
-  chev.style.transform = 'rotate(90deg)';
-  // Step 5: scroll using position calculated post-collapse
-  window.scrollTo({top, behavior:'smooth'});
+  // 5. Instant scroll (no smooth) — avoids down-then-up artifact
+  window.scrollTo({top, behavior:'auto'});
+  // 6. Restore transitions for future interactions
+  requestAnimationFrame(()=>{ body.style.transition=''; });
 }
 
 // ─── CURRICULUM ACCORDION ────────────────────────────────────────────────────
@@ -827,7 +831,7 @@ function toggleCurAcc(btn) {
   const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
   const anyOpenBefore = [...document.querySelectorAll('.cur-acc-body')].some(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
   if (!isOpen) {
-    _accOpen(item, body, chev);
+    _accOpen(document.querySelectorAll('.cur-acc-body'), document.querySelectorAll('.cur-acc-chev'), item, body, chev);
     if (!anyOpenBefore) pushOverlayHistory();
   } else {
     body.style.transition='none'; body.style.maxHeight='0px';
@@ -844,7 +848,7 @@ function toggleSpecAcc(btn) {
   const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
   const anyOpenBefore = [...document.querySelectorAll('.spec-acc-body')].some(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
   if (!isOpen) {
-    _accOpen(item, body, chev);
+    _accOpen(document.querySelectorAll('.spec-acc-body'), document.querySelectorAll('.spec-acc-chev'), item, body, chev);
     if (!anyOpenBefore) pushOverlayHistory();
   } else {
     body.style.transition='none'; body.style.maxHeight='0px';
@@ -1204,7 +1208,7 @@ function renderHome() {
     return `
   <section id="section-numbers" style="background:#fff;padding:96px 10vw">
     <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">EN CHIFFRES</p>
-    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 56px;line-height:0.95;letter-spacing:-0.03em">40 ans d'<span style="color:#2563EB">ingénieurs.</span></h2>
+    <h2 id="numbers-heading" style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 56px;line-height:0.95;letter-spacing:-0.03em">40 ans d'<span style="color:#2563EB">ingénieurs.</span></h2>
     <div id="numbers-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:64px">
       <div>
         <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">2 500+</div>
