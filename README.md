@@ -2,7 +2,7 @@
 
 A website that helps new students coming from *prépa* get to know **ENSI** (École Nationale des Sciences de l'Informatique) before and during their first days on campus.
 
-🔗 **Live site:** [ensi-orientation.vercel.app]((https://ensi-guide-orientation.tech/))
+🔗 **Live site:** [[ensi-guide-orientation.tech](https://ensi-guide-orientation.tech/)]
 
 ---
 
