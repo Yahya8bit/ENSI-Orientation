@@ -1,0 +1,1705 @@
+// ─── DATA ───────────────────────────────────────────────────────────────────
+
+const CARD_ACCENT = {MAT:'#7C3AED',AP:'#059669',EHA:'#DC2626',AI:'#D97706',DAT:'#EA580C',FIN:'#0D9488',BDC:'#2563EB',OS:'#4F46E5',NET:'#0891B2',SE:'#1D4ED8',SEC:'#B91C1C',IMA:'#DB2777'};
+const SUBJECT_COLORS = {
+  MAT:'#6366F1',AP:'#059669',AI:'#D97706',NET:'#2563EB',OS:'#7C3AED',
+  SE:'#0891B2',EHA:'#DC2626',DAT:'#EA580C',BDC:'#65A30D',FIN:'#0D9488',
+  IMA:'#DB2777',SEC:'#B91C1C',DDP:'#1D4ED8',GL:'#059669',CV:'#DB2777',
+  DOS:'#06B6D4',SLE:'#DC2626',IF:'#0D9488',
+  ISA:'#EA580C',ESDV:'#7C3AED',ESEP:'#7C3AED',IAP:'#0891B2',
+};
+
+const SUBJECT_FULLNAMES = {
+  AI:'Intelligence Artificielle', AP:'Algorithmique & Programmation', BDC:'Digitalisation des Entreprises et Communication',
+  CV:'Vision par Ordinateur', DAT:'Données', DDP:'Projet de Design et Développement',
+  DOS:'Systèmes Distribués et Exploitation', EHA:'Électronique et Architecture Matérielle',
+  ESDV:'Conception et Validation de Systèmes Embarqués', ESEP:'Systèmes Embarqués & Programmation Embarquée',
+  FIN:'Finance', IAP:'Programmation Applications IoT', IMA:'Image',
+  ISA:'Applications des Systèmes d\'Information', MAT:'Mathématiques', NET:'Réseaux Informatiques',
+  OS:'Systèmes d\'Exploitation', SE:'Génie Logiciel', SEC:'Sécurité',
+};
+function codeTipAttr(code) {
+  const prefix = (code.match(/^[A-Z]+/)||[])[0];
+  const full = SUBJECT_FULLNAMES[prefix];
+  return full ? `data-tip="${full}"` : '';
+}
+function codeTip(code) {
+  const attr = codeTipAttr(code);
+  return attr ? `class="code-tip" ${attr}` : '';
+}
+
+const SPEC_BADGE_LABEL = {'ST-IoT':'IoT','CV':'DS'};
+const SPECIALIZATIONS = [
+  {id:'AI',name:'Artificial Intelligence',nameFr:'Intelligence Artificielle',color:'#D97706',desc:'Apprentissage automatique, deep learning, NLP et systèmes cognitifs.',
+    compulsory:['AI.5.1','AI.5.2','AI.5.3','AI.5.4','AI.5.5','ISA.5.1','ISA.5.2','MAT.5.2','AI.5.6','ISA.5.6','DOS.5.8','DOS.5.2'],
+    optional:['ISA.5.3','MAT.5.1','ISA.5.5','ISA.5.4','AI.5.7','ISA.5.7','ISA.5.8','AI.5.10','AI.5.8','AI.5.9','AI.5.11']},
+  {id:'GL',name:'Software Engineering',nameFr:'Génie Logiciel',color:'#2563EB',desc:'Qualité logicielle, DevOps, ingénierie cloud et architecture avancée.',
+    compulsory:['SE.5.1','SE.5.2','SE.5.3','SE.5.4','SE.5.5','AI.5.3','AI.5.1','DOS.5.1','DOS.5.2','DOS.5.3'],
+    optional:['ISA.5.1','ISA.5.3','ISA.5.7','ISA.5.4','ISA.5.9','ISA.5.2','ISA.5.10','ISA.5.11','ISA.5.6','ISA.5.8']},
+  {id:'CV',name:'Data Science & Computer Vision',nameFr:'Vision par Ordinateur et Science des Données',color:'#DB2777',desc:'Traitement d\'images, reconnaissance de formes, analyse big data et imagerie médicale.',
+    compulsory:['CV.5.1','CV.5.2','CV.5.3','CV.5.4','CV.5.5','CV.5.6','CV.5.7','CV.5.8','CV.5.9','AI.5.16','CV.5.11'],
+    optional:['DOS.5.2','DOS.5.3','DOS.5.8','SE.5.3']},
+  {id:'IF',name:'Financial Engineering',nameFr:'Ingénierie Financière',color:'#0D9488',desc:'Finance quantitative, trading algorithmique, blockchain et gestion des risques.',
+    compulsory:['FIN.5.1','MAT.5.3','FIN.5.2','FIN.5.3','ISA.5.1','FIN.5.4','MAT.5.5','MAT.5.4','ISA.5.4','AI.5.1','FIN.5.6','AI.5.12','FIN.5.5'],
+    optional:['DOS.5.2','SE.5.3','ISA.5.7','DOS.5.3']},
+  {id:'SLE',name:'Embedded Software and Systems',nameFr:'Systèmes et Logiciels Embarqués',color:'#7C3AED',desc:'Systèmes temps réel, conception FPGA, protocoles IoT et Linux embarqué.',
+    compulsory:['AI.5.5','AI.5.12','DOS.5.4','DOS.5.5','DOS.5.6','DOS.5.7','ESDV.5.1','ESDV.5.2','ESDV.5.3','ESDV.5.4','ESDV.5.5','ESDV.5.6'],
+    optional:['DOS.5.8','DOS.5.9','ESDV.5.7','ESDV.5.8','ESDV.5.9','IAP.5.1','IAP.5.2','IAP.5.3','SEC.5.1','SEC.5.2','SEC.5.3','SEC.5.4','ISA.5.12']},
+  {id:'ST-IoT',name:'Services, Technologies & IoT',nameFr:'Services, Technologies et Internet des Objets',color:'#06B6D4',desc:'Cloud computing, microservices, applications IoT et sécurité réseau.',
+    compulsory:['ESEP.5.1','ESEP.5.2','ESEP.5.3','NET.5.1','NET.5.2','NET.5.3','NET.5.4','DOS.5.5','DOS.5.6','DOS.5.4','DOS.5.8'],
+    optional:['IAP.5.3','DOS.5.11','DOS.5.2','AI.5.12','ISA.5.12','ISA.5.1','AI.5.5','SEC.5.2','SEC.5.4']},
+];
+
+const MODULE_HANDBOOK = {
+  'AI.5.1':{objectives:["Maîtriser les concepts d'agent et de systèmes multi-agents","Apprendre le développement d'un système multi-agents","Explorer des questions de recherche complémentaires"],content:["Chapitre 2 : Agents intelligents","Chapitre 3 : Architectures d'agents","Chapitre 4 : Méthodologies de développement de systèmes multi-agents","Chapitre 4 : Environnements de développement SMA & étude de cas"]},
+  'AI.5.2':{objectives:["Systèmes formels et inférence formelle pour la décision","Démonstration de théorèmes","Fuzzification, défuzzification et décision","Règles de correspondance formelles"],content:["Leçon I. Introduction – Preuve formelle et déduction logique","Leçon II. Systèmes formels pour les logiques temporelles","Leçon III. Logique PLTL, modèles de Büchi, composition d'automates et vérification sémantique","Leçon III. Logique floue – Fuzzification et défuzzification"]},
+  'AI.5.3':{objectives:["Connaître les bases et les différents types de deep learning","Utiliser et appliquer les techniques de deep learning supervisées et non supervisées"],content:["Chapitre 1. Introduction au deep learning","Chapitre 2. Réseaux de neurones récurrents","Chapitre 3. Réseau de neurones feed-forward","Chapitre 4. Autoencodeurs","Chapitre 5. Modèles génératifs profonds","Chapitre 6. Introduction à l'apprentissage fédéré"]},
+  'AI.5.4':{objectives:["Comprendre les concepts clés du NLP pour décrire et analyser le langage","Comprendre l'étiquetage morphosyntaxique et la grammaire hors-contexte pour le langage naturel","Comprendre la représentation sémantique du langage naturel pour le traitement","Appliquer les méthodes d'apprentissage automatique / deep learning au traitement de textes"]},
+  'AI.5.5':{objectives:["Comprendre la fusion de capteurs et la perception pour les robots autonomes","Programmer des comportements de robots mobiles autonomes","Appliquer des techniques de soft computing aux systèmes de contrôle"]},
+  'AI.5.8':{content:["Chapitre I : Introduction au calcul affectif","Chapitre II : Émotions – Définitions, types, théories","Chapitre III : Reconnaissance automatique des émotions (faciale, vocale, gestuelle, physiologique)","Chapitre IV : Modélisation informatique des émotions et robots expressifs"]},
+  'AI.5.9':{objectives:["Proposer un projet ITS en utilisant les connaissances acquises dans d'autres formations","Estimer les ressources technologiques et budgétaires pour un ITS","Avoir une idée des tendances récentes et des programmes ITS nationaux et internationaux"],content:["Chapitre I : Systèmes de transport intelligents – Introduction","Chapitre II : Exemples de projets","Chapitre III : ITS en Tunisie"]},
+  'AI.5.10':{content:["Chapitre 1 : Introduction au Web sémantique","Chapitre 2 : Modèle de données RDF","Chapitre 3 : Langage de requête SPARQL","Chapitre 4 : Support des ontologies et schémas RDFS","Chapitre 4 : Formalisation en OWL"]},
+  'AI.5.12':{objectives:["Comprendre l'apprentissage automatique générique","Comprendre la motivation et le fonctionnement des réseaux profonds","Comprendre les choix et les limites des modèles de deep learning","Appliquer les techniques de deep learning à des problèmes pratiques","Évaluer de manière critique les performances des modèles"],content:["Chapitre 1 : Mathématiques appliquées et bases de l'apprentissage automatique","Chapitre 2 : Réseaux profonds pratiques modernes","Chapitre 3 : Recherche en deep learning"]},
+  'AI.5.16':{objectives:["Comprendre les concepts clés du NLP pour décrire et analyser le langage","Comprendre l'étiquetage morphosyntaxique et la grammaire hors-contexte pour le langage naturel","Comprendre la représentation sémantique du langage naturel pour le traitement"]},
+  'SE.5.1':{content:["Chapitre 1 : Introduction à la réingénierie logicielle","Chapitre 2 : Réingénierie du code – Refactoring","Chapitre 3 : Réingénierie des données","Chapitre 4 : Réingénierie des processus métier","Chapitre 5 : Réingénierie des systèmes d'information","Chapitre 6 : Outils pour la réingénierie logicielle"]},
+  'SE.5.2':{objectives:["Connaître le processus de gestion de la qualité et ses activités clés","Comprendre le rôle des normes dans la gestion de la qualité","Apprendre les métriques logicielles et l'évaluation de la qualité","Maîtriser les techniques de test logiciel","Connaître les différents niveaux de test logiciel","Savoir réduire les bugs dans les programmes logiciels","Utiliser et appliquer des outils d'évaluation"],content:["Partie 1 : Gestion de la qualité logicielle","Partie 2 : Test logiciel"]},
+  'SE.5.4':{objectives:["Assimiler les concepts clés des systèmes complexes (émergence, auto-organisation)","Décrire, comprendre et analyser les systèmes complexes","Étudier les outils informatiques de modélisation des systèmes complexes","Apprendre les bases des systèmes de systèmes"],content:["Chapitre I : Systèmes complexes – Introduction","Chapitre II : Modélisation et simulation à base d'agents","Chapitre III : Automates cellulaires","Chapitre IV : Systèmes de systèmes – Classification et architecture","Chapitre V : Ingénierie des systèmes de systèmes"]},
+  'SE.5.5':{objectives:["Détailler l'approche MDA (Model Driven Architecture) et l'OMG","Développer des capacités de méta-modélisation","Maîtriser le langage de contraintes OCL","Étudier les différents types et approches de transformation de modèles","Mettre en pratique les connaissances acquises"],content:["Chapitre I : Introduction à l'ingénierie dirigée par les modèles","Chapitre II : Principes et normes du MDE","Chapitre III : Langage de contraintes d'objets (OCL)","Chapitre IV : Transformation de modèles"]},
+  'DOS.5.1':{objectives:["Comprendre les modèles et architectures du cloud computing","Appliquer des stratégies de déploiement cloud","Configurer et gérer des services cloud"]},
+  'DOS.5.2':{objectives:["Expliquer la blockchain et son application dans différents secteurs","Décrire les principes clés de la technologie blockchain","Expliquer les concepts fondamentaux d'Hyperledger Fabric","Appliquer les concepts de sécurité blockchain, d'identité et de contrôle d'accès","Écrire des applications interagissant avec un réseau blockchain"],content:["Unité 1 : Introduction à la blockchain","Unité 2 : Introduction au développement de chaincode","Unité 3 : Méthodes de requête de chaincode","Unité 4 : Bonnes pratiques pour l'écriture, le test et le débogage de chaincode","Unité 5 : Identité et contrôle d'accès","Unité 6 : Confidentialité des données","Unité 7 : Bases du développement d'applications","Unité 8 : Intégration blockchain et développement d'applications avancées"]},
+  'DOS.5.3':{content:["Chapitre I : Introduction à l'IoT","Chapitre II : Applications et architectures IoT","Chapitre III : Technologies réseaux dans l'IoT","Chapitre IV : Middlewares et protocoles applicatifs pour l'IoT"]},
+  'DOS.5.4':{objectives:["Comprendre les architectures avancées de processeurs","Appliquer des modèles de programmation parallèle","Optimiser les logiciels pour les architectures multi-cœurs et SIMD"]},
+  'DOS.5.5':{objectives:["Comprendre les problèmes liés aux applications temps réel","Utiliser des systèmes d'exploitation temps réel basés sur FreeRTOS","Concevoir des applications temps réel avec FreeRTOS"],content:["Chapitre I : Introduction aux systèmes temps réel","Chapitre II : Systèmes d'exploitation temps réel","Chapitre III : Architecture système de FreeRTOS"]},
+  'DOS.5.6':{objectives:["Comprendre les architectures des systèmes distribués","Appliquer les principes du calcul distribué","Construire des applications distribuées"]},
+  'DOS.5.7':{objectives:["Construire et configurer des systèmes Linux embarqués","Écrire des pilotes de périphériques Linux","Utiliser Yocto et Buildroot pour des cibles embarquées"]},
+  'DOS.5.8':{objectives:["Comprendre les fondamentaux du cloud computing","Distinguer les modèles IaaS, PaaS et SaaS","Déployer des applications sur des plateformes cloud"]},
+  'DOS.5.9':{objectives:["Maîtriser le système d'exploitation robotique (ROS)","Traiter les modèles et simulations pour les robots","Développer des logiciels pour les applications robotiques"]},
+  'DOS.5.11':{objectives:["Acquérir et utiliser des connaissances sur les systèmes distribués","Découvrir les principaux concepts du middleware","Apprendre à construire une application distribuée avec différents frameworks"]},
+  'ISA.5.1':{objectives:["Maîtriser les briques de base de la plateforme Hadoop (HDFS, MapReduce)","Maîtriser l'approche MapReduce pour la résolution de problèmes","Comprendre les limites du modèle relationnel et connaître les modèles NOSQL"],content:["Chapitre I : Introduction au Big Data","Chapitre II : Hadoop – Briques de base","Chapitre III : Outils de traitement avancés","Chapitre IV : Bases de données NOSQL","Chapitre V : Architectures Big Data"]},
+  'ISA.5.2':{content:["Chapitre 1 : Introduction à l'exploration de données","Chapitre 2 : Prétraitement et extraction de caractéristiques textuelles","Chapitre 3 : Classification de textes","Chapitre 4 : Analyse de sentiment","Chapitre 5 : Identification de sujets"]},
+  'ISA.5.3':{objectives:["Comprendre les systèmes d'aide à la décision et leurs architectures","Appliquer des techniques de prise de décision interactive","Construire des applications d'aide à la décision"]},
+  'ISA.5.4':{objectives:["Être capable d'évaluer les technologies constituant la BI","Être capable de planifier la mise en œuvre d'une solution BI"],content:["Chapitre 1 : Introduction à la Business Intelligence","Chapitre 2 : Intégration des données","Chapitre 3 : Stockage des données – Entrepôt de données","Chapitre 4 : Analyse multidimensionnelle avec OLAP","Chapitre 5 : Langage MDX"]},
+  'ISA.5.7':{objectives:["Comprendre les architectures de bases de données distribuées","Appliquer des techniques de traitement de requêtes distribuées","Gérer la réplication et la cohérence"]},
+  'ISA.5.8':{objectives:["Maîtriser les techniques avancées de BI","Appliquer des analyses et rapports avancés","Évaluer et comparer les plateformes BI"]},
+  'ISA.5.9':{content:["Chapitre 1 : Introduction aux SIG","Chapitre 2 : Formats, conception et qualité de données SIG","Chapitre 3 : Analyse géospatiale et environnementale","Chapitre 4 : Cartographie et analyse spatiale"]},
+  'ISA.5.10':{objectives:["Comprendre les enjeux de gouvernance dans le contrôle des activités d'entreprise","Connaître les meilleures pratiques en gouvernance des SI","Comprendre les composantes de l'entreprise numérique"],content:["Chapitre I : Architecture d'entreprise – Introduction","Section I : Présentation du domaine de l'AE","Section II : Architecture de l'entreprise numérique","Chapitre II : Gouvernance du SI de l'entreprise","Section I : Gouvernance des SI","Section II : Fondements d'un modèle de gouvernance des SI","Section III : Initiatives clés"]},
+  'ISA.5.11':{objectives:["Maîtriser les pipelines d'ingénierie des données","Appliquer des outils ETL et d'orchestration de données","Construire une infrastructure de données scalable"]},
+  'ISA.5.12':{objectives:["Initier les étudiants aux concepts de base de l'exploration de données","Développer des compétences dans l'utilisation d'outils récents de datamining","Acquérir de l'expérience en analyse de données autonome"],content:["Chapitre 1 : Introduction au Datamining","Chapitre 2 : Prétraitement des données","Chapitre 3 : Règles d'association","Chapitre 4 : Clustering"]},
+  'CV.5.4':{objectives:["Maîtriser les méthodes de simplification de maillages 3D","Maîtriser les méthodes de recalage 3D","Maîtriser les méthodes de construction d'objets 3D à partir d'images"]},
+  'CV.5.6':{objectives:["Maîtriser les techniques de morphologie mathématique","Appliquer la morphologie mathématique en analyse d'images","Appliquer la morphologie mathématique pour des applications médicales"]},
+  'CV.5.11':{objectives:["Étudier les spécificités des différentes modalités d'imagerie"],content:["Partie 1 : Introduction à l'imagerie médicale","Partie 2 : Modalités","Partie 3 : Les principaux traitements des images médicales"]},
+  'FIN.5.2':{content:["Chapitre 1 : Risque financier – Introduction","Chapitre 2 : Assurance de portefeuille","Chapitre 3 : Stratégies de couverture dynamique","Chapitre 4 : Gestion du risque de taux d'intérêt"]},
+  'FIN.5.3':{content:["Chapitre 1 : Introduction à la gestion bancaire","Chapitre 2 : Risques bancaires – définition et typologie","Chapitre 3 : Le cadre réglementaire","Chapitre 4 : Gestion du risque de crédit"]},
+  'MAT.5.3':{objectives:["Appliquer des méthodes d'optimisation numérique avec R","Résoudre des problèmes d'optimisation avec et sans contraintes","Implémenter des algorithmes d'optimisation en R"]},
+  'MAT.5.4':{objectives:["Appliquer des méthodes d'inférence statistique avec R","Effectuer des tests d'hypothèses et estimer des intervalles de confiance","Utiliser R pour le calcul statistique et l'analyse de données"]},
+  'MAT.5.5':{objectives:["Appliquer des techniques d'analyse de données multivariées","Effectuer la réduction de dimensionnalité et le clustering","Interpréter les résultats d'analyse de données pour la prise de décision"]},
+  'SEC.5.1':{objectives:["Développer des connaissances en diagnostic et détection de défauts","Introduire les principes d'analyse en composantes indépendantes/dépendantes","Étudier le traitement en ligne de la prédiction de fiabilité dans les systèmes embarqués"],content:["Leçon 1 : Introduction au diagnostic, à la sûreté et à la fiabilité","Leçon 2 : Diagnostic – Techniques basées sur les modèles","Leçon 3 : Diagnostic – Techniques basées sur les signaux","Leçon 4 : Analyse de systèmes avec composants indépendants","Leçon 5 : Analyse de systèmes avec composants dépendants","Leçon 6 : Application des méthodologies de sûreté de fonctionnement aux SE","Leçon 7 : Méthodologie de prédiction de fiabilité pour les SE"]},
+  'SEC.5.2':{objectives:["Discuter des principales menaces et attaques IoT","Identifier les outils et protocoles cryptographiques adaptés","Évaluer les menaces et risques IoT","Concevoir un système embarqué sécurisé"],content:["Chapitre 1 : Introduction à la sécurité IoT","Chapitre 2 : Sécurisation des dispositifs IoT","Chapitre 3 : Sécurisation de la couche réseau IoT","Chapitre 4 : Sécurisation de la couche applicative IoT","Chapitre 5 : Sécurisation des plateformes IoT","Chapitre 6 : Sécurité dans les systèmes embarqués"]},
+  'SEC.5.3':{objectives:["Comprendre les architectures réseau automobiles","Appliquer les concepts de sécurité spécifiques aux systèmes automobiles","Analyser et atténuer les menaces dans les véhicules connectés"]},
+  'SEC.5.4':{objectives:["Concevoir et implémenter une solution de sécurité IoT","Appliquer des méthodologies d'évaluation de la sécurité à des projets IoT","Démontrer des compétences en test et évaluation de la sécurité"]},
+  'ESDV.5.1':{objectives:["Acquérir les bases de la programmation pour les dispositifs ARM Cortex","Appliquer les principes et approches généraux du développement embarqué","Effectuer la modélisation et l'optimisation pour les systèmes IoT"],content:["Chapitre I : Microcontrôleurs – Introduction","Chapitre II : Processeurs et bibliothèque STM","Chapitre III : Programmation des périphériques","Chapitre IV : Applications temps réel et IoT"]},
+  'ESDV.5.2':{objectives:["Comprendre les fonctionnalités du langage VHDL","Concevoir des systèmes numériques séquentiels et concurrents en VHDL","Simuler et déboguer des systèmes numériques décrits en VHDL","Synthétiser des systèmes numériques complexes et les implémenter sur FPGA"],content:["Chapitre I : Introduction au VHDL","Chapitre II : Conception de circuits combinatoires","Chapitre III : Conception de circuits séquentiels","Chapitre IV : VHDL avancé et implémentation sur FPGA"]},
+  'ESDV.5.3':{objectives:["Acquérir les concepts de base de conception et validation des systèmes temps réel"],content:["Leçon I : Introduction aux systèmes temps réel","Leçon II : Réseau de Petri","Leçon III : Automates temporisés"]},
+  'ESDV.5.4':{objectives:["Identifier une approche scientifique rigoureuse des systèmes cyber-physiques","Comprendre la conception basée sur les modèles pour les systèmes embarqués","Appliquer les concepts de l'écosystème IoT"],content:["Chapitre 1 : Motivation – Systèmes cyber-physiques","Chapitre 2 : Conception basée sur les modèles","Chapitre 3 : Capteurs et actionneurs","Chapitre 4 : Programmation de systèmes embarqués","Chapitre 5 : Réseaux","Chapitre 6 : Écosystème IoT","Chapitre 7 : Analytique IoT"]},
+  'ESDV.5.5':{content:["Chapitre I : Introduction à l'électronique pour les systèmes embarqués","Chapitre II : Conception et layout de portes logiques simples","Chapitre III : Circuits séquentiels statiques et dynamiques"]},
+  'ESDV.5.6':{content:["Chapitre I : Introduction à la conception de PCB avec Altium","Chapitre II : Bases de l'éditeur schématique","Chapitre III : Capture schématique","Chapitre IV : Layout PCB"]},
+  'ESDV.5.7':{objectives:["Intégrer des composants matériels et logiciels embarqués","Mener à bien un projet de système embarqué complet","Appliquer la gestion de projet au développement de systèmes embarqués"]},
+  'ESDV.5.8':{objectives:["Concevoir et implémenter un projet à base de microcontrôleur","Appliquer des techniques de programmation pour résoudre des problèmes embarqués","Démontrer des compétences pratiques en systèmes embarqués"]},
+  'ESDV.5.9':{objectives:["Maîtriser le flot de conception EDA pour FPGA","Connaître l'algorithme d'optimisation pour le mapping FPGA","Traiter les approches de co-conception"],content:["Chapitre 1 : Introduction aux architectures reconfigurables","Chapitre 2 : Architectures à base d'arbres","Chapitre 3 : Outils de configuration et algorithmiques","Chapitre 4 : FPGA embarqué"]},
+  'ESEP.5.1':{content:["Chapitre I : Introduction – Microcontrôleurs ARM Cortex","Chapitre II : Processeurs et bibliothèque STM","Chapitre III : Programmation des périphériques","Chapitre IV : Applications IoT"]},
+  'ESEP.5.2':{objectives:["Programmer des objets connectés à l'aide de plateformes embarquées","Appliquer les protocoles de communication IoT","Construire des applications d'objets connectés de bout en bout"]},
+  'ESEP.5.3':{objectives:["Identifier une approche scientifique rigoureuse des systèmes cyber-physiques","Appliquer la conception basée sur les modèles pour l'IoT","Travailler avec des capteurs, actionneurs et écosystèmes IoT"],content:["Chapitre 1 : Motivation – Systèmes cyber-physiques","Chapitre 2 : Conception basée sur les modèles","Chapitre 3 : Capteurs et actionneurs","Chapitre 4 : Programmation de systèmes embarqués","Chapitre 5 : Réseaux","Chapitre 6 : Écosystème IoT","Chapitre 7 : Analytique IoT"]},
+  'NET.5.1':{objectives:["Comprendre les architectures de réseaux cellulaires multi-services","Analyser les fonctionnalités et performances des réseaux 4G/5G"],content:["Partie I : Introduction aux réseaux 3G/UMTS","Partie II : Introduction aux réseaux 4G","Partie III : Introduction aux réseaux 5G"]},
+  'NET.5.2':{objectives:["Étudier les protocoles de communication fondamentaux pour l'IoT","Comprendre les architectures applicatives IoT","Analyser les réseaux de capteurs sans fil et les réseaux véhiculaires"],content:["Chapitre I : Introduction aux communications IoT","Chapitre II : Applications et architectures IoT","Chapitre III : Technologies réseaux dans l'IoT","Chapitre IV : Middlewares et protocoles applicatifs pour l'IoT","Chapitre V : Réseaux de capteurs sans fil","Chapitre VI : Réseaux ad hoc véhiculaires"]},
+  'NET.5.3':{objectives:["Comprendre les concepts et l'architecture de la gestion de réseau","Avoir une connaissance des dernières technologies de gestion de réseau","Appliquer SNMP et les protocoles de gestion de réseau associés"]},
+  'NET.5.4':{objectives:["Maîtriser les différents mécanismes d'ingénierie pour la QoS","Savoir utiliser les techniques et outils d'ingénierie du trafic","Appliquer des politiques QoS dans des environnements réseau"]},
+  'IAP.5.1':{objectives:["Comprendre les nouvelles technologies de capteurs souples et intelligents","Apprendre les actionneurs souples et intelligents modernes","Implémenter des stratégies de contrôle d'actionneurs souples"],content:["Leçon 1 : Mesures intelligentes","Leçon 2 : Capteurs souples et intelligents","Leçon 3 : Actionneurs souples et intelligents","Leçon 4 : Stratégies de contrôle d'actionneurs souples"]},
+  'IAP.5.2':{objectives:["Programmer des objets IoT connectés","Appliquer des frameworks de programmation d'applications IoT","Construire des prototypes IoT avec des cartes embarquées"]},
+  'IAP.5.3':{objectives:["Comprendre les systèmes et techniques de positionnement","Appliquer les méthodes GPS, GNSS et de positionnement intérieur","Construire des applications IoT géolocalisées"]},
+};
+
+const MODULES = [
+  // ── S1 ──
+  {code:'MAT.1.1',title:'Probabilités et Statistiques',semester:1,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Comprendre les fondamentaux de la théorie des probabilités','Appliquer les méthodes statistiques aux problèmes d\'ingénierie','Effectuer des tests d\'hypothèses et des analyses de régression'],content:['Espaces de probabilité et événements','Variables aléatoires et distributions','Inférence statistique','Régression et corrélation','Tests d\'hypothèses'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Papoulis, Probability, Random Variables and Stochastic Processes','Wackerly, Mathematical Statistics with Applications'],responsible:'Dép. de Mathématiques'},
+  {code:'MAT.1.2',title:'Mathématiques de l\'Ingénieur',semester:1,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Maîtriser l\'algèbre linéaire pour l\'ingénierie','Appliquer les équations différentielles aux systèmes','Utiliser les transformées de Fourier et de Laplace'],content:['Algèbre linéaire et théorie des matrices','Équations différentielles','Séries et transformées de Fourier','Transformées de Laplace','Analyse complexe'],examForm:'Examen écrit',passMark:'10/20',readingList:['Kreyszig, Advanced Engineering Mathematics'],responsible:'Dép. de Mathématiques'},
+  {code:'FIN.1.1',title:'Introduction au Système Bancaire et Financier',semester:1,credits:3,subject:'FIN',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Comprendre la structure des systèmes financiers','Identifier les rôles des institutions bancaires','Saisir les instruments financiers fondamentaux'],content:['Vue d\'ensemble du système financier','Banques commerciales et centrales','Marchés et instruments financiers','Politique monétaire','Secteur bancaire tunisien'],examForm:'Examen écrit',passMark:'10/20',readingList:['Mishkin, The Economics of Money, Banking and Financial Markets'],responsible:'Dép. de Finance'},
+  {code:'EHA.1.1',title:'Circuits Numériques',semester:1,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Concevoir des circuits numériques combinatoires et séquentiels','Implémenter la logique avec un HDL','Analyser le timing dans les systèmes numériques'],content:['Algèbre de Boole et portes logiques','Circuits combinatoires','Bascules (flip-flops et latches)','Conception de circuits séquentiels','Introduction au VHDL'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Wakerly, Digital Design: Principles and Practices'],responsible:'Dép. de Matériel'},
+  {code:'EHA.1.2',title:'Électronique Analogique',semester:1,credits:1.5,subject:'EHA',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Analyser des circuits analogiques de base','Comprendre la conception des amplificateurs'],content:['Diodes et transistors','Circuits amplificateurs','Amplificateurs opérationnels','Filtres'],examForm:'Examen écrit',passMark:'10/20',readingList:['Sedra & Smith, Microelectronic Circuits'],responsible:'Dép. de Matériel'},
+  {code:'AI.1.1',title:'Logique Formelle',semester:1,credits:3,subject:'AI',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Maîtriser la logique propositionnelle et des prédicats','Utiliser les techniques de preuve formelle','Appliquer la logique en informatique'],content:['Logique propositionnelle','Logique des prédicats','Méthodes de preuve','Résolution et unification','Bases de la programmation logique'],examForm:'Examen écrit',passMark:'10/20',readingList:['Ben-Ari, Mathematical Logic for Computer Science'],responsible:'Dép. d\'IA'},
+  {code:'DAT.1.1',title:'Bases de Données et SGBD',semester:1,credits:3,subject:'DAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Concevoir des bases de données relationnelles','Écrire des requêtes SQL','Comprendre le fonctionnement interne des SGBD'],content:['Modèle et algèbre relationnels','Modélisation ER','SQL (DDL, DML, requêtes)','Normalisation','Gestion des transactions'],examForm:'Examen écrit + Projet',passMark:'10/20',readingList:['Ramakrishnan & Gehrke, Database Management Systems'],responsible:'Dép. de Données'},
+  {code:'AP.1.2',title:'Algorithmique et Structures de Données',semester:1,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:28,lab:21,selfStudy:18.5},prerequisites:[],objectives:['Analyser la complexité des algorithmes','Implémenter les structures de données fondamentales','Appliquer les algorithmes de tri et de recherche'],content:['Analyse d\'algorithmes et notation Big-O','Tableaux, listes chaînées, piles, files','Arbres et arbres binaires de recherche','Algorithmes de tri','Tables de hachage','Introduction aux graphes'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Cormen, Introduction to Algorithms'],responsible:'Dép. de Programmation'},
+  {code:'AP.1.3',title:'Programmation C Avancée',semester:1,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:21,lab:31.5,selfStudy:15},prerequisites:[],objectives:['Maîtriser la programmation C avancée','Utiliser les pointeurs et la mémoire dynamique','Implémenter des structures de données complexes en C'],content:['Pointeurs et gestion mémoire','Structures et unions','Entrées/sorties fichiers','Allocation dynamique de mémoire','Appels système'],examForm:'Projet TP + Oral',passMark:'10/20',readingList:['Kernighan & Ritchie, The C Programming Language'],responsible:'Dép. de Programmation'},
+  {code:'BDC.1.1',title:'Gestion des Organisations',semester:1,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Comprendre les principes de gestion organisationnelle','Appliquer les concepts de management aux équipes IT'],content:['Structures organisationnelles','Théories du management','Prise de décision','Équipes de projet'],examForm:'Examen écrit',passMark:'10/20',readingList:[],responsible:'Dép. de Business'},
+  {code:'BDC.1.2',title:'Langue et Communication I : Anglais pour l\'Informatique',semester:1,credits:3,subject:'BDC',language:'English',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Développer la lecture et l\'écriture technique en anglais','Présenter du contenu technique en anglais'],content:['Vocabulaire technique','Lecture d\'articles scientifiques','Rédaction de rapports','Présentations orales'],examForm:'Oral + Écrit',passMark:'10/20',readingList:[],responsible:'Centre de Langues'},
+  // ── S2 ──
+  {code:'MAT.2.1',title:'Algorithmes sur les Graphes',semester:2,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.1.2'],objectives:['Maîtriser les fondamentaux de la théorie des graphes','Implémenter et analyser des algorithmes sur les graphes','Appliquer les graphes à des problèmes réels'],content:['Représentations de graphes','BFS et DFS','Algorithmes de plus court chemin','Arbres couvrants minimaux','Flot dans les réseaux'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Cormen, Introduction to Algorithms','Diestel, Graph Theory'],responsible:'Dép. de Mathématiques'},
+  {code:'MAT.2.2',title:'Méthodes Numériques',semester:2,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['MAT.1.2'],objectives:['Résoudre des problèmes par approximation numérique','Implémenter des algorithmes numériques'],content:['Méthodes de recherche de racines','Interpolation','Intégration numérique','Résolution numérique d\'EDO','Systèmes linéaires'],examForm:'Examen écrit',passMark:'10/20',readingList:['Burden & Faires, Numerical Analysis'],responsible:'Dép. de Mathématiques'},
+  {code:'EHA.2.1',title:'Microprocesseurs et Microcontrôleurs',semester:2,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.1.1'],objectives:['Comprendre l\'architecture des microprocesseurs','Programmer des microcontrôleurs en assembleur et en C'],content:['Architecture CPU','Programmation assembleur','Systèmes mémoire','Interruptions et timers','Programmation Arduino/STM32'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Mazidi, The 8051 Microcontroller and Embedded Systems'],responsible:'Dép. de Matériel'},
+  {code:'NET.2.1',title:'Transmission Numérique',semester:2,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:[],objectives:['Comprendre les fondamentaux de la transmission de données','Analyser les techniques de codage de signal'],content:['Théorie du signal','Schémas de codage','Détection et correction d\'erreurs','Techniques de modulation','Capacité du canal'],examForm:'Examen écrit',passMark:'10/20',readingList:['Haykin, Communication Systems'],responsible:'Dép. de Réseaux'},
+  {code:'OS.2.1',title:'Introduction aux Systèmes d\'Exploitation et Environnement Unix',semester:2,credits:3,subject:'OS',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Comprendre les concepts et l\'architecture des SE','Utiliser l\'environnement Unix/Linux efficacement'],content:['Vue d\'ensemble et histoire des SE','Gestion des processus','Systèmes de fichiers','Scripts shell','Commandes et outils Unix'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Tanenbaum, Modern Operating Systems'],responsible:'Dép. de Systèmes'},
+  {code:'AP.2.1',title:'Programmation Orientée Objet',semester:2,credits:4.5,subject:'AP',language:'French',type:'Compulsory',hours:{total:67.5,lecture:21,lab:31.5,selfStudy:15},prerequisites:['AP.1.3'],objectives:['Maîtriser les principes de la POO','Concevoir avec des patrons de conception','Programmer en Java'],content:['Classes, objets, héritage','Polymorphisme et interfaces','Gestion des exceptions','Java Collections Framework','Introduction aux patrons de conception'],examForm:'Projet + Oral',passMark:'10/20',readingList:['Bloch, Effective Java','Horstmann, Core Java'],responsible:'Dép. de Programmation'},
+  {code:'AP.2.2',title:'Technologies Web',semester:2,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:['Construire des applications web avec HTML/CSS/JS','Comprendre l\'architecture client-serveur'],content:['HTML5 et CSS3','Fondamentaux JavaScript','Manipulation du DOM','HTTP et bases de REST','Design responsive'],examForm:'Projet web',passMark:'10/20',readingList:['Flanagan, JavaScript: The Definitive Guide'],responsible:'Dép. de Programmation'},
+  {code:'AP.2.3',title:'Théorie des Automates et des Langages',semester:2,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AI.1.1'],objectives:['Comprendre la théorie des langages formels','Concevoir des automates pour la reconnaissance de langages'],content:['Langages réguliers et automates','Grammaires hors-contexte','Automates à pile','Machines de Turing','Bases de la calculabilité'],examForm:'Examen écrit',passMark:'10/20',readingList:['Sipser, Introduction to the Theory of Computation'],responsible:'Dép. de Programmation'},
+  {code:'DAT.2.1',title:'TP Bases de Données',semester:2,credits:1.5,subject:'DAT',language:'French',type:'Compulsory',hours:{total:22.5,lecture:0,lab:21,selfStudy:1.5},prerequisites:['DAT.1.1'],objectives:['Appliquer la conception de bases de données en pratique','Implémenter un projet de base de données complet'],content:['SQL avancé','Procédures stockées','Administration de bases de données','Projet : système de base de données complet'],examForm:'Projet TP',passMark:'10/20',readingList:[],responsible:'Dép. de Données'},
+  {code:'IMA.2.1',title:'Introduction au Traitement d\'Images',semester:2,credits:3,subject:'IMA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1'],objectives:['Comprendre les fondamentaux de l\'image numérique','Appliquer des algorithmes de base de traitement d\'images'],content:['Représentation des images','Traitement dans le domaine spatial','Domaine fréquentiel (Fourier)','Détection de contours','Opérations morphologiques'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Gonzalez & Woods, Digital Image Processing'],responsible:'Dép. d\'Image'},
+  {code:'BDC.2.1',title:'Langue et Communication 2',semester:2,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.1.2'],objectives:['Poursuivre le développement de l\'anglais','Se concentrer sur la communication technique'],content:['Rédaction technique avancée','Compétences de présentation','Préparation aux entretiens'],examForm:'Oral + Écrit',passMark:'10/20',readingList:[],responsible:'Centre de Langues'},
+  // ── S3 ──
+  {code:'MAT.3.1',title:'Programmation Linéaire et Non Linéaire',semester:3,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.2'],objectives:['Résoudre des problèmes d\'optimisation linéaire et non linéaire','Appliquer l\'optimisation à la conception en ingénierie'],content:['Programmation linéaire et simplexe','Théorie de la dualité','Programmation non linéaire','Méthodes de gradient','Optimisation sous contraintes'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Bazaraa, Nonlinear Programming'],responsible:'Dép. de Mathématiques'},
+  {code:'EHA.3.1',title:'Méthodologie de Conception de Processeurs',semester:3,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.2.1','EHA.1.1'],objectives:['Concevoir des architectures de processeurs','Implémenter des processeurs RISC avec un HDL'],content:['Organisation des ordinateurs','Conception d\'UAL','Conception de l\'unité de contrôle','Pipeline','Architecture RISC','Implémentation en VHDL'],examForm:'Projet + Oral',passMark:'10/20',readingList:["Patterson & Hennessy, Computer Organization and Design"],responsible:'Dép. de Matériel'},
+  {code:'NET.3.1',title:'Réseaux Locaux',semester:3,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.2.1'],objectives:['Concevoir et configurer des systèmes LAN','Comprendre la commutation et le routage'],content:['Ethernet et IEEE 802.x','Commutation et VLANs','Protocoles de routage','QoS','Gestion de réseau'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Forouzan, Data Communications and Networking'],responsible:'Dép. de Réseaux'},
+  {code:'NET.3.2',title:'TP Réseaux Locaux',semester:3,credits:1.5,subject:'NET',language:'French',type:'Compulsory',hours:{total:22.5,lecture:0,lab:21,selfStudy:1.5},prerequisites:['NET.3.1'],objectives:['Configurer des équipements réseau réels','Implémenter et dépanner des LAN'],content:['Configuration de routeurs et commutateurs Cisco','Configuration des VLANs','Implémentation de protocoles de routage','Dépannage réseau'],examForm:'Évaluation TP',passMark:'10/20',readingList:[],responsible:'Dép. de Réseaux'},
+  {code:'OS.3.3',title:'Systèmes d\'Exploitation et Programmation Concurrente',semester:3,credits:3,subject:'OS',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['OS.2.1'],objectives:['Maîtriser les mécanismes internes des SE','Programmer des applications concurrentes'],content:['Synchronisation des processus','Interblocages (deadlocks)','Gestion de la mémoire','Mémoire virtuelle','Threads et sémaphores','Mécanismes IPC'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Tanenbaum, Modern Operating Systems'],responsible:'Dép. de Systèmes'},
+  {code:'AP.3.1',title:'Techniques de Compilation',semester:3,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AP.2.3'],objectives:['Comprendre les phases de conception d\'un compilateur','Construire des analyseurs lexicaux et syntaxiques'],content:['Analyse lexicale','Analyse syntaxique (parsing)','Analyse sémantique','Génération de code intermédiaire','Bases de l\'optimisation de code'],examForm:'Examen écrit + Projet',passMark:'10/20',readingList:['Aho, Compilers: Principles, Techniques, and Tools'],responsible:'Dép. de Programmation'},
+  {code:'AP.3.2',title:'Conception et Analyse des Algorithmes',semester:3,credits:3,subject:'AP',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.1.2','MAT.2.1'],objectives:['Analyser rigoureusement la complexité des algorithmes','Appliquer des techniques avancées de conception d\'algorithmes'],content:['Diviser pour régner','Programmation dynamique','Algorithmes gloutons','NP-complétude','Algorithmes d\'approximation'],examForm:'Examen écrit',passMark:'10/20',readingList:['Cormen, Introduction to Algorithms'],responsible:'Dép. de Programmation'},
+  {code:'SE.3.1',title:'Génie Logiciel',semester:3,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.2.1'],objectives:['Appliquer les méthodologies du génie logiciel','Gérer des projets logiciels'],content:['Modèles de cycle de vie logiciel','Ingénierie des exigences','Architecture logicielle','Stratégies de test','Méthodes agiles'],examForm:'Projet + Rapport',passMark:'10/20',readingList:['Sommerville, Software Engineering'],responsible:'Dép. de GL'},
+  {code:'SE.3.2',title:'Analyse et Conception Orientées Objet',semester:3,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['AP.2.1'],objectives:['Appliquer UML pour la conception de systèmes','Implémenter des patrons de conception'],content:['Diagrammes UML (classes, séquence, cas d\'utilisation)','Principes SOLID','Patrons de conception (GoF)','Conception dirigée par le domaine','Refactoring'],examForm:'Projet + Oral',passMark:'10/20',readingList:['Martin, Clean Code','Gamma, Design Patterns'],responsible:'Dép. de GL'},
+  {code:'AI.3.1',title:'Intelligence Artificielle & Apprentissage Automatique',semester:3,credits:3,subject:'AI',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1','AP.1.2'],objectives:['Comprendre les fondements de l\'IA et les algorithmes de recherche','Appliquer les techniques d\'apprentissage automatique'],content:['Agents intelligents','Algorithmes de recherche (A*, minimax)','Représentation des connaissances','Apprentissage supervisé','Apprentissage non supervisé','Introduction aux réseaux de neurones'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Russell & Norvig, Artificial Intelligence: A Modern Approach'],responsible:'Dép. d\'IA'},
+  {code:'BDC.3.1',title:'Langue et Communication 3 : Anglais des Affaires',semester:3,credits:1.5,subject:'BDC',language:'English',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.2.1'],objectives:['Maîtriser l\'anglais des affaires dans les contextes IT','Rédiger des documents techniques professionnels'],content:['Correspondance professionnelle','Propositions techniques','Langue de négociation','Présentations professionnelles'],examForm:'Écrit + Oral',passMark:'10/20',readingList:[],responsible:'Centre de Langues'},
+  // ── S4 ──
+  {code:'MAT.4.1',title:'Processus Stochastiques avec R',semester:4,credits:3,subject:'MAT',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['MAT.1.1'],objectives:['Modéliser des processus aléatoires','Analyser des chaînes de Markov','Utiliser R pour le calcul statistique'],content:['Chaînes de Markov','Processus de Poisson','Théorie des files d\'attente','Simulation de Monte-Carlo','Bases des séries temporelles','Programmation R pour les statistiques'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Ross, Introduction to Probability Models'],responsible:'Dép. de Mathématiques'},
+  {code:'EHA.4.1',title:'Introduction aux Systèmes Embarqués',semester:4,credits:3,subject:'EHA',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['EHA.2.1'],objectives:['Concevoir des systèmes embarqués','Programmer sous contraintes temps réel'],content:['Architecture de systèmes embarqués','Concepts RTOS','Co-conception matériel/logiciel','Interfaçage de périphériques','Gestion de l\'énergie'],examForm:'Projet TP',passMark:'10/20',readingList:['Valvano, Embedded Systems: Introduction to ARM Cortex-M Microcontrollers'],responsible:'Dép. de Matériel'},
+  {code:'NET.4.1',title:'Réseaux Informatiques',semester:4,credits:3,subject:'NET',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.3.1'],objectives:['Maîtriser la pile de protocoles réseau','Configurer des réseaux à l\'échelle d\'Internet'],content:['Pile TCP/IP en profondeur','Adressage IP et sous-réseaux','Protocoles de routage (OSPF, BGP)','Protocoles de la couche applicative','Bases de la sécurité réseau'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Forouzan, TCP/IP Protocol Suite','Tanenbaum, Computer Networks'],responsible:'Dép. de Réseaux'},
+  {code:'SE.4.1',title:'Méthodes Formelles de Développement',semester:4,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:28,lab:0,selfStudy:17},prerequisites:['AI.1.1','SE.3.1'],objectives:['Appliquer des techniques de spécification formelle','Vérifier formellement la correction des logiciels'],content:['Notation Z','Méthode B','Model checking','Logique temporelle','Démonstration automatique de théorèmes'],examForm:'Examen écrit + Projet',passMark:'10/20',readingList:['Spivey, The Z Notation'],responsible:'Dép. de GL'},
+  {code:'SE.4.2',title:'Architectures Logicielles',semester:4,credits:3,subject:'SE',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['SE.3.1','SE.3.2'],objectives:['Concevoir des architectures logicielles scalables','Évaluer les compromis architecturaux'],content:['Styles architecturaux (microservices, SOA)','Attributs de qualité','Documentation d\'architecture','Architectures cloud-native','Méthodes d\'évaluation d\'architecture'],examForm:'Projet + Oral',passMark:'10/20',readingList:['Bass, Software Architecture in Practice'],responsible:'Dép. de GL'},
+  {code:'SEC.4.1',title:'Cybersécurité & Cryptographie',semester:4,credits:3,subject:'SEC',language:'French',type:'Compulsory',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:['NET.4.1','MAT.1.1'],objectives:['Comprendre les menaces et défenses en cybersécurité','Appliquer des algorithmes cryptographiques'],content:['Cryptographie symétrique et asymétrique','PKI et certificats','Protocoles de sécurité réseau (TLS, SSH)','Sécurité web (OWASP Top 10)','Bases de la réponse aux incidents'],examForm:'Examen écrit + TP',passMark:'10/20',readingList:['Stallings, Cryptography and Network Security'],responsible:'Dép. de Sécurité'},
+  {code:'FIN.4.1',title:'Introduction aux Marchés Financiers',semester:4,credits:1.5,subject:'FIN',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['FIN.1.1'],objectives:['Comprendre la structure des marchés financiers','Analyser des instruments financiers de base'],content:['Marchés actions et obligations','Bases des produits dérivés','Théorie du portefeuille','Microstructure des marchés'],examForm:'Examen écrit',passMark:'10/20',readingList:[],responsible:'Dép. de Finance'},
+  {code:'DDP.4.1',title:'Projet de Conception et Développement',semester:4,credits:3,subject:'DDP',language:'French',type:'Compulsory',hours:{total:45,lecture:7,lab:31.5,selfStudy:6.5},prerequisites:['SE.3.1','SE.3.2','AP.2.1'],objectives:['Mener un projet de développement logiciel complet','Appliquer la méthodologie agile en équipe'],content:['Cadrage et planification du projet','Décisions d\'architecture','Développement itératif','Pratiques de revue de code','Livraison finale et présentation'],examForm:'Soutenance de projet',passMark:'10/20',readingList:[],responsible:'Dép. de GL'},
+  {code:'BDC.4.1',title:'Introduction à l\'Entrepreneuriat et à l\'Innovation',semester:4,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Comprendre le processus de création de startup','Développer un esprit d\'innovation'],content:['Méthodologie lean startup','Business model canvas','Pitch et levée de fonds','Bases de la PI et des brevets'],examForm:'Présentation du business plan',passMark:'10/20',readingList:[],responsible:'Dép. de Business'},
+  {code:'BDC.4.2',title:'Langue et Communication 4 : Techniques de Communication',semester:4,credits:1.5,subject:'BDC',language:'Both',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.3.1'],objectives:['Maîtriser la communication professionnelle','Présenter des projets techniques efficacement'],content:['Techniques de présentation','Persuasion et négociation','Rédaction technique','Compétences en entretien'],examForm:'Présentation orale',passMark:'10/20',readingList:[],responsible:'Centre de Langues'},
+  // ── S5 COMMON ──
+  {code:'BDC.5.1',title:'Gestion de Projets Complexes',semester:5,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['DDP.4.1'],objectives:['Appliquer des techniques avancées de gestion de projet','Piloter des projets logiciels complexes'],content:['Méthodologie PMP','Gestion des risques','Gestion des parties prenantes','Agile à l\'échelle (SAFe)','Outils de suivi de projet'],examForm:'Étude de cas',passMark:'10/20',readingList:[],responsible:'Dép. de Business'},
+  {code:'BDC.5.2',title:'Droit Informatique et Droits Numériques',semester:5,credits:1.5,subject:'BDC',language:'French',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:[],objectives:['Comprendre le cadre juridique de l\'informatique','Appliquer le RGPD et les droits numériques'],content:['Droit informatique tunisien et international','Protection des données (RGPD)','Droits numériques et éthique','Droit de la cybercriminalité','Licences open source'],examForm:'Examen écrit',passMark:'10/20',readingList:[],responsible:'Dép. de Business'},
+  {code:'BDC.5.3',title:'Langue et Communication 5 : Préparation aux Examens Standardisés',semester:5,credits:1.5,subject:'BDC',language:'English',type:'Compulsory',hours:{total:22.5,lecture:14,lab:0,selfStudy:8.5},prerequisites:['BDC.4.2'],objectives:['Se préparer aux examens TOEFL/IELTS','Maîtriser la compétence en anglais'],content:['Stratégies TOEFL/IELTS','Compréhension écrite','Rédaction académique','Compétences d\'écoute'],examForm:'Examen blanc',passMark:'10/20',readingList:[],responsible:'Centre de Langues'},
+  // ── S5 AI TRACK ──
+  {code:'AI.5.1',title:'Systèmes Multi-Agents',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.2',title:'Logiques Non Classiques',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.3',title:'Deep Learning Appliqué',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.4',title:'Traitement du Langage Naturel',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:30,lecture:14,lab:7,selfStudy:9},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.6',title:'Représentation des Connaissances & Raisonnement',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.7',title:'Deep Reinforcement Learning',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.8',title:'Informatique Affective',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.9',title:'Systèmes de Transport Intelligents',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.10',title:'Web Sémantique & Données Liées',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.11',title:'AIoT',semester:5,credits:1,subject:'AI',language:'French',type:'Track',hours:{total:15,lecture:7,lab:3.5,selfStudy:4.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // ── S5 SHARED TRACK MODULES ──
+  // SE
+  {code:'SE.5.1',title:'Réingénierie Logicielle',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.2',title:'Qualité Logicielle & Test',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.3',title:'Développement Mobile',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.4',title:'Ingénierie des Systèmes Complexes',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SE.5.5',title:'Ingénierie Dirigée par les Modèles',semester:5,credits:3,subject:'SE',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.5',title:'Robotique et Soft Computing',semester:5,credits:2,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.12',title:'Introduction au Deep Learning',semester:5,credits:3,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'AI.5.16',title:'Introduction au Traitement du Langage Naturel',semester:5,credits:3,subject:'AI',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // DOS (Distributed/OS/Cloud)
+  {code:'DOS.5.1',title:'Cloud Computing',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.2',title:'Blockchain',semester:5,credits:1,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.3',title:'IoT',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.4',title:'Architectures Avancées et Programmation Parallèle',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.5',title:'Systèmes d\'Exploitation Temps Réel',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.6',title:'Systèmes et Applications Distribués',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.7',title:'Linux Embarqué',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.8',title:'Introduction au Cloud Computing',semester:5,credits:1,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.9',title:'Développement Logiciel pour la Robotique',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'DOS.5.11',title:'Systèmes de Stockage Distribués',semester:5,credits:3,subject:'DOS',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // ISA (Information Systems/Analytics)
+  {code:'ISA.5.1',title:'Big Data',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.2',title:'Fouille de Données',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.3',title:'Systèmes Interactifs d\'Aide à la Décision',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.4',title:'Business Intelligence',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.5',title:'Systèmes de Recommandation',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.6',title:'Fouille de Textes',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.7',title:'Bases de Données Distribuées',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.8',title:'BI Avancée',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.9',title:'Systèmes d\'Information Géographique',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.10',title:'Urbanisation des Systèmes d\'Information',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.11',title:'Ingénierie des Données',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ISA.5.12',title:'Introduction à la Fouille de Données',semester:5,credits:3,subject:'ISA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // CV
+  {code:'CV.5.1',title:'Restauration et Considérations Numériques',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.2',title:'Reconnaissance de Formes et Invariants Géométriques',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.3',title:'Représentation 3D : Courbes, Formes et Surfaces',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.4',title:'Représentation Discrète d\'Objets 3D',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.5',title:'Techniques de Compression pour la Vision par Ordinateur',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.6',title:'Morphologie Mathématique et Applications Médicales',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.7',title:'Traitement d\'Images Multispectrales',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.8',title:'Traitement du Signal Multidimensionnel',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.9',title:'Vision par Ordinateur',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'CV.5.11',title:'Ateliers d\'Imagerie Médicale',semester:5,credits:3,subject:'IMA',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // FIN
+  {code:'FIN.5.1',title:'Finance Internationale',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.2',title:'Modélisation du Risque et Gestion Dynamique du Risque Financier',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.3',title:'Gestion Bancaire',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.4',title:'Méthodes de Monte Carlo et Simulation de Modèles Financiers',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.5',title:'Finance Quantitative',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'FIN.5.6',title:'Évaluation et Financement des Entreprises',semester:5,credits:3,subject:'FIN',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // MAT S5
+  {code:'MAT.5.1',title:'Optimisation Combinatoire',semester:5,credits:2,subject:'MAT',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.2',title:'Théorie des Catégories et Programmation Fonctionnelle',semester:5,credits:2,subject:'MAT',language:'French',type:'Track',hours:{total:30,lecture:15,lab:7.5,selfStudy:7.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.3',title:'Optimisation Numérique avec R',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.4',title:'Inférence Statistique avec R',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'MAT.5.5',title:'Analyse de Données',semester:5,credits:3,subject:'MAT',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // SEC S5
+  {code:'SEC.5.1',title:'Diagnostic, Sûreté et Fiabilité des Systèmes Embarqués',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SEC.5.2',title:'Sécurité IoT',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SEC.5.3',title:'Architecture Automobile et Sécurité',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'SEC.5.4',title:'Projet Sécurité IoT',semester:5,credits:3,subject:'SEC',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // ESDV (Embedded Systems Design/VHDL)
+  {code:'ESDV.5.1',title:'Systèmes à Base de Microcontrôleurs',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.2',title:'Intégration de Systèmes VHDL',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.3',title:'Conception et Validation de Systèmes Temps Réel',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.4',title:'Systèmes Cyber-Physiques',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.5',title:'Électronique pour Systèmes Embarqués',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.6',title:'Interfaçage Embarqué',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.7',title:'Projet d\'Intégration',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.8',title:'Projet Microcontrôleur',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESDV.5.9',title:'Architectures Reconfigurables',semester:5,credits:3,subject:'ESDV',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // ESEP (Embedded Systems/Electronics)
+  {code:'ESEP.5.1',title:'Systèmes à Base de Microcontrôleurs',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESEP.5.2',title:'Programmation d\'Objets Connectés',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'ESEP.5.3',title:'Systèmes Cyber-Physiques',semester:5,credits:3,subject:'ESEP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // NET S5
+  {code:'NET.5.1',title:'Réseaux Cellulaires Multi-Services',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'NET.5.2',title:'Architectures et Protocoles de Communication pour l\'IoT',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'NET.5.3',title:'Gestion des Réseaux',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'NET.5.4',title:'QoS & Ingénierie du Trafic',semester:5,credits:3,subject:'NET',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  // IAP
+  {code:'IAP.5.1',title:'Contrôle d\'Actionneurs Souples et Applications',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'IAP.5.2',title:'Introduction à la Programmation d\'Objets Connectés',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+  {code:'IAP.5.3',title:'Systèmes de Positionnement et Applications',semester:5,credits:3,subject:'IAP',language:'French',type:'Track',hours:{total:45,lecture:21,lab:10.5,selfStudy:13.5},prerequisites:[],objectives:[],content:[],examForm:'',passMark:'8/20'},
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let _heroAutoTimer = null;
+let state = {
+  drawerModule: null,
+  collapsedSections: {},
+};
+
+// ─── OVERLAY HISTORY (Android back button closes modals/drawers/accordions) ──
+let _overlayDepth = 0;
+let _ignoreNextPopstate = false;
+function pushOverlayHistory() {
+  _overlayDepth++;
+  history.pushState({ ensiOverlay: true, depth: _overlayDepth }, '');
+}
+function popOverlayHistoryIfNeeded(fromPopstate) {
+  if (_overlayDepth <= 0) return;
+  _overlayDepth--;
+  if (!fromPopstate) {
+    _ignoreNextPopstate = true;
+    history.back();
+  }
+}
+function closeOpenCurAcc() {
+  const body = [...document.querySelectorAll('.cur-acc-body')].find(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
+  if (!body) return false;
+  body.style.maxHeight = '0px';
+  const item = body.closest('.cur-acc-item');
+  const chev = item ? item.querySelector('.cur-acc-chev') : null;
+  if (chev) chev.style.transform = '';
+  return true;
+}
+// ─── ARROW-KEY SCROLL TRAP (keep arrow keys scrolling the open overlay, not the page) ──
+let _arrowTrapTarget = null;
+function arrowTrapHandler(e) {
+  if (!_arrowTrapTarget) return;
+  if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+  e.preventDefault();
+  _arrowTrapTarget.scrollBy({ top: e.key === 'ArrowDown' ? 80 : -80, behavior: 'auto' });
+}
+function enableArrowTrap(target) {
+  _arrowTrapTarget = target;
+  document.addEventListener('keydown', arrowTrapHandler);
+}
+function disableArrowTrap() {
+  _arrowTrapTarget = null;
+  document.removeEventListener('keydown', arrowTrapHandler);
+}
+
+function initCodeTooltips() {
+  document.querySelectorAll('.code-tip').forEach(el=>{
+    el.addEventListener('click', e=>e.stopPropagation());
+  });
+  if (window.matchMedia('(max-width:768px)').matches !== true) return;
+  document.querySelectorAll('.code-tip').forEach(el=>{
+    el.addEventListener('touchstart', e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      const wasShown = el.classList.contains('tip-show');
+      document.querySelectorAll('.code-tip.tip-show').forEach(o=>o.classList.remove('tip-show'));
+      if (!wasShown) {
+        el.classList.add('tip-show');
+        setTimeout(()=>el.classList.remove('tip-show'), 2000);
+      }
+    }, {passive:false});
+  });
+}
+window.addEventListener('popstate', function() {
+  if (_ignoreNextPopstate) { _ignoreNextPopstate = false; return; }
+  const drawerEl = document.getElementById('drawer');
+  if (drawerEl && drawerEl.classList.contains('open')) { closeDrawer(true); return; }
+  const backdrop = document.getElementById('club-modal-backdrop');
+  if (backdrop && backdrop.classList.contains('open')) { closeClubModal(true); return; }
+  if (closeOpenCurAcc()) { popOverlayHistoryIfNeeded(true); return; }
+});
+
+// ─── ACCORDION HELPERS ───────────────────────────────────────────────────────
+function _accOpen(allBodies, allChevs, item, body, chev) {
+  // 1. Collapse all open items instantly, no transition
+  allBodies.forEach(b=>{ b.style.transition='none'; b.style.maxHeight='0px'; });
+  allChevs.forEach(c=>c.style.transform='');
+  // 2. Open new item instantly (no transition) to get final layout
+  body.style.transition='none'; body.style.maxHeight = body.scrollHeight + 'px';
+  chev.style.transform = 'rotate(90deg)';
+  // 3. Synchronous reflow — everything settled
+  void document.body.offsetHeight;
+  // 4. Measure final position after all layout changes
+  const navHeight = window.innerWidth > 768 ? 0 : document.querySelector('nav').offsetHeight;
+  const top = item.getBoundingClientRect().top + window.scrollY - navHeight - 16;
+  // 5. Instant scroll (no smooth) — avoids down-then-up artifact
+  window.scrollTo({top, behavior:'auto'});
+  // 6. Restore transitions for future interactions
+  requestAnimationFrame(()=>{ body.style.transition=''; });
+}
+
+// ─── CURRICULUM ACCORDION ────────────────────────────────────────────────────
+function toggleCurAcc(btn) {
+  const item = btn.parentElement;
+  const body = item.querySelector('.cur-acc-body');
+  const chev = btn.querySelector('.cur-acc-chev');
+  const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+  const anyOpenBefore = [...document.querySelectorAll('.cur-acc-body')].some(b=>b.style.maxHeight && b.style.maxHeight!=='0px');
+  if (!isOpen) {
+    _accOpen(document.querySelectorAll('.cur-acc-body'), document.querySelectorAll('.cur-acc-chev'), item, body, chev);
+    if (!anyOpenBefore) pushOverlayHistory();
+  } else {
+    body.style.transition='none'; body.style.maxHeight='0px';
+    chev.style.transform='';
+    popOverlayHistoryIfNeeded(false);
+  }
+}
+
+// ─── SPECIALIZATION INLINE ACCORDION ─────────────────────────────────────────
+function toggleSpecInline(id) {
+  const body = document.getElementById('spec-body-' + id);
+  const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+  document.querySelectorAll('.spec-inline-body').forEach(b => {
+    b.style.maxHeight = '0px';
+  });
+  if (!isOpen) {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    requestAnimationFrame(() => {
+      const nav = document.querySelector('nav');
+      const offset = nav ? nav.offsetHeight + 16 : 80;
+      const top = body.parentElement.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({top, behavior:'smooth'});
+    });
+  }
+}
+
+// ─── MOBILE NAV ──────────────────────────────────────────────────────────────
+function openMobileNav() {
+  const sidebar = document.getElementById('mobile-sidebar');
+  if (sidebar.classList.contains('open')) { closeMobileNav(); return; }
+  sidebar.classList.add('open');
+  document.getElementById('mobile-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileNav() {
+  document.getElementById('mobile-sidebar').classList.remove('open');
+  document.getElementById('mobile-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ─── ROUTER ──────────────────────────────────────────────────────────────────
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const nav = document.querySelector('nav');
+  const isDesktop = window.innerWidth > 768;
+  const offset = isDesktop ? 16 : (nav ? nav.offsetHeight + 16 : 80);
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({top, behavior:'smooth'});
+}
+function init() {
+  document.addEventListener('keydown', e => { if (e.key==='Escape') closeDrawer(); });
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.style.boxShadow = window.scrollY > 8 ? '0 1px 3px rgba(0,0,0,0.08)' : 'none';
+  }, {passive:true});
+  renderFullPage();
+}
+
+function initSpecStripTouch() {
+  if (window.matchMedia('(max-width:768px)').matches !== true) return;
+  document.querySelectorAll('.spec-strip').forEach(strip => {
+    strip.addEventListener('touchstart', () => {
+      const wasActive = strip.classList.contains('active');
+      document.querySelectorAll('.spec-strip.active').forEach(s => s.classList.remove('active'));
+      if (!wasActive) strip.classList.add('active');
+    }, {passive:true});
+  });
+}
+
+function initHeroSlideshow() {
+  const track = document.getElementById('hero-track');
+  const dots  = document.querySelectorAll('.hero-dot');
+  const label = document.getElementById('hero-label');
+  const slides = document.querySelectorAll('.hero-slide');
+  if(!track||!slides.length) return;
+
+  const LABELS = ['ENSI Forum 20.0','Code & Conquer 3.0','RoboCup 8.0','TuniHack 11.0'];
+  const N = slides.length;
+  const reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let current = 0;
+  if (_heroAutoTimer) { clearInterval(_heroAutoTimer); _heroAutoTimer = null; }
+  let autoTimer = null;
+  let userTimer = null;
+
+  function goTo(idx, instant) {
+    current = ((idx % N) + N) % N;
+    if(reduced || instant) track.style.transition = 'none';
+    else track.style.transition = 'transform 0.8s ease';
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d,i)=>{
+      d.classList.toggle('active', i===current);
+      d.setAttribute('aria-selected', i===current);
+    });
+    if(label){const parts=LABELS[current].split(' ');const num=parts.pop();label.innerHTML=parts.join(' ')+' <span style="color:#4DB8E8">'+num+'</span>';}
+    // preload next
+    const nextSlide = slides[(current+1)%N];
+    const bg = nextSlide.style.backgroundImage;
+    if(bg){const m=bg.match(/url\(['"]?([^'"]+)['"]?\)/);if(m){const img=new Image();img.src=m[1];}}
+  }
+
+  function startAuto() {
+    if(reduced) return;
+    clearInterval(autoTimer);
+    autoTimer = setInterval(()=>goTo(current+1), 6000);
+    _heroAutoTimer = autoTimer;
+  }
+  function pauseAuto() {
+    clearInterval(autoTimer);
+    clearTimeout(userTimer);
+    userTimer = setTimeout(startAuto, 10000);
+  }
+
+  window.heroGo = function(dir) { pauseAuto(); goTo(current+dir); };
+  window.heroJump = function(idx) { pauseAuto(); goTo(idx); };
+  window.heroKey = function(e) {
+    if(e.key==='ArrowLeft'){ e.preventDefault(); heroGo(-1); }
+    if(e.key==='ArrowRight'){ e.preventDefault(); heroGo(1); }
+  };
+
+  // Drag/swipe
+  let startX = 0, isDragging = false;
+  function onDragStart(e) {
+    startX = e.touches ? e.touches[0].clientX : e.clientX;
+    isDragging = true;
+    track.classList.add('dragging');
+    pauseAuto();
+  }
+  function onDragEnd(e) {
+    if(!isDragging) return;
+    isDragging = false;
+    track.classList.remove('dragging');
+    const endX = e.touches ? e.changedTouches[0].clientX : e.clientX;
+    const diff = startX - endX;
+    if(Math.abs(diff) > 50) goTo(current + (diff>0?1:-1));
+    else goTo(current); // snap back
+  }
+  track.addEventListener('mousedown', onDragStart);
+  track.addEventListener('touchstart', onDragStart, {passive:true});
+  window.addEventListener('mouseup', onDragEnd);
+  track.addEventListener('touchend', onDragEnd);
+  // prevent click-drag firing links
+  track.addEventListener('dragstart', e=>e.preventDefault());
+
+  goTo(0, true);
+  startAuto();
+}
+
+
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function codeEl(code, onclick) {
+  const cls = 'module-code code-tip' + (onclick?' cursor-pointer hover:opacity-80':'');
+  const oc = onclick ? `onclick="${onclick}"` : '';
+  const prefix = (code.match(/^[A-Z]+/)||[])[0];
+  const full = SUBJECT_FULLNAMES[prefix];
+  return `<span class="${cls}" ${oc} ${full?`data-tip="${full}"`:''}>${code}</span>`;
+}
+
+function subjectTag(subject) {
+  const color = SUBJECT_COLORS[subject]||'#6B7280';
+  return `<span class="tag" style="background:${color}20;color:${color};border:1px solid ${color}40">${subject}</span>`;
+}
+
+function semBadge(sem) {
+  return `<span class="tag" style="background:#1B2A4A15;color:#1B2A4A">S${sem}</span>`;
+}
+
+function creditBadge(cr) {
+  return `<span class="tag" style="background:#4DB8E815;color:#0891B2">${cr} ECTS</span>`;
+}
+
+function langTag(lang) {
+  const colors = {French:'#6366F1',English:'#059669',Both:'#D97706'};
+  const labels = {French:'Français',English:'Anglais',Both:'Bilingue'};
+  const c = colors[lang]||'#6B7280';
+  return `<span class="tag" style="background:${c}15;color:${c}">${labels[lang]||lang}</span>`;
+}
+
+function typeTag(type) {
+  if (type==='Compulsory') return `<span class="tag" style="background:#1B2A4A12;color:#1B2A4A">Obligatoire</span>`;
+  return `<span class="tag" style="background:#4DB8E815;color:#0891B2">Optionnel</span>`;
+}
+
+const SEM_LABELS = {1:'Année 1',2:'Année 1',3:'Année 2',4:'Année 2',5:'Année 3'};
+
+// ─── DRAWER ──────────────────────────────────────────────────────────────────
+function openDrawer(code) {
+  const alreadyActive = document.querySelector(`.mod-card[data-code="${code}"].mod-card-active`);
+  if (alreadyActive) { closeDrawer(); return; }
+  const base = MODULES.find(x=>x.code===code);
+  if (!base) return;
+  const hb = MODULE_HANDBOOK[code] || {};
+  const m = Object.assign({}, base, {
+    objectives: (hb.objectives && hb.objectives.length) ? hb.objectives : (base.objectives || []),
+    content: (hb.content && hb.content.length) ? hb.content : (base.content || []),
+  });
+  document.querySelectorAll('.mod-card-active').forEach(el=>el.classList.remove('mod-card-active'));
+  document.querySelectorAll(`.mod-card[data-code="${code}"]`).forEach(el=>el.classList.add('mod-card-active'));
+  const wasOpen = document.getElementById('drawer').classList.contains('open');
+  state.drawerModule = m;
+  state.collapsedSections = {};
+  renderDrawer();
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawer').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  enableArrowTrap(document.getElementById('drawer'));
+  if (!wasOpen) pushOverlayHistory();
+}
+
+function closeDrawer(fromPopstate) {
+  if (!document.getElementById('drawer').classList.contains('open')) return;
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+  document.body.style.overflow = '';
+  disableArrowTrap();
+  state.drawerModule = null;
+  document.querySelectorAll('.mod-card-active').forEach(el=>el.classList.remove('mod-card-active'));
+  popOverlayHistoryIfNeeded(fromPopstate);
+}
+
+function toggleSection(id) {
+  state.collapsedSections[id] = !state.collapsedSections[id];
+  const el = document.getElementById('dc-'+id);
+  const icon = document.getElementById('dci-'+id);
+  if (el) el.classList.toggle('open', !state.collapsedSections[id]);
+  if (icon) icon.style.transform = state.collapsedSections[id]?'rotate(-90deg)':'rotate(0)';
+}
+
+function renderDrawer() {
+  const m = state.drawerModule;
+  if (!m) return;
+  const subColor = SUBJECT_COLORS[m.subject]||'#6B7280';
+
+  function section(id, title, content) {
+    const open = !state.collapsedSections[id];
+    return `
+    <div style="border-bottom:1px solid #F0F4F8">
+      <button onclick="toggleSection('${id}')" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px 0;background:none;border:none;cursor:pointer;text-align:left">
+        <span style="font-family:'Archivo',sans-serif;font-weight:600;font-size:0.875rem;color:#1B2A4A;letter-spacing:0.02em">${title}</span>
+        <span id="dci-${id}" style="color:#4DB8E8;font-size:0.875rem;transition:transform .2s ease;transform:${open?'rotate(0)':'rotate(-90deg)'}">▼</span>
+      </button>
+      <div id="dc-${id}" class="collapse-content ${open?'open':''}">${content}</div>
+    </div>`;
+  }
+
+
+  const html = `
+  <div style="position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #F0F4F8;padding:12px 24px;display:flex;justify-content:space-between;align-items:center">
+    <div>${codeEl(m.code)}</div>
+    <button onclick="closeDrawer()" aria-label="Fermer" style="background:#F5F7FA;border:none;cursor:pointer;color:#1B2A4A;font-size:1.25rem;line-height:1;padding:8px 12px;border-radius:6px;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center">&times;</button>
+  </div>
+  <div style="padding:24px 24px 0">
+    <h2 style="font-family:'Archivo',sans-serif;font-size:1.35rem;font-weight:700;color:#1B2A4A;margin:0 0 12px;line-height:1.3">${m.title}</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px">
+      ${semBadge(m.semester)}${creditBadge(m.credits)}${langTag(m.language)}${typeTag(m.type)}${subjectTag(m.subject)}
+    </div>
+  </div>
+  <div style="padding:0 24px 24px">
+    ${section('obj','Objectifs',`<ul style="list-style:none;padding:0 0 12px;margin:0">${(m.objectives||[]).map(o=>`<li style="display:flex;gap:8px;align-items:flex-start;padding:4px 0;font-size:0.875rem;color:#374151"><span style="color:#4DB8E8;flex-shrink:0;margin-top:2px">▸</span>${o}</li>`).join('')}</ul>`)}
+    ${section('content','Contenu',`<ul style="list-style:none;padding:0 0 12px;margin:0">${(m.content||[]).map((c,i)=>`<li style="display:flex;gap:10px;align-items:flex-start;padding:4px 0;font-size:0.875rem;color:#374151"><span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#4DB8E8;flex-shrink:0;margin-top:3px;background:#4DB8E810;border-radius:2px;padding:0 4px">${String(i+1).padStart(2,'0')}</span>${c}</li>`).join('')}</ul>`)}
+    ${section('workload','Volume horaire',`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-bottom:12px">
+      ${[['Total',m.hours.total],['Cours',m.hours.lecture],['TP',m.hours.lab],['Travail personnel',m.hours.selfStudy]].map(([l,v])=>`
+      <div style="background:#F5F7FA;border-radius:8px;padding:12px">
+        <div style="font-size:0.7rem;color:#6B7280;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px">${l}</div>
+        <div style="font-family:'Archivo',sans-serif;font-size:1.25rem;font-weight:700;color:#1B2A4A">${v}<span style="font-size:0.7rem;color:#9CA3AF;margin-left:2px">h</span></div>
+      </div>`).join('')}
+    </div>`)}
+    ${section('exam','Évaluation',`<div style="padding-bottom:12px;font-size:0.875rem;color:#374151"><div style="margin-bottom:4px">${m.examForm}</div><div style="margin-top:8px;display:flex;align-items:center;gap:8px"><span style="font-size:0.75rem;color:#6B7280">Note de passage</span><span style="font-family:'JetBrains Mono',monospace;font-weight:600;color:#059669;font-size:0.85rem">8/20</span></div></div>`)}
+  </div>`;
+  document.getElementById('drawer-content').innerHTML = html;
+  initCodeTooltips();
+}
+
+// ─── FULL PAGE ───────────────────────────────────────────────────────────────
+function renderFullPage() {
+  const subjectCounts = {};
+  MODULES.forEach(m => { subjectCounts[m.subject]=(subjectCounts[m.subject]||0)+1; });
+  const subjects = Object.entries(subjectCounts).sort((a,b)=>b[1]-a[1]);
+
+  const semStats = [1,2,3,4,5].map(s=>({
+    s, count: MODULES.filter(m=>m.semester===s).length,
+    credits: MODULES.filter(m=>m.semester===s).reduce((a,m)=>a+m.credits,0)
+  }));
+
+  // Specialization keyword map
+  const specKeywords = {
+    AI: 'Apprentissage automatique · Deep learning · NLP · Systèmes cognitifs',
+    GL: 'Qualité logicielle · DevOps · Cloud · Architecture',
+    CV: 'Vision par ordinateur · Reconnaissance de formes · Big data · Imagerie médicale',
+    IF: 'Finance quantitative · Trading algorithmique · Blockchain · Risque',
+    SLE: 'Temps réel · FPGA · Protocoles IoT · Linux embarqué',
+    'ST-IoT': 'Cloud computing · Microservices · Applications IoT · Sécurité réseau',
+  };
+
+  const modByCode = Object.fromEntries(MODULES.map(m=>[m.code,m]));
+
+  document.getElementById('page').innerHTML = `
+  <!-- HERO -->
+  <section class="hero-section" id="hero-section" tabindex="0"
+    onkeydown="heroKey(event)" aria-label="Diaporama hero, utilisez les touches fléchées pour naviguer">
+    <!-- Sliding photo track (back) -->
+    <div id="hero-track">
+      ${[
+        {src:'imag/hero/forum-20th-edition.jpeg',     label:'ENSI Forum 20.0'},
+        {src:'imag/hero/code&conquer-3th-edition.jpg',label:'Code & Conquer 3.0'},
+        {src:'imag/hero/robocup-8th-edition.jpg',     label:'RoboCup 8.0'},
+        {src:'imag/hero/tunihack-11th-edition.jpg',   label:'TuniHack 11.0'}
+      ].map(({src,label})=>`
+      <div class="hero-slide" style="background-image:url('${src}')" aria-label="${label}">
+        <div class="hero-duotone"></div>
+      </div>`).join('')}
+    </div>
+    <!-- Gradient overlay -->
+    <div class="hero-overlay"></div>
+    <!-- Arrow buttons (absolute, always centered vertically) -->
+    <button class="hero-arrow hero-arrow-left" onclick="heroGo(-1)" aria-label="Photo précédente">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="hero-arrow hero-arrow-right" onclick="heroGo(1)" aria-label="Photo suivante">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <!-- Hero text (fixed above slides) -->
+    <div id="hero-text" style="position:relative;z-index:2;padding:0 10vw;max-width:960px;pointer-events:none">
+      <p class="fade-up fade-up-1" style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;margin:0 0 28px;text-transform:uppercase">DEPUIS 1984 · UNIVERSITÉ DE LA MANOUBA</p>
+      <h1 class="fade-up fade-up-2" style="font-family:'Archivo',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;color:#fff;margin:0 0 8px;line-height:0.95;letter-spacing:-0.03em">Bienvenue à <span style="color:#4DB8E8">l'ENSI</span></h1>
+      <p class="fade-up fade-up-2" style="font-family:'Inter',sans-serif;font-size:1.25rem;font-weight:300;color:rgba(255,255,255,0.75);margin:0 0 24px;line-height:1.3">École Nationale des Sciences de l'Informatique</p>
+      <p class="fade-up fade-up-3" style="font-family:'Inter',sans-serif;font-size:1.125rem;color:rgba(255,255,255,0.6);margin:0 0 32px;font-weight:400">Tout ce qu'un nouvel admis doit savoir : admission, filières, vie étudiante et programme d'études.</p>
+      <button onclick="(()=>{const t=document.getElementById('section-numbers');window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'})})()" class="ghost-cta fade-up fade-up-4" style="pointer-events:auto">Découvrir <span class="cta-arrow">↓</span></button>
+    </div>
+    <!-- Label + dots -->
+    <div id="hero-label">ENSI Forum <span style="color:#4DB8E8">20.0</span></div>
+    <div id="hero-dots" role="tablist" aria-label="Navigation du diaporama">
+      ${[
+        {label:'ENSI Forum 20.0'},
+        {label:'Code & Conquer 3.0'},
+        {label:'RoboCup 8.0'},
+        {label:'TuniHack 11.0'}
+      ].map(({label},i)=>`
+      <button class="hero-dot${i===0?' active':''}" onclick="heroJump(${i})"
+        aria-label="Aller à ${label}" role="tab" aria-selected="${i===0}"></button>`).join('')}
+    </div>
+  </section>
+
+  <!-- BY THE NUMBERS -->
+  ${(()=>{
+    const dd = [
+      {y:2013,v:3},{y:2014,v:5},{y:2015,v:11},{y:2016,v:8},
+      {y:2017,v:7},{y:2018,v:7},{y:2019,v:6},{y:2020,v:5},
+      {y:2021,v:5},{y:2022,v:10},{y:2023,v:14},{y:2024,v:17},
+    ];
+    const W=900,H=180,pL=36,pR=36,pT=16,pB=36;
+    const cW=W-pL-pR, cH=H-pT-pB, maxV=17, n=dd.length;
+    const xs=dd.map((_,i)=>pL+i*(cW/(n-1)));
+    const ys=dd.map(d=>pT+(1-d.v/maxV)*cH);
+    const line=xs.map((x,i)=>`${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ');
+    const area=`${xs[0].toFixed(1)},${(pT+cH).toFixed(1)} `+xs.map((x,i)=>`${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ')+` ${xs[n-1].toFixed(1)},${(pT+cH).toFixed(1)}`;
+    const labels=dd.map((d,i)=>`<text x="${xs[i].toFixed(1)}" y="${H-6}" text-anchor="${i===0?'start':i===n-1?'end':'middle'}" fill="#9CA3AF" font-family="JetBrains Mono,monospace" font-size="13">${d.y}</text>`).join('');
+    const dots=dd.map((d,i)=>`<circle cx="${xs[i].toFixed(1)}" cy="${ys[i].toFixed(1)}" r="3.5" fill="#2563EB"/>`).join('');
+    return `
+  <section id="section-numbers" style="background:#fff;padding:96px 10vw">
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">EN CHIFFRES</p>
+    <h2 id="numbers-heading" style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 56px;line-height:0.95;letter-spacing:-0.03em">40 ans d'<span style="color:#2563EB">ingénieurs.</span></h2>
+    <div id="numbers-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:64px">
+      <div>
+        <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">2 500+</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">ingénieurs diplômés depuis 2013</div>
+      </div>
+      <div>
+        <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">~220</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">nouveaux diplômés chaque année</div>
+      </div>
+      <div>
+        <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">98</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">diplômés en double diplôme, 2013–2024</div>
+      </div>
+      <div>
+        <div class="stat-num" style="font-family:'Archivo',sans-serif;font-size:3.5rem;font-weight:800;color:#1B2A4A;line-height:1;letter-spacing:-0.03em">1984</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.875rem;color:#6B7280;margin-top:8px">année de fondation de l'ENSI</div>
+      </div>
+    </div>
+
+    <!-- Accreditations -->
+    <div id="accred-container" style="margin-top:0">
+      <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 20px">ACCRÉDITATIONS</p>
+      <div id="accred-grid" style="display:flex;justify-content:space-between;align-items:flex-start;width:100%;gap:24px">
+        ${[
+          {logo:'eur-ace.png', label:"EUR-ACE® Master · jusqu'en 2028"},
+          {logo:'asiin.jpg',   label:"ASIIN · jusqu'en 2028"},
+          {logo:'9001.jpeg',   label:"ISO 9001:2015 · jusqu'en 2027"},
+          {logo:'iso.png',     label:"ISO 21001:2018 · jusqu'en 2027"},
+        ].map(a=>`
+        <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+          <img src="imag/${a.logo}" alt="${a.label}" loading="lazy" style="height:100px;max-width:180px;object-fit:contain;filter:grayscale(100%);opacity:0.65;transition:filter .2s ease,opacity .2s ease" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)';this.style.opacity='0.65'">
+          <span style="font-family:'Inter',sans-serif;font-size:0.72rem;color:#6B7280">${a.label}</span>
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>`;
+  })()}
+
+  <!-- ADMISSION TABLE -->
+  <section id="section-admission" style="background:#fff;padding:96px 10vw">
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">QUELLE SÉLECTIVITÉ ?</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 16px;line-height:0.95;letter-spacing:-0.03em">Rang du <span style="color:#2563EB">dernier admis</span></h2>
+    <p style="font-family:'Inter',sans-serif;font-size:1rem;color:rgba(27,42,74,0.65);margin:0 0 40px;max-width:640px;line-height:1.6">Chaque année, l'ENSI admet 200 étudiants répartis sur trois filières de prépa. Le rang du dernier admis est le dernier rang accepté dans chaque filière — plus il monte, plus vous pouvez être loin dans le classement et être quand même admis.</p>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+      <table id="admission-table" style="width:100%;border-collapse:collapse;min-width:480px">
+        <thead>
+          <tr style="border-bottom:1px solid rgba(27,42,74,0.15)">
+            <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 32px 18px 0;text-align:left">Filière</th>
+            <th style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 32px 18px 0;text-align:left">2025</th>
+            <th class="col-2024" style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(27,42,74,0.4);padding:0 0 18px;text-align:left">2024</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${[
+            {track:'Mathématiques-Physique', code:'MP', color:'#2563EB', seats:150, r2024:367, r2025:410},
+            {track:'Physique-Chimie',        code:'PC', color:'#4DB8E8', seats:25,  r2024:100, r2025:110},
+            {track:'Physique-Technologie',   code:'PT', color:'#E63946', seats:25,  r2024:69,  r2025:78},
+          ].map(({track,code,color,seats,r2024,r2025})=>`
+          <tr style="border-bottom:1px solid rgba(27,42,74,0.08)">
+            <td style="padding:22px 32px 22px 0;vertical-align:middle;width:45%">
+              <div style="display:flex;align-items:stretch;gap:12px">
+                <div style="width:5px;background:${color};border-radius:2px;flex-shrink:0;align-self:stretch"></div>
+                <div>
+                  <div style="font-family:'Archivo',sans-serif;font-size:1.25rem;font-weight:800;color:${color};letter-spacing:-0.02em;line-height:1.1">${track}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;color:rgba(27,42,74,0.4);margin-top:9px">${seats} places</div>
+                </div>
+              </div>
+            </td>
+            <td style="padding:22px 32px 22px 0;vertical-align:middle;font-family:'JetBrains Mono',monospace;font-size:1.75rem;font-weight:600;color:#1B2A4A">${r2025}</td>
+            <td class="col-2024" style="padding:22px 0 22px 0;vertical-align:middle;font-family:'JetBrains Mono',monospace;font-size:1.75rem;font-weight:600;color:#1B2A4A">${r2024}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- STUDENT LIFE -->
+  <section id="section-studentlife" style="background:#fff;padding:96px 10vw">
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">12 CLUBS ACTIFS · 3 CATÉGORIES</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 40px;line-height:0.95;letter-spacing:-0.03em">Vie <span style="color:#2563EB">étudiante</span></h2>
+
+    <!-- Filter tabs -->
+    <div id="club-tabs" style="display:flex;gap:0;border-bottom:2px solid #E8EDF4;margin-bottom:40px">
+      ${['Tous','Science · Tech · Innovation','Sport · Art · Culture','Humanitarian · Social'].map((cat,i)=>`
+      <button onclick="filterClubs('${cat}')" id="club-tab-${i}"
+        style="font-family:'Archivo',sans-serif;font-size:0.875rem;font-weight:700;color:${i===0?'#1B2A4A':'rgba(27,42,74,0.45)'};background:none;border:none;cursor:pointer;padding:0 20px 12px;border-bottom:${i===0?'2px solid #2563EB':'2px solid transparent'};margin-bottom:-2px;transition:color .15s ease,border-color .15s ease;white-space:nowrap">${cat==='Tous'?'Tous':cat}</button>`).join('')}
+    </div>
+
+    <!-- Club grid -->
+    <div id="club-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+      ${CLUBS.map(c=>`
+      <button class="club-tile" data-cat="${c.category}" data-id="${c.id}" onclick="openClubModal('${c.id}')" aria-label="Voir les détails de ${c.name}" style="-webkit-tap-highlight-color:${c.accent}33">
+        <div class="club-tile-img">
+          ${c.logo
+            ? `<img src="imag/clubs/${c.logo}" alt="${c.name}" class="club-logo" loading="lazy" width="300" height="300" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center;display:block;border-radius:8px">`
+            : `<div style="width:100%;aspect-ratio:1/1;background:${c.accent};border-radius:8px;display:flex;align-items:center;justify-content:center"><span style="font-family:'Archivo',sans-serif;font-size:1.25rem;font-weight:800;color:#fff;text-align:center;padding:12px">${c.name}</span></div>`
+          }
+        </div>
+        <div class="club-tile-bar" style="background:${c.accent}"></div>
+        <div class="club-tile-caption">
+        <div style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:800;color:#1B2A4A;line-height:1.2;margin-bottom:2px">${c.name}<span class="club-tile-chev" style="color:${c.accent}">›</span></div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.75rem;font-style:italic;color:rgba(27,42,74,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:8px">${c.tagline}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.625rem;color:rgba(27,42,74,0.45);text-transform:uppercase;letter-spacing:0.05em">EST. ${c.founded} · ${{['Science · Tech · Innovation']:'TECH',['Sport · Art · Culture']:'ARTS',['Humanitarian · Social']:'SOCIAL',['AI · ML · Innovation']:'AI'}[c.category]||c.category}</div>
+        </div>
+      </button>`).join('')}
+    </div>
+
+    <!-- Industry Partners -->
+    <div style="margin-top:72px;padding-top:48px">
+      <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 10px">Recruteurs d'ingénieurs ENSI</p>
+      <h3 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 36px;letter-spacing:-0.03em;line-height:0.95">Partenaires <span style="color:#2563EB">industriels</span></h3>
+      <div id="partner-wall" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:28px 0;width:100%">
+        ${PARTNERS.map(p=>`
+        <div class="partner-cell" style="display:flex;align-items:center;justify-content:center">
+          <img src="imag/${p.logo}" alt="${p.name}" class="partner-logo" loading="lazy" style="max-height:70px;max-width:150px;width:auto;height:auto;object-fit:contain;display:block;filter:grayscale(1);opacity:0.65;transition:filter .2s ease,opacity .2s ease"
+            onmouseover="this.style.filter='grayscale(0)';this.style.opacity='1'"
+            onmouseout="this.style.filter='grayscale(1)';this.style.opacity='0.65'">
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <!-- SEMESTER TIMELINE -->
+  <section id="curriculum-section" style="background:#fff;padding:80px 10vw">
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">PLAN D'ÉTUDES</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 28px;line-height:0.95;letter-spacing:-0.03em">Comment se déroule le <span style="color:#2563EB">plan d'études.</span></h2>
+
+    <!-- Subject × Semester matrix -->
+    ${(()=>{
+      const SUBJECT_NAMES = {
+        MAT:'Mathématiques',AP:'Algorithmique & Programmation',EHA:'Électronique & Matériel',
+        AI:'Intelligence Artificielle',DAT:'Données',OS:'Systèmes d\'Exploitation',
+        IMA:'Traitement d\'Images',NET:'Réseaux Informatiques',SE:'Génie Logiciel',
+        FIN:'Finance',SEC:'Sécurité',DDP:'Projet de Développement',BDC:'Business & Communication',
+      };
+      const MATRIX = [
+        {code:'MAT',data:[2,2,1,1,0]},
+        {code:'AP', data:[2,3,2,0,0]},
+        {code:'EHA',data:[2,1,1,1,0]},
+        {code:'AI', data:[1,0,1,0,0]},
+        {code:'DAT',data:[1,1,0,0,0]},
+        {code:'OS', data:[0,1,1,0,0]},
+        {code:'IMA',data:[0,1,0,0,0]},
+        {code:'NET',data:[0,1,2,1,0]},
+        {code:'SE', data:[0,0,2,2,0]},
+        {code:'FIN',data:[1,0,0,1,0]},
+        {code:'SEC',data:[0,0,0,1,0]},
+        {code:'DDP',data:[0,0,0,1,0]},
+        {code:'BDC',data:[2,1,1,2,3]},
+      ];
+      const OPACITY = {1:0.45,2:0.72,3:1};
+      const SEMS = [1,2,3,4,5];
+
+      const headerCells = SEMS.map(s=>`
+        <th data-sem="${s}"
+          onmouseover="gridHover('col',${s},true)" onmouseout="gridHover('col',${s},false)"
+          style="width:88px;text-align:center;padding:0 0 20px;user-select:none">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:1.375rem!important;font-weight:700;color:#4DB8E8;letter-spacing:0.08em">S${s}</span>
+        </th>`).join('');
+
+      const dataRows = MATRIX.map(row=>{
+        const color = SUBJECT_COLORS[row.code]||'#6B7280';
+        const cells = row.data.map((cnt,i)=>{
+          const s = i+1;
+          if (cnt === 0) return `
+            <td data-sem="${s}" style="width:88px;height:64px;text-align:center;vertical-align:middle;padding:2px 4px">
+              <span style="color:#D1D5DB;font-size:1.5rem;line-height:1">·</span>
+            </td>`;
+          return `
+            <td data-sem="${s}" style="width:88px;height:64px;padding:2px 4px"
+              title="${cnt} module${cnt>1?'s':''}, ${row.code} en S${s}">
+              <div style="width:64px;height:64px;border-radius:8px;background:${color};opacity:${OPACITY[cnt]};display:flex;align-items:center;justify-content:center;transition:opacity .15s ease,transform .15s ease;margin:0 auto"
+                onmouseover="this.style.opacity='1';this.style.transform='scale(1.06)'"
+                onmouseout="this.style.opacity='${OPACITY[cnt]}';this.style.transform='scale(1)'">
+                <span style="color:#fff;font-family:'JetBrains Mono',monospace;font-size:1.625rem;font-weight:700">${cnt}</span>
+              </div>
+            </td>`;
+        }).join('');
+
+        return `<tr data-subj="${row.code}"
+          onmouseover="gridHover('row','${row.code}',true)"
+          onmouseout="gridHover('row','${row.code}',false)"
+          style="transition:opacity .15s ease">
+          <td style="padding:2px 32px 2px 0;white-space:nowrap;vertical-align:middle;width:320px">
+            <div style="display:flex;align-items:baseline;gap:10px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:1.5rem!important;font-weight:700;color:${color}">${row.code}</span>
+              <span class="subj-label" style="font-family:'Inter',sans-serif;font-size:1.375rem!important;font-weight:500;color:#475569">${SUBJECT_NAMES[row.code]||''}</span>
+            </div>
+          </td>
+          ${cells}
+        </tr>`;
+      }).join('');
+
+      // Build accordion: per-semester, module cards from MODULES
+      const semCredits = SEMS.map(s => MODULES.filter(m=>m.semester===s&&(s!==5||m.type==='Compulsory')).reduce((a,m)=>a+m.credits,0));
+      const accordionHTML = SEMS.map((s,si)=>{
+        const mods = MODULES.filter(m=>m.semester===s&&(s!==5||m.type==='Compulsory'));
+        const totalCr = semCredits[si];
+        const cards = mods.map(m=>{
+          const sc = SUBJECT_COLORS[m.subject]||'#6B7280';
+          return `<div class="acc-card" onclick="openDrawer('${m.code}')" aria-label="Voir les détails de \${m.title}" style="--sc:${sc};border-left:3px solid ${sc}">
+            <span ${codeTip(m.code)} style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
+            <span style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3;padding-right:20px">${m.title}</span>
+            <span class="acc-chev">›</span>
+          </div>`;
+        }).join('');
+        return `<div class="cur-acc-item">
+          <button class="cur-acc-hdr" onclick="toggleCurAcc(this)" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 0;background:none;border:none;border-bottom:1px solid #E8EDF4;cursor:pointer;text-align:left">
+            <span style="font-family:'Archivo',sans-serif;font-size:1rem;font-weight:800;color:#1B2A4A">Semestre ${s}</span>
+            <div style="display:flex;align-items:center;gap:12px">
+              <span class="cur-acc-chev" style="color:#4DB8E8;font-size:1.2rem;transition:transform .25s ease;display:inline-block">›</span>
+            </div>
+          </button>
+          <div class="cur-acc-body" style="max-height:0;overflow:hidden;transition:max-height .3s ease">
+            <div class="cur-acc-cards" style="display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch;gap:0.75rem;padding:16px 0">${cards}</div>
+          </div>
+        </div>`;
+      }).join('');
+
+      return `<div id="cur-matrix-wrap" style="overflow-x:auto">
+        <table id="subj-grid" style="border-collapse:separate;border-spacing:16px 0;width:100%">
+          <thead>
+            <tr><th style="width:320px"></th>${headerCells}</tr>
+          </thead>
+          <tbody>${dataRows}</tbody>
+        </table>
+      </div>
+      <div id="cur-accordion">${accordionHTML}</div>`;
+    })()}
+  </section>
+
+  <!-- COMMON S5 MODULES -->
+  <section id="section-s5-common" style="background:#F5F7FA;padding:64px 10vw">
+    <h2 style="font-family:'Archivo',sans-serif;font-size:0.8rem;font-weight:600;margin:0 0 16px;letter-spacing:0.05em;text-transform:uppercase;color:#4DB8E8">Modules S5 communs (toutes les filières)</h2>
+    <div class="cur-acc-cards" style="display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch;gap:0.75rem">
+      ${MODULES.filter(m=>m.semester===5&&m.type==='Compulsory').map(m=>{
+        const sc = SUBJECT_COLORS[m.subject]||'#6B7280';
+        return `<div class="acc-card" onclick="openDrawer('${m.code}')" aria-label="Voir les détails de \${m.title}" style="--sc:${sc};border-left:3px solid ${sc}">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+            <span ${codeTip(m.code)} style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#9CA3AF">${m.credits} ECTS</span>
+          </div>
+          <span style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3;padding-right:20px">${m.title}</span>
+          <span class="acc-chev">›</span>
+        </div>`;
+      }).join('')}
+    </div>
+  </section>
+
+  <!-- SPECIALIZATIONS (INLINE ACCORDION) -->
+  <section id="section-pathways" style="background:#fff;padding:80px 0">
+    <div id="pathways-header" style="padding:0 10vw;margin-bottom:40px">
+      <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 16px">SPÉCIALISATIONS DU SEMESTRE 5</p>
+      <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0;line-height:0.95;letter-spacing:-0.03em">Choisissez votre <span style="color:#2563EB">coloration.</span></h2>
+    </div>
+    <div style="border-top:1px solid #E8EDF4">
+      ${(()=>{
+      const _modGrid = (mods, accent) => mods.length ? `
+        <div class="cur-acc-cards" style="display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch;gap:0.75rem;width:100%;max-width:100%;box-sizing:border-box">
+          ${mods.map(m=>{
+            const sc = SUBJECT_COLORS[m.subject]||accent;
+            return `<button class="acc-card mod-card" data-code="${m.code}" onclick="openDrawer('${m.code}')" aria-label="Voir les détails de \${m.title}" style="--sc:${sc};--card-color:${accent};border-left:3px solid ${sc};width:100%;text-align:left;background:#fff">
+              <span class="mod-code code-tip" ${codeTipAttr(m.code)} style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:${sc};font-weight:700">${m.code}</span>
+              <span class="mod-name" style="font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;line-height:1.3;padding-right:20px">${m.title}</span>
+              <span class="acc-chev">›</span>
+            </button>`;
+          }).join('')}
+        </div>` : '';
+      return SPECIALIZATIONS.map(sp=>{
+        const badge = SPEC_BADGE_LABEL[sp.id]||sp.id;
+        const spComp = (sp.compulsory||[]).map(code=>modByCode[code]).filter(Boolean);
+        const spOpt  = (sp.optional||[]).map(code=>modByCode[code]).filter(Boolean);
+        return `
+      <div>
+        <div class="spec-strip" style="--sp-color:${sp.color};cursor:pointer" onclick="toggleSpecInline('${sp.id}')">
+          <div class="spec-badge" style="width:56px;height:56px;background:${sp.color};border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:background .3s ease">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:700;color:#fff;letter-spacing:0.02em;text-align:center;line-height:1.3">${badge}</span>
+          </div>
+          <div style="flex:1;min-width:0">
+            <div class="spec-name" style="font-family:'Archivo',sans-serif;font-size:1.05rem;font-weight:500;color:#1B2A4A;margin-bottom:2px;transition:color .3s ease">${sp.nameFr}</div>
+            <div class="spec-namefr" style="font-size:0.78rem;color:#9CA3AF;margin-bottom:6px;transition:color .3s ease">${sp.id}</div>
+            <div class="spec-kw" style="font-size:0.8rem;color:${sp.color};font-family:'Inter',sans-serif;transition:color .3s ease">${specKeywords[sp.id]||''}</div>
+          </div>
+          <div class="spec-watermark" style="color:${sp.color};opacity:0.09;transition:color .3s ease,opacity .3s ease">${badge}</div>
+          <span class="spec-arrow" style="color:${sp.color};transition:color .3s ease,transform .2s ease">→</span>
+        </div>
+        <div class="spec-inline-body" id="spec-body-${sp.id}" style="max-height:0;overflow:hidden;transition:max-height .4s ease;background:#F5F7FA">
+          <div style="padding:28px 10vw">
+            <p style="font-size:0.875rem;color:#4B5563;margin:0 0 20px">${sp.desc}</p>
+            ${spComp.length ? `
+            <div style="margin-bottom:20px">
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${sp.color};margin-bottom:10px">Obligatoire · ${spComp.length} modules</div>
+              ${_modGrid(spComp, sp.color)}
+            </div>` : ''}
+            ${spOpt.length ? `
+            <div>
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:10px">Optionnel · ${spOpt.length} modules</div>
+              ${_modGrid(spOpt, sp.color)}
+            </div>` : ''}
+          </div>
+        </div>
+      </div>`;
+      }).join('');
+      })()}
+    </div>
+  </section>
+
+  <!-- DOUBLE DEGREES -->
+  <section id="section-double-diplomas" style="background:#F5F7FA;padding:96px 10vw">
+    <p style="font-family:'Archivo',sans-serif;font-size:0.8125rem;font-weight:700;letter-spacing:-0.01em;color:#4DB8E8;text-transform:uppercase;margin:0 0 12px">DOUBLES DIPLÔMES</p>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;color:#1B2A4A;margin:0 0 16px;line-height:0.95;letter-spacing:-0.03em">Obtenez un second <span style="color:#2563EB">diplôme</span> à l'étranger.</h2>
+    <p style="font-family:'Inter',sans-serif;font-size:1rem;color:#4B5563;margin:0 0 48px;max-width:640px">Les étudiants de l'ENSI peuvent effectuer un double diplôme dans des écoles d'ingénieurs partenaires en France, Allemagne et Canada (placements 2017–2023).</p>
+    <div id="degree-bars" style="display:flex;flex-direction:column;gap:26px">
+      ${(()=>{
+        const REAL_CODES = ['ECLyon','TSP','PASSAU','ENSEIRB','Canada'];
+        const list = DOUBLE_DIPLOMAS.filter(p=>REAL_CODES.includes(p.code)).sort((a,b)=>b.total-a.total);
+        const maxCount = Math.max(...list.map(p=>p.total));
+        return list.map(p=>{
+          const color = COUNTRY_BAR_COLORS[p.country]||'#1B2A4A';
+          const pct = (p.total/maxCount*100).toFixed(1);
+          const isNew = p.code==='Canada';
+          return `
+          <div class="degree-bar-row" data-pct="${pct}">
+            <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
+              <span style="font-size:1.1rem;line-height:1">${COUNTRY_FLAGS[p.country]||''}</span>
+              <span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:0.95rem;color:#1B2A4A">${p.name}</span>
+              ${isNew?`<span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;background:#4DB8E8;padding:1px 6px;border-radius:3px">NOUVEAU</span>`:''}
+            </div>
+            <div style="display:flex;align-items:center;gap:16px">
+              <div style="flex:1;height:34px;background:#E2E8F0;border-radius:4px;overflow:hidden">
+                <div class="degree-bar-fill" style="height:100%;width:0%;background:${color};border-radius:4px;transition:width 1.1s cubic-bezier(.16,1,.3,1)"></div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-weight:800;font-size:1.3rem;color:#1B2A4A;flex-shrink:0;min-width:34px;text-align:right">${p.total}</div>
+            </div>
+          </div>`;
+        }).join('');
+      })()}
+    </div>
+  </section>
+
+  ${footer()}`;
+  initHeroSlideshow();
+  initSpecStripTouch();
+  initCodeTooltips();
+  initDegreeBars();
+  initProgressBar();
+}
+
+function filterClubs(cat) {
+  const cards = document.querySelectorAll('.club-tile');
+  cards.forEach(c => {
+    c.style.display = (cat === 'Tous' || c.dataset.cat === cat) ? '' : 'none';
+  });
+  const tabs = document.querySelectorAll('#club-tabs button');
+  const cats = ['Tous','Science · Tech · Innovation','Sport · Art · Culture','Humanitarian · Social'];
+  tabs.forEach((t,i) => {
+    const active = cats[i] === cat;
+    t.style.color = active ? '#1B2A4A' : 'rgba(27,42,74,0.45)';
+    t.style.borderBottomColor = active ? '#2563EB' : 'transparent';
+  });
+}
+
+function gridHover(type, id, on) {
+  const grid = document.getElementById('subj-grid');
+  if (!grid) return;
+  if (type === 'row') {
+    grid.querySelectorAll('tbody tr').forEach(tr => {
+      tr.style.opacity = (!on || tr.dataset.subj === id) ? '' : '0.18';
+    });
+  } else {
+    grid.querySelectorAll('td[data-sem],th[data-sem]').forEach(el => {
+      el.style.opacity = (!on || el.dataset.sem === String(id)) ? '' : '0.18';
+    });
+  }
+}
+
+
+// ─── DOUBLE DIPLOMAS DATA ─────────────────────────────────────────────────────
+const CLUBS = [
+  {
+    "id": "are",
+    "name": "ARE",
+    "category": "Science · Tech · Innovation",
+    "founded": 2006,
+    "logo": "Are-logo.jpg",
+    "accent": "#D4A02C",
+    "tagline": "On construit ce qui n'existe pas encore",
+    "overview": "L'Association Robotique ENSI est une association à but non lucratif fondée en 2006 par un groupe d'étudiants ingénieurs passionnés de robotique, encadrés par le Professeur Moncef Tagina. Elle plonge les informaticiens dans le monde de la robotique pour affûter leurs compétences et concrétiser leurs idées. Ses valeurs : audace, engagement, fierté, rigueur.",
+    "mission": "Former les membres à construire des robots et à maîtriser de nouvelles technologies, en visant l'excellence dans chaque projet.",
+    "events": [
+      { "name": "RoboCup", "note": "Une compétition de robotique ouverte aux ingénieurs et passionnés de tous âges." },
+      { "name": "RoboDay", "note": "Une formation suivie d'une compétition interne de robots suiveurs de ligne." },
+      { "name": "SuperCup", "note": "Compétition interne de football robotique." },
+      { "name": "BootCamp", "note": "Ateliers de robotique pour les adolescents (moins de 18 ans)." },
+      { "name": "RoboCamp", "note": "Un séjour de camping pour toute la famille ARE." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/association.robotique.ensi/" },
+      { "type": "facebook", "url": "https://www.facebook.com/association.robotique.ensi/?locale=fr_FR" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/ar-ensi" }
+    ]
+  },
+  {
+    "id": "ecpc",
+    "name": "ECPC",
+    "category": "Science · Tech · Innovation",
+    "founded": 2017,
+    "logo": "ecpc-logo.png",
+    "accent": "#DCE336",
+    "tagline": "Coder pour gagner",
+    "overview": "L'ENSI Competitive Programming Club, fondé en 2017, est centré sur la programmation compétitive : formations en algorithmes, structures de données et optimisation, ainsi que des concours en ligne et en présentiel. C'est la seule communauté du campus de la Manouba préparant les étudiants au TCPC, avec des équipes classées dans le top 10 national depuis plus de cinq ans consécutifs.",
+    "mission": "Préparer un maximum d'étudiants à concourir — parce que la meilleure façon d'apprendre le CP, c'est la pratique.",
+    "events": [
+      { "name": "EPC — ENSI Programming Challenge", "note": "Le fleuron du club : un concours de quatre heures en C++, Python ou Java, organisé selon les règles ICPC." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/cpc_ensi/" },
+      { "type": "facebook", "url": "https://www.facebook.com/ENSICPC/" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/ensi-competitive-programming-club" }
+    ]
+  },
+  {
+    "id": "eje",
+    "name": "EJE Junior Enterprise",
+    "category": "Science · Tech · Innovation",
+    "founded": 2006,
+    "logo": "eje-logo.png",
+    "accent": "#2C5F8A",
+    "tagline": "Votre première vraie mission pro",
+    "overview": "Fondée en 2006, l'ENSI Junior Entreprise initie les étudiants à la vie entrepreneuriale. En 18 ans, elle est devenue un précurseur du mouvement Junior Entreprise en Tunisie — plus de 75 clients satisfaits, 78+ projets livrés, un Prix d'Excellence 2020. Les services couvrent le développement web, mobile, chatbot et logiciel, organisés autour de trois pôles : développement commercial, communication & design, et projet.",
+    "mission": "Placer l'esprit entrepreneurial au cœur de la vie étudiante — en visant toujours la grandeur par la créativité, le professionnalisme et l'excellence.",
+    "events": [
+      { "name": "GET Entrepreneurial", "note": "Un forum professionnel pour les jeunes entrepreneurs, startups et porteurs de projets." },
+      { "name": "Hack'Prise", "note": "Un hackathon avec de grandes entreprises sur des sujets IT et entrepreneuriaux à fort impact." },
+      { "name": "Séminaire d'intégration", "note": "Un séminaire pour accueillir sereinement les nouveaux membres présélectionnés." },
+      { "name": "SummerCamp", "note": "Un week-end de team-building avant la rentrée universitaire." }
+    ],
+    "socials": [
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/ensi-junior-entreprise" },
+      { "type": "instagram", "url": "https://www.instagram.com/ensijunior/" },
+      { "type": "facebook", "url": "https://www.facebook.com/ENSI.Junior.Entreprise/?locale=fr_FR" }
+    ]
+  },
+  {
+    "id": "ieee",
+    "name": "IEEE Student Branch",
+    "category": "Science · Tech · Innovation",
+    "founded": 2011,
+    "logo": "ieee-logo.jpg",
+    "accent": "#1A6FB5",
+    "tagline": "Still we rise",
+    "overview": "La branche étudiante IEEE ENSI a été fondée en octobre 2011 pour perfectionner les compétences de ses membres, développer leur créativité et renforcer leur confiance en soi. Elle réunit environ 270 membres actifs répartis en deux pôles — Sponsoring et Médias — avec trois chapitres (Computer Society, Computational Intelligence, IAS) et un groupe d'affinité WIE, tous rattachés à IEEE Tunisie.",
+    "mission": "Rester à la pointe des thèmes techniques les plus pertinents localement et mondialement, à travers des formations, publications, événements et conférences.",
+    "events": [
+      { "name": "IEEEXtreme", "note": "Un défi de programmation mondial de 24 heures ouvert aux membres étudiants IEEE." },
+      { "name": "SYP", "note": "Une compétition thématique chronométrée inspirée du congrès national TSYP." },
+      { "name": "TSYP", "note": "Un congrès IEEE national rassemblant plus de 1 200 ingénieurs et étudiants à travers la Tunisie." },
+      { "name": "GODS — Go Data Science", "note": "Un défi de science des données en février : ateliers, conférences et un concours en équipe de 12 heures." },
+      { "name": "Gamescraft", "note": "Une compétition de game design et gaming organisée par le CS Chapter, avec jury et table ronde." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/ieee_ensi_sb/" },
+      { "type": "facebook", "url": "https://www.facebook.com/IEEE.ENSI.SB/?locale=fr_FR" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/ieee-ensi" }
+    ]
+  },
+  {
+    "id": "ossec",
+    "name": "OSSEC",
+    "category": "Science · Tech · Innovation",
+    "founded": 2012,
+    "logo": "ossec-logo.jpg",
+    "accent": "#1BA5C8",
+    "tagline": "Open source, open minds",
+    "overview": "L'Open Source Software ENSI Club, fondé en 2012, propose un large éventail d'activités et d'événements autour des logiciels libres. Il œuvre selon quatre axes : événements, projets, formations et un magazine.",
+    "mission": "Diffuser la philosophie open source auprès des étudiants ingénieurs et promouvoir une culture de l'échange et du partage.",
+    "events": [
+      { "name": "Install Party", "note": "Une journée annuelle pour aider les participants à installer GNU/Linux sur leurs propres machines." },
+      { "name": "TuniHack", "note": "Un hackathon de haut niveau de 24 heures ouvert aux étudiants de toute la Tunisie." },
+      { "name": "CodeBreaker", "note": "Une compétition de cybersécurité de type Capture The Flag, testant l'attaque et la défense." },
+      { "name": "Project Day", "note": "Les nouveaux membres présentent les résultats de leurs projets de l'année." }
+    ],
+    "socials": [
+      { "type": "facebook", "url": "https://www.facebook.com/ossec.tn/?locale=fr_FR" },
+      { "type": "instagram", "url": "https://www.instagram.com/open.source.software.ensi.club/" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/ossec-ensi" }
+    ]
+  },
+  {
+    "id": "enactus",
+    "name": "Enactus ENSI",
+    "category": "Science · Tech · Innovation",
+    "founded": 2014,
+    "logo": "enactus-logo.jpg",
+    "accent": "#F2B233",
+    "tagline": "We change the odds",
+    "overview": "Enactus ENSI est un club d'entrepreneuriat social qui s'attaque aux problèmes sociaux et environnementaux du pays par des projets concrets à fort impact, tout en formant les futurs entrepreneurs. Il est organisé en pôles Projet et Marketing, avec des départements Sponsoring et Événements & Logistique.",
+    "mission": "Inspirer les étudiants et rassembler les futurs leaders pour développer leur potentiel et créer des projets à fort impact.",
+    "events": [
+      { "name": "Team Building 3.0", "note": "Renforcement des liens entre membres." },
+      { "name": "Anniversaire 3.0", "note": "Célébration de l'anniversaire du club." },
+      { "name": "Conférence 2.0", "note": "Conférence avec des intervenants." }
+    ],
+    "projects": [
+      { "name": "Agricoop", "note": "Une plateforme de partage d'équipements louant des outils aux petits agriculteurs pour un tarif fixe." },
+      { "name": "Indimej", "note": "Une application traduisant la langue des signes en texte ou en voix en temps réel, et inversement." },
+      { "name": "Tremoease", "note": "Des gants vibrants qui soulagent la raideur et les tremblements des personnes atteintes de Parkinson et de SEP." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/ensi_enactors/" },
+      { "type": "facebook", "url": "https://www.facebook.com/p/Enactus-ENSI-Tunisia-100088726237939/" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/enactus-ensi" }
+    ]
+  },
+  {
+    "id": "orbyx",
+    "name": "ORBYX ENSI",
+    "category": "Science · Tech · Innovation",
+    "founded": 2025,
+    "logo": "orbyx-logo.jpg",
+    "accent": "#2E3FA0",
+    "tagline": "Build AI",
+    "overview": "ORBYX est le club IA de l'ENSI, fondé en 2025. Il rassemble des étudiants passionnés par l'intelligence artificielle, l'apprentissage automatique et la science des données, avec un accent sur les projets pratiques et les compétitions ML.",
+    "mission": "Former la prochaine génération de praticiens de l'IA à l'ENSI.",
+    "events": [
+      { "name": "AI Bootcamp", "note": "Formation intensive sur Python, PyTorch et les transformers." },
+      { "name": "Kaggle Nights", "note": "Sessions collaboratives de défis de données." },
+      { "name": "ORBYX Demo Day", "note": "Présentation publique des modèles entraînés par les membres." }
+    ],
+    "socials": [
+      { "type": "facebook", "url": "https://www.facebook.com/people/ORBYX-ENSI-Club/61578181771173/" },
+      { "type": "instagram", "url": "https://www.instagram.com/orbyx_ensi_club/" },
+      { "type": "linkedin", "url": "https://tn.linkedin.com/company/orbyx-ensi" }
+    ]
+  },
+  {
+    "id": "coart",
+    "name": "Co'Art",
+    "category": "Sport · Art · Culture",
+    "founded": 2010,
+    "logo": "coart-logo.jpg",
+    "accent": "#E85D4A",
+    "tagline": "Art au cœur de l'ingénierie",
+    "overview": "Co'Art — abréviation de « art collaboratif » — est l'espace créatif de l'ENSI, dédié à l'épanouissement artistique de chaque étudiant. Le club organise des ateliers internes et collabore avec les autres clubs ENSI lors de leurs événements.",
+    "mission": "Promouvoir la créativité et offrir à chaque membre un espace pour exprimer librement sa passion, quel que soit son niveau.",
+    "events": [
+      { "name": "Ateliers de calligraphie", "note": "Sessions animées par l'artiste invité Chebbi Hamza." },
+      { "name": "Art de l'argile", "note": "Sculpture en argile transformée en porte-clés et accessoires." },
+      { "name": "Peinture sur instruments", "note": "Donner une seconde vie à des instruments cassés grâce à la peinture." },
+      { "name": "Pictionary nights", "note": "Jeux de dessin conviviaux pour les membres." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/co_art_ensi/" },
+      { "type": "facebook", "url": "https://www.facebook.com/coartensi/" }
+    ]
+  },
+  {
+    "id": "chess",
+    "name": "Chess Club",
+    "category": "Sport · Art · Culture",
+    "founded": 2008,
+    "logo": "chess-logo.jpg",
+    "accent": "#2B6CB0",
+    "tagline": "Stratégie, concentration, excellence",
+    "overview": "Le Chess Club ENSI crée un environnement convivial pour les joueurs d'échecs et accueille les nouveaux venus curieux du jeu. En dehors des parties, les membres travaillent sur des puzzles et partagent leurs connaissances.",
+    "mission": "Créer un espace accueillant pour les échecs à l'ENSI et développer la communauté de joueurs, des débutants aux compétiteurs.",
+    "events": [
+      { "name": "Tournoi de qualification", "note": "Tournoi interne chaque janvier ; les 3 premiers représentent l'ENSI dans les compétitions inter-écoles. Sept rondes, règles FIDE, arbitré par un ancien membre de l'équipe nationale." }
+    ],
+    "socials": [
+      { "type": "facebook", "url": "https://www.facebook.com/ENSI.chess" }
+    ]
+  },
+  {
+    "id": "music",
+    "name": "Music Club",
+    "category": "Sport · Art · Culture",
+    "founded": 1995,
+    "logo": "music-logo.jpg",
+    "accent": "#7C3AED",
+    "tagline": "La scène est à vous",
+    "overview": "Fondé dans les années 1990, le Music Club ENSI est l'un des piliers de la vie étudiante de l'école. À travers des activités culturelles et des événements musicaux, il encourage les étudiants à exprimer leur passion pour la musique et à mettre en valeur leurs talents. Ses valeurs : créativité, passion, diversité.",
+    "mission": "Promouvoir et célébrer la musique comme art et forme d'expression, en offrant un espace inclusif où les mélomanes peuvent partager, progresser et créer.",
+    "events": [
+      { "name": "Concerts", "note": "Spectacles live sur le campus." },
+      { "name": "Live performances", "note": "Animation musicale des événements ENSI." },
+      { "name": "Karaoke", "note": "Soirées chant en liberté." },
+      { "name": "Jam sessions", "note": "Sessions informelles de jeu collectif." }
+    ],
+    "socials": [
+      { "type": "instagram", "url": "https://www.instagram.com/club.musique.ensi/" },
+      { "type": "facebook", "url": "https://www.facebook.com/ensi.music/" }
+    ]
+  },
+  {
+    "id": "happiness",
+    "name": "Happiness Club",
+    "category": "Humanitarian · Social",
+    "founded": 2022,
+    "logo": "happiness-logo.jpg",
+    "accent": "#F2B400",
+    "tagline": "Positive vibes only",
+    "overview": "Fondé en 2022, le Happiness Club s'engage pour le bien-être de toute la communauté scolaire. À travers des activités éducatives et ludiques, des séances de relaxation, du mentorat et des événements sociaux, il contribue à créer une atmosphère inclusive et positive où chaque membre — étudiant ou personnel — se sent soutenu et connecté.",
+    "mission": "Favoriser un environnement positif et stimulant qui soutient la réussite académique, l'épanouissement personnel et le bien-être de tous à l'ENSI.",
+    "events": [
+      { "name": "VolleyCup", "note": "Un tournoi de volleyball célébrant l'esprit sportif et la camaraderie." },
+      { "name": "HappyDay", "note": "Une journée interne d'activités de loisirs variées pour tout le monde." },
+      { "name": "HappyAiid", "note": "Organisé avec le complexe de jeunesse de la Manouba, proposant un large éventail d'activités." }
+    ],
+    "socials": [
+      { "type": "facebook", "url": "https://www.facebook.com/p/Club-Happiness-ENSI-100090842641335/" }
+    ]
+  },
+  {
+    "id": "cps",
+    "name": "CPS",
+    "category": "Humanitarian · Social",
+    "founded": 2011,
+    "logo": "cps-logo.png",
+    "accent": "#E2231A",
+    "tagline": "Amour · Espoir · Solidarité",
+    "overview": "Citoyens Positifs et Sociables, fondé en 2011, est soutenu par le comité régional du Croissant-Rouge tunisien de La Manouba. Autrefois centré sur la sensibilisation et la santé ambulatoire, le club ajoute désormais une dimension humanitaire et bénévole à toutes ses actions.",
+    "mission": "Agir pour les autres à travers la sensibilisation, le soutien sanitaire et le service bénévole — en aidant les autres, nous grandissons.",
+    "events": [
+      { "name": "Visite des SOS", "note": "Partager des moments de joie avec les enfants du village SOS." },
+      { "name": "Dafihom fi chtehom", "note": "Offrir des vêtements chauds aux personnes en situation précaire pendant l'hiver." },
+      { "name": "Visite des écoles primaires", "note": "Initier les écoliers à l'ingénierie par la robotique, les jeux et la peinture." },
+      { "name": "Visites des Maisons de Retraite", "note": "Des journées passées avec les personnes âgées pour réduire l'isolement social." }
+    ],
+    "socials": [
+      { "type": "facebook", "url": "https://www.facebook.com/CPSENSI" },
+      { "type": "instagram", "url": "https://www.instagram.com/cps.ensi/" }
+    ]
+  }
+];
+const PARTNERS = [
+  {name:'Sagemcom',   logo:'partners/sagemcom-logo.png',   h:50, nw:90},
+  {name:'Sofrecom',   logo:'partners/sofrecom-logo.png',   h:46, nw:192},
+  {name:'Huawei',     logo:'partners/huawei-logo.png',     h:44, nw:119},
+  {name:'Minotore',   logo:'partners/minotore-logo.png',   h:42, nw:161},
+  {name:'Axefinance', logo:'partners/axefinance-logo.png', h:40, nw:276},
+  {name:'OneTech',    logo:'partners/onetech-logo.png',    h:38, nw:472},
+  {name:'ACTIA',      logo:'partners/actia-logo.png',      h:30, nw:558},
+  {name:'FIS',        logo:'partners/fis-logo.png',        h:34, nw:287},
+  {name:'Lyance',     logo:'partners/lyance-logo.png',     h:30, nw:445},
+  {name:'Inetum',     logo:'partners/inetum-logo.png',     h:28, nw:801},
+  {name:'Talan',      logo:'partners/talan-logo.svg',      h:26, nw:495},
+];
+
+const DOUBLE_DIPLOMAS = [
+  { code:'ECLyon',   name:'École Centrale de Lyon',                country:'France',  total:15, byYear:{'2017-18':1,'2018-19':2,'2019-20':3,'2020-21':3,'2021-22':4,'2022-23':2} },
+  { code:'TSP',      name:'Télécom SudParis',                      country:'France',  total:14, byYear:{'2017-18':3,'2018-19':2,'2019-20':2,'2020-21':2,'2021-22':3,'2022-23':2} },
+  { code:'PASSAU',   name:'University of Passau',                  country:'Germany', total:11, byYear:{'2017-18':0,'2018-19':0,'2019-20':2,'2020-21':3,'2021-22':3,'2022-23':3} },
+  { code:'ENSEIRB',  name:'Bordeaux INP – ENSEIRB-MATMECA',        country:'France',  total:8,  byYear:{'2017-18':2,'2018-19':1,'2019-20':1,'2020-21':1,'2021-22':3,'2022-23':0} },
+  { code:'Canada',   name:'Canadian partner universities',         country:'Canada',  total:4,  byYear:{'2017-18':0,'2018-19':0,'2019-20':0,'2020-21':0,'2021-22':0,'2022-23':4} },
+  { code:'IMT-BS',   name:'Institut Mines-Télécom Business School',country:'France',  total:2,  byYear:{'2017-18':0,'2018-19':0,'2019-20':0,'2020-21':1,'2021-22':1,'2022-23':0} },
+  { code:'ENSIIE',   name:'ENSIIE (Évry)',                         country:'France',  total:1,  byYear:{'2017-18':0,'2018-19':0,'2019-20':0,'2020-21':0,'2021-22':0,'2022-23':1} },
+  { code:'EC-Lille', name:'École Centrale de Lille',               country:'France',  total:0,  byYear:{'2017-18':0,'2018-19':0,'2019-20':0,'2020-21':0,'2021-22':0,'2022-23':0} },
+];
+const COUNTRY_FLAGS = { France:'🇫🇷', Germany:'🇩🇪', Canada:'🇨🇦' };
+const COUNTRY_COLORS = { France:'#2563EB', Germany:'#D97706', Canada:'#DC2626' };
+const COUNTRY_BAR_COLORS = { France:'#2563EB', Germany:'#D97706', Canada:'#4DB8E8' };
+
+
+
+function initDegreeBars() {
+  const rows = document.querySelectorAll('.degree-bar-row');
+  if (!rows.length) return;
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if (entry.isIntersecting) {
+        const fill = entry.target.querySelector('.degree-bar-fill');
+        fill.style.width = entry.target.dataset.pct + '%';
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.3});
+  rows.forEach(row=>obs.observe(row));
+}
+
+// ─── PROGRESS BAR ──────────────────────────────────────────────────────────────
+function initProgressBar() {
+  const sections = [
+    {id:'hero-section',label:'Accueil'},
+    {id:'section-numbers',label:'Chiffres'},
+    {id:'section-admission',label:'Admission'},
+    {id:'section-studentlife',label:'Vie étudiante'},
+    {id:'curriculum-section',label:"Plan d'étude"},
+    {id:'section-pathways',label:'Filières'},
+    {id:'section-double-diplomas',label:'Doubles diplômes'},
+  ];
+
+  // Desktop
+  const desktop = document.createElement('div');
+  desktop.id = 'progress-desktop';
+  desktop.innerHTML = `
+    <div class="pb-track">
+      <div class="pb-fill" id="pb-fill"></div>
+      <div class="pb-dot-wrap" style="height:100%">
+        ${sections.map((s,i) => `
+          <div class="pb-dot" data-idx="${i}" data-target="${s.id}" style="position:relative">
+            <span class="pb-label">${s.label}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+  document.body.appendChild(desktop);
+
+  // Mobile scroll progress bar + desktop fill + scroll spy
+  const mobile = document.createElement('div');
+  mobile.id = 'progress-mobile';
+  mobile.innerHTML = '<div class="pb-mobile-fill" id="pb-mobile-fill"></div>';
+  document.body.appendChild(mobile);
+  const dotEls = document.querySelectorAll('#progress-desktop .pb-dot');
+  function updateProgress() {
+      const nav = document.querySelector('nav');
+      const offset = window.innerWidth > 768 ? 16 : (nav ? nav.offsetHeight + 16 : 80);
+    let found = -1;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sections[i].id);
+      if (el && el.getBoundingClientRect().top <= offset) { found = i; break; }
+    }
+    const activeId = found > 0 ? sections[found].id : null;
+    dotEls.forEach(d => d.classList.toggle('active', d.dataset.target === activeId));
+    const pb = document.getElementById('progress-desktop');
+    if (pb) { pb.style.opacity = found > 0 ? '1' : '0'; pb.style.pointerEvents = found > 0 ? 'auto' : 'none'; }
+    const mb = document.getElementById('progress-mobile');
+    if (mb) { mb.style.opacity = found > 0 ? '1' : '0'; }
+    // Hide bars when footer is in view
+    const footer = document.getElementById('site-footer');
+    if (footer && footer.getBoundingClientRect().top < window.innerHeight + 20) {
+      if (pb) { pb.style.opacity = '0'; pb.style.pointerEvents = 'none'; }
+      if (mb) { mb.style.opacity = '0'; }
+    }
+
+    // Desktop fill calibrated to dot positions
+    const n = sections.length;
+    const df = document.getElementById('pb-fill');
+    if (df) {
+      let fillRatio = 0;
+      if (found > 0) {
+        const el = document.getElementById(sections[found].id);
+        const rect = el ? el.getBoundingClientRect() : null;
+        const sectionPct = rect ? Math.min(Math.max((offset - rect.top) / rect.height, 0), 1) : 0;
+        const startDot = (found) / (n - 1);
+        const endDot = found < n - 1 ? (found + 1) / (n - 1) : 1.05;
+        fillRatio = startDot + (endDot - startDot) * sectionPct;
+      }
+      df.style.height = Math.min(fillRatio * 100, 105) + '%';
+    }
+  }
+  window.addEventListener('scroll', () => {
+    const docEl = document.documentElement;
+    const pct = Math.min(window.scrollY / (docEl.scrollHeight - window.innerHeight), 1);
+    const mf = document.getElementById('pb-mobile-fill');
+    if (mf) mf.style.width = (pct * 100) + '%';
+    updateProgress();
+  }, {passive:true});
+  updateProgress();
+
+  // Click handler (delegated)
+  document.addEventListener('click', e => {
+    const dot = e.target.closest('.pb-dot');
+    if (!dot) return;
+    const targetId = dot.dataset.target;
+    const el = document.getElementById(targetId);
+    if (el) {
+      e.preventDefault();
+      scrollToSection(targetId);
+    }
+  });
+
+  // Scroll spy (active dot + desktop bar visibility) is handled in the scroll listener above
+}
+
+// ─── SHARED FOOTER ───────────────────────────────────────────────────────────
+function footer() {
+  const linkStyle = `color:rgba(255,255,255,0.5);text-decoration:none;font-family:'Inter',sans-serif;font-size:0.875rem;transition:color .15s ease`;
+  const fbIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`;
+  const liIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`;
+  const extIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+  return `
+  <footer id="site-footer" style="background:#1B2A4A;padding:64px 10vw 40px">
+    <div id="footer-grid" style="display:grid;grid-template-columns:1fr auto auto;gap:48px;align-items:start;flex-wrap:wrap">
+
+      <!-- LEFT: logo + address + credit -->
+      <div>
+        <img src="imag/ensi-navbar.png" alt="ENSI" loading="lazy" width="29" height="40" style="height:40px;margin-bottom:20px;display:block">
+        <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.45);margin:0 0 4px;line-height:1.6">ENSI, Campus Universitaire de la Manouba</p>
+        <p style="font-family:'Inter',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.45);margin:0;line-height:1.6">2010 Manouba, Tunisia</p>
+      </div>
+
+      <!-- MIDDLE: nav + official site -->
+      <div>
+        <p style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:0 0 16px">Navigation</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="#" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})" style="${linkStyle}" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Accueil</a>
+          <a href="#" onclick="event.preventDefault();scrollToSection('section-pathways')" style="${linkStyle}" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Filières</a>
+          <a href="https://ensi.rnu.tn" target="_blank" rel="noopener noreferrer" style="${linkStyle}" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Site officiel${extIcon}</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: social icons -->
+      <div>
+        <p style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:0 0 16px">Suivre</p>
+        <div style="display:flex;gap:16px">
+          <a href="https://www.facebook.com/profile.php?id=100085598258430" target="_blank" rel="noopener noreferrer" aria-label="ENSI sur Facebook" style="color:rgba(255,255,255,0.5);transition:color .15s ease" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">${fbIcon}</a>
+          <a href="https://www.linkedin.com/school/ensitn/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="ENSI sur LinkedIn" style="color:rgba(255,255,255,0.5);transition:color .15s ease" onmouseover="this.style.color='#4DB8E8'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">${liIcon}</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- bottom strip -->
+    <div style="margin-top:48px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);text-align:center">
+      <span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.35)">© 2026 All Rights Reserved. Made with 💙 by ANONYMOUS ENSI STUDENT</span>
+    </div>
+  </footer>`;
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+// ─── CLUB MODAL ───────────────────────────────────────────────────────────────
+const CAT_SHORT = {'Science · Tech · Innovation':'TECH','Sport · Art · Culture':'ARTS','Humanitarian · Social':'SOCIAL','AI · ML · Innovation':'AI'};
+const SOCIAL_ICONS = {
+  instagram:`<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+  facebook:`<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`,
+  linkedin:`<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`,
+  globe:`<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+};
+
+let _modalOpener = null;
+
+function openClubModal(id) {
+  const c = CLUBS.find(x=>x.id===id);
+  if(!c) return;
+  _modalOpener = document.querySelector(`.club-tile[data-id="${id}"]`);
+
+  const catShort = CAT_SHORT[c.category]||c.category;
+  const logoHTML = c.logo
+    ? `<img src="imag/clubs/${c.logo}" alt="${c.name}" class="club-logo" loading="lazy" width="56" height="56" style="width:56px;height:56px;object-fit:cover;object-position:center;border-radius:8px;display:block;flex-shrink:0">`
+    : `<div style="width:56px;height:56px;background:rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Archivo',sans-serif;font-size:0.75rem;font-weight:800;color:#fff;text-align:center;padding:8px">${c.name}</span></div>`;
+
+  const eventRow = (e) => `
+    <div style="display:flex;gap:14px;align-items:flex-start;padding:8px 0">
+      <div style="width:3px;min-width:3px;height:14px;background:${c.accent};border-radius:2px;margin-top:3px;flex-shrink:0"></div>
+      <div>
+        <div style="font-family:'Archivo',sans-serif;font-size:0.875rem;font-weight:700;color:#1B2A4A;margin-bottom:2px">${e.name}</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.8125rem;color:#64748B;line-height:1.5">${e.note}</div>
+      </div>
+    </div>`;
+
+  const eventsHTML = (c.events&&c.events.length) ? (c.events.map(eventRow).join('')) : '';
+
+  const projectsHTML = (c.projects&&c.projects.length) ? `
+    <div style="margin-top:32px">
+      <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:8px">Projets</p>
+      ${c.projects.map(eventRow).join('')}
+    </div>` : '';
+
+  const socialsHTML = (c.socials&&c.socials.length) ? `
+    <div style="margin-top:32px">
+      <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:12px">Suivre</p>
+      <div style="display:flex;gap:16px;align-items:center">
+        ${c.socials.map(s=>`
+        <a href="${s.url}" target="_blank" rel="noopener noreferrer"
+           style="color:rgba(27,42,74,0.4);transition:color .15s ease"
+           onmouseover="this.style.color='${c.accent}'" onmouseout="this.style.color='rgba(27,42,74,0.4)'"
+           aria-label="${s.type}">${SOCIAL_ICONS[s.type]||SOCIAL_ICONS.globe}</a>`).join('')}
+      </div>
+    </div>` : '';
+
+  const modalHTML = `
+    <div id="club-modal" role="dialog" aria-modal="true" aria-label="${c.name}" tabindex="-1">
+      <!-- Close button — outside header band, top-right of modal -->
+      <button onclick="closeClubModal()" aria-label="Close"
+        style="position:absolute;top:10px;right:10px;background:rgba(27,42,74,0.12);border:none;cursor:pointer;color:#1B2A4A;padding:6px;flex-shrink:0;transition:background .15s;border-radius:6px;display:flex;align-items:center;justify-content:center;z-index:10"
+        onmouseover="this.style.background='rgba(27,42,74,0.22)'" onmouseout="this.style.background='rgba(27,42,74,0.12)'"
+        onfocus="this.style.outline='2px solid #2563EB'" onblur="this.style.outline='none'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <!-- Full-width accent header band -->
+      <div style="background:${c.accent};padding:24px 28px 20px;border-radius:12px 12px 0 0;position:relative;overflow:hidden">
+        <div style="display:flex;align-items:center;gap:16px">
+          ${logoHTML}
+          <div style="flex:1;min-width:0">
+            <div style="font-family:'Archivo',sans-serif;font-size:1.6rem;font-weight:800;color:#fff;line-height:1.1;margin-bottom:6px">${c.name}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.06em;display:flex;gap:0.5rem;flex-wrap:nowrap;white-space:nowrap">${c.founded?`<span>EST. ${c.founded}</span><span>·</span>`:''}<span>${catShort}</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Zone A: who they are -->
+      <div class="modal-body" style="padding:28px 32px 0">
+        ${c.overview?`<p style="font-family:'Inter',sans-serif;font-size:0.9375rem;color:rgba(27,42,74,0.8);line-height:1.5;margin:0 0 16px">${c.overview}</p>`:''}
+        ${c.mission?`
+        <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:10px">Mission</p>
+        <div style="display:flex;gap:0;margin-bottom:0">
+          <div style="width:3px;min-width:3px;background:${c.accent};border-radius:2px;margin-right:16px;flex-shrink:0"></div>
+          <p style="font-family:'Inter',sans-serif;font-size:1rem;font-style:italic;color:#1B2A4A;line-height:1.5;margin:0;padding:2px 0">${c.mission}</p>
+        </div>`:''}
+      </div>
+      <!-- Zone B: what they do -->
+      ${eventsHTML?`
+      <div style="padding:36px 32px 0">
+        <p class="modal-eyebrow" style="color:${c.accent};margin-bottom:4px">Événements</p>
+        ${eventsHTML}
+      </div>`:''}
+      ${projectsHTML?`<div style="padding:0 32px">${projectsHTML}</div>`:''}
+      <!-- Socials + bottom padding -->
+      <div style="padding:0 32px 32px">
+        ${socialsHTML}
+      </div>
+    </div>`;
+
+  let backdrop = document.getElementById('club-modal-backdrop');
+  if(!backdrop){
+    backdrop = document.createElement('div');
+    backdrop.id = 'club-modal-backdrop';
+    backdrop.setAttribute('aria-hidden','true');
+    backdrop.addEventListener('click', e=>{ if(e.target===backdrop) closeClubModal(); });
+    document.body.appendChild(backdrop);
+  }
+  const wasOpen = backdrop.classList.contains('open');
+  backdrop.innerHTML = modalHTML;
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  const modal = document.getElementById('club-modal');
+  modal.focus();
+
+  // Focus trap
+  modal.addEventListener('keydown', trapFocus);
+  document.addEventListener('keydown', handleModalKey);
+  enableArrowTrap(modal);
+  if (!wasOpen) pushOverlayHistory();
+}
+
+function closeClubModal(fromPopstate) {
+  const backdrop = document.getElementById('club-modal-backdrop');
+  if(!backdrop || !backdrop.classList.contains('open')) return;
+  backdrop.classList.remove('open');
+  document.body.style.overflow = '';
+  const modal = document.getElementById('club-modal');
+  if(modal) {
+    modal.removeEventListener('keydown', trapFocus);
+  }
+  document.removeEventListener('keydown', handleModalKey);
+  if(_modalOpener) { _modalOpener.focus(); _modalOpener = null; }
+  disableArrowTrap();
+  popOverlayHistoryIfNeeded(fromPopstate);
+}
+
+function handleModalKey(e) {
+  if(e.key==='Escape') closeClubModal();
+}
+
+function trapFocus(e) {
+  if(e.key!=='Tab') return;
+  const modal = document.getElementById('club-modal');
+  const focusable = [...modal.querySelectorAll('button,a,[tabindex]:not([tabindex="-1"])')].filter(el=>!el.disabled);
+  if(!focusable.length) return;
+  const first = focusable[0], last = focusable[focusable.length-1];
+  if(e.shiftKey){ if(document.activeElement===first){ e.preventDefault(); last.focus(); } }
+  else { if(document.activeElement===last){ e.preventDefault(); first.focus(); } }
+}
+
+init();
