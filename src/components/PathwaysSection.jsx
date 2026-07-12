@@ -66,7 +66,7 @@ function PathwaysSection() {
               >
                 <button
                   onClick={(e) => toggleSpecAnchored(sp.id, e.currentTarget)}
-                  className="group relative flex h-[126px] w-full items-center gap-5 overflow-hidden px-[10vw] text-left max-[768px]:h-auto max-[768px]:gap-3 max-[768px]:px-4 max-[768px]:py-4"
+                  className="group relative flex h-[126px] w-full items-center gap-5 overflow-hidden px-[10vw] text-left max-[768px]:h-auto max-[768px]:gap-3.5 max-[768px]:px-4 max-[768px]:py-5"
                   style={{ background: `${sp.color}06`, '--sp-color': sp.color }}
                 >
                   <span
@@ -81,16 +81,16 @@ function PathwaysSection() {
                     {SPEC_BADGE_LABEL[sp.id] || sp.id}
                   </div>
                   <div
-                    className="relative z-[1] flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg font-mono text-2xl font-semibold transition-colors duration-300 [@media(hover:hover)]:group-hover:!bg-white/25 [@media(hover:hover)]:group-hover:!text-white max-[768px]:h-10 max-[768px]:w-10 max-[768px]:rounded-md max-[768px]:text-base"
+                    className="relative z-[1] flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg font-mono text-2xl font-semibold transition-colors duration-300 [@media(hover:hover)]:group-hover:!bg-white/25 [@media(hover:hover)]:group-hover:!text-white max-[768px]:h-12 max-[768px]:w-12 max-[768px]:text-lg"
                     style={{ color: sp.color, background: `${sp.color}15` }}
                   >
                     {SPEC_BADGE_LABEL[sp.id] || sp.id}
                   </div>
-                  <span className="relative z-[1] min-w-0 flex-1 font-display text-[1.1rem] font-extrabold leading-[1.3] text-ensi-navy transition-colors duration-300 [@media(hover:hover)]:group-hover:text-white max-[768px]:text-[0.92rem] max-[768px]:leading-[1.25]">
+                  <span className="relative z-[1] min-w-0 flex-1 font-display text-[1.1rem] font-extrabold leading-[1.3] text-ensi-navy transition-colors duration-300 [@media(hover:hover)]:group-hover:text-white max-[768px]:text-[1rem] max-[768px]:leading-[1.3]">
                     {sp.nameFr}
                   </span>
                   <span
-                    className="relative z-[1] flex-shrink-0 text-2xl font-bold transition-[transform,color] duration-200 [@media(hover:hover)]:group-hover:!text-white max-[768px]:text-lg"
+                    className="relative z-[1] flex-shrink-0 text-2xl font-bold transition-[transform,color] duration-200 [@media(hover:hover)]:group-hover:!text-white max-[768px]:text-xl"
                     style={{ color: sp.color, transform: isOpen ? 'rotate(90deg)' : 'none' }}
                   >
                     ›

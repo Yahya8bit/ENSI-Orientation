@@ -46,7 +46,7 @@ function StatItem({ stat }) {
 
 function StatsSection() {
   return (
-    <section id="section-numbers" className="bg-white px-[10vw] py-24 max-[768px]:px-6 max-[768px]:pb-16 max-[768px]:pt-12">
+    <section id="section-numbers" className="scroll-mt-[88px] bg-white px-[10vw] py-24 max-[768px]:px-6 max-[768px]:pb-16 max-[768px]:pt-12">
       <Reveal>
         <p className="mb-3 font-display text-[0.8125rem] font-bold uppercase tracking-[-0.01em] text-ensi-blue">
           EN CHIFFRES
