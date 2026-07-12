@@ -173,10 +173,11 @@ function Hero() {
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
       </button>
 
-      {/* Text block. Desktop: vertically centered by the section, CTA is its last child, caption/dots are separate absolute-positioned
-          siblings below (unchanged). Mobile: this container fills the section (flex-1); inside it, [eyebrow/title/subtitle/paragraph]
-          is its own flex-1+items-center group that self-centers in whatever space is left above the bottom group, while
-          [CTA, caption, dots] stay anchored at the bottom (pushed there naturally since the centered group consumes the rest). */}
+      {/* Text block. Desktop: vertically centered by the section, CTA is part of the same block right after the paragraph,
+          caption/dots are separate absolute-positioned siblings below (unchanged). Mobile: this container fills the section
+          (flex-1); inside it, [eyebrow/title/subtitle/paragraph/CTA] is its own flex-1+items-center group that self-centers
+          in whatever space is left above the bottom group, while [caption, dots] stay anchored at the bottom (pushed there
+          naturally since the centered group consumes the rest). */}
       <div className="relative z-[2] max-w-[960px] px-[10vw] pointer-events-none max-[768px]:flex max-[768px]:max-w-none max-[768px]:flex-1 max-[768px]:flex-col max-[768px]:px-6">
         <div className="max-[768px]:flex max-[768px]:flex-1 max-[768px]:items-center">
           <div className="max-[768px]:w-full">
@@ -192,16 +193,16 @@ function Hero() {
             <p className="animate-fade-up mb-8 max-w-[52ch] text-lg text-white/60 [animation-delay:160ms] max-[768px]:mb-0 max-[768px]:max-w-[34ch] max-[768px]:text-[0.9rem] max-[768px]:leading-[1.5]">
               Tout ce qu'un nouvel admis doit savoir : admission, filières, vie étudiante et programme d'études.
             </p>
+            <a
+              href="#section-numbers"
+              className="animate-fade-up pointer-events-auto inline-flex items-center gap-2.5 rounded bg-ensi-blue px-7 py-3.5 font-display text-[0.9375rem] font-semibold text-ensi-navy transition-colors hover:bg-[#3AA5D5] [animation-delay:240ms] max-[768px]:mt-6"
+            >
+              Découvrir <span className="inline-block transition-transform">↓</span>
+            </a>
           </div>
         </div>
-        <a
-          href="#section-numbers"
-          className="animate-fade-up pointer-events-auto inline-flex items-center gap-2.5 self-start rounded bg-ensi-blue px-7 py-3.5 font-display text-[0.9375rem] font-semibold text-ensi-navy transition-colors hover:bg-[#3AA5D5] [animation-delay:240ms] max-[768px]:mt-6"
-        >
-          Découvrir <span className="inline-block transition-transform">↓</span>
-        </a>
 
-        {/* Mobile-only: caption + dots flow directly after the CTA in this same column, tight fixed gaps, never absolute. */}
+        {/* Mobile-only bottom group: caption + dots, tight fixed gaps, never absolute. */}
         <div className="pointer-events-none hidden text-center font-mono text-[0.85rem] font-medium tracking-[0.04em] text-white/90 max-[768px]:mt-6 max-[768px]:block">
           {rest} <span className="text-ensi-blue">{num}</span>
         </div>
