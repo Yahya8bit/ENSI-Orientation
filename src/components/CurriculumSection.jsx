@@ -127,7 +127,7 @@ function CurriculumSection() {
                           className="relative flex cursor-pointer flex-col gap-1.5 rounded-[10px] border border-ensi-cardgray bg-white p-3.5 transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-md"
                           style={{ borderLeft: `3px solid ${sc}` }}
                         >
-                          <ModuleCode code={m.code} color={sc} />
+                          <ModuleCode code={m.code} color={sc} noTip />
                           <span className="pr-5 font-body text-sm font-bold leading-[1.3] text-ensi-navy">{m.title}</span>
                           <span className="absolute bottom-2.5 right-3 text-2xl font-bold leading-none opacity-55" style={{ color: sc }}>›</span>
                         </div>

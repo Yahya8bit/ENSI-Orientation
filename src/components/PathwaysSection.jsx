@@ -23,7 +23,7 @@ function ModuleGrid({ mods, accent, onSelect }) {
             className="relative flex w-full flex-col gap-1.5 rounded-[10px] border border-ensi-cardgray bg-white p-3.5 text-left transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-md"
             style={{ borderLeft: `3px solid ${sc}` }}
           >
-            <ModuleCode code={m.code} color={sc} />
+            <ModuleCode code={m.code} color={sc} noTip />
             <span className="pr-5 font-body text-sm font-bold leading-[1.3] text-ensi-navy">{m.title}</span>
             <span className="absolute bottom-2.5 right-3 text-2xl font-bold leading-none opacity-55" style={{ color: sc }}>›</span>
           </button>
@@ -62,7 +62,7 @@ function PathwaysSection() {
               <Reveal
                 key={sp.id}
                 id={`spec-${sp.id}`}
-                className="w-full overflow-hidden border-b border-ensi-cardgray bg-white"
+                className="w-full scroll-mt-[88px] overflow-hidden border-b border-ensi-cardgray bg-white"
               >
                 <button
                   onClick={(e) => toggleSpecAnchored(sp.id, e.currentTarget)}
@@ -99,10 +99,7 @@ function PathwaysSection() {
                 <div className="grid overflow-hidden transition-[grid-template-rows] duration-300" style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}>
                   <div className="min-h-0">
                     <div className="flex items-start gap-4 border-t px-[10vw] py-6 max-[768px]:px-4" style={{ background: `${sp.color}06`, borderColor: `${sp.color}25` }}>
-                      <div>
-                        <p className="mb-2 text-sm italic text-gray-400">{sp.name}</p>
-                        <p className="text-sm text-gray-600">{sp.desc}</p>
-                      </div>
+                      <p className="text-sm italic text-gray-400">{sp.name}</p>
                     </div>
                     <div className="flex w-full flex-col gap-5 overflow-hidden px-[10vw] py-5 max-[768px]:px-4">
                       {spComp.length > 0 && (

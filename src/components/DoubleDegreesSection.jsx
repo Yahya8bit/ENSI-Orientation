@@ -43,7 +43,7 @@ function DegreeBar({ p }) {
 
 function DoubleDegreesSection() {
   return (
-    <section className="px-[10vw] py-24">
+    <section id="section-doublediplomes" className="px-[10vw] py-24">
       <p className="mb-3 font-display text-[0.8125rem] font-bold uppercase tracking-[-0.01em] text-ensi-blue">
         DOUBLES DIPLÔMES
       </p>

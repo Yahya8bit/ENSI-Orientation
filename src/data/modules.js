@@ -1049,7 +1049,7 @@ export const MODULES = [
     teachingTeam:'Chiraz Ben Othmane Zribi',responsible:'Chiraz Ben Othmane Zribi',
     readingList:['Dwight Gunning, S. G., Natural Language Processing Fundamentals, Packt, 2019','Daniel Jurafsky, James Martin, Speech and Language Processing, 2020','Nitin Indurkhya, Fred J. Damerau, Handbook of Natural Language Processing, 2010','Alexander Gelbukh, Computational Linguistics and Intelligent Text Processing, 2008'],
     verified:true},
-  {code:'AI.5.5',title:'Robotique et Soft Computing',semester:5,credits:2,subject:'AI',language:'French',type:'Compulsory',
+  {code:'AI.5.5',title:'Robotique et Soft Computing',semester:5,credits:2,subject:'AI',language:'French',type:'Track',
     hours:{total:40,lecture:18,lab:12,selfStudy:10},
     prerequisites:['MAT.1.1 Probabilités et Statistiques','MAT.1.2'],
     objectives:["Présenter les techniques intelligentes de soft computing permettant le contrôle efficace de systèmes automatisés, en particulier les robots mobiles autonomes, et les rendre accessibles aux étudiants pour une mise en œuvre pratique","C2. Mettre en place une veille technologique pour sélectionner les outils et méthodologies pertinents","C3. Analyser des architectures de SI complexes en tenant compte de contraintes non techniques (sociétales, sécuritaires, environnementales, économiques)","C5. Spécifier un système d'information dans toutes ses dimensions","C9. Prendre des décisions complexes à partir d'informations incomplètes ou limitées"],

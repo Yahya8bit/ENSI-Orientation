@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 const LINKS = [
   { id: 'section-admission', label: 'Admission' },
+  { id: 'section-doublediplomes', label: 'Doubles diplômes' },
   { id: 'section-studentlife', label: 'Vie étudiante' },
   { id: 'curriculum-section', label: "Plan d'études" },
   { id: 'section-pathways', label: 'Filières' },
