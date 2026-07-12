@@ -4,7 +4,7 @@ import { subjectFullName } from '../lib/modules.js'
 // Replaces initCodeTooltips(): hover shows the subject-name tooltip on desktop,
 // tap toggles it (auto-hides after 2s) on touch devices, via its own local state
 // instead of global DOM listeners.
-function ModuleCode({ code, color, className = '', onClick, noTip = false }) {
+function ModuleCode({ code, color, className = '', noTip = false }) {
   const [tipShown, setTipShown] = useState(false)
   const tip = noTip ? null : subjectFullName(code)
 
@@ -23,10 +23,6 @@ function ModuleCode({ code, color, className = '', onClick, noTip = false }) {
       className={`${tip ? 'code-tip' : ''} font-mono text-xs font-bold ${tipShown ? 'tip-show' : ''} ${className}`}
       style={color ? { color } : undefined}
       data-tip={tip || undefined}
-      onClick={(e) => {
-        e.stopPropagation()
-        onClick?.()
-      }}
       onTouchStart={handleTouchStart}
     >
       {code}

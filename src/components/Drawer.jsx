@@ -112,26 +112,8 @@ function Drawer({ moduleCode, onClose }) {
                 </Tag>
                 <Tag bg={`${subColor}33`} color={subColor} border={`${subColor}66`}>{m.subject}</Tag>
               </div>
-              {(m.teachingTeam || m.responsible) && (
-                <div className="mb-6 text-sm text-gray-500">
-                  <span className="font-semibold text-ensi-navy">Équipe pédagogique : </span>
-                  {m.teachingTeam || m.responsible}
-                </div>
-              )}
             </div>
             <div className="px-6 pb-6">
-              {m.prerequisites?.length > 0 && (
-                <Section id="prereq" title="Prérequis">
-                  <ul className="list-none space-y-1.5 pb-4">
-                    {m.prerequisites.map((p, i) => (
-                      <li key={i} className="font-body flex items-start gap-2 text-sm font-semibold leading-relaxed text-slate-700">
-                        <span className="mt-0.5 flex-shrink-0 text-ensi-blue">▸</span>
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </Section>
-              )}
               <Section id="obj" title="Objectifs">
                 <ul className="list-none space-y-2.5 pb-4">
                   {(m.objectives || []).map((o, i) => (
@@ -177,21 +159,10 @@ function Drawer({ moduleCode, onClose }) {
                   <div className="mb-1">{m.examForm}</div>
                   <div className="mt-2 flex items-center gap-2">
                     <span className="text-xs text-gray-500">Note de passage</span>
-                    <span className="font-mono text-[0.85rem] font-semibold text-emerald-600">{m.passMark}</span>
+                    <span className="font-mono text-[0.85rem] font-semibold text-emerald-600">8/20</span>
                   </div>
                 </div>
               </Section>
-              {m.readingList?.length > 0 && (
-                <Section id="reading" title="Bibliographie" defaultOpen={false}>
-                  <ul className="list-none space-y-1.5 pb-4">
-                    {m.readingList.map((r, i) => (
-                      <li key={i} className="text-sm leading-relaxed text-gray-600">
-                        {r}
-                      </li>
-                    ))}
-                  </ul>
-                </Section>
-              )}
             </div>
           </>
         )}

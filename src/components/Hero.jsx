@@ -97,6 +97,7 @@ function Hero() {
 
   return (
     <section
+      id="hero-section"
       className="relative flex min-h-screen flex-col justify-center overflow-hidden max-[600px]:min-h-[100svh] max-[390px]:justify-start max-[390px]:pt-[13vh]"
       aria-label="Diaporama hero, utilisez les touches fléchées pour naviguer"
       tabIndex={0}

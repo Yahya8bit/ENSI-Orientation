@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 // Thin bar fixed just below the navbar. Desktop: horizontal, fills left-to-right.
-// Mobile (<=768px): vertical, pinned to the right edge, fills top-to-bottom.
+// Mobile (<=768px): vertical, pinned to the left edge, fills top-to-bottom.
 // Both read the same --scroll-progress custom property; only the Tailwind
 // max-[768px]: variant differs on which dimension (width vs height) uses it.
 function ScrollProgress() {
@@ -26,7 +26,7 @@ function ScrollProgress() {
     <div
       ref={trackRef}
       style={{ '--scroll-progress': '0%' }}
-      className="fixed left-0 right-0 top-[72px] z-[99] h-1 max-[768px]:left-auto max-[768px]:right-0 max-[768px]:bottom-0 max-[768px]:h-auto max-[768px]:w-1"
+      className="fixed left-0 right-0 top-[72px] z-[99] h-1 max-[768px]:right-auto max-[768px]:left-0 max-[768px]:bottom-0 max-[768px]:h-auto max-[768px]:w-1"
     >
       <div className="h-full w-[var(--scroll-progress)] bg-gradient-to-r from-ensi-blue to-ensi-accent max-[768px]:h-[var(--scroll-progress)] max-[768px]:w-full max-[768px]:bg-gradient-to-b" />
     </div>

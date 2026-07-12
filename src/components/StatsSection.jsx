@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { useInView } from '../hooks/useInView.js'
 import { useCountUp } from '../hooks/useCountUp.js'
+import Reveal from './Reveal.jsx'
 
 const STATS = [
   { target: 2500, suffix: '+', label: 'ingénieurs diplômés depuis 2013' },
@@ -49,7 +50,7 @@ function StatsSection() {
       <p className="mb-3 font-display text-[0.8125rem] font-bold uppercase tracking-[-0.01em] text-ensi-blue">
         EN CHIFFRES
       </p>
-      <h2 className="mb-14 font-display text-[clamp(2rem,4vw,3.25rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-ensi-navy max-[768px]:whitespace-nowrap max-[768px]:text-[1.75rem]">
+      <h2 className="mb-14 font-display text-[clamp(2rem,4vw,3.25rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-ensi-navy">
         40 ans d'<span className="text-ensi-accent">ingénieurs.</span>
       </h2>
 
@@ -65,7 +66,7 @@ function StatsSection() {
         </p>
         <div className="flex w-full items-start justify-between gap-6 max-[768px]:grid max-[768px]:grid-cols-2 max-[768px]:items-center max-[768px]:gap-6">
           {ACCREDITATIONS.map((a) => (
-            <div
+            <Reveal
               key={a.logo}
               className="flex flex-col items-start gap-2 max-[768px]:items-center max-[768px]:text-center"
             >
@@ -76,7 +77,7 @@ function StatsSection() {
                 className="h-[100px] max-w-[180px] object-contain max-[768px]:max-h-20 max-[768px]:max-w-full"
               />
               <span className="text-[0.72rem] text-gray-500">{a.label}</span>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

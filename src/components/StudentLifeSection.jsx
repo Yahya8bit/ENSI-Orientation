@@ -16,8 +16,8 @@ function ClubTile({ club, onOpen }) {
       data-cat={club.category}
       onClick={() => onOpen(club, btnRef.current)}
       aria-label={`Voir les détails de ${club.name}`}
-      className="group w-full cursor-pointer border-none bg-transparent p-0 text-left transition-transform duration-200 hover:-translate-y-0.5 active:scale-[0.98] max-[768px]:flex max-[768px]:flex-row max-[768px]:items-center max-[768px]:gap-3.5 max-[768px]:border-b max-[768px]:border-slate-100 max-[768px]:py-2.5"
-      style={{ WebkitTapHighlightColor: `${club.accent}33` }}
+      className="group w-full cursor-pointer border-none bg-transparent p-0 text-left transition-[transform,background-color] duration-200 hover:-translate-y-0.5 active:scale-[0.98] max-[768px]:flex max-[768px]:flex-row max-[768px]:items-center max-[768px]:gap-3.5 max-[768px]:rounded-lg max-[768px]:border-b max-[768px]:border-slate-100 max-[768px]:px-2.5 max-[768px]:py-2.5 max-[768px]:hover:bg-[var(--hover-bg)] max-[768px]:active:bg-[var(--hover-bg)]"
+      style={{ WebkitTapHighlightColor: `${club.accent}33`, '--hover-bg': `${club.accent}14` }}
     >
       <div className="overflow-hidden rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.1)] transition-transform duration-200 group-hover:-translate-y-0.5 max-[768px]:w-20 max-[768px]:min-w-[80px] max-[768px]:flex-shrink-0">
         {club.logo ? (
@@ -118,14 +118,14 @@ function StudentLifeSection() {
         </h3>
         <div className="flex w-full flex-wrap items-center justify-between gap-y-7 max-[768px]:grid max-[768px]:grid-cols-3 max-[768px]:gap-6">
           {PARTNERS.map((p) => (
-            <div key={p.name} className="flex items-center justify-center max-[768px]:overflow-hidden">
+            <Reveal key={p.name} className="flex items-center justify-center max-[768px]:overflow-hidden">
               <img
                 src={`/imag/${p.logo}`}
                 alt={p.name}
                 loading="lazy"
                 className="block max-h-[70px] max-w-[150px] object-contain max-[768px]:max-h-[50px] max-[768px]:max-w-full"
               />
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

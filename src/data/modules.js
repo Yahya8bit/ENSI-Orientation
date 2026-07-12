@@ -100,7 +100,7 @@ export const MODULES = [
   {code:'MAT.1.1',title:'Probabilités et Statistiques',semester:1,credits:3,subject:'MAT',language:'French',type:'Compulsory',
     hours:{total:60,lecture:30,lab:15,selfStudy:15},
     prerequisites:['Introduction aux probabilités','Combinatoire'],
-    objectives:["Maîtriser en profondeur les sciences de base, notamment l'informatique et les mathématiques, essentielles à la conception et à la production d'applications informatiques (C1)"],
+    objectives:["Maîtriser en profondeur les sciences de base, notamment l'informatique et les mathématiques, essentielles à la conception et à la production d'applications informatiques"],
     content:[
       "Chapitre I : Rappels (6h) — généralités sur les probabilités, variables aléatoires discrètes",
       "Chapitre II : Variables aléatoires continues (12h) — définitions, fonction caractéristique, lois usuelles",
@@ -138,8 +138,8 @@ export const MODULES = [
     prerequisites:['Mathématiques financières de base'],
     objectives:[
       "Familiariser l'étudiant avec les concepts de mathématiques financières et les outils nécessaires pour résoudre des problèmes financiers (investissement, assurance, amortissement, gestion obligataire)",
-      "Développer des compétences de leadership et d'esprit entrepreneurial, notamment via des projets socio-culturels (C12)",
-      "Prendre conscience de la nécessité de mettre à jour ses connaissances en continu (C13)",
+      "Développer des compétences de leadership et d'esprit entrepreneurial, notamment via des projets socio-culturels",
+      "Prendre conscience de la nécessité de mettre à jour ses connaissances en continu",
     ],
     content:[
       "I. Intérêt simple — définition, calcul pratique, application aux instruments d'épargne et de crédit",
@@ -207,7 +207,7 @@ export const MODULES = [
       "Étudier les principaux opérateurs, quantificateurs universels et leurs propriétés",
       "Comprendre les notions d'implication et d'équivalence",
       "Modéliser un énoncé pour tester sa validité",
-      "Appliquer ces notions à la démonstration mathématique et structurer un raisonnement (C1)",
+      "Appliquer ces notions à la démonstration mathématique et structurer un raisonnement",
     ],
     content:[
       "Chapitre 0 : Introduction à la logique formelle",
@@ -224,10 +224,10 @@ export const MODULES = [
     hours:{total:60,lecture:45,lab:0,selfStudy:15},
     prerequisites:['AP.1.2'],
     objectives:[
-      "Maîtriser en profondeur les sciences de base, notamment l'informatique, essentielles à la conception et production d'applications informatiques (C1)",
-      "Mettre en place une veille technologique pour choisir les outils et méthodologies pertinents (C2)",
-      "Maîtriser les bonnes pratiques de développement logiciel et les normes applicables (C8)",
-      "Prendre conscience de la nécessité de mettre à jour ses connaissances en continu (C13)",
+      "Maîtriser en profondeur les sciences de base, notamment l'informatique, essentielles à la conception et production d'applications informatiques",
+      "Mettre en place une veille technologique pour choisir les outils et méthodologies pertinents",
+      "Maîtriser les bonnes pratiques de développement logiciel et les normes applicables",
+      "Prendre conscience de la nécessité de mettre à jour ses connaissances en continu",
     ],
     content:[
       "Chapitre 1 : Introduction aux bases de données",
@@ -271,7 +271,7 @@ export const MODULES = [
   {code:'AP.1.3',title:'Programmation C Avancée',semester:1,credits:1.5,subject:'AP',language:'French',type:'Compulsory',
     hours:{total:30,lecture:11,lab:11.5,selfStudy:7.5},
     prerequisites:[],
-    objectives:["Se familiariser avec les algorithmes et développer les capacités pratiques d'utilisation des environnements de développement (C8)"],
+    objectives:["Se familiariser avec les algorithmes et développer les capacités pratiques d'utilisation des environnements de développement"],
     content:[
       "Chapitre I (1h) : Notions de base du langage C",
       "Chapitre II (1h) : Structures de contrôle",
@@ -326,7 +326,7 @@ export const MODULES = [
   {code:'MAT.2.1',title:'Algorithmes sur les Graphes',semester:2,credits:3,subject:'MAT',language:'French',type:'Compulsory',
     hours:{total:60,lecture:30,lab:15,selfStudy:15},
     prerequisites:['AP.1.2','AP.1.3'],
-    objectives:["Maîtriser en profondeur les sciences de base, résoudre des problèmes IT complexes et prendre conscience de la nécessité de mise à jour continue des connaissances (C1/C4/C13)"],
+    objectives:["Maîtriser en profondeur les sciences de base, résoudre des problèmes IT complexes et prendre conscience de la nécessité de mise à jour continue des connaissances"],
     content:[
       "Chapitre I (6h) : Concepts de base de la théorie des graphes — définitions, représentation, connexité",
       "Chapitre II (15h) : Chemins extrémaux de graphes pondérés — algorithmes de Moore-Dijkstra, Bellman-Ford, Floyd, application à l'ordonnancement (MPM-PERT)",
@@ -340,7 +340,7 @@ export const MODULES = [
   {code:'MAT.2.2',title:'Méthodes Numériques',semester:2,credits:3,subject:'MAT',language:'French',type:'Compulsory',
     hours:{total:60,lecture:30,lab:15,selfStudy:15},
     prerequisites:['Analyse (niveau classes préparatoires)','Algèbre linéaire'],
-    objectives:["Maîtriser en profondeur les sciences de base, notamment l'informatique et les mathématiques (C1)"],
+    objectives:["Maîtriser en profondeur les sciences de base, notamment l'informatique et les mathématiques"],
     content:[
       "Chapitre I (10.5h) : Interpolation et approximation numérique — interpolation de Lagrange, d'Hermite, approximation polynomiale, moindres carrés",
       "Chapitre II (10.5h) : Intégration numérique — méthodes de Newton-Cotes, méthodes composites, méthodes de Gauss",
@@ -358,7 +358,7 @@ export const MODULES = [
       "Connaître les blocs numériques usuels (registres, bascules…) et savoir écrire des algorithmes pour une tâche donnée",
       "Comprendre l'architecture du microprocesseur 8086 et ses applications",
       "Écrire des programmes en assembleur pour le microprocesseur 8086",
-      "Interfacer un processeur avec des périphériques (C1/C4)",
+      "Interfacer un processeur avec des périphériques",
     ],
     content:[
       "Chapitre 1 : Systèmes à base de microprocesseur — ordinateur numérique, architectures Von Neumann et Harvard, processeurs CISC et RISC",
@@ -373,7 +373,7 @@ export const MODULES = [
   {code:'NET.2.1',title:'Transmission Numérique',semester:2,credits:3,subject:'NET',language:'French',type:'Compulsory',
     hours:{total:60,lecture:30,lab:15,selfStudy:15},
     prerequisites:['MAT.1.2','EHA.1.1','EHA.1.2'],
-    objectives:["Maîtriser en profondeur les sciences de base essentielles à la conception d'applications informatiques et spécifier un système d'information dans toutes ses dimensions (C1/C3/C5/C7)"],
+    objectives:["Maîtriser en profondeur les sciences de base essentielles à la conception d'applications informatiques et spécifier un système d'information dans toutes ses dimensions"],
     content:[
       "Cours 1 : Introduction au modèle OSI — les couches et leurs fonctions, focus sur la couche physique (synchronisation, multiplexage, support de transmission)",
       "Cours 2 : Modulation analogique en bande de base — AM, FM, PM et leurs applications",
@@ -414,7 +414,7 @@ export const MODULES = [
       "Connaître le paradigme orienté objet",
       "Comprendre l'intérêt et les origines de la programmation orientée objet",
       "Apprendre les nouveaux concepts introduits par le style objet",
-      "Se familiariser avec C++ et Java et les utiliser pour programmer en style objet (C8/C9)",
+      "Se familiariser avec C++ et Java et les utiliser pour programmer en style objet",
     ],
     content:[
       "Partie 0 : Introduction — défis de la programmation, limites de la programmation structurée, du C au C++, principes de base de l'orienté objet",
@@ -430,7 +430,7 @@ export const MODULES = [
     prerequisites:['AP.1.2'],
     objectives:[
       "Se familiariser avec les langages de programmation web : HTML, CSS, JavaScript et PHP",
-      "Être capable de développer des sites web statiques et dynamiques (C8/C9)",
+      "Être capable de développer des sites web statiques et dynamiques",
     ],
     content:[
       "Chapitre I : Programmation web — concepts de base, modèle client/serveur, service HTTP, serveur web, cookies/cache/proxy/pare-feu, programmation côté client et côté serveur",
@@ -453,7 +453,7 @@ export const MODULES = [
       "Concevoir des grammaires hors-contexte et les convertir en formes normales",
       "Prouver l'équivalence entre automates à pile et grammaires hors-contexte",
       "Identifier la hiérarchie des langages, grammaires et machines formels",
-      "Distinguer calculabilité/non-calculabilité et décidabilité/indécidabilité (C1/C2)",
+      "Distinguer calculabilité/non-calculabilité et décidabilité/indécidabilité",
     ],
     content:[
       "Leçon I (3h) : Chaînes, alphabet, langage, opérations",
@@ -471,9 +471,9 @@ export const MODULES = [
     hours:{total:32.5,lecture:0,lab:22.5,selfStudy:10},
     prerequisites:['DAT.1.1'],
     objectives:[
-      "Mettre en place une veille technologique pour choisir les outils et méthodologies pertinents (C2)",
-      "Maîtriser les bonnes pratiques de développement logiciel et les normes applicables (C8)",
-      "Prendre conscience de la nécessité de mettre à jour ses connaissances en continu (C13)",
+      "Mettre en place une veille technologique pour choisir les outils et méthodologies pertinents",
+      "Maîtriser les bonnes pratiques de développement logiciel et les normes applicables",
+      "Prendre conscience de la nécessité de mettre à jour ses connaissances en continu",
     ],
     content:["Installation d'Oracle","Langage de définition de données (DDL) + TP","Langage de manipulation de données (DML) + TP","Le langage PL/SQL + TP"],
     examForm:'50% contrôle continu · 50% évaluation de projet',passMark:'10/20',
@@ -511,7 +511,7 @@ export const MODULES = [
   {code:'MAT.3.1',title:'Programmation Linéaire et Non Linéaire',semester:3,credits:3,subject:'MAT',language:'French',type:'Compulsory',
     hours:{total:65,lecture:45,lab:0,selfStudy:20},
     prerequisites:['MAT.2.2'],
-    objectives:["Approcher les problèmes de décision complexes via l'optimisation d'un objectif unique sous contraintes, dans des contextes variés (finance, physique, planification) (C1/C9)"],
+    objectives:["Approcher les problèmes de décision complexes via l'optimisation d'un objectif unique sous contraintes, dans des contextes variés (finance, physique, planification)"],
     content:[
       "1. Programmes linéaires — exemples, dualité et interprétations, applications sélectionnées de la dualité",
       "2. La méthode du simplexe — solutions de base réalisables adjacentes, simplexe primal, simplexe dual, méthode du tableau simplexe",
@@ -530,7 +530,7 @@ export const MODULES = [
       "Connaître la décomposition d'un microprocesseur en chemin de données et unité de contrôle",
       "Connaître les différents types de conception de processeur (monocycle, multicycle, pipeline)",
       "Connaître le jeu d'instructions RISC",
-      "Maîtriser la différence entre architectures CISC et RISC et savoir concevoir des processeurs (C5/C13)",
+      "Maîtriser la différence entre architectures CISC et RISC et savoir concevoir des processeurs",
     ],
     content:[
       "Introduction générale et rappels — architecture des ordinateurs, CISC vs RISC, rappels sur les systèmes logiques",
@@ -553,7 +553,7 @@ export const MODULES = [
       "Analyser les méthodes d'accès au support",
       "Appliquer les modèles OSI et IEEE 802 à l'architecture LAN",
       "Comprendre les normes IEEE 802.3 et 802.11 et l'évolution d'Ethernet",
-      "Configurer Spanning Tree, VLANs et le trunking sur des commutateurs Cisco (C1)",
+      "Configurer Spanning Tree, VLANs et le trunking sur des commutateurs Cisco",
     ],
     content:[
       "Chapitre I : Réseaux locaux — concepts de base et fondamentaux (topologies, supports, techniques et méthodes d'accès)",
@@ -569,7 +569,7 @@ export const MODULES = [
   {code:'NET.3.2',title:'TP Réseaux Locaux',semester:3,credits:1.5,subject:'NET',language:'French',type:'Compulsory',
     hours:{total:30.5,lecture:10,lab:22.5,selfStudy:8},
     prerequisites:['NET.3.1'],
-    objectives:["Déployer, configurer et dépanner un réseau TCP/IP réel sous Linux, MS Windows et IOS Cisco (C1)"],
+    objectives:["Déployer, configurer et dépanner un réseau TCP/IP réel sous Linux, MS Windows et IOS Cisco"],
     content:[
       "TP1 : Déploiement de réseaux IP sous Linux et MS Windows — adresses IP, routage statique, dépannage",
       "TP2 : Déploiement de réseaux IP sous IOS Cisco — adresses IP, routage statique, dépannage",
@@ -584,7 +584,7 @@ export const MODULES = [
   {code:'OS.3.3',title:'Systèmes d\'Exploitation et Programmation Concurrente',semester:3,credits:3,subject:'OS',language:'French',type:'Compulsory',
     hours:{total:60,lecture:30,lab:15,selfStudy:15},
     prerequisites:['AP.1.3','OS.2.1'],
-    objectives:["Comprendre les fonctionnalités, mécanismes et algorithmes des systèmes d'exploitation multitâches et multithread, et savoir les exploiter efficacement en programmation système (C1/C7/C8)"],
+    objectives:["Comprendre les fonctionnalités, mécanismes et algorithmes des systèmes d'exploitation multitâches et multithread, et savoir les exploiter efficacement en programmation système"],
     content:[
       "Chap. 1 (3 sem.) : Gestion des processus et threads — terminologie, notion de processus, bloc de contrôle de processus (PCB), notion de thread ; TP système Linux (ps, top, fork, wait, exec, pthread_create, pthread_join)",
       "Chap. 2 (2 sem.) : Ordonnancement CPU — ordonnanceur, dispatcher, objectifs/critères, types et algorithmes d'ordonnancement (FCFS, SJF, RR, SRTF), hiérarchie et ordonnancement des threads",
@@ -604,7 +604,7 @@ export const MODULES = [
       "Techniques d'analyse syntaxique",
       "Analyse sémantique",
       "Traduction vers un code intermédiaire pour interprétation",
-      "Concevoir et implémenter des compilateurs, développer des analyseurs syntaxiques (C1/C2)",
+      "Concevoir et implémenter des compilateurs, développer des analyseurs syntaxiques",
     ],
     content:[
       "Leçon 1 (3h) : Introduction à la compilation — étapes de compilation, forme de Backus-Naur, compilation en une passe",
@@ -639,7 +639,7 @@ export const MODULES = [
     objectives:[
       "Avoir une vue d'ensemble du génie logiciel et comprendre sa valeur ajoutée",
       "Connaître les processus de développement logiciel semi-formels et savoir les choisir et les appliquer",
-      "Connaître les étapes du développement logiciel (analyse, conception, implémentation, test, intégration) et savoir choisir et appliquer les techniques adaptées à chacune (C1/C2/C3/C5/C8/C9/C13)",
+      "Connaître les étapes du développement logiciel (analyse, conception, implémentation, test, intégration) et savoir choisir et appliquer les techniques adaptées à chacune",
     ],
     content:[
       "Chapitre 1 : Introduction au génie logiciel — le logiciel, le génie logiciel",
@@ -678,7 +678,7 @@ export const MODULES = [
     prerequisites:['MAT.1.1','MAT.1.2','AP.1.2'],
     objectives:[
       "Résoudre des problèmes par des algorithmes d'IA et des méthodes de recherche (problèmes bien définis, formulation, problèmes réels)",
-      "Comprendre les concepts théoriques et maîtriser les algorithmes d'apprentissage automatique, et distinguer les situations favorables à chaque approche (C1/C2/C4/C9)",
+      "Comprendre les concepts théoriques et maîtriser les algorithmes d'apprentissage automatique, et distinguer les situations favorables à chaque approche",
     ],
     content:[
       "Chapitre 1 (6h) : Vue d'ensemble des fondements de l'IA — algorithmes d'IA (fondements, buts, types, applications, classification/régression/clustering), introduction au machine learning",
@@ -715,7 +715,7 @@ export const MODULES = [
   {code:'MAT.4.1',title:'Processus Stochastiques avec R',semester:4,credits:3,subject:'MAT',language:'French',type:'Compulsory',
     hours:{total:65,lecture:45,lab:0,selfStudy:20},
     prerequisites:['MAT.1.1'],
-    objectives:["Étudier les principaux processus stochastiques : processus de Poisson, chaînes de Markov à temps discret et continu, phénomènes d'attente, processus de naissance et de mort, processus gaussiens, mouvement brownien, intégrales stochastiques, martingales, temps d'arrêt — avec un usage intensif du logiciel R pour la simulation (C1/C9)"],
+    objectives:["Étudier les principaux processus stochastiques : processus de Poisson, chaînes de Markov à temps discret et continu, phénomènes d'attente, processus de naissance et de mort, processus gaussiens, mouvement brownien, intégrales stochastiques, martingales, temps d'arrêt — avec un usage intensif du logiciel R pour la simulation"],
     content:[
       "1. Généralités — définition et exemples, classification, stationnarité, propriété sans mémoire",
       "2. Processus de Poisson — définition, caractérisations, décomposition, superposition",
@@ -736,7 +736,7 @@ export const MODULES = [
       "Comprendre les méthodes de spécification et de conception des systèmes embarqués",
       "Apprendre la programmation de microcontrôleurs",
       "Connaître la conception architecturale avec VHDL et circuits FPGA",
-      "Maîtriser la différence entre conception logicielle et matérielle, savoir lire des datasheets et utiliser des outils EDA (Quartus, Vivado, Keil, IAR) (C5/C13)",
+      "Maîtriser la différence entre conception logicielle et matérielle, savoir lire des datasheets et utiliser des outils EDA (Quartus, Vivado, Keil, IAR)",
     ],
     content:[
       "Introduction générale — définition, contraintes de conception, conception logicielle/matérielle/mixte d'un système embarqué",
@@ -755,7 +755,7 @@ export const MODULES = [
       "Se familiariser avec les technologies réseau sous-jacentes, les couches physique et liaison, la commutation de paquets/cellules/circuits et l'interconnexion de réseaux jusqu'à Internet",
       "Comprendre les protocoles des couches réseau et transport et leur interaction pour un service de bout en bout fiable",
       "Comprendre la détection/correction d'erreurs, la fragmentation, le contrôle de flux et de congestion à différentes couches",
-      "Comprendre les principes et algorithmes de routage (C1/C13)",
+      "Comprendre les principes et algorithmes de routage",
     ],
     content:[
       "Partie I : Les bases des réseaux informatiques — concepts introductifs (classification, taxonomie, topologies, modèles OSI et Internet), réseaux étendus (commutation de circuits/paquets, réseaux virtuels et datagrammes), performance réseau",
@@ -775,7 +775,7 @@ export const MODULES = [
       "Concevoir des modèles avec la méthode B et les raffiner",
       "Maîtriser le calcul des obligations de preuve",
       "Spécifier des propriétés avec les logiques temporelles linéaire et arborescente",
-      "Utiliser le model checking pour la vérification (C1/C2/C3)",
+      "Utiliser le model checking pour la vérification",
     ],
     content:[
       "Leçon 1 (6h) : Introduction à la spécification et la vérification formelles — systèmes formels, automates et théorie des modèles, sémantique dynamique, preuve de théorèmes et model checking, étude de cas",
@@ -798,7 +798,7 @@ export const MODULES = [
       "Comprendre les types d'architecture et le métier d'architecte",
       "Connaître les principaux styles architecturaux et savoir les appliquer",
       "Apprendre à évaluer et documenter une architecture, défendre les choix effectués",
-      "Justifier le choix d'une architecture selon les exigences fonctionnelles et non fonctionnelles, et la modéliser avec UML (C3/C5/C8/C9/C13)",
+      "Justifier le choix d'une architecture selon les exigences fonctionnelles et non fonctionnelles, et la modéliser avec UML",
     ],
     content:[
       "Préambule — historique, critères de qualité logicielle, rappels sur les diagrammes UML d'architecture",
@@ -823,7 +823,7 @@ export const MODULES = [
       "Classifier les différents types de cyberattaques et proposer des contre-mesures de base",
       "Connaître les protocoles cryptographiques de base et leurs cas d'usage",
       "Savoir utiliser des outils de cryptanalyse simples",
-      "Savoir utiliser un scanner de vulnérabilités simple (C1/C3/C4/C6)",
+      "Savoir utiliser un scanner de vulnérabilités simple",
     ],
     content:[
       "Partie I : Introduction et évaluation des risques — Leçon 1 (6h) : définitions et terminologie, évaluation des risques (étude de cas) ; Leçon 2 (3h) : classification des attaques ; Lab 1 (6h) : sniffer réseau, attaques réseau sous GNS3, attaques système sous WebGoat",
@@ -841,7 +841,7 @@ export const MODULES = [
     objectives:[
       "Maîtriser les fondamentaux de la gestion de portefeuille",
       "Se familiariser avec la terminologie du monde financier",
-      "Acquérir une connaissance approfondie des actifs financiers, des produits classiques (actions, obligations) aux plus sophistiqués (options, futures, stratégies optionnelles complexes), avec un accent sur leur valorisation (C11/C12/C13)",
+      "Acquérir une connaissance approfondie des actifs financiers, des produits classiques (actions, obligations) aux plus sophistiqués (options, futures, stratégies optionnelles complexes), avec un accent sur leur valorisation",
     ],
     content:[
       "Chapitre 0 : Généralités sur les marchés de capitaux — marché monétaire et marché financier, titres du marché financier (actions et obligations), marchés dérivés",
@@ -859,7 +859,7 @@ export const MODULES = [
     prerequisites:['Selon le thème du projet, peut couvrir tous les modules de l\'école'],
     objectives:[
       "Travailler en groupe (binôme ou trinôme) sur un projet issu d'une problématique exigeante : étude bibliographique, modélisation du problème (analyse), conception de la solution, travail d'équipe avec l'encadrant",
-      "Savoir utiliser des outils de gestion de projet (comme Trello) et Git pour développer en parallèle (C1 à C13)",
+      "Savoir utiliser des outils de gestion de projet (comme Trello) et Git pour développer en parallèle",
     ],
     content:["Rédaction du cahier des charges","Analyse du problème","Conception","Réalisation","Tests et expérimentation","Rédaction du rapport","Soutenance devant un jury académique"],
     examForm:'50% évaluation de l\'encadrant · 50% évaluation du jury',passMark:'10/20',
@@ -931,7 +931,7 @@ export const MODULES = [
       "Maîtriser les éléments fondamentaux du droit informatique issus des besoins de la pratique",
       "Se familiariser avec l'environnement juridique de l'informatique",
       "Savoir se protéger en tant que créateur de logiciel",
-      "Connaître les bases du concept de données personnelles, identifier les droits associés et en comprendre les enjeux (C6/C8/C13)",
+      "Connaître les bases du concept de données personnelles, identifier les droits associés et en comprendre les enjeux",
     ],
     content:[
       "Leçon 1 (2h) : Introduction — société de l'information et révolution numérique, régulation de la société de l'information, définition du droit informatique",
@@ -1016,7 +1016,7 @@ export const MODULES = [
   {code:'AI.5.1',title:'Systèmes Multi-Agents',semester:5,credits:2,subject:'AI',language:'Both',type:'Track',
     hours:{total:40,lecture:30,lab:0,selfStudy:10},
     prerequisites:['SE.3.1 Génie Logiciel','AI.3.1 IA & Apprentissage Automatique'],
-    objectives:["Maîtriser les concepts d'agent et de systèmes multi-agents","Étudier et appliquer une méthodologie de conception pour un système multi-agents","Apprendre le développement d'un système multi-agents","Explorer des questions de recherche complémentaires","C1. Maîtriser en profondeur les sciences de base, notamment l'informatique et les mathématiques, essentielles à la conception et à la production d'applications informatiques","C7. Identifier, localiser et collecter toutes les données nécessaires à la recherche et au développement de nouveaux logiciels ou architectures de SI"],
+    objectives:["Maîtriser les concepts d'agent et de systèmes multi-agents","Étudier et appliquer une méthodologie de conception pour un système multi-agents","Apprendre le développement d'un système multi-agents","Explorer des questions de recherche complémentaires"],
     content:["Chapitre 1 : Introduction aux systèmes multi-agents (SMA)","Chapitre 2 : Agents intelligents","Chapitre 3 : Architectures d'agents","Chapitre 4 : Méthodologies de développement de systèmes multi-agents","Chapitre 5 : Environnements de développement SMA et étude de cas"],
     examForm:'35% contrôle continu · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Narjès Bellamine Ben Saoud',responsible:'Narjès Bellamine Ben Saoud',
@@ -1025,7 +1025,7 @@ export const MODULES = [
   {code:'AI.5.2',title:'Logiques Non-Classiques',semester:5,credits:2,subject:'AI',language:'French',type:'Track',
     hours:{total:40,lecture:20,lab:10,selfStudy:10},
     prerequisites:['AI.1.1 Logique Formelle','AP.2.3 Théorie des Automates et Langages Formels','SE.4.1 Méthodes Formelles de Développement'],
-    objectives:["Introduire les logiques temporelles pour exprimer et déduire les propriétés dynamiques d'un système, ainsi que la logique floue pour le raisonnement approché (mise en pratique avec Prolog et SPIN)","Connaissances : systèmes formels et inférence formelle pour la décision, démonstration de théorèmes, fuzzification/défuzzification et décision, règles de correspondance formelles","C1. Maîtriser en profondeur les sciences de base, notamment l'informatique et les mathématiques","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions","C9. Prendre des décisions complexes à partir d'informations incomplètes ou limitées"],
+    objectives:["Introduire les logiques temporelles pour exprimer et déduire les propriétés dynamiques d'un système, ainsi que la logique floue pour le raisonnement approché (mise en pratique avec Prolog et SPIN)","Connaissances : systèmes formels et inférence formelle pour la décision, démonstration de théorèmes, fuzzification/défuzzification et décision, règles de correspondance formelles"],
     content:["Leçon I (6h) : Introduction — aspects théoriques de la logique, preuve formelle et déduction logique","Leçon II (6h) : Systèmes formels pour les logiques modale et temporelle","Leçon III (9h) : Logique PLTL, automates de Büchi, composition d'automates et vérification sémantique","Leçon IV (9h) : Logique floue — fuzzification et défuzzification"],
     examForm:'35% contrôle continu · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Leila Ben Ayed',responsible:'Leila Ben Ayed',
@@ -1052,7 +1052,7 @@ export const MODULES = [
   {code:'AI.5.5',title:'Robotique et Soft Computing',semester:5,credits:2,subject:'AI',language:'French',type:'Track',
     hours:{total:40,lecture:18,lab:12,selfStudy:10},
     prerequisites:['MAT.1.1 Probabilités et Statistiques','MAT.1.2'],
-    objectives:["Présenter les techniques intelligentes de soft computing permettant le contrôle efficace de systèmes automatisés, en particulier les robots mobiles autonomes, et les rendre accessibles aux étudiants pour une mise en œuvre pratique","C2. Mettre en place une veille technologique pour sélectionner les outils et méthodologies pertinents","C3. Analyser des architectures de SI complexes en tenant compte de contraintes non techniques (sociétales, sécuritaires, environnementales, économiques)","C5. Spécifier un système d'information dans toutes ses dimensions","C9. Prendre des décisions complexes à partir d'informations incomplètes ou limitées"],
+    objectives:["Présenter les techniques intelligentes de soft computing permettant le contrôle efficace de systèmes automatisés, en particulier les robots mobiles autonomes, et les rendre accessibles aux étudiants pour une mise en œuvre pratique"],
     content:["I. Introduction à la robotique et au soft computing (1,5h)","II. Commandes classiques en robotique (3h) — contrôle de position, de vitesse, limites des méthodes classiques","III. Commande floue (10,5h) — opérateurs, règles, inférence, processus de commande floue","IV. Commande neuronale (9h) — perceptron déterministe et probabiliste, perceptron multicouche et rétropropagation, implémentation","V. Optimisation de trajectoire (6h) — algorithme génétique, application en robotique"],
     examForm:'100% examen final',passMark:'10/20',
     teachingTeam:'Moncef Tagina',responsible:'Moncef Tagina',
@@ -1061,7 +1061,7 @@ export const MODULES = [
   {code:'AI.5.6',title:'Représentation des Connaissances et Raisonnement',semester:5,credits:1,subject:'AI',language:'French',type:'Track',
     hours:{total:30,lecture:9,lab:6,selfStudy:15},
     prerequisites:['AI.1.1 Logique Formelle','SE.3.2 Analyse & Conception Orientées Objet'],
-    objectives:["Exposer la nature diverse des connaissances, les problèmes de leur représentation dans un contexte incomplet et incertain, les formalismes de représentation existants et les moyens d'interprétation permettant la mise en œuvre du raisonnement","C1. Maîtriser en profondeur les sciences de base","C2. Mettre en place une veille technologique","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C9. Prendre des décisions complexes à partir d'informations incomplètes ou limitées"],
+    objectives:["Exposer la nature diverse des connaissances, les problèmes de leur représentation dans un contexte incomplet et incertain, les formalismes de représentation existants et les moyens d'interprétation permettant la mise en œuvre du raisonnement"],
     content:["Chapitre 1 (3h) : Introduction — histoire, approches et définitions de l'IA, définition et types de connaissances","Chapitre 2 (6h) : Représentations relationnelles — logique classique, logique non-classique, règles de production","Chapitre 3 (6h) : Représentations à base d'objets — réseaux sémantiques, frames, ontologies, cas pratique du domaine biomédical"],
     examForm:'35% contrôle continu · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Anja Habacha',responsible:'Anja Habacha',
@@ -1115,7 +1115,7 @@ export const MODULES = [
   {code:'AI.5.12',title:'Introduction au Deep Learning',semester:5,credits:1,subject:'AI',language:'French',type:'Track',
     hours:{total:21,lecture:15,lab:0,selfStudy:6},
     prerequisites:['MAT.1.1 Probabilités et Statistiques','AI.3.1 IA & Apprentissage Automatique','Compétence en Python'],
-    objectives:["Comprendre la terminologie générique du machine learning","Comprendre la motivation et le fonctionnement des types courants de réseaux de neurones profonds","Comprendre les choix et les limites d'un modèle pour un contexte donné","Appliquer les techniques de deep learning à des problèmes pratiques","Évaluer de manière critique la performance des modèles et interpréter les résultats","C1. Maîtriser en profondeur les sciences de base","C9. Prendre des décisions complexes à partir d'informations incomplètes ou limitées"],
+    objectives:["Comprendre la terminologie générique du machine learning","Comprendre la motivation et le fonctionnement des types courants de réseaux de neurones profonds","Comprendre les choix et les limites d'un modèle pour un contexte donné","Appliquer les techniques de deep learning à des problèmes pratiques","Évaluer de manière critique la performance des modèles et interpréter les résultats"],
     content:["Introduction","Chapitre 1 : Mathématiques appliquées et bases du machine learning — algèbre linéaire, probabilités et théorie de l'information, calcul numérique, bases du machine learning","Chapitre 2 : Réseaux profonds pratiques modernes — réseaux feedforward profonds, régularisation, optimisation, réseaux convolutifs, modélisation de séquences (RNN), méthodologie pratique, applications","Chapitre 3 : Recherche en deep learning — autoencodeurs, modèles génératifs profonds","Idées de projets : routage intelligent, sécurité domestique intelligente, gestion intelligente de l'énergie"],
     examForm:'100% évaluation de projet',passMark:'10/20',
     teachingTeam:'Rym Besrour',responsible:'Rym Besrour',
@@ -1134,7 +1134,7 @@ export const MODULES = [
   {code:'DOS.5.1',title:'Cloud Computing',semester:5,credits:2,subject:'DOS',language:'French',type:'Track',
     hours:{total:45,lecture:24,lab:6,selfStudy:15},
     prerequisites:['OS.2.1 Introduction aux Systèmes d\'Exploitation et Environnement Unix','NET.3.1 Réseaux Locaux','NET.4.1 Réseaux Informatiques','SE.4.2 Architecture Logicielle','SEC.4.1 Cybersécurité et Cryptographie'],
-    objectives:["Introduire le cloud computing comme mode de fourniture de ressources informatiques","Exposer les architectures logicielles modernes et les kits de développement formant les frameworks cloud","Comprendre la conception, le développement, le provisionnement et la gestion d'applications cloud","Porter une attention particulière à la sécurité des applications cloud et aux stratégies de déploiement","C2. Mettre en place une veille technologique","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions","C6. Évaluer la vulnérabilité d'un SI et mettre en œuvre des solutions de protection","C7. Identifier, localiser et collecter les données nécessaires à la recherche et au développement","C9. Prendre des décisions complexes à partir d'informations incomplètes ou limitées","C10. Piloter un projet informatique"],
+    objectives:["Introduire le cloud computing comme mode de fourniture de ressources informatiques","Exposer les architectures logicielles modernes et les kits de développement formant les frameworks cloud","Comprendre la conception, le développement, le provisionnement et la gestion d'applications cloud","Porter une attention particulière à la sécurité des applications cloud et aux stratégies de déploiement"],
     content:["Unité 1 : Concepts principaux du cloud computing — introduction, historique, caractéristiques, modèle économique, avantages et limites","Unité 2 : Centres de données — définitions, composants, green computing, sécurité, haute disponibilité","Unité 3 : Services et modèles de déploiement cloud — IaaS, PaaS, SaaS, FaaS, cloud public/privé/hybride/communautaire, approche DevOps","Unité 4 : Virtualisation — définitions, architectures, solutions, virtualisation de serveurs, conteneurs, virtualisation du stockage","Unité 5 : Conteneurisation et orchestration"],
     examForm:'20% TP · 80% examen écrit',passMark:'10/20',
     teachingTeam:'Mehrez Essafi',responsible:'Mehrez Essafi',
@@ -1143,7 +1143,7 @@ export const MODULES = [
   {code:'DOS.5.2',title:'Blockchain',semester:5,credits:1,subject:'DOS',language:'French',type:'Track',
     hours:{total:25,lecture:12,lab:3,selfStudy:10},
     prerequisites:['SEC.4.1 Cybersécurité et Cryptographie'],
-    objectives:["Expliquer la blockchain et son application dans différents secteurs","Décrire les principes clés de la technologie blockchain et sa valeur pour les entreprises","Expliquer le rôle d'un registre partagé et les concepts fondamentaux d'Hyperledger Fabric","Décrire les éléments d'un réseau métier, le rôle des canaux et le maintien de l'état global","Développer, tester, déboguer et déployer du chaincode avec IBM Blockchain Platform Extension pour VS Code","Appliquer les concepts de sécurité blockchain, de contrôle d'identité et d'accès, et de confidentialité des données","Écrire des applications interagissant avec un réseau blockchain","C6. Évaluer la vulnérabilité d'un SI et mettre en œuvre des solutions de protection","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Expliquer la blockchain et son application dans différents secteurs","Décrire les principes clés de la technologie blockchain et sa valeur pour les entreprises","Expliquer le rôle d'un registre partagé et les concepts fondamentaux d'Hyperledger Fabric","Décrire les éléments d'un réseau métier, le rôle des canaux et le maintien de l'état global","Développer, tester, déboguer et déployer du chaincode avec IBM Blockchain Platform Extension pour VS Code","Appliquer les concepts de sécurité blockchain, de contrôle d'identité et d'accès, et de confidentialité des données","Écrire des applications interagissant avec un réseau blockchain"],
     content:["Unité 1 : Panorama de la blockchain","Unité 2 : Introduction au développement de chaincode","Unité 3 : Méthodes de requêtage du chaincode","Unité 4 : Bonnes pratiques d'écriture, de test et de débogage du chaincode","Unité 5 : Contrôle d'identité et d'accès","Unité 6 : Confidentialité des données","Unité 7 : Bases du développement d'applications","Unité 8 : Intégration blockchain et développement avancé d'applications"],
     examForm:'100% examen écrit',passMark:'10/20',
     teachingTeam:'Mohamed Houcine Hdhili · Hanen Idoudi',responsible:'Mohamed Houcine Hdhili',
@@ -1161,7 +1161,7 @@ export const MODULES = [
   {code:'DOS.5.4',title:'Architectures Avancées et Programmation Parallèle',semester:5,credits:2,subject:'DOS',language:'French',type:'Track',
     hours:{total:45,lecture:21,lab:9,selfStudy:15},
     prerequisites:['EHA.2.1 Architecture & Microprocesseurs','EHA.3.1 Méthodologie de Conception de Processeurs','AP.1.3 C Avancé','AP.2.1 Programmation Orientée Objet','OS.3.03 Systèmes d\'Exploitation et Programmation Concurrente'],
-    objectives:["Présenter les architectures parallèles (avantages et inconvénients)","Évaluer et analyser les performances de différentes architectures (parallèles et optimisées)","Apprendre la programmation parallèle et écrire des programmes parallèles","C5. Spécifier un système d'information dans toutes ses dimensions","C8. Maîtriser les bonnes pratiques de développement logiciel et les normes applicables","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Présenter les architectures parallèles (avantages et inconvénients)","Évaluer et analyser les performances de différentes architectures (parallèles et optimisées)","Apprendre la programmation parallèle et écrire des programmes parallèles"],
     content:["Introduction générale — limites des architectures classiques, définition du parallélisme, caractéristiques des architectures parallèles","Chapitre I : Classification des machines parallèles — classification de Flynn (SISD, SIMD, MIMD), classification de Raina","Chapitre II : Performance des architectures — importance du calcul de performance, loi d'Amdahl / loi de Gustafson, unités de mesure, norme SPEC","Chapitre III : Cohérence de cache pour architectures parallèles — mémoire cache, types de correspondance, protocoles de cohérence (snoopy bus, protocoles à répertoire)","Chapitre IV : Concepts de base de la programmation parallèle — partage de données, concurrence et synchronisation","Chapitre V : Programmation avec OpenMP — pragmas OpenMP, variables privées vs partagées, tâches parallèles, travaux pratiques"],
     examForm:'35% contrôle continu · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Lobna Kriaa · Chadlia Jerad',responsible:'Lobna Kriaa',
@@ -1179,7 +1179,7 @@ export const MODULES = [
   {code:'DOS.5.6',title:'Systèmes et Applications Distribués',semester:5,credits:2,subject:'DOS',language:'English',type:'Track',
     hours:{total:40,lecture:20,lab:10,selfStudy:10},
     prerequisites:['OS.3.03 Systèmes d\'Exploitation et Programmation Concurrente','AP.2.1 Programmation Orientée Objet'],
-    objectives:["Maîtriser les concepts fondamentaux des systèmes distribués, notamment la programmation client-serveur et les services sur middlewares standards (communications synchrones, asynchrones, transitoires et persistantes) avec les technologies courantes et récentes","C7. Identifier, localiser et collecter les données nécessaires à la recherche et au développement de nouveaux logiciels ou services","C8. Maîtriser les bonnes pratiques de programmation client/serveur avec middleware"],
+    objectives:["Maîtriser les concepts fondamentaux des systèmes distribués, notamment la programmation client-serveur et les services sur middlewares standards (communications synchrones, asynchrones, transitoires et persistantes) avec les technologies courantes et récentes"],
     content:["Chapitre 1 : Programmation client-serveur (2 sem.) — concepts de base des systèmes distribués, architectures (C/S requête-réponse, maître-esclaves, P2P), modèle client-serveur, RPC (IDL, stubs, marshalling, binding, portmapper, XDR), TP : programmation synchrone en C sous Linux","Chapitre 2 : Programmation gRPC (1,5 sem.) — sérialisation de données et Protocol Buffers, fichiers .proto, principes gRPC, compilateur protoc, application Hello World client-serveur en plusieurs langages","Chapitre 3 : Middleware orienté message (MOM) (1 sem.) — communication synchrone/asynchrone, transitoire/persistante, point-à-point, files de messages, publish-subscribe, JMS, mini-projet avec OpenMQ","Chapitre 4 : Systèmes pair-à-pair (P2P) (2 sem.) — motivations (Skype, Spotify, BitTorrent), overlays réseau, types de P2P, table de hachage distribuée (DHT sur Chord)","Chapitre 5 : Systèmes de fichiers distribués (2,5 sem.) — services et protocoles, NFS, HDFS, Google File System (architecture maître-esclave, chunks), Hadoop (Namenode, Datanodes, JobTracker), mini-projet WordCount avec Hadoop MapReduce"],
     examForm:'40% travail continu · 60% examen final',passMark:'10/20',
     teachingTeam:'Faïza Najjar',responsible:'Faïza Najjar',
@@ -1188,7 +1188,7 @@ export const MODULES = [
   {code:'DOS.5.7',title:'Linux Embarqué',semester:5,credits:2,subject:'DOS',language:'French',type:'Track',
     hours:{total:40,lecture:21,lab:9,selfStudy:10},
     prerequisites:['OS.2.1 Introduction aux Systèmes d\'Exploitation et Environnement Unix','EHA.4.1 Introduction aux Systèmes Embarqués','EHA.5.2 Systèmes à Base de Microcontrôleurs'],
-    objectives:["Comprendre la conception d'un système d'exploitation embarqué","Installer une chaîne de compilation croisée","Utiliser Buildroot","Configurer une chaîne de compilation croisée","Générer une image pour un chipset spécifique avec Buildroot","C5. Spécifier un système d'information dans toutes ses dimensions","C7. Identifier, localiser et collecter les données nécessaires à la recherche et au développement","C8. Maîtriser les bonnes pratiques de développement logiciel et les normes applicables","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Comprendre la conception d'un système d'exploitation embarqué","Installer une chaîne de compilation croisée","Utiliser Buildroot","Configurer une chaîne de compilation croisée","Générer une image pour un chipset spécifique avec Buildroot"],
     content:["Introduction — présentation de Linux OS, définition des systèmes embarqués","Chapitre 1 : Licence Linux et architecture GNU/Linux — bootloader, noyau, rootfs","Chapitre 2 : Intégration de modules dans le noyau Linux","Chapitre 3 : Gestion du système de fichiers","Chapitre 4 : Processus et multithreading","Chapitre 5 : Buildroot — installation d'une chaîne de compilation croisée, configuration, génération d'image pour un chipset spécifique"],
     examForm:'35% contrôle continu · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Lobna Kriaa · Lassaad Jemai (partenaire industriel ACTIA)',responsible:'Lobna Kriaa',
@@ -1197,7 +1197,7 @@ export const MODULES = [
   {code:'DOS.5.8',title:'Introduction au Cloud Computing',semester:5,credits:1,subject:'DOS',language:'French',type:'Track',
     hours:{total:25,lecture:12,lab:3,selfStudy:10},
     prerequisites:['OS.2.1 Introduction aux Systèmes d\'Exploitation et Environnement Unix','NET.3.1 Réseaux Locaux','NET.4.1 Réseaux Informatiques','SE.4.2 Architecture Logicielle','SEC.4.1 Cybersécurité et Cryptographie'],
-    objectives:["Introduire le cloud computing comme mode de fourniture de ressources informatiques","Exposer les architectures logicielles modernes et les kits de développement qui forment les frameworks cloud","Comprendre la conception, le développement, le provisionnement et la gestion d'applications cloud","Porter une attention particulière à la sécurité des applications cloud et aux stratégies de déploiement disponibles","C2. Mettre en place une veille technologique","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions","C6. Évaluer la vulnérabilité d'un SI et mettre en œuvre des solutions de protection","C7. Identifier, localiser et collecter les données nécessaires à la recherche et au développement","C9. Prendre des décisions complexes à partir d'informations incomplètes ou limitées","C10. Piloter un projet informatique en maîtrisant la gestion des personnes, l'analyse des risques, le respect du budget et la conduite du changement"],
+    objectives:["Introduire le cloud computing comme mode de fourniture de ressources informatiques","Exposer les architectures logicielles modernes et les kits de développement qui forment les frameworks cloud","Comprendre la conception, le développement, le provisionnement et la gestion d'applications cloud","Porter une attention particulière à la sécurité des applications cloud et aux stratégies de déploiement disponibles"],
     content:["Unité 1 : Concepts principaux du cloud computing — introduction, historique, caractéristiques, modèle économique, avantages et limites","Unité 2 : Centres de données — définitions, composants principaux, green computing, sécurité, haute disponibilité","Unité 3 : Services et modèles de déploiement cloud — IaaS, PaaS, SaaS, FaaS, cloud public/privé/hybride/communautaire, approche DevOps","Unité 4 : Virtualisation — définitions, architectures, solutions, virtualisation de serveurs, conteneurs, virtualisation du stockage","Unité 5 : IA et cloud computing — services cloud de machine learning, plateformes cloud d'IA"],
     examForm:'20% TP · 80% examen écrit',passMark:'10/20',
     teachingTeam:'Mehrez Essafi',responsible:'Mehrez Essafi',
@@ -1206,7 +1206,7 @@ export const MODULES = [
   {code:'DOS.5.9',title:'Développement Logiciel pour la Robotique',semester:5,credits:1,subject:'DOS',language:'French',type:'Track',
     hours:{total:20,lecture:0,lab:15,selfStudy:5},
     prerequisites:['Systèmes d\'Exploitation Temps Réel','EHA.5.2 Applications et Systèmes Distribués'],
-    objectives:["Maîtriser le Robot Operating System (ROS)","Traiter des modèles et simulations pour robots (environnement Gazebo)","Travailler en équipe, gérer le temps, prendre systématiquement des initiatives créatives","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions","C7. Identifier, localiser et collecter les données nécessaires à la recherche et au développement"],
+    objectives:["Maîtriser le Robot Operating System (ROS)","Traiter des modèles et simulations pour robots (environnement Gazebo)","Travailler en équipe, gérer le temps, prendre systématiquement des initiatives créatives"],
     content:["Cours : Introduction — complexité des systèmes robotiques, introduction à ROS-1, modèles et simulation, introduction à ROS-2, démonstrations de projets existants","Projet (4h/semaine minimum, groupes de 2 à 4 étudiants) : choix d'une application robotique dans un domaine (e-santé, e-agriculture, Industrie 4.0…), modélisation et simulation, implémentation possible sur circuit matériel (Raspberry Pi, etc.)"],
     examForm:'100% évaluation de projet',passMark:'10/20',
     teachingTeam:'Mohamed Karim Bouafoura',responsible:'Mohamed Karim Bouafoura',
@@ -1215,7 +1215,7 @@ export const MODULES = [
   {code:'DOS.5.11',title:'Middlewares et Frameworks IoT',semester:5,credits:1.5,subject:'DOS',language:'French',type:'Track',
     hours:{total:22,lecture:10,lab:5,selfStudy:7},
     prerequisites:['OS.2.1 Introduction aux Systèmes d\'Exploitation et Environnement Unix','Systèmes d\'exploitation et programmation concurrente','Réseaux et langage C/Java','Introduction aux systèmes et applications distribués'],
-    objectives:["Acquérir et utiliser des connaissances sur les systèmes distribués","Découvrir les principaux concepts de middleware et distinguer les différents types","Apprendre à construire une application distribuée avec différentes technologies récentes","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions","C8. Maîtriser les bonnes pratiques de développement logiciel et les normes applicables"],
+    objectives:["Acquérir et utiliser des connaissances sur les systèmes distribués","Découvrir les principaux concepts de middleware et distinguer les différents types","Apprendre à construire une application distribuée avec différentes technologies récentes"],
     content:["1. Introduction générale aux middlewares et applications distribuées","2. Désignation et liaison dans les systèmes distribués — DNS, LDAP, JNDI","3. Architectures de services web — SOAP, REST","4. Middleware orienté événement — MQTT","5. Middleware pour environnements mobiles, ubiquitaires et pervasifs"],
     examForm:'30% contrôle continu (TP) · 70% examen écrit',passMark:'10/20',
     teachingTeam:'Faïza Najjar · Chiraz Houaidia',responsible:'Faïza Najjar',
@@ -1225,7 +1225,7 @@ export const MODULES = [
   {code:'ISA.5.1',title:'Big Data',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',
     hours:{total:45,lecture:20,lab:10,selfStudy:15},
     prerequisites:['DAT.1.1 Bases de Données et SGBD'],
-    objectives:["Maîtriser les briques de base de la plateforme Hadoop (HDFS, MapReduce) et son écosystème","Maîtriser l'approche MapReduce pour la résolution de problèmes","Comprendre les limites du modèle relationnel et les différents modèles de bases NoSQL","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C7. Identifier, localiser et collecter les données nécessaires à la recherche et au développement","C8. Maîtriser les bonnes pratiques de développement logiciel et les normes applicables"],
+    objectives:["Maîtriser les briques de base de la plateforme Hadoop (HDFS, MapReduce) et son écosystème","Maîtriser l'approche MapReduce pour la résolution de problèmes","Comprendre les limites du modèle relationnel et les différents modèles de bases NoSQL"],
     content:["Chapitre I : Introduction au Big Data — motivations, définition, les 3V, bénéfices et défis, étapes d'un projet Big Data","Chapitre II : Hadoop — présentation, historique, écosystème, HDFS, MapReduce V1/V2, design patterns","Chapitre III : Outils de traitement avancés — Pig, Hive, Apache Spark","Chapitre IV : Bases de données NoSQL — forces et limites des SGBDR, étude de Cassandra et MongoDB","Chapitre V : Architectures Big Data — architecture Lambda, architecture Kappa, étude de cas","Travaux pratiques : installation de l'environnement, HDFS, MapReduce, Pig et Hive, Spark, HBase"],
     examForm:'35% contrôle continu (TP, présentations) · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Raoudha Chebil',responsible:'Raoudha Chebil',
@@ -1243,7 +1243,7 @@ export const MODULES = [
   {code:'ISA.5.3',title:'Systèmes Interactifs d\'Aide à la Décision',semester:5,credits:2,subject:'ISA',language:'French',type:'Track',
     hours:{total:40,lecture:30,lab:0,selfStudy:15},
     prerequisites:['MAT.1.1 Probabilités et Statistiques','MAT.1.2','DAT.2.1'],
-    objectives:["Comprendre le processus de décision et les composantes d'un système d'aide à la décision (SIAD), ainsi que les différents modèles (multicritère, en risque ou en incertitude), pour les appliquer selon une situation donnée","C1. Maîtriser en profondeur les sciences de base","C2. Mettre en place une veille technologique","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C9. Prendre des décisions complexes à partir d'informations incomplètes ou limitées"],
+    objectives:["Comprendre le processus de décision et les composantes d'un système d'aide à la décision (SIAD), ainsi que les différents modèles (multicritère, en risque ou en incertitude), pour les appliquer selon une situation donnée"],
     content:["I. Introduction à la théorie de la décision (3h)","II. Qu'est-ce qu'un système d'aide à la décision ? (3h) — SIAD vs système d'information, classifications, décision de groupe, structures et architectures","III. Décision multicritère (6h) — optimalité de Pareto, AHP, ANP","IV. Décision en incertitude (9h) — probabilité objective vs subjective, loterie et utilité, critères Maximax, Wald, Hurwicz, Laplace, Savage","V. Décision en risque (9h) — arbres de décision de Raiffa, diagrammes d'influence"],
     examForm:'100% examen final',passMark:'10/20',
     teachingTeam:'Imen Boukhris',responsible:'Imen Boukhris',
@@ -1279,7 +1279,7 @@ export const MODULES = [
   {code:'ISA.5.7',title:'Bases de Données Distribuées',semester:5,credits:1.5,subject:'ISA',language:'French',type:'Track',
     hours:{total:25,lecture:15,lab:0,selfStudy:10},
     prerequisites:['DAT.2.1','DAT.2.2','NET.3.1','NET.3.2','NET.4.1'],
-    objectives:["Aborder les problématiques fondamentales des grands systèmes de bases de données distribuées, motivées par la mise en réseau et la distribution des processeurs et du contrôle — théorie, conception, spécification, implémentation et performance des grands systèmes","C1. Maîtriser en profondeur les sciences de base","C2. Mettre en place une veille technologique","C8. Maîtriser les bonnes pratiques de développement logiciel et les normes applicables","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Aborder les problématiques fondamentales des grands systèmes de bases de données distribuées, motivées par la mise en réseau et la distribution des processeurs et du contrôle — théorie, conception, spécification, implémentation et performance des grands systèmes"],
     content:["I. Introduction","II. Conception et implémentation des bases de données réparties","III. Transactions et accès concurrents","IV. Optimisation des requêtes distribuées"],
     examForm:'100% examen écrit',passMark:'10/20',
     teachingTeam:'Raoudha Khcherif',responsible:'Raoudha Khcherif',
@@ -1324,7 +1324,7 @@ export const MODULES = [
   {code:'ISA.5.12',title:'Introduction à la Fouille de Données',semester:5,credits:1,subject:'ISA',language:'French',type:'Track',
     hours:{total:21,lecture:15,lab:0,selfStudy:6},
     prerequisites:['MAT.1.1 Probabilités et Statistiques','AI.3.1 IA & Apprentissage Automatique','Compétence en Python'],
-    objectives:["Introduire les concepts et techniques de base de la fouille de données","Développer des compétences d'utilisation de logiciels récents de fouille de données pour résoudre des problèmes pratiques","Acquérir une expérience de travail et de recherche indépendants","C1. Maîtriser en profondeur les sciences de base","C9. Prendre des décisions complexes à partir d'informations incomplètes ou limitées"],
+    objectives:["Introduire les concepts et techniques de base de la fouille de données","Développer des compétences d'utilisation de logiciels récents de fouille de données pour résoudre des problèmes pratiques","Acquérir une expérience de travail et de recherche indépendants"],
     content:["Chapitre 1 : Introduction à la fouille de données — définition, technologies connexes (machine learning, OLAP, statistique), objectifs, étapes du processus, techniques, méthodes de représentation des connaissances, applications","Chapitre 2 : Prétraitement des données — nettoyage, transformation, réduction, discrétisation et hiérarchies de concepts","Chapitre 3 : Règles d'association — motivation et terminologie, exemple (données météo), ensembles d'articles, génération efficace de règles, analyse de corrélation","Chapitre 4 : Clustering — enjeux de base, premier système de clustering conceptuel (Cluster/2), méthodes de partitionnement (k-means, EM), méthodes hiérarchiques","Idées de projets : fouille de texte, approche bayésienne de classification de texte, fouille du Web"],
     examForm:'100% examen de TP',passMark:'10/20',
     teachingTeam:'Rym Besrour',responsible:'Rym Besrour',
@@ -1423,9 +1423,9 @@ export const MODULES = [
     verified:true},
   // FIN
   {code:'FIN.5.1',title:'Finance Internationale',semester:5,credits:2.5,subject:'FIN',language:'French',type:'Track',
-    hours:{total:65,lecture:30,lab:0,selfStudy:20},
+    hours:{total:65,lecture:30,lab:15,selfStudy:20},
     prerequisites:['Concepts de marchés financiers'],
-    objectives:["Acquérir une bonne connaissance du fonctionnement du système monétaire international","Comprendre le fonctionnement du marché des changes au comptant et à terme","Comprendre le fonctionnement des opérations sur les différents compartiments du marché des changes","Faire connaître les différents types de risques de change et les instruments permettant de les couvrir","C11. Adapter sa communication selon l'audience et le contexte, en maîtrisant au moins 3 langues","C12. Développer des compétences de leadership et d'entrepreneuriat","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Acquérir une bonne connaissance du fonctionnement du système monétaire international","Comprendre le fonctionnement du marché des changes au comptant et à terme","Comprendre le fonctionnement des opérations sur les différents compartiments du marché des changes","Faire connaître les différents types de risques de change et les instruments permettant de les couvrir"],
     content:["I. Introduction au marché des changes — histoire du système monétaire international, régime de change en Tunisie, organisation et participants du marché des changes, supports utilisés, opérations de change","II. Le marché des changes au comptant — définition, méthodes de cotation, calcul des cours croisés, arbitrage géographique et triangulaire","III. Le marché des changes à terme — définition, report/déport, cotations à terme, mécanisme de formation des cours à terme, calcul du cours à terme, swaps de change","IV. Couverture du risque de change par les options de change — marchés OTC et organisés, calls/puts, déterminants des options de change, principe de couverture"],
     examForm:'35% contrôle continu · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Imen Snoussi',responsible:'Imen Snoussi',
@@ -1434,16 +1434,16 @@ export const MODULES = [
   {code:'FIN.5.2',title:'Modélisation du Risque et Gestion Dynamique du Risque Financier',semester:5,credits:2.5,subject:'FIN',language:'French',type:'Track',
     hours:{total:40,lecture:21,lab:9,selfStudy:10},
     prerequisites:['Gestion de portefeuille','Marché financier'],
-    objectives:["Comprendre le concept de risque financier et fournir les méthodes de mesure et de gestion de ce risque","Étudier le risque de marché (risque actions et risque de taux) — méthodes classiques (écart-type) et modernes (VaR)","Présenter les instruments de couverture du risque de marché : forwards, futures, options et swaps","Acquérir les outils nécessaires pour identifier, mesurer et couvrir les risques financiers","C11. Adapter sa communication selon l'audience et le contexte","C12. Développer des compétences de leadership et d'entrepreneuriat","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Comprendre le concept de risque financier et fournir les méthodes de mesure et de gestion de ce risque","Étudier le risque de marché (risque actions et risque de taux) — méthodes classiques (écart-type) et modernes (VaR)","Présenter les instruments de couverture du risque de marché : forwards, futures, options et swaps","Acquérir les outils nécessaires pour identifier, mesurer et couvrir les risques financiers"],
     content:["Chapitre 1 : Évaluation du risque financier — mesures du risque des actifs financiers ; la Value at Risk (VaR) — VaR historique, paramétrique (position/portefeuille actions, position de change, position obligataire, VaR agrégée, VaR marginale/incrémentale/individuelle), VaR par simulation Monte Carlo, VaR d'une position d'option (delta normal, delta gamma), expected shortfall, VaR stressée","Chapitre 2 : Assurance de portefeuille — définition des options (call, put), positions non couvertes, stratégies stop-loss, assurance de portefeuille à base d'options (put, call, méthode du coussin)","Chapitre 4 : Gestion du risque de taux d'intérêt — définition, mesure du risque (analyse de gap), couverture (FRA, swap de taux d'intérêt, cap, floor, collar)"],
     examForm:'35% contrôle continu · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Mouna Ben Salah',responsible:'Mouna Ben Salah',
     readingList:['Bellalah, M., Simon, Y., Options, contrats à terme et gestion des risques, Economica, 2000','Bellalah, M., Gestion des risques et produits dérivés classiques et exotiques, Dunod, 2003','Esch, L., Kieffer, R., Lopez, T., Asset and Risk Management, De Boeck et Larcier, 2003','Hull, J., Options, Futures and Other Derivatives, 3e édition, Prentice Hall, 1997','Roncalli, T., La Gestion des Risques Financiers, Economica, 2004','Simon, Y., Bellalah, M., Options, contrats à terme et gestion des risques, 2e édition, Economica, 2003','Simon, Y., Lautier, D., Morel, C., Finance internationale, 10e édition, Economica, 2009','Vernimmen, P., Finance d\'Entreprise, Dalloz, 2002'],
     verified:true},
   {code:'FIN.5.3',title:'Gestion Bancaire',semester:5,credits:2.5,subject:'FIN',language:'French',type:'Track',
-    hours:{total:65,lecture:30,lab:0,selfStudy:20},
+    hours:{total:65,lecture:30,lab:15,selfStudy:20},
     prerequisites:['Analyse financière'],
-    objectives:["Introduire les différents types de banques et leurs activités respectives","Identifier les risques rencontrés dans l'activité bancaire (taux d'intérêt, marché, crédit, opérationnel)","Comprendre les mécanismes de gestion du risque de crédit sous l'effet du durcissement réglementaire et des exigences d'allocation de capital (accords de Bâle I, II, III)","C11. Adapter sa communication selon l'audience et le contexte","C12. Développer des compétences de leadership et d'entrepreneuriat","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Introduire les différents types de banques et leurs activités respectives","Identifier les risques rencontrés dans l'activité bancaire (taux d'intérêt, marché, crédit, opérationnel)","Comprendre les mécanismes de gestion du risque de crédit sous l'effet du durcissement réglementaire et des exigences d'allocation de capital (accords de Bâle I, II, III)"],
     content:["Chapitre 1 : Organisation et fonctionnement de l'établissement de crédit — le système bancaire tunisien, définition et mission, règles de constitution, trois domaines d'activité bancaire, architecture du secteur bancaire tunisien","Chapitre 2 : Risques bancaires — typologies : risque de crédit, risque de marché, risque opérationnel, risque de liquidité, risque de taux d'intérêt global","Chapitre 3 : Cadre réglementaire — histoire et rôle du Comité de Bâle, accord de Bâle I, les trois piliers de Bâle II (exigence minimale de capital, processus de surveillance prudentielle, discipline de marché), apports de Bâle III","Chapitre 4 : Gestion du risque de crédit — évaluation classique (analyse financière) et moderne (credit scoring, rating, RAROC, Credit VaR) ; gestion — instruments traditionnels (gestion réglementaire, garanties, provisionnement) et nouvelles techniques (titrisation, dérivés de crédit : CDS, CLN, TRS)"],
     examForm:'35% contrôle continu · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Mouna Ben Salah',responsible:'Mouna Ben Salah',
@@ -1461,7 +1461,7 @@ export const MODULES = [
   {code:'FIN.5.5',title:'Finance Quantitative',semester:5,credits:2.5,subject:'FIN',language:'French',type:'Track',
     hours:{total:20,lecture:10,lab:5,selfStudy:5},
     prerequisites:['Calcul stochastique','Équations différentielles','Gestion de portefeuille'],
-    objectives:["Introduire les méthodes numériques les plus utilisées en finance, principalement pour la valorisation des produits dérivés","C11. Adapter sa communication selon l'audience et le contexte","C12. Développer des compétences de leadership et d'entrepreneuriat","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Introduire les méthodes numériques les plus utilisées en finance, principalement pour la valorisation des produits dérivés"],
     content:["Chapitre 1 : Modèle de pricing d'options à temps discret — modèle de Cox, Ross et Rubinstein (1985) : modèle binomial à une période (calls, puts), extension à deux périodes, généralisation à n périodes, couverture dynamique, prise en compte des dividendes","Chapitre 2 : Pricing d'options en temps continu — modèle de Black-Scholes : hypothèses, lemme d'Itô, formule de valorisation de Black-Scholes ; les lettres grecques (delta, gamma, thêta, véga, rhô) ; couverture dynamique (delta, delta-gamma, delta-véga, delta-gamma-véga hedging)"],
     examForm:'100% examen écrit',passMark:'10/20',
     teachingTeam:'Mouna Ben Salah',responsible:'Mouna Ben Salah',
@@ -1480,7 +1480,7 @@ export const MODULES = [
   {code:'MAT.5.1',title:'Optimisation Combinatoire',semester:5,credits:2,subject:'MAT',language:'French',type:'Track',
     hours:{total:45,lecture:20,lab:10,selfStudy:15},
     prerequisites:['AP.1.2 Algorithmique et Structures de Données','MAT.2.1 Théorie des Graphes'],
-    objectives:["Comprendre que l'optimisation combinatoire consiste à résoudre des problèmes complexes en trouvant une solution optimale dans un espace de recherche fini mais large","Étudier des algorithmes efficaces pour explorer cet espace de solutions","Catégoriser les problèmes en classes de complexité","Modéliser et résoudre des problèmes polynomiaux, NP-complets et NP-difficiles","Appliquer des méthodes exactes (Branch and Bound) et approchées (TS, RS, ACO, GA) pour trouver des solutions en temps raisonnable","Implémenter des algorithmes et expérimenter sur des instances de référence","C1. Maîtriser en profondeur les sciences de base","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C9. Prendre des décisions complexes à partir d'informations incomplètes ou limitées","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Comprendre que l'optimisation combinatoire consiste à résoudre des problèmes complexes en trouvant une solution optimale dans un espace de recherche fini mais large","Étudier des algorithmes efficaces pour explorer cet espace de solutions","Catégoriser les problèmes en classes de complexité","Modéliser et résoudre des problèmes polynomiaux, NP-complets et NP-difficiles","Appliquer des méthodes exactes (Branch and Bound) et approchées (TS, RS, ACO, GA) pour trouver des solutions en temps raisonnable","Implémenter des algorithmes et expérimenter sur des instances de référence"],
     content:["Chapitre 1 (4h) : Introduction à l'optimisation combinatoire — définitions, applications, modélisation, complexité","Chapitre 2 (4h) : Méthodes de résolution — méthodes exactes, Branch & Bound, heuristiques et métaheuristiques","Chapitre 3 (4h) : Méthodes constructives — algorithmes gloutons (Knapsack, ordonnancement, TSP, Bin Packing), évaluation des heuristiques","Chapitre 4 (6h) : Méthodes de recherche locale — descente de gradient, voisinages, recuit simulé, recherche tabou","Chapitre 5 (6h) : Approches évolutionnaires — choix d'une métaheuristique, optimisation par colonies de fourmis, algorithmes génétiques","Chapitre 6 (3h) : Approches hybrides — avantages et exemples","Chapitre 7 (3h) : Optimisation multi-objectif — modélisation, relation de dominance, optimalité de Pareto, NSGA-II"],
     examForm:'35% contrôle continu · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Olfa Belkahla Driss',responsible:'Olfa Belkahla Driss',
@@ -1524,9 +1524,9 @@ export const MODULES = [
     verified:true},
   // SEC S5
   {code:'SEC.5.1',title:'Diagnostic, Sûreté et Fiabilité des Systèmes Embarqués',semester:5,credits:2,subject:'SEC',language:'French',type:'Track',
-    hours:{total:50,lecture:14,lab:10,selfStudy:20},
+    hours:{total:50,lecture:14,lab:16,selfStudy:20},
     prerequisites:['MAT.1.1 Probabilités et Statistiques','MAT.1.2','EHA.1.1','EHA.1.2','NET.2.1','EHA.4.1 Introduction aux Systèmes Embarqués'],
-    objectives:["Développer des compétences avancées pour le diagnostic en ligne et le traitement de la fiabilité, dédiés à la prédiction et la détection précoce des défaillances des systèmes embarqués","Développer des compétences en techniques de diagnostic et détection de défauts dédiées aux systèmes embarqués","Introduire les principes d'analyse de composants indépendants/dépendants","Étudier le traitement en ligne de la prédiction de fiabilité","C1. Maîtriser en profondeur les sciences de base","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis"],
+    objectives:["Développer des compétences avancées pour le diagnostic en ligne et le traitement de la fiabilité, dédiés à la prédiction et la détection précoce des défaillances des systèmes embarqués","Développer des compétences en techniques de diagnostic et détection de défauts dédiées aux systèmes embarqués","Introduire les principes d'analyse de composants indépendants/dépendants","Étudier le traitement en ligne de la prédiction de fiabilité"],
     content:["Leçon 1 (1h) : Introduction — diagnostic, sûreté et fiabilité pour les systèmes embarqués modernes","Leçon 2 (2h) : Diagnostic — techniques à base de modèle","Leçon 3 (3h) : Diagnostic — techniques à base de signal","Leçon 4 (2h) : Analyse de systèmes à composants indépendants","Leçon 5 (2h) : Analyse de systèmes à composants dépendants","Leçon 6 (2h) : Application des méthodologies de fiabilité aux systèmes embarqués","Leçon 7 (2h) : Méthodologie de prédiction de fiabilité pour les systèmes embarqués"],
     examForm:'35% contrôle continu (TP) · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Yasser Gritli',responsible:'Yasser Gritli',
@@ -1535,7 +1535,7 @@ export const MODULES = [
   {code:'SEC.5.2',title:'Sécurité IoT',semester:5,credits:2,subject:'SEC',language:'French',type:'Track',
     hours:{total:40,lecture:18,lab:12,selfStudy:10},
     prerequisites:['SEC.4.1 Cybersécurité et Cryptographie','NET.4.1 Réseaux Informatiques'],
-    objectives:["Discuter des principales menaces et attaques sur les dispositifs et services IoT","Identifier les outils et protocoles cryptographiques adaptés pour sécuriser les dispositifs, communications et plateformes IoT","Évaluer les menaces et risques IoT","Concevoir un système embarqué sécurisé","C6. Évaluer la vulnérabilité d'un SI et mettre en œuvre des solutions de protection","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Discuter des principales menaces et attaques sur les dispositifs et services IoT","Identifier les outils et protocoles cryptographiques adaptés pour sécuriser les dispositifs, communications et plateformes IoT","Évaluer les menaces et risques IoT","Concevoir un système embarqué sécurisé"],
     content:["Chapitre 1 : Contexte de la sécurité IoT — exigences, défis, risques potentiels selon les cas d'usage, évaluation des risques","Chapitre 2 : Sécurisation des dispositifs IoT — matériel et firmware, vulnérabilités et attaques de la couche matérielle, atténuation des menaces","Chapitre 3 : Sécurisation de la couche réseau IoT — vulnérabilités et atténuation","Chapitre 4 : Sécurisation de la couche applicative IoT — vulnérabilités, projets OWASP (codage sécurisé, OWASP Top 10), atténuation","Chapitre 5 : Sécurisation des plateformes IoT — sécurité cloud, sécurisation des données au repos","Chapitre 6 : Sécurité des systèmes embarqués — risques, atténuation, fonctionnalités de sécurité STM32","TP : évaluation de la sécurité firmware avec OWASP-FSTM, test de vulnérabilités avec IoTGoat, audit matériel avec HardSploit, conception d'un système embarqué sécurisé avec STM32Trust"],
     examForm:'50% contrôle continu (TP) · 50% examen écrit',passMark:'10/20',
     teachingTeam:'Mohamed Houcine Hdhili',responsible:'Mohamed Houcine Hdhili',
@@ -1544,7 +1544,7 @@ export const MODULES = [
   {code:'SEC.5.3',title:'Architecture Automobile et Sécurité',semester:5,credits:1,subject:'SEC',language:'English',type:'Track',
     hours:{total:20,lecture:12,lab:3,selfStudy:5},
     prerequisites:['EHA.2.1 Architecture & Microprocesseurs','EHA.4.1 Introduction aux Systèmes Embarqués','EHA.5.2 Systèmes à Base de Microcontrôleurs'],
-    objectives:["Se familiariser avec les architectures et protocoles automobiles","Comprendre l'importance des enjeux de sécurité dans le domaine automobile","C5. Spécifier un système d'information dans toutes ses dimensions","C6. Évaluer la vulnérabilité d'un SI et mettre en œuvre des solutions de protection","C7. Identifier, localiser et collecter les données nécessaires à la recherche et au développement","C8. Maîtriser les bonnes pratiques de développement logiciel et les normes applicables","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Se familiariser avec les architectures et protocoles automobiles","Comprendre l'importance des enjeux de sécurité dans le domaine automobile"],
     content:["Chapitre 1 : Panorama automobile — structure du véhicule, unité de contrôle électronique (ECU), réseau embarqué","Chapitre 2 : Panorama AUTOSAR — définition et histoire, AUTOSAR vs modèle OSI, application AUTOSAR, RTE, BSW","Chapitre 3 : Sécurité automobile — Automotive SPICE, sécurité fonctionnelle ISO 26262, cybersécurité automobile (défis, terminologie, STRIDE, détermination du risque, modules de sécurité matériels, démarrage sécurisé, communication embarquée sécurisée, tests de sécurité type fuzz testing)","Chapitre 4 : Fondamentaux du bus CAN (ISO 11898) — CAN vs modèle OSI, adressage et couche physique, accès au bus, trames CAN et protection des données, CAN FD, outils et bases de données CAN"],
     examForm:'100% examen écrit',passMark:'10/20',
     teachingTeam:'Lobna Kriaa · Youssef Rekik · Rostom El Abed (partenaire industriel Mercedes-Benz)',responsible:'Lobna Kriaa',
@@ -1553,7 +1553,7 @@ export const MODULES = [
   {code:'SEC.5.4',title:'Projet Sécurité IoT',semester:5,credits:1,subject:'SEC',language:'French',type:'Track',
     hours:{total:25,lecture:0,lab:15,selfStudy:10},
     prerequisites:['SEC.4.1 Cybersécurité et Cryptographie','NET.5.2 Architectures et Protocoles de Communication pour l\'IoT','SEC.5.1'],
-    objectives:["Identifier les exigences de sécurité d'une application IoT spécifique","Concevoir et implémenter une solution de sécurité pour une application IoT spécifique","Identifier les outils et protocoles cryptographiques adaptés pour sécuriser des applications IoT","Travailler en équipe et gérer le temps","C6. Évaluer la vulnérabilité d'un SI et mettre en œuvre des solutions de protection","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Identifier les exigences de sécurité d'une application IoT spécifique","Concevoir et implémenter une solution de sécurité pour une application IoT spécifique","Identifier les outils et protocoles cryptographiques adaptés pour sécuriser des applications IoT","Travailler en équipe et gérer le temps"],
     content:["Module à base de projet : l'enseignant définit des projets de sécurisation d'applications IoT (dispositifs, systèmes embarqués, réseau, couche applicative)","Les étudiants sont répartis en groupes, chaque groupe choisit un projet à développer (exigences, conception, implémentation, tests) et répartit les tâches","Exemples de projets : sécurisation d'une application e-santé, d'une application maison intelligente, d'une application hôtel intelligent"],
     examForm:'100% évaluation de projet',passMark:'10/20',
     teachingTeam:'Mohamed Houcine Hdhili',responsible:'Mohamed Houcine Hdhili',
@@ -1581,7 +1581,7 @@ export const MODULES = [
   {code:'ESDV.5.3',title:'Conception et Validation de Systèmes Temps Réel',semester:5,credits:2,subject:'ESDV',language:'French',type:'Track',
     hours:{total:30,lecture:20,lab:10,selfStudy:0},
     prerequisites:['AP.1.1 Automates','OS.2.1 Systèmes d\'Exploitation','AP.3.2 Techniques de Compilation','SE.4.1 Méthodes Formelles de Développement'],
-    objectives:["Acquérir les concepts et méthodes de base de la modélisation de processus, la théorie des réseaux de Petri et ses applications à la modélisation, conception et vérification de systèmes","Utiliser des outils assistés par ordinateur à base de réseaux de Petri","Étudier les automates temporisés, modèles de systèmes réactifs à temps continu, et la vérification de formules de logique temporelle arborescente TCTL","C1. Construire des modèles en réseaux de Petri, les valider et générer du code","C2. Identifier, formuler et résoudre des problèmes de contrôle complexes","C3. Modéliser et valider des processus concurrents et communicants"],
+    objectives:["Acquérir les concepts et méthodes de base de la modélisation de processus, la théorie des réseaux de Petri et ses applications à la modélisation, conception et vérification de systèmes","Utiliser des outils assistés par ordinateur à base de réseaux de Petri","Étudier les automates temporisés, modèles de systèmes réactifs à temps continu, et la vérification de formules de logique temporelle arborescente TCTL"],
     content:["Leçon I (6h) : Introduction aux systèmes temps réel — systèmes automatisés temps réel, propriétés comportementales requises, limites des automates à états finis","Leçon II (12h) : Réseaux de Petri — présentation, modélisation de la synchronisation et du parallélisme, propriétés comportementales, validation avec l'outil TINA, réseaux de Petri colorés et à tuiles","Leçon III (12h) : Automates temporisés — présentation, modélisation, logique temporelle arborescente temporisée (TCTL), vérification avec UPPAAL"],
     examForm:'35% contrôle continu · 65% examen écrit',passMark:'10/20',
     teachingTeam:'Leila Ben Ayed',responsible:'Leila Ben Ayed',
@@ -1590,7 +1590,7 @@ export const MODULES = [
   {code:'ESDV.5.4',title:'Systèmes Cyber-Physiques',semester:5,credits:2,subject:'ESDV',language:'English',type:'Track',
     hours:{total:45,lecture:20,lab:10,selfStudy:15},
     prerequisites:['EHA.4.1 Introduction aux Systèmes Embarqués','Automates','Réseaux','Programmation C/C++','Programmation JavaScript'],
-    objectives:["Identifier une approche scientifique et rigoureuse de conception et d'implémentation de systèmes cyber-physiques, centrée sur la conception de systèmes à base de modèles et le logiciel embarqué","Travailler en équipe, gérer le temps, prendre systématiquement des initiatives créatives","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions","C7. Identifier, localiser et collecter les données nécessaires à la recherche et au développement"],
+    objectives:["Identifier une approche scientifique et rigoureuse de conception et d'implémentation de systèmes cyber-physiques, centrée sur la conception de systèmes à base de modèles et le logiciel embarqué","Travailler en équipe, gérer le temps, prendre systématiquement des initiatives créatives"],
     content:["Introduction","Chapitre 1 : Motivation — systèmes cyber-physiques vs systèmes embarqués, exigences et défis des CPS, exemples d'applications CPS et IoT","Chapitre 2 : Conception à base de modèles — processus itératif (modélisation, conception, analyse), modèles de calcul (machines à états, automates hybrides, dataflow et KPN)","Chapitre 3 : Capteurs et actionneurs — modélisation, modèle affine, biais et sensibilité, plage et précision, défauts, fusion de capteurs","Chapitre 4 : Programmation des systèmes embarqués — gestion de la mémoire, hiérarchies mémoire, mécanismes d'E/S (polling vs interruption), concurrence","Chapitre 5 : Réseaux — technologies et protocoles de communication (CAN, TTP, FlexRay, TTEthernet/TSN, Zigbee, Bluetooth, NFC, 6LowPAN, CoAP), infrastructure IoT et composition de services cloud (IFTTT)","Chapitre 6 : Écosystème IoT — visions et exigences, architecture de référence, gestion des ressources (conteneurs, virtualisation, cloud vs fog)","Chapitre 7 : Analytique IoT — publish/subscribe MQTT, capteurs, clients et topics"],
     examForm:'40% contrôle continu · 60% examen écrit',passMark:'10/20',
     teachingTeam:'Chadlia Jerad',responsible:'Chadlia Jerad',
@@ -1617,7 +1617,7 @@ export const MODULES = [
   {code:'ESDV.5.7',title:'Projet d\'Intégration',semester:5,credits:1,subject:'ESDV',language:'French',type:'Track',
     hours:{total:20,lecture:0,lab:15,selfStudy:5},
     prerequisites:['EHA.2.1 Architecture & Microprocesseurs','EHA.4.1 Introduction aux Systèmes Embarqués','EHA.5.2 Systèmes à Base de Microcontrôleurs','Intégration de Systèmes'],
-    objectives:["Maîtriser le concept de prototypage sur FPGA","Maîtriser le langage VHDL","Traiter des approches de co-conception (codesign)","Travailler en équipe et gérer le temps","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions","C7. Identifier, localiser et collecter les données nécessaires à la recherche et au développement"],
+    objectives:["Maîtriser le concept de prototypage sur FPGA","Maîtriser le langage VHDL","Traiter des approches de co-conception (codesign)","Travailler en équipe et gérer le temps"],
     content:["Module à base de projet : intégration des connaissances des modules « Intégration de Systèmes (VHDL) » et « Systèmes à Base de Microcontrôleurs » pour générer une approche de conception SoC intégrant les parties logicielle et matérielle sur une plateforme de prototypage FPGA","Travail en groupes (2 à 4 étudiants, min. 4h/semaine) : exemples de projets — implémentation d'un mini-microcontrôleur avec un périphérique (SPI, I2C, UART, GPIO, Timer) intégrant un processeur (NIOS, µBlaze), implémentation de la couche logicielle, application de traitement d'image ou jeu"],
     examForm:'100% évaluation de projet',passMark:'10/20',
     teachingTeam:'Lobna Kriaa · Mohamed Masmoudi (partenaire industriel Alpha Connect International)',responsible:'Lobna Kriaa',
@@ -1626,7 +1626,7 @@ export const MODULES = [
   {code:'ESDV.5.8',title:'Projet Microcontrôleur',semester:5,credits:1,subject:'ESDV',language:'French',type:'Track',
     hours:{total:25,lecture:0,lab:15,selfStudy:10},
     prerequisites:['EHA.2.1 Architecture & Microprocesseurs','EHA.4.1 Introduction aux Systèmes Embarqués','Systèmes à Base de Microcontrôleurs'],
-    objectives:["Maîtriser le microcontrôleur STM32","Maîtriser les interfaces de périphériques","Travailler en équipe, gérer le temps, prendre systématiquement des initiatives créatives","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions","C7. Identifier, localiser et collecter les données nécessaires à la recherche et au développement"],
+    objectives:["Maîtriser le microcontrôleur STM32","Maîtriser les interfaces de périphériques","Travailler en équipe, gérer le temps, prendre systématiquement des initiatives créatives"],
     content:["Module à base de projet : application des connaissances du cours « Systèmes à Base de Microcontrôleurs »","Développement d'une application embarquée réelle à base de STM32, avec les outils STM32","Étapes du projet : définir les grandes lignes, répartir le travail entre les membres de l'équipe, intégrer les travaux individuels (min. 5h/semaine, groupes de 2 à 4 étudiants)","Matériel nécessaire : cartes électroniques à base de microcontrôleurs, câbles de connexion, composants électroniques pour les montages"],
     examForm:'100% évaluation de projet',passMark:'10/20',
     teachingTeam:'Mohamed Masmoudi (partenaire industriel Alpha Connect International)',responsible:'Mohamed Masmoudi',
@@ -1635,7 +1635,7 @@ export const MODULES = [
   {code:'ESDV.5.9',title:'Architectures Reconfigurables',semester:5,credits:1,subject:'ESDV',language:'French',type:'Track',
     hours:{total:20,lecture:10,lab:0,selfStudy:5},
     prerequisites:['EHA.4.1 Introduction aux Systèmes Embarqués','Intégration de Systèmes'],
-    objectives:["Maîtriser les étapes de la conception assistée par ordinateur (CAO) pour FPGA","Connaître les algorithmes d'optimisation des étapes de placement et de routage","Traiter des approches de co-conception (codesign)","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions"],
+    objectives:["Maîtriser les étapes de la conception assistée par ordinateur (CAO) pour FPGA","Connaître les algorithmes d'optimisation des étapes de placement et de routage","Traiter des approches de co-conception (codesign)"],
     content:["Introduction et généralités","Chapitre 1 : Architectures en maillage (mesh)","Chapitre 2 : Architectures arborescentes","Chapitre 3 : Outils de configuration et algorithmiques","Chapitre 4 : FPGA embarqués"],
     examForm:'100% examen écrit',passMark:'10/20',
     teachingTeam:'Lobna Kriaa · Zied Marrakchi (partenaire industriel Siemens Mentor Graphics)',responsible:'Lobna Kriaa',
@@ -1660,10 +1660,10 @@ export const MODULES = [
     teachingTeam:'Lassaad Latrach',responsible:'Lassaad Latrach',
     readingList:['Cuno Pfister, Getting Started with the Internet of Things','Lakshmana Kumar Ramasamy, Seifedine Kadry, Internet of Things (IoT)'],
     verified:true},
-  {code:'ESEP.5.3',title:'Systèmes Cyber-Physiques',semester:5,credits:1,subject:'ESEP',language:'English',type:'Track',
+  {code:'ESEP.5.3',title:'Systèmes Cyber-Physiques',semester:5,credits:2,subject:'ESEP',language:'English',type:'Track',
     hours:{total:45,lecture:20,lab:10,selfStudy:15},
     prerequisites:['EHA.4.1 Introduction aux Systèmes Embarqués','Automates','Réseaux','Programmation C/C++','Programmation JavaScript'],
-    objectives:["Identifier une approche scientifique et rigoureuse de conception et d'implémentation de systèmes cyber-physiques, centrée sur la conception à base de modèles et le logiciel embarqué","Travailler en équipe, gérer le temps, prendre systématiquement des initiatives créatives","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions","C7. Identifier, localiser et collecter les données nécessaires à la recherche et au développement"],
+    objectives:["Identifier une approche scientifique et rigoureuse de conception et d'implémentation de systèmes cyber-physiques, centrée sur la conception à base de modèles et le logiciel embarqué","Travailler en équipe, gérer le temps, prendre systématiquement des initiatives créatives"],
     content:["Introduction","Chapitre 1 : Motivation — systèmes cyber-physiques vs systèmes embarqués, exigences et défis des CPS, exemples d'applications CPS et IoT","Chapitre 2 : Conception à base de modèles — processus itératif, modèles de calcul (machines à états, automates hybrides, dataflow et KPN)","Chapitre 3 : Capteurs et actionneurs — modélisation, modèle affine, biais et sensibilité, fusion de capteurs","Chapitre 4 : Programmation des systèmes embarqués — gestion de la mémoire, hiérarchies mémoire, mécanismes d'E/S (polling vs interruption), concurrence","Chapitre 5 : Réseaux — technologies et protocoles (CAN, TTP, FlexRay, TTEthernet/TSN, Zigbee, Bluetooth, NFC, 6LowPAN, CoAP), infrastructure IoT et composition de services cloud","Chapitre 6 : Écosystème IoT — architecture de référence, gestion des ressources","Chapitre 7 : Analytique IoT — publish/subscribe MQTT"],
     examForm:'40% contrôle continu · 60% examen écrit',passMark:'10/20',
     teachingTeam:'Chadlia Jerad',responsible:'Chadlia Jerad',
@@ -1673,7 +1673,7 @@ export const MODULES = [
   {code:'NET.5.1',title:'Réseaux Cellulaires Multi-Services',semester:5,credits:2,subject:'NET',language:'French',type:'Track',
     hours:{total:30,lecture:20,lab:10,selfStudy:0},
     prerequisites:['NET.3.1 Réseaux Locaux','NET.3.2 TP Réseaux Locaux','NET.4.1 Réseaux Informatiques'],
-    objectives:["Connaître les différences d'architecture entre réseaux 2G, 4G et 5G (sécurité et gestion de la mobilité)","Connaître les différences entre les procédures de base utilisées en 2G, 4G et 5G","Évaluer les défis liés au déploiement d'un réseau cellulaire 2G simple dans des conditions et scénarios définis","C2. Mettre en place une veille technologique","C3. Analyser des architectures de SI complexes en tenant compte de contraintes non techniques","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C6. Évaluer la vulnérabilité d'un SI et mettre en œuvre des solutions de protection"],
+    objectives:["Connaître les différences d'architecture entre réseaux 2G, 4G et 5G (sécurité et gestion de la mobilité)","Connaître les différences entre les procédures de base utilisées en 2G, 4G et 5G","Évaluer les défis liés au déploiement d'un réseau cellulaire 2G simple dans des conditions et scénarios définis"],
     content:["Partie I : Architecture et protocoles des réseaux 2G — Leçon 1 (6h) : communications cellulaires, duplex et accès multiple, réutilisation de fréquence, déploiement réseau (défis sanitaires, environnementaux, économiques, techniques) ; Leçon 2 (6h) : composants d'un réseau cellulaire 2G, identifiants ; Leçon 3 (6h) : sécurité, enregistrement et mise à jour de localisation, handover et itinérance, établissement d'appel","Partie II : Introduction aux réseaux 4G — Leçon 4 (6h) : architecture, sécurité","Partie III : Introduction aux réseaux 5G — Leçon 5 (6h) : Massive MIMO, formation de faisceaux 3D, procédures de base et gestion de la mobilité"],
     examForm:'30% contrôle continu · 70% examen écrit',passMark:'10/20',
     teachingTeam:'Naouel Ben Salem Grati',responsible:'Naouel Ben Salem Grati',
@@ -1691,7 +1691,7 @@ export const MODULES = [
   {code:'NET.5.3',title:'Gestion des Réseaux',semester:5,credits:1.5,subject:'NET',language:'French',type:'Track',
     hours:{total:25,lecture:15,lab:0,selfStudy:10},
     prerequisites:['NET.4.1 Réseaux Informatiques','NET.3.1 Réseaux Locaux','NET.2.1 Transmission Numérique'],
-    objectives:["Donner les principes et concepts de la gestion de réseaux ainsi qu'une vision pratique et opérationnelle des systèmes et outils de gestion, en soulignant leurs forces et limites","Se concentrer sur SNMP comme protocole standard de gestion de réseau TCP/IP","Comprendre les concepts et l'architecture de la gestion SNMP","Connaître les outils et systèmes de gestion réseau récents","Développer de petits programmes SNMP pour des tâches de gestion spécifiques","C1. Maîtriser en profondeur les sciences de base","C2. Mettre en place une veille technologique","C13. Prendre conscience de la nécessité de mettre à jour ses connaissances en continu"],
+    objectives:["Donner les principes et concepts de la gestion de réseaux ainsi qu'une vision pratique et opérationnelle des systèmes et outils de gestion, en soulignant leurs forces et limites","Se concentrer sur SNMP comme protocole standard de gestion de réseau TCP/IP","Comprendre les concepts et l'architecture de la gestion SNMP","Connaître les outils et systèmes de gestion réseau récents","Développer de petits programmes SNMP pour des tâches de gestion spécifiques"],
     content:["Fondations de base — définitions, portée et enjeux, modèles, architectures et standards","Gestion de réseau SNMP — concepts, architecture et protocole (SNMP v1, v2c, v3), structure des informations de gestion (ASN.1, SMI, BER), identifiants d'objets, MIB (MIB-II, RMON), authentification et contrôle d'accès SNMP, programmation SNMP","Alternatives et solutions complémentaires — CLI, WBEM, WMI, NETCONF/YANG, RESTCONF, NETFLOW/IPFIX","Outils et systèmes de gestion de réseau — NET-SNMP, RRDtools, Cacti, Nagios, HP OpenView"],
     examForm:'Examen écrit',passMark:'10/20',
     teachingTeam:'Ahmed Elleuch',responsible:'Ahmed Elleuch',
@@ -1700,7 +1700,7 @@ export const MODULES = [
   {code:'NET.5.4',title:'QoS & Ingénierie du Trafic',semester:5,credits:1.5,subject:'NET',language:'French',type:'Track',
     hours:{total:22,lecture:10,lab:5,selfStudy:7},
     prerequisites:['Réseaux locaux','Réseaux informatiques'],
-    objectives:["Maîtriser les mécanismes et approches d'ingénierie liés à la performance des réseaux filaires, sans fil et mobiles (dimensionnement, allocation et contrôle des ressources)","Savoir utiliser les techniques et outils pour planifier, implémenter et développer des architectures offrant une qualité de service selon les types d'applications","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions","C8. Maîtriser les bonnes pratiques de développement logiciel et les normes applicables"],
+    objectives:["Maîtriser les mécanismes et approches d'ingénierie liés à la performance des réseaux filaires, sans fil et mobiles (dimensionnement, allocation et contrôle des ressources)","Savoir utiliser les techniques et outils pour planifier, implémenter et développer des architectures offrant une qualité de service selon les types d'applications"],
     content:["I. Réseaux mono-service — dimensionnement des réseaux téléphoniques fixes et mobiles, contrôle de congestion, ordonnancement et dimensionnement des réseaux IP best-effort","II. Réseaux IP multi-services — paradigmes de qualité de service, techniques avancées (contrôle de congestion avancé, gestion active de file d'attente), modélisation au niveau flux et qualité de service","III. Réseaux sans fil et mobiles — qualité de service dans les réseaux cellulaires (3G, 4G, 5G) et dans les réseaux sans fil (personnels, locaux, métropolitains, régionaux)"],
     examForm:'30% contrôle continu (TD, TP) · 70% examen écrit',passMark:'10/20',
     teachingTeam:'Chiraz Houaidia',responsible:'Chiraz Houaidia',
@@ -1710,7 +1710,7 @@ export const MODULES = [
   {code:'IAP.5.1',title:'Contrôle d\'Actionneurs Souples et Applications',semester:5,credits:2,subject:'IAP',language:'French',type:'Track',
     hours:{total:50,lecture:25,lab:20,selfStudy:20},
     prerequisites:['MAT.1.1','AP.1.2','MAT.1.2','EHA.1.1','EHA.1.2','NET.2.1','EHA.4.1','NET.4.1'],
-    objectives:["Développer des compétences et connaissances en techniques de mesures intelligentes, nouvelles technologies de capteurs souples et intelligents, actionneurs souples et intelligents modernes, et stratégies de contrôle d'actionneurs souples","C1. Maîtriser en profondeur les sciences de base","C4. Identifier, formuler et résoudre des problèmes informatiques complexes ou incomplètement définis","C5. Spécifier un système d'information dans toutes ses dimensions"],
+    objectives:["Développer des compétences et connaissances en techniques de mesures intelligentes, nouvelles technologies de capteurs souples et intelligents, actionneurs souples et intelligents modernes, et stratégies de contrôle d'actionneurs souples"],
     content:["Projets : Projet 1 — actionneur de drone ; Projet 2 — soft-robotique pour applications médicales ; Projet 3 — agriculture intelligente","Leçon 1 : Mesures intelligentes — concepts de métrologie de base, métrologie des capteurs","Leçon 2 : Capteurs souples et intelligents — principes de base, capteurs souples, capteurs intelligents et systèmes de communication de données","Leçon 3 : Actionneurs souples et intelligents — principes de base, topologies d'actionneurs souples, exigences de communication de données","Leçon 4 : Stratégies de contrôle d'actionneurs souples — stratégies de base, applications, implémentation","Exercices pratiques hebdomadaires en groupes fixes de 2 à 4 étudiants, avec simulateurs dédiés à chaque projet"],
     examForm:'100% évaluation de projet',passMark:'10/20',
     teachingTeam:'Yasser Gritli',responsible:'Yasser Gritli',
@@ -1873,4 +1873,44 @@ export const MODULES = [
      could instead re-check the duplicate-record conflicts above against
      the printed PDF (not just the text extraction) to see which version
      is authoritative, and resolve the FIN.5.x credit mismatches likewise.
+
+   ═══════════════════════════════════════════════════════════════════════
+   PASS 4: full field-by-field audit of all 129 `verified:true` modules
+   against the handbook — credits, hours, examForm, passMark for all 129;
+   objectives/content word-for-word for all 129 (spot-checked ~25 directly,
+   the remaining ~104 audited via a dedicated pass).
+   ═══════════════════════════════════════════════════════════════════════
+
+   FIXED (genuine transcription errors found and corrected):
+   - FIN.5.1 / FIN.5.3: hours.lab was 0, dropping a 15h "exercises" contact
+     component the handbook lists separately from lessons — hours no longer
+     summed to the stated total (65h). Fixed lab:0→15.
+   - SEC.5.1: same issue, a 6h "exercise" component was missing from hours
+     (30h contact ≠ 14 lesson + 10 lab alone). Folded into lab:10→16.
+   - ESEP.5.3: credits was 1; handbook's own record unambiguously states
+     2ECTS. Fixed credits:1→2.
+
+   NOT A BUG (false positive, verified against the file directly):
+   - EHA.2.1 lecture/lab hours were flagged as possibly swapped; checked
+     the live file and they are already correct (lecture:30, lab:15).
+
+   UNRESOLVED / HANDBOOK ITSELF IS WRONG (not fixable by better transcription):
+   - FIN.5.6: the handbook's own "Module objectives/intended learning
+     outcomes" field for this module is corrupted — it describes signal
+     processing / Fourier analysis / Matlab, content that belongs to a
+     different module entirely and has nothing to do with company
+     valuation and financing (which is what FIN.5.6 actually is, per its
+     own Content section and title). The site's objectives text is a
+     reasonable paraphrase of the module's real (and correctly transcribed)
+     Content section rather than a transcription of the handbook's garbled
+     Objectives field, since transcribing the latter faithfully would mean
+     publishing objectives for the wrong subject. Left as-is; flagged here
+     since this is a source-document error, not a site error.
+   - BDC.5.2 and IAP.5.1: handbook's own workload breakdown doesn't sum to
+     its own stated total (OCR bleed from an adjacent field, most likely)
+     — inherited as-is from the source rather than silently "corrected"
+     without the original PDF page to check against.
+   - AP.2.3, SE.4.1, ESDV.5.3: individual handbook records have a blank
+     "Credit points" field; site values are taken from context/summary
+     tables rather than the module's own record.
 */

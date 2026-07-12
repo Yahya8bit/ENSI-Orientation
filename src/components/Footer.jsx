@@ -15,6 +15,18 @@ function Footer() {
             <a href="#hero-section" className="text-sm text-white/50 no-underline transition-colors hover:text-white">
               Accueil
             </a>
+            <a href="#section-admission" className="text-sm text-white/50 no-underline transition-colors hover:text-white">
+              Admission
+            </a>
+            <a href="#section-doublediplomes" className="text-sm text-white/50 no-underline transition-colors hover:text-white">
+              Doubles diplômes
+            </a>
+            <a href="#section-studentlife" className="text-sm text-white/50 no-underline transition-colors hover:text-white">
+              Vie étudiante
+            </a>
+            <a href="#curriculum-section" className="text-sm text-white/50 no-underline transition-colors hover:text-white">
+              Plan d'études
+            </a>
             <a href="#section-pathways" className="text-sm text-white/50 no-underline transition-colors hover:text-white">
               Filières
             </a>
@@ -71,7 +83,7 @@ function Footer() {
 
       <div className="mt-12 border-t border-white/10 pt-5 text-center">
         <span className="text-[0.8rem] text-white/35">
-          © 2026 All Rights Reserved. Made with 💙 by ANONYMOUS ENSI STUDENT
+          © 2026 All Rights Reserved. Made with 💙 by Mohamed Yahia Gazzeh
         </span>
       </div>
     </footer>

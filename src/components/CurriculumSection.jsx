@@ -6,6 +6,7 @@ import { useOverlayHistory } from '../hooks/useOverlayHistory.js'
 import { useAccordionScroll } from '../hooks/useAccordionScroll.js'
 import { useOverlay } from '../context/OverlayContext.jsx'
 import ModuleCode from './ModuleCode.jsx'
+import Reveal from './Reveal.jsx'
 
 const SUBJECT_NAMES = {
   MAT: 'Mathématiques', AP: 'Algorithmique & Programmation', EHA: 'Électronique & Matériel',
@@ -99,7 +100,7 @@ function CurriculumSection() {
           const mods = MODULES.filter((m) => m.semester === s && (s !== 5 || m.type === 'Compulsory'))
           const isOpen = openSem === s
           return (
-            <div key={s}>
+            <Reveal key={s} as="div">
               <button
                 onClick={(e) => toggleSem(s, e.currentTarget)}
                 className="flex w-full items-center justify-between border-b border-ensi-cardgray bg-transparent py-4 text-left"
@@ -124,8 +125,8 @@ function CurriculumSection() {
                         <div
                           key={m.code}
                           onClick={() => openDrawer(m.code)}
-                          className="relative flex cursor-pointer flex-col gap-1.5 rounded-[10px] border border-ensi-cardgray bg-white p-3.5 transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-md"
-                          style={{ borderLeft: `3px solid ${sc}` }}
+                          className="relative flex cursor-pointer flex-col gap-1.5 rounded-[10px] border border-ensi-cardgray bg-white p-3.5 transition-[box-shadow,transform,background-color] duration-150 hover:-translate-y-0.5 hover:bg-[var(--hover-bg)] hover:shadow-md active:translate-y-0 active:shadow-sm"
+                          style={{ borderLeft: `3px solid ${sc}`, '--hover-bg': `${sc}0d` }}
                         >
                           <ModuleCode code={m.code} color={sc} noTip />
                           <span className="pr-5 font-body text-sm font-bold leading-[1.3] text-ensi-navy">{m.title}</span>
@@ -136,7 +137,7 @@ function CurriculumSection() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           )
         })}
       </div>
