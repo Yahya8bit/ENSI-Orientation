@@ -123,7 +123,7 @@ function Hero() {
   return (
     <section
       id="hero-section"
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden max-[768px]:min-h-[calc(100svh-72px)] max-[768px]:justify-end max-[768px]:pb-[max(24px,env(safe-area-inset-bottom))] max-[768px]:pt-24"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden max-[768px]:min-h-[calc(100svh-72px)] max-[768px]:pb-[max(24px,env(safe-area-inset-bottom))] max-[768px]:pt-24"
       aria-label="Diaporama hero, utilisez les touches fléchées pour naviguer"
       tabIndex={0}
       onKeyDown={handleKeyDown}
@@ -174,24 +174,29 @@ function Hero() {
       </button>
 
       {/* Text block. Desktop: vertically centered by the section, CTA is its last child, caption/dots are separate absolute-positioned
-          siblings below (unchanged). Mobile: ONE flex column — eyebrow/title/subtitle/paragraph, CTA, caption, dots all flow here in
-          order with small fixed gaps, and the section pushes this single block to the bottom via justify-end. */}
-      <div className="relative z-[2] max-w-[960px] px-[10vw] pointer-events-none max-[768px]:flex max-[768px]:max-w-none max-[768px]:flex-col max-[768px]:px-6">
-        <p className="animate-fade-up mb-7 font-display text-[0.8125rem] font-bold uppercase tracking-[-0.01em] text-ensi-blue [animation-delay:0ms] max-[768px]:mb-4 max-[768px]:text-[0.7rem]">
-          DEPUIS 1984 · UNIVERSITÉ DE LA MANOUBA
-        </p>
-        <h1 className="animate-fade-up mb-2 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-white [animation-delay:80ms] max-[768px]:text-[clamp(2.25rem,9vw,3.5rem)]">
-          Bienvenue à <span className="text-ensi-blue">l'ENSI</span>
-        </h1>
-        <p className="animate-fade-up mb-6 font-body text-xl font-light leading-[1.3] text-white/75 [animation-delay:80ms] max-[768px]:mb-4 max-[768px]:text-[1.05rem]">
-          École Nationale des Sciences de l'Informatique
-        </p>
-        <p className="animate-fade-up mb-8 max-w-[52ch] text-lg text-white/60 [animation-delay:160ms] max-[768px]:mb-6 max-[768px]:max-w-[34ch] max-[768px]:text-[0.9rem] max-[768px]:leading-[1.5]">
-          Tout ce qu'un nouvel admis doit savoir : admission, filières, vie étudiante et programme d'études.
-        </p>
+          siblings below (unchanged). Mobile: this container fills the section (flex-1); inside it, [eyebrow/title/subtitle/paragraph]
+          is its own flex-1+items-center group that self-centers in whatever space is left above the bottom group, while
+          [CTA, caption, dots] stay anchored at the bottom (pushed there naturally since the centered group consumes the rest). */}
+      <div className="relative z-[2] max-w-[960px] px-[10vw] pointer-events-none max-[768px]:flex max-[768px]:max-w-none max-[768px]:flex-1 max-[768px]:flex-col max-[768px]:px-6">
+        <div className="max-[768px]:flex max-[768px]:flex-1 max-[768px]:items-center">
+          <div className="max-[768px]:w-full">
+            <p className="animate-fade-up mb-7 font-display text-[0.8125rem] font-bold uppercase tracking-[-0.01em] text-ensi-blue [animation-delay:0ms] max-[768px]:mb-4 max-[768px]:text-[0.7rem]">
+              DEPUIS 1984 · UNIVERSITÉ DE LA MANOUBA
+            </p>
+            <h1 className="animate-fade-up mb-2 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-white [animation-delay:80ms] max-[768px]:text-[clamp(2.25rem,9vw,3.5rem)]">
+              Bienvenue à <span className="text-ensi-blue">l'ENSI</span>
+            </h1>
+            <p className="animate-fade-up mb-6 font-body text-xl font-light leading-[1.3] text-white/75 [animation-delay:80ms] max-[768px]:mb-4 max-[768px]:text-[1.05rem]">
+              École Nationale des Sciences de l'Informatique
+            </p>
+            <p className="animate-fade-up mb-8 max-w-[52ch] text-lg text-white/60 [animation-delay:160ms] max-[768px]:mb-0 max-[768px]:max-w-[34ch] max-[768px]:text-[0.9rem] max-[768px]:leading-[1.5]">
+              Tout ce qu'un nouvel admis doit savoir : admission, filières, vie étudiante et programme d'études.
+            </p>
+          </div>
+        </div>
         <a
           href="#section-numbers"
-          className="animate-fade-up pointer-events-auto inline-flex items-center gap-2.5 self-start rounded bg-ensi-blue px-7 py-3.5 font-display text-[0.9375rem] font-semibold text-ensi-navy transition-colors hover:bg-[#3AA5D5] [animation-delay:240ms]"
+          className="animate-fade-up pointer-events-auto inline-flex items-center gap-2.5 self-start rounded bg-ensi-blue px-7 py-3.5 font-display text-[0.9375rem] font-semibold text-ensi-navy transition-colors hover:bg-[#3AA5D5] [animation-delay:240ms] max-[768px]:mt-6"
         >
           Découvrir <span className="inline-block transition-transform">↓</span>
         </a>
