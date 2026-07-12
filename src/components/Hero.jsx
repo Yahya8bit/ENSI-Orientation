@@ -98,7 +98,7 @@ function Hero() {
   return (
     <section
       id="hero-section"
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden max-[600px]:min-h-[100svh] max-[390px]:justify-start max-[390px]:pt-[13vh]"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden max-[600px]:min-h-[100svh] max-[600px]:justify-between max-[600px]:py-8"
       aria-label="Diaporama hero, utilisez les touches fléchées pour naviguer"
       tabIndex={0}
       onKeyDown={handleKeyDown}
@@ -169,11 +169,11 @@ function Hero() {
         </a>
       </div>
 
-      <div className="pointer-events-none absolute bottom-[92px] left-1/2 z-[3] -translate-x-1/2 whitespace-nowrap font-mono text-[0.9375rem] font-medium tracking-[0.04em] text-white/90 max-[600px]:bottom-28 max-[390px]:bottom-[6.5rem]">
+      <div className="pointer-events-none absolute bottom-[92px] left-1/2 z-[3] -translate-x-1/2 whitespace-nowrap font-mono text-[0.9375rem] font-medium tracking-[0.04em] text-white/90 max-[600px]:static max-[600px]:mt-6 max-[600px]:w-full max-[600px]:translate-x-0 max-[600px]:whitespace-normal max-[600px]:px-6 max-[600px]:text-center">
         {rest} <span className="text-ensi-blue">{num}</span>
       </div>
       <div
-        className="absolute bottom-[72px] left-1/2 z-[3] flex -translate-x-1/2 items-center gap-0 max-[600px]:bottom-20 max-[390px]:bottom-20"
+        className="absolute bottom-[72px] left-1/2 z-[3] flex -translate-x-1/2 items-center gap-0 max-[600px]:static max-[600px]:mt-4 max-[600px]:w-full max-[600px]:translate-x-0 max-[600px]:justify-center"
         role="tablist"
         aria-label="Navigation du diaporama"
       >

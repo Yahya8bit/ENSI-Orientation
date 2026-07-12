@@ -47,12 +47,14 @@ function StatItem({ stat }) {
 function StatsSection() {
   return (
     <section id="section-numbers" className="bg-white px-[10vw] py-24 max-[768px]:px-6 max-[768px]:pb-16 max-[768px]:pt-12">
-      <p className="mb-3 font-display text-[0.8125rem] font-bold uppercase tracking-[-0.01em] text-ensi-blue">
-        EN CHIFFRES
-      </p>
-      <h2 className="mb-14 font-display text-[clamp(2rem,4vw,3.25rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-ensi-navy">
-        40 ans d'<span className="text-ensi-accent">ingénieurs.</span>
-      </h2>
+      <Reveal>
+        <p className="mb-3 font-display text-[0.8125rem] font-bold uppercase tracking-[-0.01em] text-ensi-blue">
+          EN CHIFFRES
+        </p>
+        <h2 className="mb-14 font-display text-[clamp(2rem,4vw,3.25rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-ensi-navy">
+          40 ans d'<span className="text-ensi-accent">ingénieurs.</span>
+        </h2>
+      </Reveal>
 
       <div className="mb-16 grid grid-cols-4 gap-10 max-[768px]:mb-0 max-[768px]:grid-cols-1 max-[768px]:gap-7">
         {STATS.map((s) => (
