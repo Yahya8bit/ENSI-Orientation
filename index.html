@@ -9,12 +9,12 @@
 <meta name="description" content="Tout ce que les nouveaux admis à l'ENSI doivent savoir : rangs max, les 6 filières, les clubs et le programme complet. École Nationale des Sciences de l'Informatique, Manouba.">
 <meta name="keywords" content="ENSI, École Nationale des Sciences de l'Informatique, Manouba, admission ENSI, spécialisations ENSI, clubs ENSI, orientation ENSI, filières ENSI, curriculum ENSI">
 <meta name="robots" content="index, follow">
-<link rel="preload" as="image" href="imag/ensi-navbar.png">
-<link rel="preload" as="image" fetchpriority="high" href="imag/hero/forum-20th-edition.jpeg">
-<link rel="preload" as="image" href="imag/partners/sagemcom-logo.png">
-<link rel="preload" as="image" href="imag/partners/sofrecom-logo.png">
-<link rel="preload" as="image" href="imag/partners/huawei-logo.png">
-<link rel="preload" as="image" href="imag/partners/minotore-logo.png">
+<link rel="preload" as="image" href="/imag/ensi-navbar.png">
+<link rel="preload" as="image" fetchpriority="high" href="/imag/hero/forum-20th-edition.jpeg">
+<link rel="preload" as="image" href="/imag/partners/sagemcom-logo.png">
+<link rel="preload" as="image" href="/imag/partners/sofrecom-logo.png">
+<link rel="preload" as="image" href="/imag/partners/huawei-logo.png">
+<link rel="preload" as="image" href="/imag/partners/minotore-logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ENSI Guide Orientation | Rang Max, Clubs &amp; Plan d'Études">
 <meta property="og:description" content="Tout ce que les nouveaux admis à l'ENSI doivent savoir : rangs max, les 6 filières, les clubs et le programme complet. École Nationale des Sciences de l'Informatique, Manouba.">
@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="ENSI Guide Orientation | Rang Max, Clubs &amp; Plan d'Études">
 <meta name="twitter:description" content="Tout ce que les nouveaux admis à l'ENSI doivent savoir : rangs d'admission, les 6 filières de spécialisation, clubs, et le programme complet.">
 <meta name="twitter:image" content="https://ensi-guide-orientation.tech/imag/ensi-navbar.png">
-<link rel="icon" href="imag/header_logo.png" type="image/png">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1422673955442324" crossorigin="anonymous"></script>
 <script type="application/ld+json">
 {
@@ -44,74 +44,11 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<script defer src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<script>
-window.tailwind = window.tailwind || {};
-window.tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        ensi: {
-          navy: '#1B2A4A', blue: '#4DB8E8', lightblue: '#A8D8F0',
-          accent: '#2563EB', red: '#E63946', gray: '#F5F7FA', cardgray: '#E8EDF4',
-        }
-      },
-      fontFamily: {
-        display: ['Archivo','sans-serif'],
-        body: ['Archivo','sans-serif'],
-        mono: ['JetBrains Mono','monospace'],
-      }
-    }
-  }
-}
-</script>
 </head>
 <body>
-
-<!-- NAVBAR -->
-<nav id="navbar" style="background:#fff;border-bottom:1px solid #E2E8F0;position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;padding:0 10vw;justify-content:space-between;transition:box-shadow .2s ease">
-  <button id="nav-hamburger" onclick="openMobileNav()" aria-label="Ouvrir le menu">☰</button>
-  <a href="#home" id="navbar-logo" onclick="event.preventDefault();navigate('home');window.scrollTo({top:0,behavior:'smooth'})" style="flex-shrink:0;display:flex;align-items:center;text-decoration:none;cursor:pointer">
-    <img src="/imag/ensi-navbar.png" alt="ENSI" loading="lazy" width="37" height="52" style="height:52px;width:auto;flex-shrink:0;display:block">
-  </a>
-  <div id="nav-links" style="display:flex;align-items:center;gap:28px">
-    <a href="#home" onclick="event.preventDefault();if(location.hash==='#home'||location.hash===''){window.scrollTo({top:0,behavior:'smooth'})}else{navigate('home')}" class="nav-link" id="nav-home">Accueil</a>
-    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-admission');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Admission</a>
-    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-studentlife');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Vie étudiante</a>
-    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('curriculum-section');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link">Plan d'études</a>
-    <a href="#home" onclick="event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-pathways');if(el)el.scrollIntoView({behavior:'smooth'})},50)" class="nav-link" id="nav-specializations">Filières</a>
-  </div>
-</nav>
-
-<div id="scroll-progress">
-  <div id="scroll-progress-fill"></div>
-</div>
-
-<!-- Mobile sidebar -->
-<div id="mobile-overlay" onclick="closeMobileNav()"></div>
-<nav id="mobile-sidebar" aria-label="Navigation mobile">
-  <button id="mobile-sidebar-close" onclick="closeMobileNav()" aria-label="Fermer le menu">×</button>
-  <a href="#home" class="mobile-nav-link" onclick="event.preventDefault();closeMobileNav();if(location.hash==='#home'||location.hash===''){window.scrollTo({top:0,behavior:'smooth'})}else{navigate('home')}">Accueil</a>
-  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-admission');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Admission</a>
-  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-studentlife');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Vie étudiante</a>
-  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('curriculum-section');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Plan d'études</a>
-  <a href="#home" class="mobile-nav-link" onclick="closeMobileNav();event.preventDefault();navigate('home');setTimeout(()=>{const el=document.getElementById('section-pathways');if(el)el.scrollIntoView({behavior:'smooth'})},50)">Filières</a>
-</nav>
-
-<!-- DRAWER OVERLAY -->
-<div id="overlay" class="overlay" onclick="closeDrawer()"></div>
-
-<!-- DRAWER -->
-<div id="drawer" class="drawer" role="dialog" aria-modal="true">
-  <div id="drawer-content"></div>
-</div>
-
-<!-- MAIN PAGE -->
-<div id="page" style="padding-top:72px"></div>
-
-<script src="script.js" defer></script>
+<div id="root"></div>
+<script type="module" src="/src/main.jsx"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

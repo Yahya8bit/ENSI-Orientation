@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 112.5%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('/imag/fraunces-400.woff2') format('woff2');
+}
+
+/* Module-code tooltip: Tailwind can't express content:attr(), so this one stays custom CSS. */
+.code-tip {
+  position: relative;
+}
+.code-tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: 6px;
+  background: #1b2a4a;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 60;
+}
+.code-tip:hover::after,
+.code-tip.tip-show::after {
+  opacity: 1;
+}
